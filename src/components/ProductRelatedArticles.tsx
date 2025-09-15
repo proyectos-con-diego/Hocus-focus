@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { sanityClient } from '@/sanity/sanity';
+// Removed direct Sanity import - using API route instead
 
 // Función para obtener clases de color de categoría
 function getCategoryColorClasses(category: string) {
@@ -92,22 +92,27 @@ export default function ProductRelatedArticles({ productSlug, productColor }: Pr
 
   useEffect(() => {
     setLoadingArticles(true);
-    const query = `*[_type == "post" && defined(slug.current) && (isHidden != true) && relatedProduct->slug.current == "${productSlug}"] | order(publishedAt desc)[0...6] {
-      _id,
-      title,
-      "slug": slug.current,
-      categories[]->{title},
-      excerpt,
-      publishedAt,
-      readTime,
-      author->{name},
-      mainImage,
-      body
-    }`;
-    sanityClient.fetch(query).then((data) => {
-      setRelatedArticles(data);
-      setLoadingArticles(false);
-    });
+    
+    // Fetch articles from API route instead of direct Sanity query
+    fetch('/api/articles')
+      .then(response => response.json())
+      .then(data => {
+        if (data.success && data.articles) {
+          // Filter articles related to this product
+          const related = data.articles.filter((article: any) => 
+            article.relatedProduct && article.relatedProduct.slug === productSlug
+          ).slice(0, 6);
+          setRelatedArticles(related);
+        } else {
+          setRelatedArticles([]);
+        }
+        setLoadingArticles(false);
+      })
+      .catch(error => {
+        console.error('Error fetching articles:', error);
+        setRelatedArticles([]);
+        setLoadingArticles(false);
+      });
   }, [productSlug]);
 
   // Función para manejar cambios en los inputs

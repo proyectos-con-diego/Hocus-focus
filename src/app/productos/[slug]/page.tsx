@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { sanityClient } from "../../../sanity/sanity";
+// Removed direct Sanity import - using API route instead
 import BlogSection from '../../../components/BlogSection';
 import ProductRelatedArticles from '../../../components/ProductRelatedArticles';
 import StarRating from '../../../components/StarRating';
@@ -2132,22 +2132,27 @@ export default function ProductoPage() {
   // Cargar artículos relacionados
   React.useEffect(() => {
     setLoadingArticles(true);
-    const query = `*[_type == "post" && defined(slug.current) && relatedProduct->slug.current == "${slug}"] | order(publishedAt desc)[0...6] {
-      _id,
-      title,
-      "slug": slug.current,
-      categories[]->{title},
-      excerpt,
-      publishedAt,
-      readTime,
-      author->{name},
-      mainImage,
-      body
-    }`;
-    sanityClient.fetch(query).then((data) => {
-      setRelatedArticles(data);
-      setLoadingArticles(false);
-    });
+    
+    // Fetch articles from API route instead of direct Sanity query
+    fetch('/api/articles')
+      .then(response => response.json())
+      .then(data => {
+        if (data.success && data.articles) {
+          // Filter articles related to this product
+          const related = data.articles.filter((article: any) => 
+            article.relatedProduct && article.relatedProduct.slug === slug
+          ).slice(0, 6);
+          setRelatedArticles(related);
+        } else {
+          setRelatedArticles([]);
+        }
+        setLoadingArticles(false);
+      })
+      .catch(error => {
+        console.error('Error fetching articles:', error);
+        setRelatedArticles([]);
+        setLoadingArticles(false);
+      });
   }, [slug]);
 
   // Función para obtener clases de color de categoría

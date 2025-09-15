@@ -10,6 +10,10 @@ const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('🔍 NOTION_TOKEN presente:', !!process.env.NOTION_TOKEN);
+    console.log('🔍 NOTION_TOKEN inicio:', process.env.NOTION_TOKEN?.substring(0, 10));
+    console.log('🔍 DATABASE_ID presente:', !!process.env.NOTION_DATABASE_ID);
+    
     const { name, email, idea, subscribeNewsletter, source } = await request.json();
 
     if (!name || !email) {
