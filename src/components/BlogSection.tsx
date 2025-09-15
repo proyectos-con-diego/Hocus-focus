@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { sanityClient } from '@/sanity';
 
 // Función para obtener clases de color de categoría
 function getCategoryColorClasses(category: string) {
@@ -83,11 +82,18 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
     fetch('/api/articles')
       .then(response => response.json())
       .then((data: any) => {
-        setLatestArticles(data.slice(0, 3)); // Tomar solo los primeros 3
+        // Verificar que data.articles existe y es un array
+        if (data.success && Array.isArray(data.articles)) {
+          setLatestArticles(data.articles.slice(0, 3)); // Tomar solo los primeros 3
+        } else {
+          console.warn('No se encontraron artículos:', data);
+          setLatestArticles([]);
+        }
         setLoadingArticles(false);
       })
       .catch(error => {
         console.error('Error loading articles:', error);
+        setLatestArticles([]);
         setLoadingArticles(false);
       });
   }, []);
