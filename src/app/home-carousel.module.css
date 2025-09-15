@@ -1,0 +1,151 @@
+/* Timeline scroll animation */
+@keyframes infiniteScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.timeline-scroll {
+  animation: infiniteScroll 45s linear infinite;
+  width: calc(300% + 100px);
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .timeline-scroll {
+    animation-duration: 40s;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-scroll {
+    animation-duration: 35s;
+  }
+}
+
+/* Mascot gradient classes */
+.mascot-jaime {
+  background: linear-gradient(135deg, #22c55e 0%, #10b981 100%);
+}
+
+.mascot-midas {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+}
+
+.mascot-vinxi {
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+}
+
+.mascot-grilla {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+.mascot-okro {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+}
+
+.mascot-bafet {
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+}
+
+.mascot-navio {
+  background: linear-gradient(135deg, #64748b 0%, #06b6d4 100%);
+}
+
+/* Timeline container */
+.timeline-container {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+}
+
+/* Timeline item styles */
+.timeline-item {
+  min-width: 160px;
+  margin: 0 20px;
+}
+
+.timeline-mascot {
+  width: 120px;
+  height: 120px;
+  font-size: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+}
+
+.timeline-mascot:hover {
+  transform: scale(1.2);
+  border-color: rgba(156, 39, 176, 0.6);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Popular badge */
+.popular-badge {
+  background: #4caf50;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Mascot info */
+.mascot-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.mascot-category {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timeline-item {
+    min-width: 140px;
+    margin: 0 15px;
+  }
+  
+  .timeline-mascot {
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+  }
+  
+  .mascot-name {
+    font-size: 1rem;
+  }
+  
+  .mascot-category {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-item {
+    min-width: 120px;
+    margin: 0 10px;
+  }
+  
+  .timeline-mascot {
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+  }
+  
+  .mascot-name {
+    font-size: 0.9rem;
+  }
+  
+  .mascot-category {
+    font-size: 0.7rem;
+  }
+} 

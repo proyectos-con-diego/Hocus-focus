@@ -1,0 +1,9 @@
+/* ===== ESTILOS DE BLOG - ARCHIVO PRINCIPAL ===== */
+
+/* Importar módulos CSS organizados */
+@import './base.css';
+@import './components.css';
+@import './typography.css';
+@import './layout.css';
+@import './responsive.css';
+@import './utilities.css'; 

@@ -1,0 +1,46 @@
+{
+  "name": "mi-sitio-nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbopack",
+    "dev:clean": "./scripts/dev-setup.sh",
+    "dev:stable": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "clean": "rm -rf .next && rm -rf node_modules/.cache",
+    "reset": "rm -rf .next && rm -rf node_modules/.cache && npm install",
+    "test:styles": "echo 'Visita http://localhost:3000/blog/articulo-de-prueba para probar estilos'",
+    "sanity:dev": "sanity dev",
+    "sanity:start": "sanity start",
+    "sanity:build": "sanity build",
+    "sanity:deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "@portabletext/react": "^3.2.1",
+    "@sanity/client": "^7.8.1",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/vision": "^4.2.0",
+    "autoprefixer": "^10.4.21",
+    "framer-motion": "^12.23.12",
+    "next": "15.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-masonry-css": "^1.0.16",
+    "sanity": "^4.2.0",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

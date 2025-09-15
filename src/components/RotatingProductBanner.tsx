@@ -1,0 +1,161 @@
+"use client";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+
+// Función helper para mapear nombres de productos a nombres de archivos de imágenes
+function getPetImageName(productName: string): string {
+  const imageMapping: { [key: string]: string } = {
+    'OKRo': 'okro panda',
+    'Grilla Viralis': 'Grilla',
+    'Jaime Daily': 'Jaime Daily',
+    'Navio': 'Navio | Lobo',
+    'Bafet': 'Bafet',
+    'Midas': 'Midas',
+    'Vinxi': 'Vinxi',
+    'Mythos': 'Mythos'
+  };
+  
+  return imageMapping[productName] || productName;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  icon: string;
+  color: string;
+  bgColor: string;
+  status: string;
+}
+
+const products: Product[] = [
+                    {
+                    id: 'jaime',
+                    name: 'Jaime Daily',
+                    slug: 'jaime-daily',
+                    description: 'Hábitos inteligentes. Sistema completo 3 en 1.',
+                    icon: '🐔',
+                    color: 'text-green-400',
+                    bgColor: 'bg-green-500/10',
+                    status: 'Disponible'
+                  },
+  {
+    id: 'vinxi',
+    name: 'Vinxi',
+    slug: 'vinxi',
+    description: 'Organización personal creativa. Planifica y ejecuta con inteligencia.',
+    icon: '🦊',
+    color: 'text-blue-400',
+    bgColor: 'bg-blue-500/10',
+    status: 'Disponible'
+  },
+  {
+    id: 'grilla',
+    name: 'Grilla Viralis',
+    slug: 'grilla-viralis',
+    description: 'Herramienta de marketing viral y crecimiento',
+    icon: '🦗',
+    color: 'text-green-400',
+    bgColor: 'bg-green-500/10',
+    status: 'Disponible'
+  },
+  {
+    id: 'okro',
+    name: 'OKRo',
+    slug: 'okro',
+    description: 'Convierte metas en logros reales. Gestión inteligente de OKRs.',
+    icon: '🐼',
+    color: 'text-cyan-400',
+    bgColor: 'bg-cyan-500/10',
+    status: 'Disponible'
+  }
+];
+
+export default function RotatingProductBanner() {
+  const [currentProductIndex, setCurrentProductIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Rotación automática cada 6 segundos
+  useEffect(() => {
+    if (isHovered) return; // Pausar rotación cuando el usuario hace hover
+    
+    const interval = setInterval(() => {
+      setCurrentProductIndex((prev) => (prev + 1) % products.length);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
+  const currentProduct = products[currentProductIndex];
+
+  return (
+    <div className="my-6">
+      <div 
+        className="bg-gradient-to-r from-gray-900/60 to-gray-800/60 border border-gray-700/40 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 relative overflow-hidden"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Borde con glow púrpura→azul→rosa siempre visible */}
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/20 via-blue-500/20 to-pink-500/20"></div>
+        
+        {/* Contenido principal */}
+        <div className="relative z-10">
+        <div className="text-gray-400 text-xs mb-3 font-medium tracking-wide uppercase">PRODUCTO DESTACADO</div>
+        <div className="bg-gradient-to-r from-gray-800/40 to-gray-700/40 rounded-xl p-6 flex items-center justify-center border border-gray-600/30 min-h-[140px] transition-all duration-300 hover:bg-gradient-to-r hover:from-gray-800/60 hover:to-gray-700/60">
+          <div className="text-center">
+            {/* Imagen de la mascota y título */}
+            <div className="flex justify-center mb-4">
+              <img 
+                                    src={`/Cabezas pets/${getPetImageName(currentProduct.name)}.png`}
+                alt={`${currentProduct.name} mascota`}
+                className="w-16 h-16 object-contain"
+                onError={(e) => {
+                  // Fallback al emoji si la imagen no carga
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = document.createElement('div');
+                  fallback.className = 'text-4xl';
+                  fallback.textContent = currentProduct.icon;
+                  target.parentNode?.insertBefore(fallback, target);
+                }}
+              />
+            </div>
+            <h4 className={`text-xl font-bold ${currentProduct.color} mb-3`}>
+              {currentProduct.name}
+            </h4>
+            
+            {/* Descripción */}
+            <p className="text-gray-300 text-sm mb-5 leading-relaxed max-w-sm mx-auto">
+              {currentProduct.description}
+            </p>
+            
+            {/* Botón CTA */}
+            <Link
+              href={`/productos/${currentProduct.slug}`}
+              className={`inline-block px-8 py-3 ${currentProduct.bgColor} ${currentProduct.color} rounded-xl font-semibold hover:opacity-90 transition-all duration-300 border border-current/20 hover:scale-105 hover:shadow-lg`}
+            >
+              Ver producto
+            </Link>
+          </div>
+        </div>
+        
+        {/* Indicadores de rotación mejorados */}
+        <div className="flex justify-center gap-3 mt-6">
+          {products.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentProductIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                currentProductIndex === index 
+                  ? 'bg-purple-400 opacity-100 shadow-lg shadow-purple-400/50' 
+                  : 'bg-gray-600 opacity-50 hover:opacity-75'
+              }`}
+            />
+          ))}
+        </div>
+        </div>
+      </div>
+    </div>
+  );
+} 

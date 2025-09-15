@@ -1,0 +1,12 @@
+import post from './post'
+import author from './author'
+import category from './category'
+import blockContent from './blockContent'
+import producto from './producto'
+import table from './table'
+import callout from './callout'
+import columns from './columns'
+import divider from './divider'
+import symbolList from './symbolList'
+import roadmap from './roadmap'
+export const schemaTypes = [post, author, category, blockContent, producto, table, callout, columns, divider, symbolList, roadmap] 

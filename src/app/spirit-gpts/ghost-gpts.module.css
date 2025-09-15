@@ -1,0 +1,90 @@
+/* Estilos adicionales específicos para la página Ghost GPTs */
+.ghostGlow {
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+}
+
+.floatingAnimation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.particleTwinkle {
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Efectos de hover mejorados */
+.ghostCardHover {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ghostCardHover:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 212, 255, 0.3);
+}
+
+/* Gradientes animados */
+.animatedGradient {
+  background: linear-gradient(-45deg, #00d4ff, #7c3aed, #00d4ff, #7c3aed);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Efectos de partículas mejorados */
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(0, 212, 255, 0.3);
+  border-radius: 50%;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+/* Efectos de hover para botones */
+.ctaButtonHover {
+  transition: all 0.3s ease;
+}
+
+.ctaButtonHover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+}
+
+/* Efectos de navegación */
+.navLinkHover {
+  transition: color 0.3s ease;
+}
+
+.navLinkHover:hover {
+  color: #00d4ff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  
+  .navLinks {
+    display: none;
+  }
+  
+  .gptsGrid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}

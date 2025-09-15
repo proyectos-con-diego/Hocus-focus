@@ -1,0 +1,24 @@
+/* Estilos para react-masonry-css */
+.masonry-grid {
+  display: flex;
+  margin-left: -1rem; /* Ajustar el gap */
+  width: auto;
+}
+
+.masonry-column {
+  padding-left: 1rem; /* Ajustar el gap */
+  background-clip: padding-box;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 900px) {
+  .masonry-column {
+    width: 100% !important;
+  }
+}
+
+/* Asegurar que las tarjetas tengan el ancho correcto */
+.masonry-column > * {
+  width: 100%;
+  margin-bottom: 1rem;
+} 

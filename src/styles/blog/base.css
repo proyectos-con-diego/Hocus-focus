@@ -1,0 +1,67 @@
+/* ===== ESTILOS BASE PARA BLOG ===== */
+
+/* Variables CSS centralizadas */
+:root {
+  /* Colores principales */
+  --blog-dark: #0a0a0a;
+  --blog-primary: #8b5cf6;
+  --blog-accent: #3b82f6;
+  --blog-gradient: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+  
+  /* Espaciado */
+  --blog-spacing-xs: 0.5rem;
+  --blog-spacing-sm: 1rem;
+  --blog-spacing-md: 1.5rem;
+  --blog-spacing-lg: 2rem;
+  --blog-spacing-xl: 3rem;
+  
+  /* Tipografía */
+  --blog-font-size-sm: 0.875rem;
+  --blog-font-size-base: 1rem;
+  --blog-font-size-lg: 1.125rem;
+  --blog-font-size-xl: 1.25rem;
+  --blog-font-size-2xl: 1.5rem;
+  --blog-font-size-3xl: 1.875rem;
+  --blog-font-size-4xl: 2.25rem;
+  
+  /* Bordes */
+  --blog-border-radius: 0.5rem;
+  --blog-border-radius-lg: 1rem;
+  
+  /* Sombras */
+  --blog-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --blog-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --blog-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Reset básico para blog */
+.blog-content {
+  color: #d1d5db;
+  line-height: 1.6;
+}
+
+.blog-content * {
+  box-sizing: border-box;
+}
+
+/* Contenedor principal del blog */
+.blog-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--blog-spacing-sm);
+}
+
+/* Layout principal */
+.blog-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--blog-spacing-xl);
+  margin-top: var(--blog-spacing-lg);
+}
+
+@media (max-width: 1024px) {
+  .blog-layout {
+    grid-template-columns: 1fr;
+    gap: var(--blog-spacing-lg);
+  }
+} 

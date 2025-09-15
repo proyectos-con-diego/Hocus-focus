@@ -1,0 +1,170 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+
+interface HeroSectionProps {
+  title: string;
+  subtitle?: string;
+  description: string;
+  ctaText: string;
+  ctaOnClick: () => void;
+  ctaIcon?: string;
+  secondaryCtaText?: string;
+  secondaryCtaOnClick?: () => void;
+  imageSrc?: string;
+  imageAlt?: string;
+  gradientColors?: {
+    from: string;
+    via?: string;
+    to: string;
+  };
+  textGradient?: {
+    from: string;
+    via?: string;
+    to: string;
+  };
+}
+
+export default function HeroSection({
+  title,
+  subtitle,
+  description,
+  ctaText,
+  ctaOnClick,
+  ctaIcon = "🚀",
+  secondaryCtaText,
+  secondaryCtaOnClick,
+  imageSrc,
+  imageAlt,
+  gradientColors = {
+    from: "from-[#0c0c0c]",
+    via: "via-[#1a1a2e]",
+    to: "to-[#16213e]"
+  },
+  textGradient = {
+    from: "from-white",
+    via: "via-cyan-400",
+    to: "to-purple-600"
+  }
+}: HeroSectionProps) {
+  const [particles, setParticles] = useState<Array<{id: number, left: string, top: string, delay: string, duration: string}>>([]);
+
+
+  useEffect(() => {
+    // Crear partículas flotantes optimizadas
+    const particleCount = 20;
+    const newParticles = Array.from({ length: particleCount }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 3}s`,
+      duration: `${Math.random() * 3 + 2}s`
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  return (
+    <section className="pt-32 pb-20 relative min-h-screen flex items-center">
+      {/* Partículas de fondo */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="absolute w-0.5 h-0.5 bg-cyan-400/50 rounded-full animate-pulse hover:scale-150 hover:bg-cyan-400 transition-all duration-300"
+            style={{
+              left: particle.left,
+              top: particle.top,
+              animationDelay: particle.delay,
+              animationDuration: particle.duration
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-7xl mx-auto px-5 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Contenido del Hero */}
+          <div className="text-left">
+            <motion.h1 
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 bg-gradient-to-r from-white via-cyan-400 to-purple-600 bg-clip-text text-transparent leading-tight"
+            >
+              {title}
+              {subtitle && (
+                <>
+                  <br className="hidden sm:block" />
+                  <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    {subtitle}
+                  </span>
+                </>
+              )}
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-base sm:text-lg md:text-xl text-white/70 mb-8 sm:mb-10 leading-relaxed max-w-2xl"
+            >
+              {description}
+            </motion.p>
+            
+            {/* Botones CTA */}
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6"
+            >
+              {/* Botón Principal */}
+              <button 
+                className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-semibold text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 hover:scale-105 hover:translate-y-[-2px] hover:shadow-xl hover:shadow-pink-500/30 w-full sm:w-auto"
+                onClick={ctaOnClick}
+              >
+                {ctaText}
+              </button>
+              
+              {/* Botón Secundario */}
+              {secondaryCtaText && secondaryCtaOnClick && (
+                <button 
+                  className="bg-transparent border-2 border-cyan-400/50 text-cyan-400 hover:bg-cyan-400 hover:text-black hover:border-cyan-400 font-semibold text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 hover:scale-110 transform w-full sm:w-auto"
+                  onClick={secondaryCtaOnClick}
+                >
+                  {secondaryCtaText}
+                </button>
+              )}
+            </motion.div>
+          </div>
+
+          {/* Imagen del Hero (opcional) */}
+          {imageSrc && (
+            <div className="relative flex justify-center items-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="relative"
+              >
+                {/* Efecto de brillo detrás de la imagen */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-600/20 rounded-full blur-3xl scale-150 animate-pulse"></div>
+                
+                {/* Imagen principal */}
+                <img
+                  src={imageSrc}
+                  alt={imageAlt || "Hero Image"}
+                  className="relative z-10 w-full h-auto max-w-md mx-auto lg:max-w-lg xl:max-w-xl object-contain bg-transparent transition-all duration-500 hover:scale-105"
+                  style={{
+                    filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.3))',
+                    mixBlendMode: 'multiply'
+                  }}
+                />
+              </motion.div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+} 

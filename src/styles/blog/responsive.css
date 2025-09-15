@@ -1,0 +1,158 @@
+/* ===== RESPONSIVE DE BLOG ===== */
+
+/* Responsive para separadores */
+@media (max-width: 768px) {
+  .divider {
+    margin: var(--blog-spacing-md) 0;
+  }
+  
+  .divider-line {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .divider-line {
+    max-width: 120px;
+  }
+}
+
+/* Responsive para callouts */
+@media (max-width: 768px) {
+  .callout-container {
+    margin: var(--blog-spacing-md) 0;
+    padding: var(--blog-spacing-sm);
+  }
+  
+  .callout-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--blog-spacing-xs);
+  }
+  
+  .callout-icon {
+    font-size: 1.25rem;
+  }
+  
+  .callout-title {
+    font-size: var(--blog-font-size-base);
+  }
+}
+
+/* Responsive para tablas */
+@media (max-width: 768px) {
+  .table-container {
+    margin: var(--blog-spacing-md) 0;
+  }
+  
+  .comparison-table {
+    font-size: var(--blog-font-size-sm);
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    padding: var(--blog-spacing-xs);
+  }
+}
+
+/* Responsive para columnas */
+@media (max-width: 768px) {
+  .columns-container {
+    grid-template-columns: 1fr;
+    gap: var(--blog-spacing-sm);
+  }
+  
+  .column {
+    padding: var(--blog-spacing-sm);
+  }
+  
+  .column h3 {
+    font-size: var(--blog-font-size-lg);
+  }
+  
+  .column h4 {
+    font-size: var(--blog-font-size-base);
+  }
+}
+
+/* Responsive para listas de símbolos */
+@media (max-width: 768px) {
+  .symbol-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--blog-spacing-xs);
+  }
+  
+  .symbol-list .item-icon {
+    font-size: 1.25rem;
+  }
+}
+
+/* Responsive para banners */
+@media (max-width: 768px) {
+  .blog-banner {
+    padding: var(--blog-spacing-sm);
+  }
+  
+  .blog-banner-content {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--blog-spacing-sm);
+  }
+  
+  .blog-banner-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  
+  .blog-banner-text h3 {
+    font-size: var(--blog-font-size-base);
+  }
+  
+  .blog-banner-text p {
+    font-size: var(--blog-font-size-sm);
+  }
+}
+
+/* Responsive para blockquotes */
+@media (max-width: 768px) {
+  .blog-blockquote {
+    padding: var(--blog-spacing-sm);
+    margin: var(--blog-spacing-md) 0;
+  }
+  
+  .blog-blockquote::before {
+    font-size: 2rem;
+    top: -0.25rem;
+  }
+}
+
+/* Responsive para código */
+@media (max-width: 768px) {
+  .blog-pre {
+    padding: var(--blog-spacing-sm);
+    font-size: 0.75rem;
+  }
+  
+  .blog-code {
+    font-size: 0.75rem;
+  }
+}
+
+/* Responsive general para contenedores */
+@media (max-width: 768px) {
+  .blog-container {
+    padding: 0 var(--blog-spacing-xs);
+  }
+  
+  .blog-content {
+    font-size: var(--blog-font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-container {
+    padding: 0 0.5rem;
+  }
+} 
