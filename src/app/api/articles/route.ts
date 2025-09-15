@@ -17,8 +17,10 @@ export async function GET(request: NextRequest) {
     const limit = searchParams.get('limit');
     const offset = searchParams.get('offset');
 
-    // Query base para artículos
-    let query = `*[_type == "post" && defined(slug.current) && (isHidden != true)] | order(publishedAt desc) {
+    // Construir query base
+    const baseQuery = `*[_type == "post" && defined(slug.current) && (isHidden != true)]`;
+    const orderBy = `| order(publishedAt desc)`;
+    const fields = `{
       _id,
       title,
       "slug": slug.current,
@@ -34,46 +36,27 @@ export async function GET(request: NextRequest) {
     }`;
 
     // Aplicar filtros si se especifican
+    let filterClause = '';
     if (category && category !== 'Todos') {
-      query = `*[_type == "post" && defined(slug.current) && (isHidden != true) && "${category}" in categories[]->title] | order(publishedAt desc) {
-        _id,
-        title,
-        "slug": slug.current,
-        "category": categories[0]->title,
-        "author": author->name,
-        "mainImage": mainImage.asset->url,
-        publishedAt,
-        body,
-        excerpt,
-        readTime,
-        categories[]->{title},
-        "relatedProduct": relatedProduct->{name, "slug": slug.current}
-      }`;
+      filterClause = ` && "${category}" in categories[]->title`;
     }
 
-    // Aplicar límite si se especifica
+    // Aplicar límite y offset
+    let limitClause = '';
     if (limit) {
       const limitNum = parseInt(limit);
       if (!isNaN(limitNum)) {
-        // Reemplazar el último ] con el límite
-        const lastBracketIndex = query.lastIndexOf(']');
-        if (lastBracketIndex !== -1) {
-          query = query.substring(0, lastBracketIndex) + `[0...${limitNum}]` + query.substring(lastBracketIndex + 1);
-        }
+        limitClause = `[0...${limitNum}]`;
+      }
+    } else if (offset) {
+      const offsetNum = parseInt(offset);
+      if (!isNaN(offsetNum)) {
+        limitClause = `[${offsetNum}...]`;
       }
     }
 
-    // Aplicar offset si se especifica
-    if (offset) {
-      const offsetNum = parseInt(offset);
-      if (!isNaN(offsetNum)) {
-        // Reemplazar el último ] con el offset
-        const lastBracketIndex = query.lastIndexOf(']');
-        if (lastBracketIndex !== -1) {
-          query = query.substring(0, lastBracketIndex) + `[${offsetNum}...]` + query.substring(lastBracketIndex + 1);
-        }
-      }
-    }
+    // Construir query final
+    const query = `${baseQuery}${filterClause} ${orderBy}${limitClause} ${fields}`;
 
     console.log('🔍 Server-side query:', query);
     
