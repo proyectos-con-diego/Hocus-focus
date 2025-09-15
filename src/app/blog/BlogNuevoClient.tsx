@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useCallback, useMemo } from "react";
-import { sanityClient } from "@/sanity/sanity";
+// Removed: import { sanityClient } from "@/sanity/sanity";
 import { Article, Category, articlesQuery, categoriesQuery } from "@/data/blog";
 import HeaderGlass from '../../components/HeaderGlass';
 import BlogHeroSection from '@/components/BlogHeroSection';
@@ -42,43 +42,45 @@ export default function BlogNuevoClient() {
     setError(null);
     
     try {
-      console.log('🔍 Fetching articles...');
+      console.log('🔍 Fetching articles from API...');
       
-      // CONSULTA DIRECTA: Filtra artículos ocultos (incluye artículos sin campo isHidden)
-      const articlesQueryDirect = `*[_type == "post" && defined(slug.current) && (isHidden != true)] | order(publishedAt desc) {
-        _id,
-        title,
-        "slug": slug.current,
-        "category": categories[0]->title,
-        "author": author->name,
-        "mainImage": mainImage.asset->url,
-        publishedAt,
-        body,
-        excerpt
-      }`;
-      
-      console.log('🔍 Using direct query:', articlesQueryDirect);
-      
-      const [data, cats] = await Promise.all([
-        sanityClient.fetch(articlesQueryDirect),
-        sanityClient.fetch(categoriesQuery)
+      // Usar la API route en lugar de Sanity directamente
+      const [articlesResponse, categoriesResponse] = await Promise.all([
+        fetch('/api/articles'),
+        fetch('/api/articles', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'categories' })
+        })
       ]);
 
-      console.log('📊 Articles data received:', data);
-      console.log('📊 Categories data received:', cats);
-      console.log('📊 Articles length:', data?.length || 0);
+      if (!articlesResponse.ok) {
+        throw new Error(`Error fetching articles: ${articlesResponse.status}`);
+      }
+      
+      if (!categoriesResponse.ok) {
+        throw new Error(`Error fetching categories: ${categoriesResponse.status}`);
+      }
+
+      const [articlesData, categoriesData] = await Promise.all([
+        articlesResponse.json(),
+        categoriesResponse.json()
+      ]);
+
+      console.log('📊 Articles data received:', articlesData);
+      console.log('📊 Categories data received:', categoriesData);
 
       // Validación de datos
-      if (!Array.isArray(data)) {
+      if (!articlesData.success || !Array.isArray(articlesData.articles)) {
         throw new Error('Formato de artículos inválido');
       }
       
-      if (!Array.isArray(cats)) {
+      if (!categoriesData.success || !Array.isArray(categoriesData.categories)) {
         throw new Error('Formato de categorías inválido');
       }
 
-      setArticles(data);
-      setCategories(cats);
+      setArticles(articlesData.articles);
+      setCategories(categoriesData.categories);
       setRetryCount(0); // Reset retry count on success
       
     } catch (err) {
