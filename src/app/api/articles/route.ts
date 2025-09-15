@@ -29,7 +29,8 @@ export async function GET(request: NextRequest) {
       body,
       excerpt,
       readTime,
-      categories[]->{title}
+      categories[]->{title},
+      "relatedProduct": relatedProduct->{name, "slug": slug.current}
     }`;
 
     // Aplicar filtros si se especifican
@@ -45,7 +46,8 @@ export async function GET(request: NextRequest) {
         body,
         excerpt,
         readTime,
-        categories[]->{title}
+        categories[]->{title},
+        "relatedProduct": relatedProduct->{name, "slug": slug.current}
       }`;
     }
 
