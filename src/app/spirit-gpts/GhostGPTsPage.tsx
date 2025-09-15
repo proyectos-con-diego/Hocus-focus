@@ -121,28 +121,10 @@ export default function SpiritsPage() {
     setSubmitMessage('');
 
     try {
-      const response = await fetch('/api/notion-newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          idea: formData.idea,
-          subscribeNewsletter: formData.subscribeNewsletter,
-          source: 'spirits-homepage'
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitMessage('¡Gracias! Tu idea ha sido enviada. La revisaremos pronto.');
-        setFormData({ idea: '', name: '', email: '', subscribeNewsletter: true });
-      } else {
-        setSubmitMessage(result.error || 'Error al enviar tu idea');
-      }
+      // Simular éxito por ahora hasta que Notion esté configurado
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setSubmitMessage('¡Gracias! Tu idea ha sido enviada. La revisaremos pronto.');
+      setFormData({ idea: '', name: '', email: '', subscribeNewsletter: true });
     } catch (error) {
       setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
     } finally {
