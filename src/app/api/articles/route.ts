@@ -55,7 +55,11 @@ export async function GET(request: NextRequest) {
     if (limit) {
       const limitNum = parseInt(limit);
       if (!isNaN(limitNum)) {
-        query = query.replace(']', `[0...${limitNum}]`);
+        // Reemplazar el último ] con el límite
+        const lastBracketIndex = query.lastIndexOf(']');
+        if (lastBracketIndex !== -1) {
+          query = query.substring(0, lastBracketIndex) + `[0...${limitNum}]` + query.substring(lastBracketIndex + 1);
+        }
       }
     }
 
@@ -63,7 +67,11 @@ export async function GET(request: NextRequest) {
     if (offset) {
       const offsetNum = parseInt(offset);
       if (!isNaN(offsetNum)) {
-        query = query.replace(']', `[${offsetNum}...]`);
+        // Reemplazar el último ] con el offset
+        const lastBracketIndex = query.lastIndexOf(']');
+        if (lastBracketIndex !== -1) {
+          query = query.substring(0, lastBracketIndex) + `[${offsetNum}...]` + query.substring(lastBracketIndex + 1);
+        }
       }
     }
 
