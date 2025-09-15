@@ -9,7 +9,11 @@ const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('🔍 NOTION_TOKEN:', process.env.NOTION_TOKEN ? 'Presente' : 'Faltante');
+    console.log('🔍 DATABASE_ID:', process.env.NOTION_DATABASE_ID ? 'Presente' : 'Faltante');
+    
     const { name, email, idea, subscribeNewsletter, source } = await request.json();
+    console.log('📝 Datos recibidos:', { name, email, idea, subscribeNewsletter, source });
 
     if (!name || !email) {
       return NextResponse.json(
@@ -80,9 +84,13 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error con Notion:', error);
+    console.error('❌ Error con Notion:', error);
+    console.error('❌ Error details:', JSON.stringify(error, null, 2));
     return NextResponse.json(
-      { error: 'Error al guardar en Notion' },
+      { 
+        error: 'Error al guardar en Notion',
+        details: error instanceof Error ? error.message : 'Error desconocido'
+      },
       { status: 500 }
     );
   }
