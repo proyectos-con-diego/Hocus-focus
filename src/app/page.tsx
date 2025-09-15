@@ -85,7 +85,7 @@ export default function DiegoPersonalSite() {
             assistantsSection.scrollIntoView({ behavior: 'smooth' });
           }
         }}
-        imageSrc="/Retratos pets/Okro/Okro retrato.png"
+        imageSrc="/Retratos pets/Okro/okro retrato.png"
         imageAlt="OKRo - Sistema automatizado trabajando"
       />
 

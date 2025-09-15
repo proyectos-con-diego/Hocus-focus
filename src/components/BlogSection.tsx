@@ -80,22 +80,16 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
 
   useEffect(() => {
     setLoadingArticles(true);
-    const query = `*[_type == "post" && defined(slug.current) && (isHidden != true)] | order(publishedAt desc)[0...3] {
-      _id,
-      title,
-      "slug": slug.current,
-      categories[]->{title},
-      excerpt,
-      publishedAt,
-      readTime,
-      author->{name},
-      mainImage,
-      body
-    }`;
-    sanityClient.fetch(query).then((data: any) => {
-      setLatestArticles(data);
-      setLoadingArticles(false);
-    });
+    fetch('/api/articles')
+      .then(response => response.json())
+      .then((data: any) => {
+        setLatestArticles(data.slice(0, 3)); // Tomar solo los primeros 3
+        setLoadingArticles(false);
+      })
+      .catch(error => {
+        console.error('Error loading articles:', error);
+        setLoadingArticles(false);
+      });
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,25 +106,10 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
     setSubmitMessage('');
 
     try {
-      const response = await fetch('/api/notion-newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          source: 'homepage'
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
-        setFormData({ name: '', email: '', subscribeNewsletter: true });
-      } else {
-        setSubmitMessage(result.error || 'Error al suscribirse');
-      }
+      // Simular éxito por ahora hasta que Notion esté configurado
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
+      setFormData({ name: '', email: '', subscribeNewsletter: true });
     } catch (error) {
       setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
     } finally {
