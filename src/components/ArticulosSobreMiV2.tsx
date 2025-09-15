@@ -124,10 +124,23 @@ export default function ArticulosSobreMiV2() {
     setSubmitMessage('');
     
     try {
-      // Simular éxito por ahora hasta que Notion esté configurado
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
-      setFormData({ name: '', email: '', subscribeNewsletter: true });
+      const response = await fetch('/api/notion-newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          source: 'sobre-mi'
+        }),
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok) {
+        setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
+        setFormData({ name: '', email: '', subscribeNewsletter: true });
+      } else {
+        setSubmitMessage(result.error || 'Error al suscribirse');
+      }
     } catch (error) {
       setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
     } finally {
