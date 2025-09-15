@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import HeaderGlass from '../../components/HeaderGlass';
 import { motion } from 'framer-motion';
-import { sanityClient } from '../../sanity/sanity';
+// Removed direct Sanity import - using API route instead
 import CompaniesBanner from '../../components/CompaniesBanner';
 import { getReadingContext } from '../../data/blog';
 import SobreMiFAQSection from '../../components/SobreMiFAQSection';
@@ -108,44 +108,25 @@ export default function SobreMiExperimentalPage() {
     setShowFullJourney(!showFullJourney);
   };
 
-  // Fetch artículos de Sanity
+  // Fetch artículos de API route
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         setLoadingArticles(true);
         setArticlesError(null);
         
-        // Debug: verificar token
-        console.log('Token disponible:', !!process.env.SANITY_API_TOKEN);
-        console.log('Token length:', process.env.SANITY_API_TOKEN?.length);
+        // Fetch from API route instead of direct Sanity query
+        const response = await fetch('/api/articles?limit=3');
+        const data = await response.json();
         
-        const query = `*[_type == "post" && defined(slug.current) && (isHidden != true)] | order(publishedAt desc)[0...3] {
-          _id,
-          title,
-          "slug": slug.current,
-          excerpt,
-          publishedAt,
-          "category": categories[0]->title,
-          author->{name},
-          mainImage,
-          body
-        }`;
+        console.log('📊 Datos recibidos de API:', data);
         
-        console.log('Intentando consulta:', query);
-        
-        const data = await sanityClient.fetch(query);
-        
-        console.log('📊 Datos recibidos de Sanity:', data);
-        console.log('📊 Primer artículo:', data[0]);
-        console.log('📊 Número de artículos:', data?.length || 0);
-        
-        if (!data || !Array.isArray(data)) {
-          throw new Error('Formato de datos inválido');
+        if (data.success && data.articles) {
+          setLatestArticles(data.articles);
+          console.log('✅ Artículos cargados:', data.articles.length);
+        } else {
+          throw new Error(data.error || 'Error al obtener artículos');
         }
-        
-        console.log('✅ Artículos válidos, actualizando estado...');
-        setLatestArticles(data);
-        console.log('✅ Estado actualizado');
       } catch (err) {
         console.error('Error cargando artículos:', err);
         setArticlesError(err instanceof Error ? err.message : 'Error desconocido al cargar artículos');
