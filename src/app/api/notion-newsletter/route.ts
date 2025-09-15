@@ -3,17 +3,14 @@ import { Client } from '@notionhq/client';
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
+  notionVersion: '2025-09-03',
 });
 
 const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('🔍 NOTION_TOKEN:', process.env.NOTION_TOKEN ? 'Presente' : 'Faltante');
-    console.log('🔍 DATABASE_ID:', process.env.NOTION_DATABASE_ID ? 'Presente' : 'Faltante');
-    
     const { name, email, idea, subscribeNewsletter, source } = await request.json();
-    console.log('📝 Datos recibidos:', { name, email, idea, subscribeNewsletter, source });
 
     if (!name || !email) {
       return NextResponse.json(
@@ -21,6 +18,19 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Obtener data_source_id de la base de datos
+    const databaseResponse = await notion.databases.retrieve({
+      database_id: DATABASE_ID!,
+    });
+
+    const dataSources = databaseResponse.data_sources;
+    if (!dataSources || dataSources.length === 0) {
+      throw new Error('No se encontraron data sources en la base de datos');
+    }
+
+    // Usar el primer data source (en bases de datos simples solo hay uno)
+    const dataSourceId = dataSources[0].id;
 
     // Preparar propiedades para Notion (coincidiendo con los nombres de tu tabla)
     const properties: any = {
@@ -69,10 +79,11 @@ export async function POST(request: NextRequest) {
       };
     }
 
-    // Agregar entrada a Notion
+    // Agregar entrada a Notion usando data_source_id
     const response = await notion.pages.create({
       parent: {
-        database_id: DATABASE_ID!,
+        type: 'data_source_id',
+        data_source_id: dataSourceId,
       },
       properties,
     });
