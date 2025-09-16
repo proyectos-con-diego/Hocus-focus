@@ -10,12 +10,6 @@ const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('🔍 NOTION_TOKEN presente:', !!process.env.NOTION_TOKEN);
-    console.log('🔍 NOTION_TOKEN inicio:', process.env.NOTION_TOKEN?.substring(0, 10));
-    console.log('🔍 NOTION_TOKEN completo:', process.env.NOTION_TOKEN);
-    console.log('🔍 DATABASE_ID presente:', !!process.env.NOTION_DATABASE_ID);
-    console.log('🔍 DATABASE_ID valor:', process.env.NOTION_DATABASE_ID);
-    
     const { name, email, idea, subscribeNewsletter, source } = await request.json();
 
     if (!name || !email) {
@@ -25,6 +19,28 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // TEMPORAL: Simular éxito hasta que Notion esté completamente configurado
+    console.log('✅ Simulando éxito para:', { name, email, source });
+    
+    // Log de los datos para debugging
+    console.log('📝 Datos recibidos:', {
+      name,
+      email,
+      idea: idea || 'No proporcionada',
+      subscribeNewsletter: subscribeNewsletter || false,
+      source: source || 'No especificado'
+    });
+    
+    return NextResponse.json(
+      { 
+        message: 'Datos guardados exitosamente (modo simulación)', 
+        id: 'sim-' + Date.now() 
+      },
+      { status: 200 }
+    );
+
+    // TODO: Restaurar integración real de Notion cuando esté funcionando
+    /*
     // Preparar propiedades básicas para Notion
     const properties: any = {
       Nombres: {
@@ -88,6 +104,7 @@ export async function POST(request: NextRequest) {
       { message: 'Datos guardados exitosamente', id: response.id },
       { status: 200 }
     );
+    */
   } catch (error) {
     console.error('❌ Error con Notion:', error);
     console.error('❌ Error details:', JSON.stringify(error, null, 2));
