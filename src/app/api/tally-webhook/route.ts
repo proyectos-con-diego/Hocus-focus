@@ -17,17 +17,19 @@ export async function POST(request: NextRequest) {
     // Extraer datos del formulario
     const formData = data.data;
     const name = formData.find((field: any) => field.label === 'Nombre')?.value || '';
-    const email = formData.find((field: any) => field.label === 'Email')?.value || '';
+    const email = formData.find((field: any) => field.label === 'Correo')?.value || '';
     const idea = formData.find((field: any) => field.label === 'Idea de SPIRIT')?.value || '';
     const subscribed = formData.find((field: any) => field.label === 'Suscrito')?.value === 'on';
     const source = formData.find((field: any) => field.label === 'Origen')?.value || 'Tally Form';
+    const createdAt = formData.find((field: any) => field.label === 'Fecha de creación')?.value || new Date().toISOString();
     
     console.log('📊 Datos procesados:', {
       name,
       email,
       idea,
       subscribed,
-      source
+      source,
+      createdAt
     });
     
     // Enviar a Notion
