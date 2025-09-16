@@ -29,21 +29,6 @@ export default function ContactoPage() {
           </p>
         </div>
 
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Redes sociales</h2>
-          <ul className="list-disc list-inside space-y-1 text-neutral-300">
-            <li>
-              <a className="hover:underline" href="https://x.com/diegogonzalezv" target="_blank" rel="noreferrer">
-                X (Twitter)
-              </a>
-            </li>
-            <li>
-              <a className="hover:underline" href="https://www.linkedin.com/in/diegogonzalezvaccaro/" target="_blank" rel="noreferrer">
-                LinkedIn
-              </a>
-            </li>
-          </ul>
-        </div>
 
         <div className="border border-neutral-800 rounded-lg p-4 bg-neutral-900/40">
           <h3 className="font-semibold mb-2">Información legal</h3>
