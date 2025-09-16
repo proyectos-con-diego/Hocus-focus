@@ -3,7 +3,7 @@ import { Client } from '@notionhq/client';
 
 const notion = new Client({
   auth: process.env.NOTION_TOKEN,
-  notionVersion: '2025-09-03',
+  notionVersion: '2022-06-28',
 });
 
 const DATABASE_ID = process.env.NOTION_DATABASE_ID;
@@ -23,18 +23,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Obtener data_source_id de la base de datos
-    const databaseResponse = await notion.databases.retrieve({
+    // Verificar que la base de datos existe
+    await notion.databases.retrieve({
       database_id: DATABASE_ID!,
     });
-
-    const dataSources = databaseResponse.data_sources;
-    if (!dataSources || dataSources.length === 0) {
-      throw new Error('No se encontraron data sources en la base de datos');
-    }
-
-    // Usar el primer data source (en bases de datos simples solo hay uno)
-    const dataSourceId = dataSources[0].id;
 
     // Preparar propiedades para Notion (coincidiendo con los nombres de tu tabla)
     const properties: any = {
@@ -83,11 +75,10 @@ export async function POST(request: NextRequest) {
       };
     }
 
-    // Agregar entrada a Notion usando data_source_id
+    // Agregar entrada a Notion usando database_id
     const response = await notion.pages.create({
       parent: {
-        type: 'data_source_id',
-        data_source_id: dataSourceId,
+        database_id: DATABASE_ID!,
       },
       properties,
     });
