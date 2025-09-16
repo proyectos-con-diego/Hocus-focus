@@ -49,15 +49,29 @@ export async function POST(request: NextRequest) {
 
     // Agregar campos adicionales si existen
     if (idea) {
-      properties['Idea de SPIRIT'] = {
-        rich_text: [
-          {
-            text: {
-              content: idea,
+      // Si el origen es de contacto, usar la columna "¿En qué puedo ayudarte?"
+      if (source === 'contacto-sobre-mi') {
+        properties['¿En qué puedo ayudarte?'] = {
+          rich_text: [
+            {
+              text: {
+                content: idea,
+              },
             },
-          },
-        ],
-      };
+          ],
+        };
+      } else {
+        // Para otros casos, usar "Idea de SPIRIT"
+        properties['Idea de SPIRIT'] = {
+          rich_text: [
+            {
+              text: {
+                content: idea,
+              },
+            },
+          ],
+        };
+      }
     }
 
     if (subscribeNewsletter !== undefined) {

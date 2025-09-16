@@ -101,11 +101,73 @@ export default function SobreMiExperimentalPage() {
   const [articlesError, setArticlesError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'superpoderes' | 'ideales'>('superpoderes');
   const [showFullJourney, setShowFullJourney] = useState(false);
+  
+  // Estado para el formulario de contacto
+  const [contactData, setContactData] = useState({
+    name: '',
+    email: '',
+    message: '',
+    subscribeNewsletter: true
+  });
+  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
+  const [contactMessage, setContactMessage] = useState('');
 
 
 
   const toggleJourney = () => {
     setShowFullJourney(!showFullJourney);
+  };
+
+  // Funciones para el formulario de contacto
+  const handleContactInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+    setContactData(prev => ({ 
+      ...prev, 
+      [name]: value 
+    }));
+  };
+
+  const handleContactCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target;
+    setContactData(prev => ({ 
+      ...prev, 
+      subscribeNewsletter: checked 
+    }));
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmittingContact(true);
+    setContactMessage('');
+
+    try {
+      const response = await fetch('/api/notion-newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: contactData.name,
+          email: contactData.email,
+          idea: contactData.message, // Usamos el campo 'idea' para el mensaje
+          subscribeNewsletter: contactData.subscribeNewsletter,
+          source: 'contacto-sobre-mi'
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setContactMessage('¡Gracias! Tu mensaje ha sido enviado. Te responderé pronto.');
+        setContactData({ name: '', email: '', message: '', subscribeNewsletter: true });
+      } else {
+        setContactMessage(result.error || 'Error al enviar el mensaje');
+      }
+    } catch (error) {
+      setContactMessage('Error de conexión. Inténtalo de nuevo.');
+    } finally {
+      setIsSubmittingContact(false);
+    }
   };
 
   // Fetch artículos de API route
@@ -1390,33 +1452,72 @@ export default function SobreMiExperimentalPage() {
               viewport={{ once: true }}
             >
               <h3 className="text-2xl font-bold text-white mb-6">Envíame un Mensaje</h3>
-              <form className="space-y-4">
+              
+              {contactMessage && (
+                <div className={`w-full mb-6 p-4 rounded-xl text-center font-medium ${
+                  contactMessage.includes('Gracias') 
+                    ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                    : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                }`}>
+                  {contactMessage}
+                </div>
+              )}
+              
+              <form onSubmit={handleContactSubmit} className="space-y-4">
                 <div>
                   <input
                     type="text"
+                    name="name"
+                    value={contactData.name}
+                    onChange={handleContactInputChange}
                     placeholder="Tu nombre"
                     className="w-full px-4 py-3 bg-gray-800/50 backdrop-blur-sm border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none transition-colors duration-300"
+                    required
                   />
                 </div>
                 <div>
                   <input
                     type="email"
+                    name="email"
+                    value={contactData.email}
+                    onChange={handleContactInputChange}
                     placeholder="Tu email"
                     className="w-full px-4 py-3 bg-gray-800/50 backdrop-blur-sm border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none transition-colors duration-300"
+                    required
                   />
                 </div>
                 <div>
                   <textarea
+                    name="message"
+                    value={contactData.message}
+                    onChange={handleContactInputChange}
                     placeholder="¿En qué puedo ayudarte?"
                     rows={4}
                     className="w-full px-4 py-3 bg-gray-800/50 backdrop-blur-sm border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-colors duration-300 resize-none"
+                    required
                   ></textarea>
                 </div>
+                
+                <div className="flex items-start space-x-3">
+                  <input
+                    type="checkbox"
+                    id="subscribeNewsletter"
+                    name="subscribeNewsletter"
+                    checked={contactData.subscribeNewsletter}
+                    onChange={handleContactCheckboxChange}
+                    className="mt-1 w-4 h-4 text-cyan-500 bg-white/10 border-white/20 rounded focus:ring-cyan-400/50 focus:ring-2"
+                  />
+                  <label htmlFor="subscribeNewsletter" className="text-sm text-white/80 leading-relaxed">
+                    Quiero recibir artículos y recursos exclusivos en mi email.
+                  </label>
+                </div>
+                
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 bg-gradient-to-r from-cyan-400 to-yellow-400 text-black font-bold rounded-lg hover:from-cyan-300 hover:to-yellow-300 transition-all duration-300 transform hover:scale-105"
+                  disabled={isSubmittingContact || !contactData.name.trim() || !contactData.email.trim() || !contactData.message.trim()}
+                  className="w-full px-6 py-3 bg-gradient-to-r from-cyan-400 to-yellow-400 disabled:from-gray-500 disabled:to-gray-600 disabled:cursor-not-allowed text-black font-bold rounded-lg hover:from-cyan-300 hover:to-yellow-300 transition-all duration-300 transform hover:scale-105 disabled:scale-100"
                 >
-                  📧 Enviar Mensaje
+                  {isSubmittingContact ? '⏳ Enviando...' : '📧 Enviar Mensaje'}
                 </button>
               </form>
             </motion.div>
