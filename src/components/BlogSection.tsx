@@ -112,7 +112,7 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
     setSubmitMessage('');
 
     try {
-      const response = await fetch('/api/simple-newsletter', {
+      const response = await fetch('/api/google-sheets', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
