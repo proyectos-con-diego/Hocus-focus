@@ -24,26 +24,41 @@ export async function POST(request: NextRequest) {
 
     // Enviar a Tally
     try {
+      console.log('🔍 Enviando a Tally con:', {
+        url: `https://api.tally.so/forms/${TALLY_FORM_ID}/responses`,
+        apiKey: TALLY_API_KEY?.substring(0, 10) + '...',
+        formId: TALLY_FORM_ID
+      });
+
+      const requestBody = {
+        data: {
+          'Nombre': name,
+          'Correo': email,
+          'Idea de SPIRIT': idea || '',
+          'Suscrito': subscribeNewsletter || false,
+          'Origen': source || 'Formulario Web',
+          'Fecha de creación': new Date().toISOString()
+        }
+      };
+
+      console.log('🔍 Request body:', JSON.stringify(requestBody, null, 2));
+
       const tallyResponse = await fetch(`https://api.tally.so/forms/${TALLY_FORM_ID}/responses`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${TALLY_API_KEY}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          data: {
-            'Nombre': name,
-            'Correo': email,
-            'Idea de SPIRIT': idea || '',
-            'Suscrito': subscribeNewsletter || false,
-            'Origen': source || 'Formulario Web',
-            'Fecha de creación': new Date().toISOString()
-          }
-        })
+        body: JSON.stringify(requestBody)
       });
 
+      console.log('🔍 Tally response status:', tallyResponse.status);
+      console.log('🔍 Tally response headers:', Object.fromEntries(tallyResponse.headers.entries()));
+
       if (!tallyResponse.ok) {
-        throw new Error(`Tally API error: ${tallyResponse.status}`);
+        const errorText = await tallyResponse.text();
+        console.error('❌ Tally API error response:', errorText);
+        throw new Error(`Tally API error: ${tallyResponse.status} - ${errorText}`);
       }
 
       const tallyData = await tallyResponse.json();
