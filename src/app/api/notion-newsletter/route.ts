@@ -25,12 +25,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verificar que la base de datos existe
-    await notion.databases.retrieve({
-      database_id: DATABASE_ID!,
-    });
-
-    // Preparar propiedades para Notion (coincidiendo con los nombres de tu tabla)
+    // Preparar propiedades básicas para Notion
     const properties: any = {
       Nombres: {
         title: [
@@ -76,6 +71,8 @@ export async function POST(request: NextRequest) {
         ],
       };
     }
+
+    console.log('🔍 Intentando crear página en Notion con propiedades:', JSON.stringify(properties, null, 2));
 
     // Agregar entrada a Notion usando database_id
     const response = await notion.pages.create({
