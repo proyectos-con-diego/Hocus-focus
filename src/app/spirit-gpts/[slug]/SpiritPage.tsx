@@ -46,7 +46,7 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
     setNewsletterMessage('');
 
     try {
-      const response = await fetch('/api/notion-newsletter', {
+      const response = await fetch('/api/tally-submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

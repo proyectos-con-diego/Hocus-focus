@@ -128,7 +128,7 @@ export default function ProductRelatedArticles({ productSlug, productColor }: Pr
     setSubmitMessage('');
     
     try {
-      const response = await fetch('/api/notion-newsletter', {
+      const response = await fetch('/api/tally-submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

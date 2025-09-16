@@ -78,7 +78,7 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
   const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
-    setLoadingArticles(true);
+    setLoadingArticles(true);Por favor pásame nuevamente
     fetch('/api/articles')
       .then(response => response.json())
       .then((data: any) => {
@@ -112,7 +112,7 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
     setSubmitMessage('');
 
     try {
-      const response = await fetch('/api/notion-newsletter', {
+      const response = await fetch('/api/tally-submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
