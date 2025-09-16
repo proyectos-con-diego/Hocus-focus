@@ -1,4 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Client } from '@notionhq/client';
+
+const notion = new Client({
+  auth: process.env.NOTION_TOKEN,
+  notionVersion: '2022-06-28',
+});
+
+const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,9 +19,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Aquí usarías la API de Tally para enviar los datos
-    // Por ahora, simulamos el envío exitoso
-    console.log('📝 Enviando a Tally:', {
+    console.log('📝 Enviando a Notion via Tally:', {
       name,
       email,
       idea,
@@ -21,36 +27,75 @@ export async function POST(request: NextRequest) {
       source
     });
 
-    // TODO: Implementar llamada real a la API de Tally
-    // const tallyResponse = await fetch('https://api.tally.so/forms/YOUR_FORM_ID/responses', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Authorization': `Bearer ${process.env.TALLY_API_KEY}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     data: {
-    //       name,
-    //       email,
-    //       idea,
-    //       subscribeNewsletter,
-    //       source
-    //     }
-    //   })
-    // });
-
-    return NextResponse.json(
-      { 
-        message: 'Datos enviados a Tally exitosamente',
-        success: true
-      },
-      { status: 200 }
-    );
+    // Enviar directamente a Notion
+    try {
+      const notionResponse = await notion.pages.create({
+        parent: {
+          database_id: DATABASE_ID!,
+        },
+        properties: {
+          Nombres: {
+            title: [
+              {
+                text: {
+                  content: name,
+                },
+              },
+            ],
+          },
+          Correo: {
+            email: email,
+          },
+          'Idea de SPIRIT': {
+            rich_text: [
+              {
+                text: {
+                  content: idea || '',
+                },
+              },
+            ],
+          },
+          Suscrito: {
+            checkbox: subscribeNewsletter || false,
+          },
+          Origen: {
+            rich_text: [
+              {
+                text: {
+                  content: source || 'Formulario Web',
+                },
+              },
+            ],
+          },
+        },
+      });
+      
+      console.log('✅ Datos enviados a Notion:', notionResponse.id);
+      
+      return NextResponse.json(
+        { 
+          message: 'Datos guardados exitosamente',
+          success: true,
+          notionId: notionResponse.id
+        },
+        { status: 200 }
+      );
+      
+    } catch (notionError) {
+      console.error('❌ Error enviando a Notion:', notionError);
+      return NextResponse.json(
+        { 
+          error: 'Error al guardar en Notion',
+          details: notionError instanceof Error ? notionError.message : 'Error desconocido'
+        },
+        { status: 500 }
+      );
+    }
     
   } catch (error) {
-    console.error('❌ Error enviando a Tally:', error);
+    console.error('❌ Error procesando formulario:', error);
     return NextResponse.json(
-      { error: 'Error al enviar formulario' },
+      { error: 'Error al procesar formulario' },
       { status: 500 }
     );
   }

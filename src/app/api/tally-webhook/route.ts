@@ -1,4 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Client } from '@notionhq/client';
+
+const notion = new Client({
+  auth: process.env.NOTION_TOKEN,
+  notionVersion: '2022-06-28',
+});
+
+const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,22 +30,74 @@ export async function POST(request: NextRequest) {
       source
     });
     
-    // Aquí puedes agregar lógica adicional como:
-    // - Guardar en base de datos
-    // - Enviar email de confirmación
-    // - Integrar con servicios de email marketing
-    
-    return NextResponse.json({
-      success: true,
-      message: 'Formulario procesado exitosamente',
-      data: {
-        name,
-        email,
-        idea,
-        subscribed,
-        source
+    // Enviar a Notion
+    if (name && email) {
+      try {
+        const notionResponse = await notion.pages.create({
+          parent: {
+            database_id: DATABASE_ID!,
+          },
+          properties: {
+            Nombres: {
+              title: [
+                {
+                  text: {
+                    content: name,
+                  },
+                },
+              ],
+            },
+            Correo: {
+              email: email,
+            },
+            'Idea de SPIRIT': {
+              rich_text: [
+                {
+                  text: {
+                    content: idea || '',
+                  },
+                },
+              ],
+            },
+            Suscrito: {
+              checkbox: subscribed,
+            },
+            Origen: {
+              rich_text: [
+                {
+                  text: {
+                    content: source,
+                  },
+                },
+              ],
+            },
+          },
+        });
+        
+        console.log('✅ Datos enviados a Notion:', notionResponse.id);
+        
+        return NextResponse.json({
+          success: true,
+          message: 'Datos enviados a Notion exitosamente',
+          notionId: notionResponse.id
+        });
+        
+      } catch (notionError) {
+        console.error('❌ Error enviando a Notion:', notionError);
+        return NextResponse.json(
+          { 
+            error: 'Error enviando a Notion',
+            details: notionError instanceof Error ? notionError.message : 'Error desconocido'
+          },
+          { status: 500 }
+        );
       }
-    });
+    } else {
+      return NextResponse.json(
+        { error: 'Nombre y email son requeridos' },
+        { status: 400 }
+      );
+    }
     
   } catch (error) {
     console.error('❌ Error procesando webhook de Tally:', error);
