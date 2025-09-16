@@ -56,7 +56,7 @@ export default function PoliticaPrivacidadPage() {
         <p>
           Para ejercer tus derechos, escríbenos a
           {' '}
-          <a className="text-cyan-400 hover:underline" href="mailto:hola@hocusfocus.dev">hola@hocusfocus.dev</a>.
+          <a className="text-cyan-400 hover:underline" href="mailto:proyectoscondiego@gmail.com">proyectoscondiego@gmail.com</a>.
         </p>
 
         <h2 className="text-xl font-semibold">Terceros</h2>

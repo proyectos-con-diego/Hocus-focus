@@ -22,9 +22,9 @@ export default function ContactoPage() {
           <p>
             <a
               className="text-cyan-400 hover:underline"
-              href="mailto:hola@hocusfocus.dev"
+              href="mailto:proyectoscondiego@gmail.com"
             >
-              hola@hocusfocus.dev
+              proyectoscondiego@gmail.com
             </a>
           </p>
         </div>

@@ -39,7 +39,7 @@ export default function PoliticaCookiesPage() {
         <h2 className="text-xl font-semibold">Contacto</h2>
         <p>
           Si tienes preguntas sobre esta política, contáctanos en{' '}
-          <a className="text-cyan-400 hover:underline" href="mailto:hola@hocusfocus.dev">hola@hocusfocus.dev</a>.
+          <a className="text-cyan-400 hover:underline" href="mailto:proyectoscondiego@gmail.com">proyectoscondiego@gmail.com</a>.
         </p>
       </section>
     </main>
