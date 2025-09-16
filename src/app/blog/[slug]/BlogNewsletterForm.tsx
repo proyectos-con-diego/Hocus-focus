@@ -2,7 +2,11 @@
 
 import React, { useState } from 'react';
 
-export default function BlogNewsletterForm() {
+interface BlogNewsletterFormProps {
+  articleSlug?: string;
+}
+
+export default function BlogNewsletterForm({ articleSlug }: BlogNewsletterFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,7 +36,7 @@ export default function BlogNewsletterForm() {
         },
         body: JSON.stringify({
           ...formData,
-          source: 'blog-article'
+          source: articleSlug ? `blog-article-${articleSlug}` : 'blog-article'
         }),
       });
 

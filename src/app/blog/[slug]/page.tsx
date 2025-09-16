@@ -703,7 +703,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
       {/* Newsletter Signup con diseño consistente */}
       <div className="max-w-7xl mx-auto px-6">
-        <BlogNewsletterForm />
+        <BlogNewsletterForm articleSlug={post.slug?.current} />
       </div>
 
       {/* Navegación mejorada */}
