@@ -112,7 +112,7 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
     setSubmitMessage('');
 
     try {
-      const response = await fetch('/api/notion-newsletter', {
+      const response = await fetch('/api/simple-newsletter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
