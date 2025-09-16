@@ -124,7 +124,7 @@ export default function ArticulosSobreMiV2() {
     setSubmitMessage('');
     
     try {
-      const response = await fetch('/api/tally-submit', {
+      const response = await fetch('/api/notion-newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
