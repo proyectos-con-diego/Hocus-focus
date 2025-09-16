@@ -14,7 +14,7 @@ import NosferatuSpiritForm from '../../../components/NosferatuSpiritForm';
 import TatarotoSpiritForm from '../../../components/TatarotoSpiritForm';
 import PromptifySpiritForm from '../../../components/PromptifySpiritForm';
 import CriptoferSpiritForm from '../../../components/CriptoferSpiritForm';
-import { sanityClient } from '../../../sanity/sanity';
+// Removed direct Sanity import - using API route instead
 import { getReadingContext } from '../../../data/blog';
 
 interface SpiritPageProps {
@@ -155,32 +155,28 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
     setParticles(newParticles);
   }, []);
 
-  // Fetch artículos de Sanity
+  // Fetch artículos de API route
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         setLoadingArticles(true);
         setArticlesError(null);
         
-        const query = `*[_type == "post" && defined(slug.current) && (isHidden != true) && (categories[0]->title == "Inteligencia artificial" || categories[0]->title == "Proyectos y productos")] | order(publishedAt desc)[0...3] {
-          _id,
-          title,
-          "slug": slug.current,
-          excerpt,
-          publishedAt,
-          "category": categories[0]->title,
-          author->{name},
-          mainImage,
-          body
-        }`;
+        // Fetch from API route instead of direct Sanity query
+        const response = await fetch('/api/articles?limit=3');
+        const data = await response.json();
         
-        const data = await sanityClient.fetch(query);
-        
-        if (!data || !Array.isArray(data)) {
-          throw new Error('Formato de datos inválido');
+        if (data.success && data.articles) {
+          // Filter articles for AI and projects categories
+          const filteredArticles = data.articles.filter((article: any) => 
+            article.category === "Inteligencia artificial" || 
+            article.category === "Proyectos y productos"
+          ).slice(0, 3);
+          
+          setLatestArticles(filteredArticles);
+        } else {
+          throw new Error(data.error || 'Error al obtener artículos');
         }
-        
-        setLatestArticles(data);
       } catch (err) {
         console.error('Error cargando artículos:', err);
         setArticlesError(err instanceof Error ? err.message : 'Error desconocido al cargar artículos');
