@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
       headers: {
         'Authorization': `Bearer ${TALLY_API_KEY}`,
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
     });
 
