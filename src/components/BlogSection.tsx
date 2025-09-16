@@ -78,7 +78,7 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
   const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
-    setLoadingArticles(true);Por favor pásame nuevamente
+    setLoadingArticles(true);
     fetch('/api/articles')
       .then(response => response.json())
       .then((data: any) => {
