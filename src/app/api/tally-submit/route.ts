@@ -1,12 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Client } from '@notionhq/client';
 
-const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
-  notionVersion: '2022-06-28',
-});
-
-const DATABASE_ID = process.env.NOTION_DATABASE_ID;
+const TALLY_API_KEY = process.env.TALLY_API_KEY;
+const TALLY_FORM_ID = 'mY2AR6';
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,7 +14,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('📝 Enviando a Notion via Tally:', {
+    console.log('📝 Enviando a Tally:', {
       name,
       email,
       idea,
@@ -27,66 +22,48 @@ export async function POST(request: NextRequest) {
       source
     });
 
-    // Enviar directamente a Notion
+    // Enviar a Tally
     try {
-      const notionResponse = await notion.pages.create({
-        parent: {
-          database_id: DATABASE_ID!,
+      const tallyResponse = await fetch(`https://api.tally.so/forms/${TALLY_FORM_ID}/responses`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${TALLY_API_KEY}`,
+          'Content-Type': 'application/json',
         },
-        properties: {
-          Nombres: {
-            title: [
-              {
-                text: {
-                  content: name,
-                },
-              },
-            ],
-          },
-          Correo: {
-            email: email,
-          },
-          'Idea de SPIRIT': {
-            rich_text: [
-              {
-                text: {
-                  content: idea || '',
-                },
-              },
-            ],
-          },
-          Suscrito: {
-            checkbox: subscribeNewsletter || false,
-          },
-          Origen: {
-            rich_text: [
-              {
-                text: {
-                  content: source || 'Formulario Web',
-                },
-              },
-            ],
-          },
-        },
+        body: JSON.stringify({
+          data: {
+            'Nombre': name,
+            'Correo': email,
+            'Idea de SPIRIT': idea || '',
+            'Suscrito': subscribeNewsletter || false,
+            'Origen': source || 'Formulario Web',
+            'Fecha de creación': new Date().toISOString()
+          }
+        })
       });
-      
-      console.log('✅ Datos enviados a Notion:', notionResponse.id);
+
+      if (!tallyResponse.ok) {
+        throw new Error(`Tally API error: ${tallyResponse.status}`);
+      }
+
+      const tallyData = await tallyResponse.json();
+      console.log('✅ Datos enviados a Tally:', tallyData);
       
       return NextResponse.json(
         { 
-          message: 'Datos guardados exitosamente',
+          message: 'Datos guardados exitosamente en Tally',
           success: true,
-          notionId: notionResponse.id
+          tallyId: tallyData.id
         },
         { status: 200 }
       );
       
-    } catch (notionError) {
-      console.error('❌ Error enviando a Notion:', notionError);
+    } catch (tallyError) {
+      console.error('❌ Error enviando a Tally:', tallyError);
       return NextResponse.json(
         { 
-          error: 'Error al guardar en Notion',
-          details: notionError instanceof Error ? notionError.message : 'Error desconocido'
+          error: 'Error al guardar en Tally',
+          details: tallyError instanceof Error ? tallyError.message : 'Error desconocido'
         },
         { status: 500 }
       );
