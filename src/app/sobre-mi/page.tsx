@@ -348,10 +348,10 @@ export default function SobreMiExperimentalPage() {
   ], []);
 
   const socialData = React.useMemo(() => [
-    { icon: "🐦", name: "Twitter", handle: "@diego_optimiza", color: "text-blue-400 hover:text-blue-300", bgColor: "bg-blue-500/20" },
-    { icon: "💼", name: "LinkedIn", handle: "Diego Gonzalez Vaccaro", color: "text-cyan-400 hover:text-cyan-300", bgColor: "bg-cyan-500/20" },
-    { icon: "📸", name: "Instagram", handle: "@diego.optimiza", color: "text-yellow-400 hover:text-yellow-300", bgColor: "bg-yellow-500/20" },
-    { icon: "📧", name: "Email", handle: "hola@diegooptimiza.com", color: "text-orange-400 hover:text-orange-300", bgColor: "bg-orange-500/20" }
+    { icon: "💼", name: "LinkedIn", handle: "Diego Gonzalez Vaccaro", url: "https://www.linkedin.com/in/diego-gonzalez-v/", color: "text-cyan-400 hover:text-cyan-300", bgColor: "bg-cyan-500/20" },
+    { icon: "📸", name: "Instagram", handle: "@proyectoscondiego", url: "https://www.instagram.com/proyectoscondiego/", color: "text-yellow-400 hover:text-yellow-300", bgColor: "bg-yellow-500/20" },
+    { icon: "📺", name: "YouTube", handle: "@ProyectosconDiego", url: "https://www.youtube.com/@ProyectosconDiego", color: "text-red-400 hover:text-red-300", bgColor: "bg-red-500/20" },
+    { icon: "📧", name: "Email", handle: "proyectoscondiego@gmail.com", url: "mailto:proyectoscondiego@gmail.com", color: "text-orange-400 hover:text-orange-300", bgColor: "bg-orange-500/20" }
   ], []);
 
 
@@ -1363,15 +1363,21 @@ export default function SobreMiExperimentalPage() {
               <h3 className="text-2xl font-bold text-white mb-6">Mis Redes Sociales</h3>
               <div className="space-y-4">
                 {socialData.map((social, index) => (
-                  <div key={index} className={`${social.bgColor} rounded-xl p-4 border border-gray-700/50`}>
+                  <a 
+                    key={index} 
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${social.bgColor} rounded-xl p-4 border border-gray-700/50 hover:border-cyan-400/30 transition-all duration-300 block group`}
+                  >
                     <div className="flex items-center space-x-3">
-                      <span className="text-2xl">{social.icon}</span>
+                      <span className="text-2xl group-hover:scale-110 transition-transform duration-300">{social.icon}</span>
                       <div>
-                        <div className="font-semibold text-white">{social.name}</div>
+                        <div className="font-semibold text-white group-hover:text-cyan-400 transition-colors duration-300">{social.name}</div>
                         <div className={`${social.color} text-sm`}>{social.handle}</div>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </motion.div>
@@ -1461,13 +1467,15 @@ export default function SobreMiExperimentalPage() {
         <div className="max-w-6xl mx-auto text-center px-5">
           <div className="flex justify-center space-x-6 mb-6">
             {[
-              { icon: "🐦", label: "Twitter", color: "text-blue-400 hover:text-blue-300" },
-              { icon: "💼", label: "LinkedIn", color: "text-cyan-400 hover:text-cyan-300" },
-              { icon: "📸", label: "Instagram", color: "text-yellow-400 hover:text-yellow-300" }
+              { icon: "💼", label: "LinkedIn", url: "https://www.linkedin.com/in/diego-gonzalez-v/", color: "text-cyan-400 hover:text-cyan-300" },
+              { icon: "📸", label: "Instagram", url: "https://www.instagram.com/proyectoscondiego/", color: "text-yellow-400 hover:text-yellow-300" },
+              { icon: "📺", label: "YouTube", url: "https://www.youtube.com/@ProyectosconDiego", color: "text-red-400 hover:text-red-300" }
             ].map((social, index) => (
               <motion.a
                 key={index}
-                href="#"
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`text-2xl ${social.color} transition-colors duration-300`}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
