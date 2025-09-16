@@ -131,7 +131,7 @@ export default function SpiritsPage() {
           email: formData.email,
           idea: formData.idea,
           subscribeNewsletter: formData.subscribeNewsletter,
-          source: 'spirits-homepage'
+          source: 'spirits-convocatoria'
         }),
       });
 
