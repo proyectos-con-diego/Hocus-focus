@@ -5,9 +5,9 @@ export async function GET(request: NextRequest) {
     const allEnvVars = process.env;
     const relevantVars = {};
     
-    // Buscar todas las variables que contengan NOTION o TALLY
+    // Buscar todas las variables que contengan NOTION, TALLY o GOOGLE
     Object.keys(allEnvVars).forEach(key => {
-      if (key.includes('NOTION') || key.includes('TALLY') || key.includes('SANITY')) {
+      if (key.includes('NOTION') || key.includes('TALLY') || key.includes('SANITY') || key.includes('GOOGLE')) {
         relevantVars[key] = {
           present: !!allEnvVars[key],
           value: allEnvVars[key] ? allEnvVars[key].substring(0, 10) + '...' : 'NOT_FOUND',
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
       relevantVars: relevantVars,
       totalEnvVars: Object.keys(allEnvVars).length,
       allEnvKeys: Object.keys(allEnvVars).filter(key => 
-        key.includes('NOTION') || key.includes('TALLY') || key.includes('SANITY')
+        key.includes('NOTION') || key.includes('TALLY') || key.includes('SANITY') || key.includes('GOOGLE')
       )
     });
   } catch (error) {
