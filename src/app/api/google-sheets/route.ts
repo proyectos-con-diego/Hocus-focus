@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const GOOGLE_SHEETS_URL = process.env.GOOGLE_SHEETS_URL;
+// Fallback temporal: si la env no llega, usar la URL /exec provista
+const GOOGLE_SHEETS_URL =
+  process.env.GOOGLE_SHEETS_URL ||
+  'https://script.google.com/macros/s/AKfycbx-f-NvGLtKrKWZ4c7w8QxOVwWiu_9rKWk0e7Qs8YMzkKh8MHCQO6PuZtnri_KchsF1NA/exec';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,12 +16,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!GOOGLE_SHEETS_URL) {
-      return NextResponse.json(
-        { error: 'Google Sheets URL no configurada' },
-        { status: 500 }
-      );
-    }
+    // Nota: mantenemos fallback arriba para no bloquear producción si la env no llega
 
     console.log('📝 Enviando a Google Sheets:', {
       name,
