@@ -1,4 +1,45 @@
+'use client';
+import React, { useState } from 'react';
+
 export default function NewsletterSignup() {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      const response = await fetch('/api/notion-newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: email.split('@')[0], // Usar parte del email como nombre
+          email: email,
+          subscribeNewsletter: true,
+          source: 'newsletter-signup'
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
+        setEmail('');
+      } else {
+        setSubmitMessage(result.error || 'Error al suscribirse');
+      }
+    } catch (error) {
+      setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6">
       <div className="relative mt-16 rounded-3xl overflow-hidden shadow-2xl">
@@ -12,20 +53,34 @@ export default function NewsletterSignup() {
           <p className="text-white/90 mb-6 text-base">
             Recibe mis mejores reflexiones sobre productividad y optimización directamente en tu email.
           </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" role="form" aria-label="Formulario de suscripción al newsletter">
+          
+          {submitMessage && (
+            <div className={`w-full max-w-md mx-auto mb-4 p-3 rounded-xl text-center font-medium text-sm ${
+              submitMessage.includes('Gracias') 
+                ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                : 'bg-red-500/20 text-red-400 border border-red-500/30'
+            }`}>
+              {submitMessage}
+            </div>
+          )}
+          
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" role="form" aria-label="Formulario de suscripción al newsletter">
             <input 
               type="email" 
-              className="flex-1 px-4 sm:px-5 py-3 sm:py-4 rounded-xl bg-white/20 text-white placeholder-white/70 border-none outline-none text-sm" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="flex-1 px-4 sm:px-5 py-3 sm:py-4 rounded-xl bg-white/20 text-white placeholder-white/70 border-none outline-none text-sm focus:bg-white/30 transition-all duration-300" 
               placeholder="Tu mejor email" 
               aria-label="Email para suscripción"
               required
             />
             <button 
               type="submit" 
-              className="px-4 sm:px-6 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold transition-all hover:scale-105 text-sm sm:text-base"
+              disabled={isSubmitting || !email.trim()}
+              className="px-4 sm:px-6 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 disabled:from-gray-500 disabled:to-gray-600 disabled:cursor-not-allowed text-white font-bold transition-all hover:scale-105 text-sm sm:text-base"
               aria-label="Suscribirse al newsletter"
             >
-              Suscribirme
+              {isSubmitting ? 'Suscribiendo...' : 'Suscribirme'}
             </button>
           </form>
         </div>

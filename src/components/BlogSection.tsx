@@ -112,7 +112,7 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
     setSubmitMessage('');
 
     try {
-      const response = await fetch('/api/airtable', {
+      const response = await fetch('/api/notion-newsletter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
