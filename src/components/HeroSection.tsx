@@ -52,31 +52,32 @@ export default function HeroSection({
 
 
   useEffect(() => {
-    // Crear partículas flotantes optimizadas
-    const particleCount = 20;
+    // Crear menos partículas y más ligeras
+    const particleCount = 8;
     const newParticles = Array.from({ length: particleCount }, (_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 3}s`,
-      duration: `${Math.random() * 3 + 2}s`
+      delay: `${Math.random() * 2}s`,
+      duration: `${Math.random() * 2 + 2}s`
     }));
     setParticles(newParticles);
   }, []);
 
   return (
     <section className="pt-32 pb-20 relative min-h-screen flex items-center">
-      {/* Partículas de fondo */}
-      <div className="fixed inset-0 pointer-events-none z-0">
+      {/* Partículas de fondo (contenidas al section) */}
+      <div className="absolute inset-0 pointer-events-none z-0">
         {particles.map((particle) => (
           <div
             key={particle.id}
-            className="absolute w-0.5 h-0.5 bg-cyan-400/50 rounded-full animate-pulse hover:scale-150 hover:bg-cyan-400 transition-all duration-300"
+            className="absolute w-0.5 h-0.5 bg-cyan-400/40 rounded-full"
             style={{
               left: particle.left,
               top: particle.top,
               animationDelay: particle.delay,
-              animationDuration: particle.duration
+              animationDuration: particle.duration,
+              transition: 'transform 300ms ease, opacity 300ms ease'
             }}
           />
         ))}
@@ -147,17 +148,25 @@ export default function HeroSection({
                 transition={{ duration: 1, delay: 0.3 }}
                 className="relative"
               >
-                {/* Efecto de brillo detrás de la imagen */}
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-purple-600/20 rounded-full blur-3xl scale-150 animate-pulse"></div>
+                {/* Efecto de brillo simplificado */}
+                <div className="absolute inset-0 rounded-full"
+                  style={{
+                    opacity: 0.35,
+                    background: 'radial-gradient(closest-side, rgba(34,211,238,0.25), transparent 70%)'
+                  }}
+                />
                 
                 {/* Imagen principal */}
                 <img
                   src={imageSrc}
                   alt={imageAlt || "Hero Image"}
-                  className="relative z-10 w-full h-auto max-w-md mx-auto lg:max-w-lg xl:max-w-xl object-contain bg-transparent transition-all duration-500 hover:scale-105"
+                  loading="eager"
+                  decoding="async"
+                  className="relative z-10 w-full h-auto max-w-md mx-auto lg:max-w-lg xl:max-w-xl object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105"
                   style={{
                     filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.3))',
-                    mixBlendMode: 'multiply'
+                    mixBlendMode: 'multiply',
+                    transform: 'translateZ(0)'
                   }}
                 />
               </motion.div>
