@@ -287,6 +287,29 @@ export default function BlogNuevoClient() {
               loading={loading}
               data-testid="articles-list"
             />
+            
+            {/* Botón Ver más - Solo en móvil, después de los artículos */}
+            <div className="lg:hidden">
+              {visibleCount < filteredArticles.length && !loading && (
+                <section 
+                  className="text-center mt-12"
+                  role="region"
+                  aria-label="Cargar más artículos"
+                  data-testid="load-more-section-mobile"
+                >
+                  <button
+                    onClick={handleLoadMore}
+                    disabled={isLoadingMore}
+                    className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-black"
+                    aria-label={isLoadingMore ? "Cargando más artículos..." : "Cargar más artículos"}
+                    data-testid="load-more-button-mobile"
+                    onKeyDown={(e) => handleKeyDown(e, handleLoadMore)}
+                  >
+                    {isLoadingMore ? "Cargando..." : "Ver más"}
+                  </button>
+                </section>
+              )}
+            </div>
           </main>
           
           {/* Sidebar */}
@@ -308,26 +331,28 @@ export default function BlogNuevoClient() {
           </aside>
         </div>
         
-        {/* Botón Ver más */}
-        {visibleCount < filteredArticles.length && !loading && (
-          <section 
-            className="text-center mt-12"
-            role="region"
-            aria-label="Cargar más artículos"
-            data-testid="load-more-section"
-          >
-            <button
-              onClick={handleLoadMore}
-              disabled={isLoadingMore}
-              className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-black"
-              aria-label={isLoadingMore ? "Cargando más artículos..." : "Cargar más artículos"}
-              data-testid="load-more-button"
-              onKeyDown={(e) => handleKeyDown(e, handleLoadMore)}
+        {/* Botón Ver más - Solo en desktop, después del sidebar */}
+        <div className="hidden lg:block">
+          {visibleCount < filteredArticles.length && !loading && (
+            <section 
+              className="text-center mt-12"
+              role="region"
+              aria-label="Cargar más artículos"
+              data-testid="load-more-section-desktop"
             >
-              {isLoadingMore ? "Cargando..." : "Ver más"}
-            </button>
-          </section>
-        )}
+              <button
+                onClick={handleLoadMore}
+                disabled={isLoadingMore}
+                className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:from-purple-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-black"
+                aria-label={isLoadingMore ? "Cargando más artículos..." : "Cargar más artículos"}
+                data-testid="load-more-button-desktop"
+                onKeyDown={(e) => handleKeyDown(e, handleLoadMore)}
+              >
+                {isLoadingMore ? "Cargando..." : "Ver más"}
+              </button>
+            </section>
+          )}
+        </div>
         
         {/* Newsletter Section */}
         <section 
