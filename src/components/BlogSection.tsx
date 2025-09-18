@@ -202,7 +202,7 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
           )}
         </div>
         {/* Banner de suscripción con fondo oscuro y glow degradado */}
-        <div className="relative max-w-6xl mx-auto mt-16 rounded-3xl overflow-hidden shadow-2xl">
+        <div id="newsletter-banner" className="relative max-w-6xl mx-auto mt-16 rounded-3xl overflow-hidden shadow-2xl">
           <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{
             boxShadow: '0 0 0 4px #a21caf55, 0 0 40px 8px #a21caf33'
           }} />

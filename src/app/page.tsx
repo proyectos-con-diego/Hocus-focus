@@ -58,9 +58,14 @@ export default function DiegoPersonalSite() {
         ctaButton={{
           text: "📩 Suscríbete",
           onClick: () => {
-            const articlesSection = document.querySelector('[data-section="articles"]');
-            if (articlesSection) {
-              articlesSection.scrollIntoView({ behavior: 'smooth' });
+            const newsletterBanner = document.querySelector('#newsletter-banner');
+            if (newsletterBanner) {
+              const headerHeight = 80;
+              const elementPosition = newsletterBanner.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+              window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+              });
             }
           }
         }}
