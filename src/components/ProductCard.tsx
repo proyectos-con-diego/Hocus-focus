@@ -154,12 +154,12 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
         <div 
           className="mascot-avatar mx-auto mb-3 transition-all duration-500"
           style={{
-            width: 'clamp(120px, 20vw, 207px)',
-            height: 'clamp(120px, 20vw, 207px)',
+            width: 'clamp(160px, 20vw, 207px)',
+            height: 'clamp(160px, 20vw, 207px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: 'clamp(-60px, -8vw, -92px) auto 12px',
+            margin: 'clamp(-80px, -8vw, -92px) auto 12px',
             position: 'relative',
             filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
           }}
