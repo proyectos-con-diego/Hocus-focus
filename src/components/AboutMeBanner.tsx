@@ -1,11 +1,19 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function AboutMeBanner() {
+interface AboutMeBannerProps {
+  onServicesClick?: () => void;
+}
+
+export default function AboutMeBanner({ onServicesClick }: AboutMeBannerProps) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/servicios');
+    if (onServicesClick) {
+      onServicesClick();
+    } else {
+      router.push('/servicios');
+    }
   };
 
   return (

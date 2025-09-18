@@ -247,7 +247,19 @@ export default function ServiciosPage() {
         data-testid="cta-banner"
         data-section="cta"
       >
-        <AboutMeBanner />
+        <AboutMeBanner 
+          onServicesClick={() => {
+            const servicesSection = document.querySelector('#servicios');
+            if (servicesSection) {
+              const headerHeight = 80;
+              const elementPosition = servicesSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+              window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+              });
+            }
+          }}
+        />
       </section>
 
       {/* FAQ Section */}
