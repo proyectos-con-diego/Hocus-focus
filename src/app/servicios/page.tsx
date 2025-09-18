@@ -6,7 +6,7 @@ import CaseStudySection from '@/components/CaseStudySection';
 import ServiciosSection from '@/components/ServiciosSection';
 import ServiciosTestimonialsSection from '@/components/ServiciosTestimonialsSection';
 import ServiciosFAQSection from '@/components/ServiciosFAQSection';
-import ServiciosCTABanner from '@/components/ServiciosCTABanner';
+import AboutMeBanner from '@/components/AboutMeBanner';
 import WorkflowSection from '@/components/WorkflowSection';
 
 export default function ServiciosPage() {
@@ -247,10 +247,7 @@ export default function ServiciosPage() {
         data-testid="cta-banner"
         data-section="cta"
       >
-        <ServiciosCTABanner 
-          onLoad={() => handleComponentLoad('ServiciosCTABanner')}
-          onError={(error) => handleComponentError('ServiciosCTABanner', error)}
-        />
+        <AboutMeBanner />
       </section>
 
       {/* FAQ Section */}
