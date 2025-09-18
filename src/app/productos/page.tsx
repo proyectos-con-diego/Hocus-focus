@@ -98,10 +98,10 @@ export default function ProductosNuevoPage() {
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 pt-5" style={{ 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 pt-5" style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-            gap: 'clamp(24px, 6vw, 40px)', 
+            gap: '40px', 
             paddingTop: '20px' 
           }}>
             {products.map((product, index) => (
@@ -116,25 +116,25 @@ export default function ProductosNuevoPage() {
       </div>
 
       {/* How It Works Section */}
-      <div id="como-funciona" className="py-8 sm:py-12">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-2 text-white">¿Cómo funcionan?</h2>
-          <p className="text-center text-gray-400 mb-8 sm:mb-12 text-sm sm:text-base">Proceso simple para empezar con tus asistentes</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 mt-8 sm:mt-16">
+      <div id="como-funciona" className="py-12">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-2 text-white">¿Cómo funcionan?</h2>
+          <p className="text-center text-gray-400 mb-12">Proceso simple para empezar con tus asistentes</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-16">
             <div className="text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center text-white font-bold text-2xl sm:text-3xl mx-auto mb-4">1</div>
-              <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">Elige tu asistente</h3>
-              <p className="text-gray-400 text-sm sm:text-base">Selecciona el asistente que mejor se adapte a tus necesidades actuales</p>
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center text-white font-bold text-3xl mx-auto mb-4">1</div>
+              <h3 className="text-xl font-semibold text-white mb-2">Elige tu asistente</h3>
+              <p className="text-gray-400">Selecciona el asistente que mejor se adapte a tus necesidades actuales</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-2xl sm:text-3xl mx-auto mb-4">2</div>
-              <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">Configuración personalizada</h3>
-              <p className="text-gray-400 text-sm sm:text-base">Adapta el asistente a tu estilo de vida y objetivos específicos</p>
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-3xl mx-auto mb-4">2</div>
+              <h3 className="text-xl font-semibold text-white mb-2">Configuración personalizada</h3>
+              <p className="text-gray-400">Adapta el asistente a tu estilo de vida y objetivos específicos</p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold text-2xl sm:text-3xl mx-auto mb-4">3</div>
-              <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">Resultados inmediatos</h3>
-              <p className="text-gray-400 text-sm sm:text-base">Comienza a ver mejoras en tus hábitos y productividad desde el primer día</p>
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold text-3xl mx-auto mb-4">3</div>
+              <h3 className="text-xl font-semibold text-white mb-2">Resultados inmediatos</h3>
+              <p className="text-gray-400">Comienza a ver mejoras en tus hábitos y productividad desde el primer día</p>
             </div>
           </div>
         </div>

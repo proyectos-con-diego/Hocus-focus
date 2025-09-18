@@ -2231,9 +2231,9 @@ export default function ProductoPage() {
   return (
     <div className="font-sans bg-black text-gray-300 min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 px-6" style={{ background: `linear-gradient(to bottom right, ${mainColor}15, ${mainColor}05, ${mainColor}15)` }}>
+      <section className="relative py-12 sm:py-20 px-4 sm:px-6" style={{ background: `linear-gradient(to bottom right, ${mainColor}15, ${mainColor}05, ${mainColor}15)` }}>
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div>
               {product.popularity === "popular" && (
                 <div className="rounded-lg p-4 mb-6 inline-block" style={{ backgroundColor: mainColor + '20', border: '1px solid ' + mainColor + '30' }}>
@@ -2245,14 +2245,14 @@ export default function ProductoPage() {
                   <p className="text-pink-300 text-sm font-semibold">BETA</p>
                 </div>
               )}
-              <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight">
                 <span className="bg-clip-text text-transparent" style={{ background: mainGradient, WebkitBackgroundClip: 'text' }}>
                   {product.name}
                 </span>
                 <br />
                 <span className="text-white">{product.subtitle}</span>
               </h1>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed">
                 {product.audience}
               </p>
               <div className="flex flex-wrap gap-6 text-sm mb-8">
@@ -2274,9 +2274,9 @@ export default function ProductoPage() {
               </div>
               
               {/* Botones de acción */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
                 <button 
-                  className="px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:scale-105 transform transition-all duration-300"
+                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-lg hover:scale-105 transform transition-all duration-300 touch-manipulation"
                   style={{ background: mainGradient, color: '#fff' }}
                   onClick={scrollToPricing}
                 >
@@ -2284,7 +2284,7 @@ export default function ProductoPage() {
                 </button>
                 
                 <button 
-                  className="px-8 py-4 border-2 rounded-full font-semibold transition-all duration-300 group relative overflow-hidden"
+                  className="px-6 sm:px-8 py-3 sm:py-4 border-2 rounded-full font-semibold transition-all duration-300 group relative overflow-hidden touch-manipulation"
                   style={{ borderColor: mainColor, color: mainColor }}
                   onClick={goToHowItWorks}
                 >
@@ -2303,16 +2303,16 @@ export default function ProductoPage() {
             <div className="flex justify-center lg:justify-end">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br rounded-2xl transform rotate-6 animate-pulse" style={{ background: mainGradient, opacity: 0.3 }}></div>
-                <div className="relative bg-gradient-to-br rounded-2xl p-8 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-500" style={{ background: mainGradient, minWidth: 480, maxWidth: 520 }}>
+                <div className="relative bg-gradient-to-br rounded-2xl p-4 sm:p-8 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-500" style={{ background: mainGradient, minWidth: 'clamp(280px, 50vw, 480px)', maxWidth: 'clamp(320px, 60vw, 520px)' }}>
                   <div className="text-center">
                     <div className="mb-4 flex justify-center">
                       <img 
                         src={`/Cabezas pets/${getPetImageName(product.name)}.png`}
                         alt={`${product.name} mascota`}
-                        className="w-[30rem] h-[30rem] object-contain"
+                        className="object-contain"
                         style={{
-                          width: '480px',
-                          height: '480px',
+                          width: 'clamp(200px, 40vw, 480px)',
+                          height: 'clamp(200px, 40vw, 480px)',
                           maxWidth: 'none',
                           maxHeight: 'none'
                         }}
@@ -2346,12 +2346,12 @@ export default function ProductoPage() {
       </section>
 
       {/* Tabs Navigation */}
-      <section className="py-8 px-6 bg-gray-900/30 border-b border-gray-800" data-section="tabs">
+      <section className="py-6 sm:py-8 px-4 sm:px-6 bg-gray-900/30 border-b border-gray-800" data-section="tabs">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
             <button 
               onClick={() => setActiveTab('features')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
                 activeTab === 'features' 
                   ? ''
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -2362,7 +2362,7 @@ export default function ProductoPage() {
             </button>
             <button 
               onClick={() => setActiveTab('how-it-works')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
                 activeTab === 'how-it-works' 
                   ? ''
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -2373,7 +2373,7 @@ export default function ProductoPage() {
             </button>
             <button 
               onClick={() => setActiveTab('testimonials')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
                 activeTab === 'testimonials' 
                   ? ''
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -2384,7 +2384,7 @@ export default function ProductoPage() {
             </button>
             <button 
               onClick={() => setActiveTab('faq')}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
                 activeTab === 'faq' 
                   ? ''
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
