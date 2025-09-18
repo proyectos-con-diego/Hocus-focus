@@ -45,21 +45,21 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
       <div className="bg-black">
         <div className="max-w-7xl mx-auto px-6 mb-8">
           {/* Solo el banner con gradiente, sin contenedor exterior gris */}
-          <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-xl p-6 border border-purple-500/30">
+          <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-xl p-4 md:p-6 border border-purple-500/30">
             <div className="text-gray-400 text-xs mb-3 font-medium tracking-wide uppercase">PUBLICIDAD</div>
-            <div className="flex items-center gap-6">
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
               {/* Imagen del animalito */}
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 order-1 md:order-1">
                 <img 
                   src={`/Cabezas pets/${getPetImageName(productConfig.name)}.png`}
                   alt={`${productConfig.name} mascota`}
-                  className="w-16 h-16 object-contain"
+                  className="w-12 h-12 md:w-16 md:h-16 object-contain"
                   onError={(e) => {
                     // Fallback al emoji si la imagen no carga
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
                     const fallback = document.createElement('span');
-                    fallback.className = 'text-4xl';
+                    fallback.className = 'text-3xl md:text-4xl';
                     fallback.textContent = productConfig.emoji;
                     target.parentNode?.insertBefore(fallback, target);
                   }}
@@ -67,23 +67,23 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
               </div>
               
               {/* Contenido del banner */}
-              <div className="flex-1 min-w-0">
-                <h3 className="text-white font-semibold text-lg mb-2 leading-tight">
+              <div className="flex-1 min-w-0 order-2 md:order-2 text-center md:text-left">
+                <h3 className="text-white font-semibold text-base md:text-lg mb-2 leading-tight">
                   {productConfig.title}
                 </h3>
-                <p className="text-gray-300 text-sm mb-2 leading-relaxed">
+                <p className="text-gray-300 text-xs md:text-sm mb-2 leading-relaxed">
                   {productConfig.description}
                 </p>
-                <div className="flex items-center gap-2 text-xs text-gray-400">
+                <div className="flex items-center justify-center md:justify-start gap-2 text-xs text-gray-400">
                   <span>{productConfig.metrics}</span>
                 </div>
               </div>
               
               {/* Botón CTA */}
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 order-3 md:order-3 w-full md:w-auto">
                 <a 
                   href={productConfig.ctaLink} 
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 whitespace-nowrap"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 whitespace-nowrap w-full md:w-auto text-center block"
                 >
                   {productConfig.ctaText}
                 </a>
