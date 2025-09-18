@@ -239,10 +239,31 @@ export default function SpiritsPage() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white font-semibold text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 hover:scale-105 hover:translate-y-[-2px] hover:shadow-xl hover:shadow-pink-500/30 w-full sm:w-auto"
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 active:from-pink-600 active:to-purple-700 text-white font-semibold text-sm sm:text-base md:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full transition-all duration-300 hover:scale-105 hover:translate-y-[-2px] hover:shadow-xl hover:shadow-pink-500/30 active:scale-95 w-full sm:w-auto relative z-10 cursor-pointer touch-manipulation"
                   onMouseMove={handleMouseMove}
                   onMouseLeave={handleMouseLeave}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Botón clickeado'); // Debug
+                    const gptsSection = document.querySelector('#gpts');
+                    console.log('Sección encontrada:', gptsSection); // Debug
+                    if (gptsSection) {
+                      const headerHeight = 80;
+                      const elementPosition = gptsSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                      console.log('Haciendo scroll a:', elementPosition); // Debug
+                      window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                      });
+                    } else {
+                      console.error('No se encontró la sección #gpts');
+                    }
+                  }}
+                  onTouchEnd={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Touch end en botón'); // Debug
                     const gptsSection = document.querySelector('#gpts');
                     if (gptsSection) {
                       const headerHeight = 80;
