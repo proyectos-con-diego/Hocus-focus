@@ -90,7 +90,14 @@ export default function DiegoPersonalSite() {
       />
 
       {/* Case Study */}
-      <CaseStudySection />
+      <CaseStudySection 
+        onResultsClick={() => {
+          const servicesSection = document.querySelector('[data-section="services"]');
+          if (servicesSection) {
+            servicesSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+      />
 
       {/* ServicesSection: Cómo puedo ayudarte */}
       <div 

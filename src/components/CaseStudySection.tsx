@@ -2,7 +2,11 @@
 import React from 'react';
 import { caseStudyData } from '@/data/servicios';
 
-export default function CaseStudySection() {
+interface CaseStudySectionProps {
+  onResultsClick?: () => void;
+}
+
+export default function CaseStudySection({ onResultsClick }: CaseStudySectionProps) {
   return (
     <section className="case-study py-20 bg-gradient-to-br from-gray-900 via-purple-900/10 to-gray-900">
       <div className="container mx-auto max-w-6xl px-4">
@@ -75,7 +79,10 @@ export default function CaseStudySection() {
                 </div>
               ))}
               <div className="text-center mt-4">
-                <button className="bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition">
+                <button 
+                  onClick={onResultsClick}
+                  className="bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition"
+                >
                   🚀 Quiero resultados similares
                 </button>
               </div>

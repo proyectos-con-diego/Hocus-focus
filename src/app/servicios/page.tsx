@@ -187,6 +187,17 @@ export default function ServiciosPage() {
         <CaseStudySection 
           onLoad={() => handleComponentLoad('CaseStudySection')}
           onError={(error) => handleComponentError('CaseStudySection', error)}
+          onResultsClick={() => {
+            const servicesSection = document.querySelector('#servicios');
+            if (servicesSection) {
+              const headerHeight = 80;
+              const elementPosition = servicesSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+              window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+              });
+            }
+          }}
         />
       </section>
 
