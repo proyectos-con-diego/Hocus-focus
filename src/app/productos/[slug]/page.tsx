@@ -2507,26 +2507,21 @@ export default function ProductoPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                       {product.testimonials.map((t, i) => (
                       <div key={i} className="bg-gray-800/50 rounded-2xl p-8 border border-gray-700/50 transition-all duration-300" style={{ '--tw-border-opacity': '1' } as React.CSSProperties} onMouseEnter={(e) => e.currentTarget.style.borderColor = mainColor + '4D'} onMouseLeave={(e) => e.currentTarget.style.borderColor = '#374151'}>
-                    <div className="flex items-start gap-6">
-                        <div className="w-16 h-16 bg-gradient-to-br rounded-full flex items-center justify-center flex-shrink-0" style={{ background: mainGradient }}>
-                          <span className="text-white font-bold text-xl">{t.name.charAt(0)}</span>
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-4 mb-4">
-                            <div>
-                              <div className="font-semibold text-white text-lg">{t.name}</div>
-                              <div className="text-gray-400">{t.role}</div>
-                              <StarRating rating={5} size="sm" className="mt-1" />
-                            </div>
-                          </div>
-                          <blockquote className="text-gray-300 text-lg italic leading-relaxed mb-4">
-                            "{t.text}"
-                          </blockquote>
-                          <div className="text-sm font-semibold" style={{ color: mainColor }}>
-                            Resultado: {t.result}
-                          </div>
-                        </div>
+                    <div className="flex items-center mb-5">
+                      <div 
+                        className="w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold text-white mr-4"
+                        style={{ background: mainGradient }}
+                      >
+                        {t.name.charAt(0)}
                       </div>
+                      <div className="flex-1">
+                        <div className="font-semibold text-white text-lg">{t.name}</div>
+                        <div className="text-gray-400 text-sm">{t.role}</div>
+                        <StarRating rating={5} size="sm" className="mt-1" />
+                      </div>
+                    </div>
+                    <div className="italic text-gray-200 mb-4 opacity-90">"{t.text}"</div>
+                    <div className="font-semibold text-green-400 text-sm">Resultado: {t.result}</div>
                     </div>
                   ))}
               </div>
