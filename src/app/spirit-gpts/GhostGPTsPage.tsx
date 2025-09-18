@@ -224,8 +224,8 @@ export default function SpiritsPage() {
                   transition={{ duration: 0.8 }}
                   className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 bg-gradient-to-r from-white via-cyan-400 to-purple-600 bg-clip-text text-transparent leading-tight"
                 >
-                  ✨ Spirits: inteligencia artificial<br className="hidden sm:block" />
-                  con alma propia.
+                  ✨ Spirits: inteligencia<br className="hidden md:block" />
+                  <span className="block md:inline">artificial con alma propia.</span>
                 </motion.h1>
                 <motion.p 
                   initial={{ opacity: 0, x: -30 }}

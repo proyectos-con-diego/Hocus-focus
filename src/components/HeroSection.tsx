@@ -96,8 +96,8 @@ export default function HeroSection({
               {title}
               {subtitle && (
                 <>
-                  <br className="hidden sm:block" />
-                  <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  <br className="hidden md:block" />
+                  <span className="block md:inline bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                     {subtitle}
                   </span>
                 </>

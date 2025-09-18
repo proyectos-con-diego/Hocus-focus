@@ -158,8 +158,8 @@ export default function ServiciosPage() {
 
       {/* Hero Section */}
       <HeroSection 
-        title="¿Pierdes tiempo en"
-        subtitle="tareas repetitivas?"
+        title="¿Pierdes tiempo en tareas"
+        subtitle="repetitivas?"
         description="Te ayudo a crear sistemas automatizados que trabajan 24/7 mientras tú te enfocas en lo que realmente importa para tu negocio."
         ctaText="🚀 Ver servicios"
         ctaOnClick={() => {
