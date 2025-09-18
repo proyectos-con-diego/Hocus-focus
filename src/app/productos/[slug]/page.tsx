@@ -2720,7 +2720,7 @@ export default function ProductoPage() {
             }}>
               <h3 className="text-2xl font-bold text-white mb-4">{product.guarantee.title}</h3>
               <p className="text-gray-400 mb-6 max-w-2xl mx-auto">{product.guarantee.description}</p>
-              <div className="flex justify-center gap-6">
+              <div className="flex flex-col items-center gap-4">
                 {product.guarantee.features.map((feature: any, index: any) => (
                   <div key={index} className="flex items-center text-gray-300">
                     <span className="mr-2" style={{ color: product.guarantee.checkmarkColor || mainColor }}>✓</span>
