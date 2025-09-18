@@ -85,13 +85,14 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
       className="relative text-center transition-all duration-400 product-card group"
       style={{
         borderRadius: '20px',
-        padding: '32px 28px 32px',
-        marginTop: '60px',
+        padding: 'clamp(20px, 5vw, 32px) clamp(16px, 4vw, 28px)',
+        marginTop: 'clamp(40px, 8vw, 60px)',
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
-        height: '460px',
+        height: 'auto',
+        minHeight: '400px',
         background: 'linear-gradient(145deg, rgba(31, 41, 55, 0.95), rgba(17, 24, 39, 0.95))',
         border: '1px solid rgba(75, 85, 99, 0.3)',
         backdropFilter: 'blur(10px)',
@@ -153,12 +154,12 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
         <div 
           className="mascot-avatar mx-auto mb-3 transition-all duration-500"
           style={{
-            width: '207px',
-            height: '207px',
+            width: 'clamp(120px, 20vw, 207px)',
+            height: 'clamp(120px, 20vw, 207px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: '-92px auto 12px',
+            margin: 'clamp(-60px, -8vw, -92px) auto 12px',
             position: 'relative',
             filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))'
           }}
@@ -181,16 +182,16 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
       </div>
 
       {/* Product Info */}
-      <div className="text-3xl font-black mb-1" style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.5px' }}>
+      <div className="text-3xl font-black mb-1" style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 900, letterSpacing: '-0.5px' }}>
         {product.name}
       </div>
-      <div className="text-sm mb-2 font-medium" style={{ fontSize: '0.9rem', color: '#06b6d4', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+      <div className="text-sm mb-2 font-medium" style={{ fontSize: 'clamp(0.8rem, 2.5vw, 0.9rem)', color: '#06b6d4', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
         {product.badge}
       </div>
-      <div className="text-base opacity-85 mb-3" style={{ fontSize: '1rem', opacity: 0.85, lineHeight: 1.4, fontWeight: 500 }}>
+      <div className="text-base opacity-85 mb-3" style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1rem)', opacity: 0.85, lineHeight: 1.4, fontWeight: 500 }}>
         {product.description}
       </div>
-      <div className="text-sm text-green-400 mb-6 font-semibold" style={{ fontSize: '0.9rem', color: '#4ade80', fontWeight: 600 }}>
+      <div className="text-sm text-green-400 mb-6 font-semibold" style={{ fontSize: 'clamp(0.8rem, 2.5vw, 0.9rem)', color: '#4ade80', fontWeight: 600 }}>
         {product.beneficioDestacado}
       </div>
 
@@ -220,11 +221,11 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
       {/* Action Button */}
       <div className="mt-auto pt-6">
         <button 
-          className="btn-shop w-full py-3 px-6 text-base font-semibold transition-all duration-300 cursor-pointer" 
+          className="btn-shop w-full py-3 px-6 text-base font-semibold transition-all duration-300 cursor-pointer touch-manipulation" 
           style={{
             border: 'none',
             borderRadius: '12px',
-            fontSize: '1rem',
+            fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
             fontWeight: 600,
             textTransform: 'none',
             letterSpacing: '0.2px',
@@ -234,7 +235,8 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
             overflow: 'hidden',
             backdropFilter: 'blur(10px)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            minHeight: '48px'
           }}
           onMouseEnter={(e) => {
             const button = e.currentTarget;
