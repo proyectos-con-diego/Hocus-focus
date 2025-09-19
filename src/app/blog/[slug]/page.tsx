@@ -561,7 +561,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: post.title + ' | Diego Gonzalez Vaccaro',
       description: post.excerpt || 'Artículo del blog de Diego Gonzalez Vaccaro sobre optimización, productividad y tecnología.',
       type: 'article',
-              url: `https://tusitio.com/blog/${post.slug.current}`,
+              url: `https://diegogonzalezvaccaro.com/blog/${post.slug.current}`,
       siteName: 'Diego Gonzalez Vaccaro',
       locale: 'es_ES',
       images: [

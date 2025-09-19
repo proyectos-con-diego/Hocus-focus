@@ -7,6 +7,7 @@ import ProductCard from '@/components/ProductCard';
 import ProductsTestimonialsSection from '@/components/ProductsTestimonialsSection';
 import ProductsFAQSection from '@/components/ProductsFAQSection';
 import { products } from '@/data/products';
+import StructuredData, { productsPageStructuredData } from '@/components/StructuredData';
 
 export default function ProductosNuevoPage() {
   const router = useRouter();
@@ -52,6 +53,7 @@ export default function ProductosNuevoPage() {
 
   return (
     <div className="text-white overflow-x-hidden bg-black">
+      <StructuredData data={productsPageStructuredData} />
       {/* Header Glass */}
       <HeaderGlass 
         pageTitle="🪄 Hocus Focus"

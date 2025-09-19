@@ -4,7 +4,7 @@ export const metadata = {
   openGraph: {
     title: 'Blog | Diego Gonzalez Vaccaro',
     description: 'Reflexiones, metodologías y casos reales sobre optimización de procesos, productividad y tecnología. Aprende a recuperar tiempo y mejorar tu vida profesional.',
-    url: 'https://tusitio.com/blog',
+    url: 'https://diegogonzalezvaccaro.com/blog',
     siteName: 'Diego Gonzalez Vaccaro',
     locale: 'es_ES',
     type: 'website',
@@ -27,7 +27,13 @@ export const metadata = {
 };
 
 import BlogNuevoClient from './BlogNuevoClient';
+import StructuredData, { blogPageStructuredData } from '@/components/StructuredData';
 
 export default function BlogNuevo() {
-  return <BlogNuevoClient />;
+  return (
+    <>
+      <StructuredData data={blogPageStructuredData} />
+      <BlogNuevoClient />
+    </>
+  );
 } 

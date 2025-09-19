@@ -30,14 +30,14 @@ export function generateStructuredData(post: any) {
       "name": "Diego Gonzalez Vaccaro",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://tusitio.com/logo.png"
+        "url": "https://diegogonzalezvaccaro.com/logo.png"
       }
     },
     "datePublished": post.publishedAt,
     "dateModified": post.publishedAt,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://tusitio.com/blog/${post.slug.current}`
+      "@id": `https://diegogonzalezvaccaro.com/blog/${post.slug.current}`
     },
     "articleSection": post.categories?.[0]?.title || "Blog",
     "keywords": post.categories?.map((cat: any) => cat.title).join(", ") || "productividad, tecnología, optimización"

@@ -13,6 +13,7 @@ import AboutMeBanner from "../components/AboutMeBanner";
 import BlogSection from "../components/BlogSection";
 import FAQSection from "../components/FAQSection";
 import Footer from "../components/Footer";
+import StructuredData, { homePageStructuredData } from "../components/StructuredData";
 
 
 export default function DiegoPersonalSite() {
@@ -45,6 +46,7 @@ export default function DiegoPersonalSite() {
       role="main"
       aria-label="Sitio web personal de Diego Gonzalez Vaccaro"
     >
+      <StructuredData data={homePageStructuredData} />
       {/* Header Glass */}
       <HeaderGlass 
         pageTitle="🪄 Hocus Focus"
