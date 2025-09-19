@@ -11,10 +11,12 @@ import AutomatizacionIACaseStudiesSection from '@/components/AutomatizacionIACas
 import AutomatizacionIAPricingSection from '@/components/AutomatizacionIAPricingSection';
 import AutomatizacionIAFAQSection from '@/components/AutomatizacionIAFAQSection';
 import AutomatizacionIAForm from '@/components/AutomatizacionIAForm';
+import StructuredData, { automatizacionIAStructuredData } from '@/components/StructuredData';
 
 export default function AutomatizacionIAPage() {
   return (
     <main className="bg-black text-gray-200 min-h-screen w-full overflow-x-hidden">
+      <StructuredData data={automatizacionIAStructuredData} />
       <AutomatizacionIAHeroSection />
       <AutomatizacionIAProblemsSection />
       <AutomatizacionIASolutionSection />

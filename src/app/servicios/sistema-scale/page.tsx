@@ -12,10 +12,12 @@ import SistemaScalePackageSection from '@/components/SistemaScalePackageSection'
 
 import SistemaScaleFAQSection from '@/components/SistemaScaleFAQSection';
 import SistemaScaleForm from '@/components/SistemaScaleForm';
+import StructuredData, { sistemaScaleStructuredData } from '@/components/StructuredData';
 
 export default function SistemaScalePage() {
   return (
     <main className="bg-black text-gray-200 min-h-screen w-full overflow-x-hidden">
+      <StructuredData data={sistemaScaleStructuredData} />
       <SistemaScaleHeroSection />
       <SistemaScaleProblemsSection />
       <SistemaScaleComparisonSection />

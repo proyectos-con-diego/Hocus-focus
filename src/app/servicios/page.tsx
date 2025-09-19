@@ -8,6 +8,7 @@ import ServiciosTestimonialsSection from '@/components/ServiciosTestimonialsSect
 import ServiciosFAQSection from '@/components/ServiciosFAQSection';
 import AboutMeBanner from '@/components/AboutMeBanner';
 import WorkflowSection from '@/components/WorkflowSection';
+import StructuredData, { servicesPageStructuredData } from '@/components/StructuredData';
 
 export default function ServiciosPage() {
   const [error, setError] = useState<string | null>(null);
@@ -100,6 +101,7 @@ export default function ServiciosPage() {
       aria-label="Página de servicios de Diego Gonzalez Vaccaro"
       data-testid="servicios-page"
     >
+      <StructuredData data={servicesPageStructuredData} />
       {/* Header Glass */}
       <HeaderGlass 
         pageTitle="🪄 Hocus Focus"

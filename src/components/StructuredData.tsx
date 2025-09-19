@@ -81,3 +81,96 @@ export const blogPageStructuredData = {
   },
   "inLanguage": "es-ES"
 };
+
+// Structured data para Plan de Marketing
+export const planMarketingStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Plan de Marketing | Diego Gonzalez Vaccaro",
+  "description": "Genera más leads y clientes con una estrategia clara. Para emprendedores que necesitan claridad total en su marketing digital.",
+  "url": "https://diegogonzalezvaccaro.com/servicios/plan-marketing",
+  "provider": {
+    "@type": "Person",
+    "name": "Diego Gonzalez Vaccaro",
+    "jobTitle": "Especialista en Marketing Digital y Optimización"
+  },
+  "serviceType": "Consultoría en Marketing Digital",
+  "areaServed": "España",
+  "availableLanguage": "es",
+  "offers": {
+    "@type": "Offer",
+    "name": "Plan de Marketing Personalizado",
+    "description": "Plan detallado en 2-3 semanas con metodología probada que funciona",
+    "price": "35",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "2024-01-01"
+  },
+  "category": "Marketing Digital",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Emprendedores y pequeñas empresas"
+  }
+};
+
+// Structured data para Sistema SCALE
+export const sistemaScaleStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Sistema SCALE | Diego Gonzalez Vaccaro",
+  "description": "Escala tu negocio con un sistema digital organizado. Para líderes con equipos de 3-15 personas que quieren delegar sin dolores de cabeza.",
+  "url": "https://diegogonzalezvaccaro.com/servicios/sistema-scale",
+  "provider": {
+    "@type": "Person",
+    "name": "Diego Gonzalez Vaccaro",
+    "jobTitle": "Especialista en Optimización de Procesos"
+  },
+  "serviceType": "Consultoría en Gestión Empresarial",
+  "areaServed": "España",
+  "availableLanguage": "es",
+  "offers": {
+    "@type": "Offer",
+    "name": "Sistema SCALE para Escalamiento",
+    "description": "Visibilidad 24/7 de equipo y proyectos, procesos listos para delegar, decisiones basadas en datos reales",
+    "price": "35",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "2024-01-01"
+  },
+  "category": "Gestión Empresarial",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Líderes y directivos de equipos medianos"
+  }
+};
+
+// Structured data para Automatización IA
+export const automatizacionIAStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Automatización IA | Diego Gonzalez Vaccaro",
+  "description": "Automatiza 3 procesos clave y ahorra 8–15h semanales. Para consultores y servicios profesionales que quieren ganar tiempo para clientes y crecimiento.",
+  "url": "https://diegogonzalezvaccaro.com/servicios/automatizacion-ia",
+  "provider": {
+    "@type": "Person",
+    "name": "Diego Gonzalez Vaccaro",
+    "jobTitle": "Especialista en Automatización con IA"
+  },
+  "serviceType": "Consultoría en Automatización",
+  "areaServed": "España",
+  "availableLanguage": "es",
+  "offers": {
+    "@type": "Offer",
+    "name": "Automatización con Inteligencia Artificial",
+    "description": "8-15 horas semanales liberadas, automatizaciones que funcionan 24/7, supera a competencia tradicional",
+    "price": "35",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "2024-01-01"
+  },
+  "category": "Automatización e IA",
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Consultores y servicios profesionales"
+  }
+};

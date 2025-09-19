@@ -10,10 +10,12 @@ import DiagnosticoPricingSection from '@/components/DiagnosticoPricingSection';
 import PlanMarketingPricingSection from '@/components/PlanMarketingPricingSection';
 import PlanMarketingFAQSection from '@/components/PlanMarketingFAQSection';
 import PlanMarketingForm from '@/components/PlanMarketingForm';
+import StructuredData, { planMarketingStructuredData } from '@/components/StructuredData';
 
 export default function PlanMarketingPage() {
   return (
     <main className="bg-black text-gray-200 min-h-screen w-full font-sans overflow-x-hidden">
+      <StructuredData data={planMarketingStructuredData} />
       <PlanMarketingHeroSection />
       <PlanMarketingProblemsSection />
       <PlanMarketingConvertSection />
