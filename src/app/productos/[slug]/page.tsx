@@ -2262,12 +2262,13 @@ export default function ProductoPage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div>
-              {product.popularity === "popular" && (
+              {/* Badges ocultos temporalmente */}
+              {false && product.popularity === "popular" && (
                 <div className="rounded-lg p-4 mb-6 inline-block" style={{ backgroundColor: mainColor + '20', border: '1px solid ' + mainColor + '30' }}>
                   <p className="text-sm font-semibold" style={{ color: mainColor }}>{getProductBadgeText(product)}</p>
                 </div>
               )}
-              {product.popularity === "beta" && (
+              {false && product.popularity === "beta" && (
                 <div className="bg-pink-500/20 border border-pink-500/30 rounded-lg p-4 mb-6 inline-block">
                   <p className="text-pink-300 text-sm font-semibold">BETA</p>
                 </div>
