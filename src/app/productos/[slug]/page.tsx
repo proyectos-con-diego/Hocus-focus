@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 // Removed direct Sanity import - using API route instead
+import HeaderGlass from '../../../components/HeaderGlass';
 import BlogSection from '../../../components/BlogSection';
 import ProductRelatedArticles from '../../../components/ProductRelatedArticles';
 import StarRating from '../../../components/StarRating';
@@ -2230,8 +2231,34 @@ export default function ProductoPage() {
 
   return (
     <div className="font-sans bg-black text-gray-300 min-h-screen">
+      {/* Header Glass */}
+      <HeaderGlass 
+        pageTitle="🪄 Hocus Focus"
+        showGhostLogo={false}
+        customLinks={[
+          { href: '/productos', label: 'Asistentes IA' },
+          { href: '/servicios', label: 'Servicios' },
+          { href: '/blog', label: 'Blog' },
+          { href: '/sobre-mi', label: 'Sobre Mí' }
+        ]}
+        ctaButton={{
+          text: "📩 Suscríbete",
+          onClick: () => {
+            const newsletterBanner = document.querySelector('#newsletter-banner');
+            if (newsletterBanner) {
+              const headerHeight = 80;
+              const elementPosition = newsletterBanner.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+              window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+              });
+            }
+          }
+        }}
+      />
+
       {/* Hero Section */}
-      <section className="relative py-12 sm:py-20 px-4 sm:px-6" style={{ background: `linear-gradient(to bottom right, ${mainColor}15, ${mainColor}05, ${mainColor}15)` }}>
+      <section className="relative pt-24 pb-12 sm:pt-28 sm:pb-20 px-4 sm:px-6" style={{ background: `linear-gradient(to bottom right, ${mainColor}15, ${mainColor}05, ${mainColor}15)` }}>
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div>
