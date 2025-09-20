@@ -2231,16 +2231,11 @@ export default function ProductoPage() {
 
   return (
     <div className="font-sans bg-black text-gray-300 min-h-screen">
-      {/* Header Glass */}
+      {/* Header Glass - Simplificado para páginas de productos */}
       <HeaderGlass 
         pageTitle="🪄 Hocus Focus"
         showGhostLogo={false}
-        customLinks={[
-          { href: '/productos', label: 'Asistentes IA' },
-          { href: '/servicios', label: 'Servicios' },
-          { href: '/blog', label: 'Blog' },
-          { href: '/sobre-mi', label: 'Sobre Mí' }
-        ]}
+        customLinks={[]}
         ctaButton={{
           text: "📩 Suscríbete",
           onClick: () => {
