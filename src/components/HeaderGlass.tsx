@@ -49,16 +49,18 @@ export default function HeaderGlass({
       <nav className="max-w-7xl mx-auto px-4 sm:px-5 py-4 sm:py-5 flex justify-between items-center">
         {/* Logo y Menú Hamburguesa */}
         <div className="flex items-center gap-3">
-          {/* Menú Hamburguesa - Solo en mobile */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
-            aria-label="Abrir menú de navegación"
-          >
-            <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-          </button>
+          {/* Menú Hamburguesa - Solo en mobile y solo si hay enlaces */}
+          {links.length > 0 && (
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
+              aria-label="Abrir menú de navegación"
+            >
+              <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+              <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+            </button>
+          )}
           
           <div className="text-2xl bg-gradient-to-r from-white via-cyan-400 to-purple-600 bg-clip-text text-transparent">🪄</div>
           <a 
@@ -144,8 +146,8 @@ export default function HeaderGlass({
         </div>
       </nav>
 
-      {/* Menú Móvil Desplegable */}
-      {isMobileMenuOpen && (
+      {/* Menú Móvil Desplegable - Solo si hay enlaces */}
+      {isMobileMenuOpen && links.length > 0 && (
         <div className="md:hidden bg-black/95 backdrop-blur-[20px] border-t border-cyan-400/20 shadow-lg">
           <div className="max-w-7xl mx-auto px-4 py-6">
             <div className="flex flex-col space-y-4">
