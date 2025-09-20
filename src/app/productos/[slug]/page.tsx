@@ -2237,17 +2237,9 @@ export default function ProductoPage() {
         showGhostLogo={false}
         customLinks={[]}
         ctaButton={{
-          text: "📩 Suscríbete",
+          text: "🐨 Agentes IA",
           onClick: () => {
-            const newsletterBanner = document.querySelector('#newsletter-banner');
-            if (newsletterBanner) {
-              const headerHeight = 80;
-              const elementPosition = newsletterBanner.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-              window.scrollTo({
-                top: elementPosition,
-                behavior: 'smooth'
-              });
-            }
+            window.location.href = '/productos';
           }
         }}
       />
