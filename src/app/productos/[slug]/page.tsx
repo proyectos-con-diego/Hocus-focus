@@ -9,6 +9,7 @@ import ProductRelatedArticles from '../../../components/ProductRelatedArticles';
 import StarRating from '../../../components/StarRating';
 import PackStickyBannerInferior from '../../../components/PackStickyBannerInferior';
 import { getPacksForProduct } from '../../../data/packs';
+import { event as trackEvent } from '@/lib/analytics';
 
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
@@ -2080,6 +2081,8 @@ export default function ProductoPage() {
   // Los hooks deben ir ANTES de cualquier condición
   const [activeTab, setActiveTab] = useState('features');
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+  const [hasTrackedPricingView, setHasTrackedPricingView] = useState(false);
+  const [hasTrackedFormView, setHasTrackedFormView] = useState(false);
 
   // Estado para los artículos relacionados
   const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
@@ -2087,6 +2090,7 @@ export default function ProductoPage() {
 
   // Función para scroll a la sección de pricing
   const scrollToPricing = () => {
+    try { trackEvent({ action: 'click_cta_pricing', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
     const pricingSection = document.querySelector('[data-section="pricing"]');
     if (pricingSection) {
       pricingSection.scrollIntoView({ 
@@ -2098,6 +2102,7 @@ export default function ProductoPage() {
 
   // Función para ir a la pestaña "Cómo funciona"
   const goToHowItWorks = () => {
+    try { trackEvent({ action: 'click_demo_live', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
     setActiveTab('how-it-works');
     // Hacer scroll a la sección de tabs después de un pequeño delay para que el cambio de tab se procese
     setTimeout(() => {
@@ -2365,7 +2370,10 @@ export default function ProductoPage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
             <button 
-              onClick={() => setActiveTab('features')}
+              onClick={() => {
+                try { trackEvent({ action: 'click_tab', category: 'Producto', label: `${product?.name || 'unknown'}_features` }); } catch {}
+                setActiveTab('features');
+              }}
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
                 activeTab === 'features' 
                   ? ''
@@ -2376,7 +2384,10 @@ export default function ProductoPage() {
               ¿Es para mí?
             </button>
             <button 
-              onClick={() => setActiveTab('how-it-works')}
+              onClick={() => {
+                try { trackEvent({ action: 'click_tab', category: 'Producto', label: `${product?.name || 'unknown'}_how-it-works` }); } catch {}
+                setActiveTab('how-it-works');
+              }}
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
                 activeTab === 'how-it-works' 
                   ? ''
@@ -2387,7 +2398,10 @@ export default function ProductoPage() {
               Cómo funciona
             </button>
             <button 
-              onClick={() => setActiveTab('testimonials')}
+              onClick={() => {
+                try { trackEvent({ action: 'click_tab', category: 'Producto', label: `${product?.name || 'unknown'}_testimonials` }); } catch {}
+                setActiveTab('testimonials');
+              }}
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
                 activeTab === 'testimonials' 
                   ? ''
@@ -2398,7 +2412,10 @@ export default function ProductoPage() {
               Testimonios
             </button>
             <button 
-              onClick={() => setActiveTab('faq')}
+              onClick={() => {
+                try { trackEvent({ action: 'click_tab', category: 'Producto', label: `${product?.name || 'unknown'}_faq` }); } catch {}
+                setActiveTab('faq');
+              }}
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
                 activeTab === 'faq' 
                   ? ''
@@ -2570,7 +2587,10 @@ export default function ProductoPage() {
                           e.currentTarget.style.borderColor = 'transparent';
                         }}
 
-                        onClick={() => setOpenFAQ(openFAQ === idx ? null : idx)}
+                        onClick={() => {
+                          try { trackEvent({ action: 'click_faq', category: 'Producto', label: `${product?.name || 'unknown'}_faq_${idx}` }); } catch {}
+                          setOpenFAQ(openFAQ === idx ? null : idx);
+                        }}
                       >
                         <div className="flex justify-between items-center">
                           <h3 className="text-lg font-semibold text-white pr-4">{faq.question}</h3>
