@@ -16,6 +16,7 @@ import PromptifySpiritForm from '../../../components/PromptifySpiritForm';
 import CriptoferSpiritForm from '../../../components/CriptoferSpiritForm';
 // Removed direct Sanity import - using API route instead
 import { getReadingContext } from '../../../data/blog';
+import { event as trackEvent } from '../../../lib/analytics';
 
 interface SpiritPageProps {
   spirit: Spirit;
@@ -155,6 +156,11 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
     setParticles(newParticles);
   }, []);
 
+  // View tracking
+  useEffect(() => {
+    try { trackEvent({ action: 'view_spirit', category: 'Spirits', label: spirit.slug }); } catch {}
+  }, [spirit.slug]);
+
   // Fetch artículos de API route
   useEffect(() => {
     const fetchArticles = async () => {
@@ -256,6 +262,7 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
                         >
                           <button
                             onClick={() => {
+                              try { trackEvent({ action: 'click_spirit_primary_cta', category: 'Spirits', label: spirit.slug }); } catch {}
                               // Lista de Spirits que tienen formularios personalizados
                               const spiritsWithForms = [
                                 'vinxi-spirit', 'okro-spirit', 'grilla-spirit', 

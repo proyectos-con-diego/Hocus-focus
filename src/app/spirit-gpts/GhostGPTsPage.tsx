@@ -6,6 +6,7 @@ import { useDynamicGradient } from './useDynamicGradient';
 import HeaderGlass from '../../components/HeaderGlass';
 import { spirits } from '../../data/spirits';
 import Link from 'next/link';
+import { event as trackEvent } from '../../lib/analytics';
 
 // La interfaz Spirit se importa desde ../../data/spirits
 
@@ -177,6 +178,29 @@ export default function SpiritsPage() {
     setParticles(newParticles);
   }, []);
 
+  useEffect(() => {
+    try {
+      const grid = document.getElementById('gpts');
+      if (grid) {
+        const obs = new IntersectionObserver((entries, o) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) { try { trackEvent({ action: 'view_spirits_grid', category: 'Spirits', label: 'grid' }); } catch {} ; o.disconnect(); }
+          });
+        }, { threshold: 0.4 });
+        obs.observe(grid);
+      }
+      const ideas = document.getElementById('ideas-spirits');
+      if (ideas) {
+        const obs2 = new IntersectionObserver((entries, o) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) { try { trackEvent({ action: 'view_spirits_ideas', category: 'Spirits', label: 'ideas_section' }); } catch {} ; o.disconnect(); }
+          });
+        }, { threshold: 0.4 });
+        obs2.observe(ideas);
+      }
+    } catch {}
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0c0c0c] via-[#1a1a2e] to-[#16213e] text-white overflow-x-hidden">
       {/* Partículas de fondo */}
@@ -207,7 +231,7 @@ export default function SpiritsPage() {
         ]}
         ctaButton={{
           text: "🐨 Asistentes IA",
-          onClick: () => window.location.href = '/productos'
+          onClick: () => { try { trackEvent({ action: 'click_header_cta', category: 'Spirits', label: 'asistentes_ia' }); } catch {} ; window.location.href = '/productos' }
         }}
       />
 
@@ -245,6 +269,7 @@ export default function SpiritsPage() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    try { trackEvent({ action: 'click_hero_cta', category: 'Spirits', label: 'explorar_spirits' }); } catch {}
                     console.log('Botón clickeado'); // Debug
                     const gptsSection = document.querySelector('#gpts');
                     console.log('Sección encontrada:', gptsSection); // Debug
@@ -332,6 +357,7 @@ export default function SpiritsPage() {
                   key={spirit.id}
                   href={`/spirit-gpts/${spirit.slug}`}
                   className="group bg-white/5 backdrop-blur-[20px] border border-white/10 rounded-3xl p-6 sm:p-8 text-center cursor-pointer transition-all duration-400 hover:border-cyan-400/40 hover:shadow-2xl hover:shadow-cyan-400/30 relative overflow-hidden"
+                  onClick={() => { try { trackEvent({ action: 'click_spirit_card', category: 'Spirits', label: spirit.slug }); } catch {} }}
                 >
                   {/* Efecto de brillo en hover */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -skew-x-12 -translate-x-full group-hover:translate-x-full"></div>
@@ -473,13 +499,13 @@ export default function SpiritsPage() {
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <button 
-                onClick={() => window.location.href = '/servicios/automatizacion-ia'}
+                onClick={() => { try { trackEvent({ action: 'click_cta', category: 'Spirits', label: 'diagnostico_automatizacion' }); } catch {} ; window.location.href = '/servicios/automatizacion-ia' }}
                 className="px-10 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300"
               >
                 📅 Agendar una sesión de diagnóstico
               </button>
               <button 
-                onClick={() => window.location.href = '/productos'}
+                onClick={() => { try { trackEvent({ action: 'click_cta', category: 'Spirits', label: 'explorar_productos' }); } catch {} ; window.location.href = '/productos' }}
                 className="px-10 py-4 bg-transparent border-2 border-cyan-400 text-cyan-400 rounded-full font-bold text-xl hover:bg-cyan-400 hover:text-black transition-all duration-300"
               >
                 🐨 Explorar Asistentes IA disponibles
@@ -520,7 +546,7 @@ export default function SpiritsPage() {
                 >
                   <button
                     className="w-full text-left bg-white/5 backdrop-blur-[20px] hover:bg-white/10 rounded-xl p-6 transition-all duration-300 border border-white/10 hover:border-cyan-400/50"
-                    onClick={() => toggleFAQ(index)}
+                    onClick={() => { try { trackEvent({ action: 'click_faq', category: 'Spirits', label: String(index) }); } catch {} ; toggleFAQ(index); }}
                   >
                     <div className="flex justify-between items-center">
                       <h3 className="text-lg font-semibold text-white pr-4 flex items-center">
@@ -576,7 +602,7 @@ export default function SpiritsPage() {
                 {submitMessage}
               </div>
             )}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={(e) => { try { trackEvent({ action: 'submit_spirit_idea', category: 'Spirits', label: 'ideas_form' }); } catch {} ; handleSubmit(e); }} className="space-y-6">
 
                 <div>
                   <label htmlFor="spirit-idea" className="block text-sm font-medium text-white/90 mb-3">
