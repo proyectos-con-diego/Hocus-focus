@@ -222,7 +222,7 @@ export default function BlogNuevoClient() {
           { href: '/sobre-mi', label: 'Sobre Mí' }
         ]}
         ctaButton={{
-          text: "📧 Suscribirme",
+          text: "📩 Suscríbete",
           onClick: () => {
             try { trackEvent({ action: 'click_header_subscribe', category: 'Blog', label: 'header_cta' }); } catch {}
             const newsletterSection = document.querySelector('[data-section="newsletter"]');
