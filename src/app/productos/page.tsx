@@ -201,15 +201,15 @@ export default function ProductosNuevoPage() {
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-extrabold mb-6 text-white leading-tight">¿Listo para transformar tu productividad?</h2>
           <p className="text-xl text-gray-200 mb-8 leading-relaxed">
-            <span>Únete a cientos de personas que ya están viendo resultados con mis asistentes de IA.</span><br />
-            <span className="text-purple-300 font-semibold">Empieza gratis hoy mismo.</span>
+            <span>Únete a las personas que ya están viendo resultados con estos agentes de IA.</span><br />
+            <span className="text-purple-300 font-semibold">Empieza hoy mismo.</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <button onClick={() => { try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'ver_todos_los_asistentes' }); } catch {} }} className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300">
               🚀 Ver todos los asistentes
             </button>
-            <button onClick={() => { try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'agendar_consulta' }); } catch {} }} className="px-10 py-4 border-2 border-white text-white rounded-full font-bold text-xl hover:bg-white hover:text-purple-900 transition-all duration-300">
-              📞 Agendar consulta gratuita
+            <button onClick={() => { try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'probar_spirits_gratis' }); } catch {} ; window.location.href = '/spirit-gpts'; }} className="px-10 py-4 border-2 border-white text-white rounded-full font-bold text-xl hover:bg-white hover:text-purple-900 transition-all duration-300">
+              🎁 Probar Spirits Gratis
             </button>
           </div>
         </div>
