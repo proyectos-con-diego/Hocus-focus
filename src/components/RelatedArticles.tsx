@@ -117,10 +117,10 @@ export default async function RelatedArticles({ currentSlug, categories }: Relat
 
   return (
     <section className="my-12">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-0 sm:px-4 md:px-6">
         <h2 className="text-3xl font-bold mb-2 text-white text-center">Artículos relacionados</h2>
         <p className="text-center text-gray-400 mb-10">Más reflexiones sobre productividad y desarrollo profesional</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {articles.map((a) => {
             const category = a.categories && a.categories[0]?.title;
             const colorClasses = getCategoryColorClasses(category);
@@ -130,7 +130,7 @@ export default async function RelatedArticles({ currentSlug, categories }: Relat
             
             return (
               <Link key={a._id} href={`/blog/${a.slug.current}`} className="group">
-                <article className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700 cursor-pointer hover:shadow-purple-500/20">
+                <article className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700 cursor-pointer hover:shadow-purple-500/20 w-full">
                   {/* Franja de color */}
                   <div className={`h-2 bg-gradient-to-r ${colorClasses.gradient}`}></div>
                   {/* Imagen del artículo */}
@@ -139,7 +139,7 @@ export default async function RelatedArticles({ currentSlug, categories }: Relat
                   ) : (
                     <img src="/blog-default.png" alt="Imagen por defecto del blog" className="w-full h-48 object-cover opacity-80" loading="lazy" />
                   )}
-                  <div className="p-6">
+                  <div className="p-5 sm:p-6">
                     <div className="flex items-center justify-between mb-3">
                       {/* Etiqueta de categoría estilo pill */}
                       <span className={`text-xs font-semibold bg-gray-900/60 px-3 py-1 rounded-full border border-gray-700/40 ${colorClasses.text}`}>{category || 'Sin categoría'}</span>
