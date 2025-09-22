@@ -30,13 +30,16 @@ export default function BlogSearchFilters({
         />
       </div>
 
-      {/* Categories */}
-      <div className="flex flex-wrap justify-center gap-3 mb-12">
+      {/* Categorías: scroll horizontal en móvil, wrap en desktop */}
+      <div
+        className="flex gap-2 mb-8 md:mb-12 overflow-x-auto md:overflow-visible px-1 -mx-1 md:mx-0 md:px-0 flex-nowrap md:flex-wrap md:justify-center"
+        aria-label="Filtros por categoría"
+      >
         {['Todos', ...categories.map(cat => cat.title)].map((cat) => (
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`px-5 py-2 rounded-full font-semibold border transition-all duration-200 text-sm
+            className={`whitespace-nowrap rounded-full font-semibold border transition-all duration-200 text-xs md:text-sm px-3 py-1.5 md:px-5 md:py-2
               ${selectedCategory === cat
                 ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white border-purple-500 shadow-lg'
                 : 'bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700 hover:text-white'}`}
