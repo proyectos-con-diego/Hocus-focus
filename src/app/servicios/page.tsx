@@ -113,9 +113,14 @@ export default function ServiciosPage() {
           { href: '#testimonios', label: 'Testimonios' },
           { href: '#faq', label: 'FAQ' }
         ]}
-                ctaButton={{
-          text: "🎁 Spirits",
-          onClick: () => window.location.href = '/spirit-gpts'
+        ctaButton={{
+          text: "📩 Suscríbete",
+          onClick: () => {
+            const newsletter = document.getElementById('newsletter');
+            if (newsletter) {
+              newsletter.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
         }}
       />
 
@@ -280,7 +285,7 @@ export default function ServiciosPage() {
       </section>
       
       {/* Newsletter Section al final */}
-      <section className="max-w-7xl mx-auto px-6">
+      <section id="newsletter" className="max-w-7xl mx-auto px-6">
         <BlogNewsletterSection />
       </section>
 
