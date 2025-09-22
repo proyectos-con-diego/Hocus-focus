@@ -3,6 +3,8 @@
 import dynamic from 'next/dynamic';
 import { getProductBannerConfig } from '../../../data/product-banners-config';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { event as trackEvent } from '../../../lib/analytics';
 
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
@@ -35,6 +37,11 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
   // Obtener configuración del producto relacionado
   const productSlug = post.relatedProduct?.slug?.current || 'default';
   const productConfig = getProductBannerConfig(productSlug);
+
+  // Track vista de artículo
+  useEffect(() => {
+    try { trackEvent({ action: 'view_article', category: 'Blog', label: post?.slug?.current || '' }); } catch {}
+  }, [post?.slug?.current]);
 
   return (
     <>
@@ -83,6 +90,7 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
               <div className="flex-shrink-0 order-3 md:order-3 w-full md:w-auto">
                 <a 
                   href={productConfig.ctaLink} 
+                  onClick={() => { try { trackEvent({ action: 'click_article_banner_cta', category: 'Blog', label: productSlug }); } catch {} }}
                   className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 whitespace-nowrap w-full md:w-auto text-center block"
                 >
                   {productConfig.ctaText}
@@ -184,6 +192,7 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
                   <p className="text-gray-300 text-sm mb-4">{productConfig.description}</p>
                   <a 
                     href={productConfig.ctaLink} 
+                    onClick={() => { try { trackEvent({ action: 'click_article_sidebar_cta', category: 'Blog', label: productSlug }); } catch {} }}
                     className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 block text-center"
                   >
                     {productConfig.ctaText}

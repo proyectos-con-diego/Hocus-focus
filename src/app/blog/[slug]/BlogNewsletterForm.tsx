@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { event as trackEvent } from '../../../lib/analytics';
 
 interface BlogNewsletterFormProps {
   articleSlug?: string;
@@ -29,6 +30,7 @@ export default function BlogNewsletterForm({ articleSlug }: BlogNewsletterFormPr
     setSubmitMessage('');
 
     try {
+      try { trackEvent({ action: 'submit_article_newsletter', category: 'Blog', label: articleSlug || 'sin_slug' }); } catch {}
       const response = await fetch('/api/notion-newsletter', {
         method: 'POST',
         headers: {
@@ -45,18 +47,39 @@ export default function BlogNewsletterForm({ articleSlug }: BlogNewsletterFormPr
       if (response.ok) {
         setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
         setFormData({ name: '', email: '', subscribeNewsletter: true });
+        try { trackEvent({ action: 'article_newsletter_success', category: 'Blog', label: articleSlug || 'sin_slug' }); } catch {}
       } else {
         setSubmitMessage(result.error || 'Error al suscribirse');
+        try { trackEvent({ action: 'article_newsletter_error', category: 'Blog', label: 'error_respuesta' }); } catch {}
       }
     } catch (error) {
       setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
+      try { trackEvent({ action: 'article_newsletter_error', category: 'Blog', label: 'error_conexion' }); } catch {}
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  // View newsletter
+  useEffect(() => {
+    try {
+      const el = document.getElementById('article-newsletter');
+      if (!el) return;
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            try { trackEvent({ action: 'view_article_newsletter', category: 'Blog', label: articleSlug || 'sin_slug' }); } catch {}
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      observer.observe(el);
+      return () => observer.disconnect();
+    } catch {}
+  }, [articleSlug]);
+
   return (
-    <div className="relative mt-16 rounded-3xl overflow-hidden shadow-2xl">
+    <div id="article-newsletter" className="relative mt-16 rounded-3xl overflow-hidden shadow-2xl">
       <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{
         boxShadow: '0 0 0 4px #a21caf55, 0 0 40px 8px #a21caf33'
       }} />
