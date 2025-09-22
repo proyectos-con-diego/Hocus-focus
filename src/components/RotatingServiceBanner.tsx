@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { event as trackEvent } from '../lib/analytics';
 
 interface Service {
   id: string;
@@ -97,6 +98,7 @@ export default function RotatingServiceBanner() {
           {/* Botón CTA mejorado */}
           <Link
             href={`/servicios/${currentService.slug}`}
+            onClick={() => { try { trackEvent({ action: 'click_rotating_service_cta', category: 'Blog', label: currentService.slug }); } catch {} }}
             className={`block w-full px-4 py-3 ${currentService.bgColor} ${currentService.color} rounded-lg font-medium hover:scale-105 hover:shadow-lg transition-all duration-300 text-center border border-current/20 transform`}
           >
             Ver servicio
@@ -106,19 +108,19 @@ export default function RotatingServiceBanner() {
         {/* Indicadores de rotación mejorados */}
         <div className="flex justify-center gap-2 mt-4">
           <button
-            onClick={() => setCurrentServiceIndex(0)}
+            onClick={() => { try { trackEvent({ action: 'click_rotating_service_indicator', category: 'Blog', label: '0' }); } catch {} ; setCurrentServiceIndex(0); }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               currentServiceIndex === 0 ? 'bg-blue-400 opacity-100 shadow-lg shadow-blue-400/50' : 'bg-gray-600 opacity-50 hover:bg-gray-500'
             }`}
           />
           <button
-            onClick={() => setCurrentServiceIndex(1)}
+            onClick={() => { try { trackEvent({ action: 'click_rotating_service_indicator', category: 'Blog', label: '1' }); } catch {} ; setCurrentServiceIndex(1); }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               currentServiceIndex === 1 ? 'bg-green-400 opacity-100 shadow-lg shadow-green-400/50' : 'bg-gray-600 opacity-50 hover:bg-gray-500'
             }`}
           />
           <button
-            onClick={() => setCurrentServiceIndex(2)}
+            onClick={() => { try { trackEvent({ action: 'click_rotating_service_indicator', category: 'Blog', label: '2' }); } catch {} ; setCurrentServiceIndex(2); }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               currentServiceIndex === 2 ? 'bg-purple-400 opacity-100 shadow-lg shadow-purple-400/50' : 'bg-gray-600 opacity-50 hover:bg-gray-500'
             }`}

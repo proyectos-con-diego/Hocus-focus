@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { event as trackEvent } from '@/lib/analytics';
 
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
@@ -133,6 +134,7 @@ export default function RotatingProductBanner() {
             {/* Botón CTA */}
             <Link
               href={`/productos/${currentProduct.slug}`}
+              onClick={() => { try { trackEvent({ action: 'click_rotating_product_cta', category: 'Blog', label: currentProduct.slug }); } catch {} }}
               className={`inline-block px-8 py-3 ${currentProduct.bgColor} ${currentProduct.color} rounded-xl font-semibold hover:opacity-90 transition-all duration-300 border border-current/20 hover:scale-105 hover:shadow-lg`}
             >
               Ver producto
@@ -145,7 +147,10 @@ export default function RotatingProductBanner() {
           {products.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentProductIndex(index)}
+              onClick={() => {
+                try { trackEvent({ action: 'click_rotating_product_indicator', category: 'Blog', label: String(index) }); } catch {}
+                setCurrentProductIndex(index);
+              }}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 currentProductIndex === index 
                   ? 'bg-purple-400 opacity-100 shadow-lg shadow-purple-400/50' 
