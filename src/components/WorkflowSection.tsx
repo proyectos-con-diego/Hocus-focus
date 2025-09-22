@@ -32,8 +32,8 @@ export default function WorkflowSection() {
   return (
     <section className="py-16 px-6 bg-black">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-white text-center md:text-left mb-2">Cómo trabajo contigo</h2>
-        <p className="text-center md:text-left text-gray-400 mb-10">Proceso claro y personalizado para que sepas qué esperar en cada etapa</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-white text-left md:text-center mb-2">Cómo trabajo contigo</h2>
+        <p className="text-left md:text-center text-gray-400 mb-10">Proceso claro y personalizado para que sepas qué esperar en cada etapa</p>
         <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-0 relative">
           
           {workflowSteps.map((step, index) => (
