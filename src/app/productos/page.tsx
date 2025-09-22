@@ -9,12 +9,17 @@ import ProductsFAQSection from '@/components/ProductsFAQSection';
 import { products } from '@/data/products';
 import StructuredData, { productsPageStructuredData } from '@/components/StructuredData';
 import BlogNewsletterSection from '../../components/BlogNewsletterSection';
+import { event as trackEvent } from '@/lib/analytics';
 
 export default function ProductosNuevoPage() {
   const router = useRouter();
   const animationTimeoutRefs = useRef<NodeJS.Timeout[]>([]);
+  const hasTrackedNewsletterView = useRef(false);
 
   const handleProductClick = (slug: string) => {
+    try {
+      trackEvent({ action: 'product_click', category: 'Productos', label: slug });
+    } catch {}
     router.push(`/productos/${slug}`);
   };
 
@@ -52,9 +57,42 @@ export default function ProductosNuevoPage() {
     };
   }, []);
 
+  // Track: vista del bloque de newsletter
+  useEffect(() => {
+    const el = document.getElementById('newsletter');
+    if (!el) return;
+    const io = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting && !hasTrackedNewsletterView.current) {
+        hasTrackedNewsletterView.current = true;
+        try {
+          trackEvent({ action: 'view_newsletter', category: 'Productos', label: 'newsletter_section' });
+        } catch {}
+      }
+    }, { threshold: 0.5 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <div className="text-white overflow-x-hidden bg-black">
       <StructuredData data={productsPageStructuredData} />
+      {/* SEO: ItemList con productos */}
+      <StructuredData data={{
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        itemListElement: products.map((p, idx) => ({
+          '@type': 'ListItem',
+          position: idx + 1,
+          url: `https://diegogonzalezvaccaro.com/productos/${p.slug}`,
+          item: {
+            '@type': 'Product',
+            name: p.nombre,
+            description: p.descripcion,
+            url: `https://diegogonzalezvaccaro.com/productos/${p.slug}`,
+          },
+        })),
+      }} />
       {/* Header Glass */}
       <HeaderGlass 
         pageTitle="🪄 Hocus Focus"
@@ -68,6 +106,7 @@ export default function ProductosNuevoPage() {
         ctaButton={{
           text: "📩 Suscríbete",
           onClick: () => {
+            try { trackEvent({ action: 'click_header_subscribe', category: 'Productos', label: 'header_cta' }); } catch {}
             const newsletter = document.getElementById('newsletter');
             if (newsletter) {
               newsletter.scrollIntoView({ behavior: 'smooth' });
@@ -83,6 +122,7 @@ export default function ProductosNuevoPage() {
         description="Trabaja en equipo con asistentes digitales que se integran a tu rutina y te ayudan a avanzar más rápido cada día. Amarás llevarlos contigo."
         ctaText="🚀 Ver asistentes IA"
         ctaOnClick={() => {
+          try { trackEvent({ action: 'click_hero_cta', category: 'Productos', label: 'ver_asistentes' }); } catch {}
           const productsSection = document.querySelector('[data-section="products"]');
           if (productsSection) {
             productsSection.scrollIntoView({ behavior: 'smooth' });
@@ -98,7 +138,7 @@ export default function ProductosNuevoPage() {
           {/* Section Header */}
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4" style={{ fontSize: '2.8rem', fontWeight: 800 }}>
-              Elige tu Asistente
+              Asistentes IA para hábitos, proyectos, finanzas y más
             </h2>
             <p className="text-xl opacity-80" style={{ fontSize: '1.2rem', opacity: 0.8 }}>
               Cada una resuelve un problema específico de tu vida digital

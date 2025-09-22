@@ -10,6 +10,7 @@ import AboutMeBanner from '@/components/AboutMeBanner';
 import WorkflowSection from '@/components/WorkflowSection';
 import StructuredData, { servicesPageStructuredData } from '@/components/StructuredData';
 import BlogNewsletterSection from '../../components/BlogNewsletterSection';
+import { event as trackEvent } from '@/lib/analytics';
 
 export default function ServiciosPage() {
   const [error, setError] = useState<string | null>(null);
@@ -116,6 +117,7 @@ export default function ServiciosPage() {
         ctaButton={{
           text: "📩 Suscríbete",
           onClick: () => {
+            try { trackEvent({ action: 'click_header_subscribe', category: 'Servicios', label: 'header_cta' }); } catch {}
             const newsletter = document.getElementById('newsletter');
             if (newsletter) {
               newsletter.scrollIntoView({ behavior: 'smooth' });
@@ -171,6 +173,7 @@ export default function ServiciosPage() {
         description="Te ayudo a crear sistemas automatizados que trabajan 24/7 mientras tú te enfocas en lo que realmente importa para tu negocio."
         ctaText="🚀 Ver servicios"
         ctaOnClick={() => {
+          try { trackEvent({ action: 'click_hero_cta', category: 'Servicios', label: 'ver_servicios' }); } catch {}
           const servicesSection = document.querySelector('#servicios');
           if (servicesSection) {
             const headerHeight = 80;
