@@ -230,8 +230,8 @@ export default function SpiritsPage() {
           { href: '#faq', label: 'FAQ' }
         ]}
         ctaButton={{
-          text: "🐨 Asistentes IA",
-          onClick: () => { try { trackEvent({ action: 'click_header_cta', category: 'Spirits', label: 'asistentes_ia' }); } catch {} ; window.location.href = '/productos' }
+          text: "🤖 Agentes IA",
+          onClick: () => { try { trackEvent({ action: 'click_header_cta', category: 'Spirits', label: 'agentes_ia' }); } catch {} ; window.location.href = '/productos' }
         }}
       />
 
