@@ -110,7 +110,7 @@ export default function RotatingProductBanner() {
             <img 
                                   src={`/Cabezas pets/${getPetImageName(currentProduct.name)}.png`}
               alt={`${currentProduct.name} mascota`}
-              className="w-16 h-16 object-contain"
+              className="w-24 h-24 object-contain"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.style.display = 'none';
@@ -141,7 +141,7 @@ export default function RotatingProductBanner() {
         </div>
         
         {/* Indicadores de rotación mejorados */}
-        <div className="flex justify-center gap-3 mt-6">
+        <div className="flex justify-center gap-3 mt-4">
           {products.map((_, index) => (
             <button
               key={index}
