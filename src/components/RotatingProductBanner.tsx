@@ -103,43 +103,41 @@ export default function RotatingProductBanner() {
         {/* Contenido principal */}
         <div className="relative z-10">
         <div className="text-gray-400 text-xs mb-3 font-medium tracking-wide uppercase">PRODUCTO DESTACADO</div>
-        <div className="bg-gradient-to-r from-gray-800/40 to-gray-700/40 rounded-xl p-6 flex items-center justify-center border border-gray-600/30 min-h-[140px] transition-all duration-300 hover:bg-gradient-to-r hover:from-gray-800/60 hover:to-gray-700/60">
-          <div className="text-center">
-            {/* Imagen de la mascota y título */}
-            <div className="flex justify-center mb-4">
-              <img 
-                                    src={`/Cabezas pets/${getPetImageName(currentProduct.name)}.png`}
-                alt={`${currentProduct.name} mascota`}
-                className="w-16 h-16 object-contain"
-                onError={(e) => {
-                  // Fallback al emoji si la imagen no carga
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const fallback = document.createElement('div');
-                  fallback.className = 'text-4xl';
-                  fallback.textContent = currentProduct.icon;
-                  target.parentNode?.insertBefore(fallback, target);
-                }}
-              />
-            </div>
-            <h4 className={`text-xl font-bold ${currentProduct.color} mb-3`}>
-              {currentProduct.name}
-            </h4>
-            
-            {/* Descripción */}
-            <p className="text-gray-300 text-sm mb-5 leading-relaxed max-w-sm mx-auto">
-              {currentProduct.description}
-            </p>
-            
-            {/* Botón CTA */}
-            <Link
-              href={`/productos/${currentProduct.slug}`}
-              onClick={() => { try { trackEvent({ action: 'click_rotating_product_cta', category: 'Blog', label: currentProduct.slug }); } catch {} }}
-              className={`inline-block px-8 py-3 ${currentProduct.bgColor} ${currentProduct.color} rounded-xl font-semibold hover:opacity-90 transition-all duration-300 border border-current/20 hover:scale-105 hover:shadow-lg`}
-            >
-              Ver producto
-            </Link>
+        {/* Contenido directo en el banner exterior (sin recuadro interior) */}
+        <div className="text-center px-2 py-2 md:px-4 md:py-4">
+          {/* Imagen de la mascota y título */}
+          <div className="flex justify-center mb-4">
+            <img 
+                                  src={`/Cabezas pets/${getPetImageName(currentProduct.name)}.png`}
+              alt={`${currentProduct.name} mascota`}
+              className="w-16 h-16 object-contain"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const fallback = document.createElement('div');
+                fallback.className = 'text-4xl';
+                fallback.textContent = currentProduct.icon;
+                target.parentNode?.insertBefore(fallback, target);
+              }}
+            />
           </div>
+          <h4 className={`text-xl font-bold ${currentProduct.color} mb-3`}>
+            {currentProduct.name}
+          </h4>
+          
+          {/* Descripción */}
+          <p className="text-gray-300 text-sm mb-5 leading-relaxed max-w-sm mx-auto">
+            {currentProduct.description}
+          </p>
+          
+          {/* Botón CTA */}
+          <Link
+            href={`/productos/${currentProduct.slug}`}
+            onClick={() => { try { trackEvent({ action: 'click_rotating_product_cta', category: 'Blog', label: currentProduct.slug }); } catch {} }}
+            className={`inline-block px-8 py-3 ${currentProduct.bgColor} ${currentProduct.color} rounded-xl font-semibold hover:opacity-90 transition-all duration-300 border border-current/20 hover:scale-105 hover:shadow-lg`}
+          >
+            Ver producto
+          </Link>
         </div>
         
         {/* Indicadores de rotación mejorados */}
