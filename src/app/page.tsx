@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderGlass from "../components/HeaderGlass";
 import HeroSection from "../components/HeroSection";
 import CaseStudySection from "../components/CaseStudySection";
@@ -14,10 +14,32 @@ import BlogSection from "../components/BlogSection";
 import FAQSection from "../components/FAQSection";
 import Footer from "../components/Footer";
 import StructuredData, { homePageStructuredData } from "../components/StructuredData";
+import { event as trackEvent } from "../lib/analytics";
 
 
 export default function DiegoPersonalSite() {
   const [leadMagnetOpen, setLeadMagnetOpen] = useState(false);
+
+  useEffect(() => {
+    // Track view of newsletter banner if present
+    const banner = document.querySelector('#newsletter-banner');
+    if (!banner) return;
+    try {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              try { trackEvent({ action: 'view_newsletter', category: 'Home', label: 'newsletter_banner' }); } catch {}
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.4 }
+      );
+      observer.observe(banner as Element);
+      return () => observer.disconnect();
+    } catch {}
+  }, []);
 
   const handleWhatsAppClick = () => {
     try {
@@ -60,6 +82,7 @@ export default function DiegoPersonalSite() {
         ctaButton={{
           text: "📩 Suscríbete",
           onClick: () => {
+            try { trackEvent({ action: 'click_header_subscribe', category: 'Home', label: 'header_cta' }); } catch {}
             const newsletterBanner = document.querySelector('#newsletter-banner');
             if (newsletterBanner) {
               const headerHeight = 80;
@@ -80,6 +103,7 @@ export default function DiegoPersonalSite() {
         description="Transforma tu caos en procesos claros y automatizados para que avances más rápido, sin perder energía en lo repetitivo."
         ctaText="🚀 Ver servicios"
         ctaOnClick={() => {
+          try { trackEvent({ action: 'click_hero_cta', category: 'Home', label: 'ver_servicios' }); } catch {}
           const servicesSection = document.querySelector('[data-section="services"]');
           if (servicesSection) {
             servicesSection.scrollIntoView({ behavior: 'smooth' });
@@ -87,6 +111,7 @@ export default function DiegoPersonalSite() {
         }}
                             secondaryCtaText="Ver Asistentes IA"
         secondaryCtaOnClick={() => {
+          try { trackEvent({ action: 'click_hero_cta', category: 'Home', label: 'ver_asistentes_ia' }); } catch {}
           const assistantsSection = document.querySelector('[data-section="assistants"]');
           if (assistantsSection) {
             assistantsSection.scrollIntoView({ behavior: 'smooth' });
@@ -99,6 +124,7 @@ export default function DiegoPersonalSite() {
       {/* Case Study */}
       <CaseStudySection 
         onResultsClick={() => {
+          try { trackEvent({ action: 'click_case_study_cta', category: 'Home', label: 'ver_servicios_desde_case_study' }); } catch {}
           const servicesSection = document.querySelector('[data-section="services"]');
           if (servicesSection) {
             servicesSection.scrollIntoView({ behavior: 'smooth' });
