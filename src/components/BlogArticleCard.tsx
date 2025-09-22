@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import { event as trackEvent } from '@/lib/analytics';
 import { Article } from '@/data/blog';
 import { 
   getTagClass, 
@@ -23,6 +24,7 @@ export default function BlogArticleCard({ article }: BlogArticleCardProps) {
   return (
     <Link
       href={article.slug ? `/blog/${article.slug}` : "#"}
+      onClick={() => { try { trackEvent({ action: 'click_article_card', category: 'Blog', label: article.slug || 'sin_slug' }); } catch {} }}
       className="block group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-0 transition-all duration-300 relative cursor-pointer hover:bg-gray-700/70 hover:border-cyan-400/30 hover:scale-105 hover:shadow-2xl min-h-[260px] flex flex-col overflow-hidden focus:outline-none focus:ring-2 focus:ring-cyan-500 mb-8"
       style={{ textDecoration: 'none' }}
     >

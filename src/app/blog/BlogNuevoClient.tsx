@@ -9,6 +9,7 @@ import BlogArticlesList from '@/components/BlogArticlesList';
 import BlogNewsletterSection from '@/components/BlogNewsletterSection';
 import LeadMagnetBanner from "@/components/LeadMagnetBanner";
 import RotatingServiceBanner from "@/components/RotatingServiceBanner";
+import { event as trackEvent } from "@/lib/analytics";
 
 export default function BlogNuevoClient() {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
@@ -108,6 +109,7 @@ export default function BlogNuevoClient() {
       if (!category || typeof category !== 'string') {
         throw new Error('Categoría inválida');
       }
+      try { trackEvent({ action: 'click_filter_category', category: 'Blog', label: category }); } catch {}
       setSelectedCategory(category);
       setVisibleCount(10); // Reset visible count when changing category
     } catch (error) {
@@ -121,6 +123,7 @@ export default function BlogNuevoClient() {
       if (typeof searchTerm !== 'string') {
         throw new Error('Término de búsqueda inválido');
       }
+      try { trackEvent({ action: 'search_blog', category: 'Blog', label: searchTerm }); } catch {}
       setSearch(searchTerm);
       setVisibleCount(10); // Reset visible count when searching
     } catch (error) {
@@ -131,6 +134,7 @@ export default function BlogNuevoClient() {
   // Cargar más artículos con manejo de errores
   const handleLoadMore = useCallback(() => {
     try {
+      try { trackEvent({ action: 'click_load_more', category: 'Blog', label: `visibles_${visibleCount + 10}` }); } catch {}
       setIsLoadingMore(true);
       setVisibleCount((c) => c + 10);
     } catch (error) {
@@ -138,7 +142,7 @@ export default function BlogNuevoClient() {
     } finally {
       setIsLoadingMore(false);
     }
-  }, [handleError]);
+  }, [handleError, visibleCount]);
 
   // Navegación por teclado
   const handleKeyDown = useCallback((event: React.KeyboardEvent, action: () => void) => {
@@ -175,6 +179,24 @@ export default function BlogNuevoClient() {
     fetchData();
   }, [fetchData]);
 
+  // Track view of newsletter section
+  useEffect(() => {
+    const el = document.querySelector('[data-section="newsletter"]');
+    if (!el) return;
+    try {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            try { trackEvent({ action: 'view_newsletter', category: 'Blog', label: 'newsletter_section' }); } catch {}
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      observer.observe(el as Element);
+      return () => observer.disconnect();
+    } catch {}
+  }, []);
+
   // Scroll to top when category or search changes
   useEffect(() => {
     const topElement = document.getElementById('top');
@@ -202,6 +224,7 @@ export default function BlogNuevoClient() {
         ctaButton={{
           text: "📧 Suscribirme",
           onClick: () => {
+            try { trackEvent({ action: 'click_header_subscribe', category: 'Blog', label: 'header_cta' }); } catch {}
             const newsletterSection = document.querySelector('[data-section="newsletter"]');
             if (newsletterSection) {
               newsletterSection.scrollIntoView({ behavior: 'smooth' });
