@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { event as trackEvent } from "@/lib/analytics";
+import TrackedLink from "@/components/TrackedLink";
 import { sanityClient } from "@/sanity/sanity";
 
 interface RelatedArticlesProps {
@@ -130,11 +130,13 @@ export default async function RelatedArticles({ currentSlug, categories }: Relat
             const context = getReadingContext(readingTime);
             
             return (
-              <Link 
+              <TrackedLink 
                 key={a._id} 
                 href={`/blog/${a.slug.current}`} 
                 className="group"
-                onClick={() => { try { trackEvent({ action: 'click_related_article', category: 'Blog', label: a.slug.current }); } catch {} }}
+                action="click_related_article"
+                category="Blog"
+                label={a.slug.current}
               >
                 <article className="bg-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700 cursor-pointer hover:shadow-purple-500/20 w-full">
                   {/* Franja de color */}
@@ -171,7 +173,7 @@ export default async function RelatedArticles({ currentSlug, categories }: Relat
                     </div>
                   </div>
                 </article>
-              </Link>
+              </TrackedLink>
             );
           })}
         </div>
