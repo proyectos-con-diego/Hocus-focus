@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import CompaniesBanner from '../../components/CompaniesBanner';
 import { getReadingContext } from '../../data/blog';
 import SobreMiFAQSection from '../../components/SobreMiFAQSection';
+import { event as trackEvent } from '../../lib/analytics';
 
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
@@ -141,6 +142,9 @@ export default function SobreMiExperimentalPage() {
     setContactMessage('');
 
     try {
+      // Track form submission
+      try { trackEvent({ action: 'submit_contact_form', category: 'Sobre Mi', label: 'formulario_contacto' }); } catch {}
+
       const response = await fetch('/api/notion-newsletter', {
         method: 'POST',
         headers: {
@@ -160,11 +164,17 @@ export default function SobreMiExperimentalPage() {
       if (response.ok) {
         setContactMessage('¡Gracias! Tu mensaje ha sido enviado. Te responderé pronto.');
         setContactData({ name: '', email: '', message: '', subscribeNewsletter: true });
+        // Track successful submission
+        try { trackEvent({ action: 'contact_form_success', category: 'Sobre Mi', label: 'envio_exitoso' }); } catch {}
       } else {
         setContactMessage(result.error || 'Error al enviar el mensaje');
+        // Track form error
+        try { trackEvent({ action: 'contact_form_error', category: 'Sobre Mi', label: 'error_envio' }); } catch {}
       }
     } catch (error) {
       setContactMessage('Error de conexión. Inténtalo de nuevo.');
+      // Track connection error
+      try { trackEvent({ action: 'contact_form_error', category: 'Sobre Mi', label: 'error_conexion' }); } catch {}
     } finally {
       setIsSubmittingContact(false);
     }
@@ -452,6 +462,7 @@ export default function SobreMiExperimentalPage() {
         ctaButton={{
           text: "🚀 Ver servicios",
           onClick: () => {
+            try { trackEvent({ action: 'click_header_cta', category: 'Sobre Mi', label: 'ver_servicios' }); } catch {}
             const servicesSection = document.querySelector('[data-section="services"]');
             if (servicesSection) {
               const headerHeight = 80;
@@ -521,6 +532,7 @@ export default function SobreMiExperimentalPage() {
               >
                 <button 
                   onClick={() => {
+                    try { trackEvent({ action: 'click_hero_cta', category: 'Sobre Mi', label: 'ver_mi_trabajo' }); } catch {}
                     const productsSection = document.querySelector('[data-section="products"]');
                     if (productsSection) {
                       const headerHeight = 80;
@@ -537,6 +549,7 @@ export default function SobreMiExperimentalPage() {
                 </button>
                 <button 
                   onClick={() => {
+                    try { trackEvent({ action: 'click_hero_cta', category: 'Sobre Mi', label: 'contactar' }); } catch {}
                     const contactSection = document.querySelector('[data-section="contact"]');
                     if (contactSection) {
                       const headerHeight = 80;
@@ -606,7 +619,10 @@ export default function SobreMiExperimentalPage() {
           >
             <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-2 flex">
               <button
-                onClick={() => setActiveTab('superpoderes')}
+                onClick={() => {
+                  try { trackEvent({ action: 'click_tab', category: 'Sobre Mi', label: 'superpoderes' }); } catch {}
+                  setActiveTab('superpoderes');
+                }}
                 className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 ${
                   activeTab === 'superpoderes'
                     ? 'bg-gradient-to-r from-yellow-400 to-cyan-400 text-black shadow-lg'
@@ -616,7 +632,10 @@ export default function SobreMiExperimentalPage() {
                 🦸 Superpoderes
               </button>
               <button
-                onClick={() => setActiveTab('ideales')}
+                onClick={() => {
+                  try { trackEvent({ action: 'click_tab', category: 'Sobre Mi', label: 'ideales' }); } catch {}
+                  setActiveTab('ideales');
+                }}
                 className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 ${
                   activeTab === 'ideales'
                     ? 'bg-gradient-to-r from-yellow-400 to-cyan-400 text-black shadow-lg'
@@ -766,7 +785,10 @@ export default function SobreMiExperimentalPage() {
                           {/* Botón para expandir - debajo de todo */}
                           <div className="text-center mt-16">
                             <motion.button
-                              onClick={toggleJourney}
+                              onClick={() => {
+                                try { trackEvent({ action: 'click_timeline_toggle', category: 'Sobre Mi', label: 'expandir_historia' }); } catch {}
+                                toggleJourney();
+                              }}
                               className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold text-lg rounded-xl hover:from-purple-500 hover:to-blue-500 transition-all duration-300 transform hover:scale-105 shadow-xl shadow-purple-500/25"
                               whileHover={{ scale: 1.02 }}
                               whileTap={{ scale: 0.98 }}
@@ -842,7 +864,10 @@ export default function SobreMiExperimentalPage() {
                           {/* Botón para colapsar */}
                           <div className="text-center mt-16">
                             <motion.button
-                              onClick={toggleJourney}
+                              onClick={() => {
+                                try { trackEvent({ action: 'click_timeline_toggle', category: 'Sobre Mi', label: 'colapsar_historia' }); } catch {}
+                                toggleJourney();
+                              }}
                               className="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105"
                               whileHover={{ scale: 1.02 }}
                               whileTap={{ scale: 0.98 }}
@@ -1011,7 +1036,13 @@ export default function SobreMiExperimentalPage() {
                   </div>
                   
                   {/* CTA Button - Ahora está pegado al fondo */}
-                  <Link href={service.slug} className={`w-full px-6 py-3 bg-gradient-to-r ${service.buttonColor} text-white font-bold rounded-lg hover:scale-105 transition-all duration-300 transform block text-center mt-auto`}>
+                  <Link 
+                    href={service.slug} 
+                    onClick={() => {
+                      try { trackEvent({ action: 'click_service_card', category: 'Sobre Mi', label: service.slug.replace('/servicios/', '') }); } catch {}
+                    }}
+                    className={`w-full px-6 py-3 bg-gradient-to-r ${service.buttonColor} text-white font-bold rounded-lg hover:scale-105 transition-all duration-300 transform block text-center mt-auto`}
+                  >
                     Ver Detalle del Servicio
                   </Link>
                 </div>
@@ -1150,7 +1181,10 @@ export default function SobreMiExperimentalPage() {
             viewport={{ once: true }}
           >
             <button 
-              onClick={() => window.location.href = '/productos'}
+              onClick={() => {
+                try { trackEvent({ action: 'click_cta', category: 'Sobre Mi', label: 'ver_todos_productos' }); } catch {}
+                window.location.href = '/productos';
+              }}
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-gray-700/50 to-gray-800/50 backdrop-blur-sm border border-gray-600/50 text-gray-300 hover:text-white hover:border-cyan-400/50 hover:bg-gray-700/70 transition-all duration-300 rounded-lg group"
             >
               <span className="text-sm font-medium">Ver todos los productos</span>
@@ -1286,7 +1320,13 @@ export default function SobreMiExperimentalPage() {
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: true }}
                     >
-                      <Link href={article.slug ? `/blog/${article.slug}` : "#"} className="block">
+                      <Link 
+                        href={article.slug ? `/blog/${article.slug}` : "#"} 
+                        onClick={() => {
+                          try { trackEvent({ action: 'click_article_card', category: 'Sobre Mi', label: article.slug || 'sin_slug' }); } catch {}
+                        }}
+                        className="block"
+                      >
                         <article className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden hover:border-cyan-400/30 transition-all duration-300 transform hover:scale-105 h-full">
                           {/* Franja de color */}
                           <div className={`h-2 bg-gradient-to-r ${colorClasses.gradient}`}></div>
@@ -1376,6 +1416,9 @@ export default function SobreMiExperimentalPage() {
           >
             <Link 
               href="/blog"
+              onClick={() => {
+                try { trackEvent({ action: 'click_cta', category: 'Sobre Mi', label: 'ver_todos_articulos' }); } catch {}
+              }}
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-gray-700/50 to-gray-800/50 backdrop-blur-sm border border-gray-600/50 text-gray-300 hover:text-white hover:border-cyan-400/50 hover:bg-gray-700/70 transition-all duration-300 rounded-lg group"
             >
               <span className="text-sm font-medium">Ver todos los artículos</span>
@@ -1430,6 +1473,9 @@ export default function SobreMiExperimentalPage() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => {
+                      try { trackEvent({ action: 'click_social_link', category: 'Sobre Mi', label: social.name.toLowerCase() }); } catch {}
+                    }}
                     className={`${social.bgColor} rounded-xl p-4 border border-gray-700/50 hover:border-cyan-400/30 transition-all duration-300 block group`}
                   >
                     <div className="flex items-center space-x-3">
@@ -1546,6 +1592,9 @@ export default function SobreMiExperimentalPage() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a 
                 href="/servicios" 
+                onClick={() => {
+                  try { trackEvent({ action: 'click_final_cta', category: 'Sobre Mi', label: 'ver_servicios' }); } catch {}
+                }}
                 className="px-10 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold text-xl rounded-full hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-yellow-400/30 flex items-center justify-center gap-3"
               >
                 <span>🚀</span>
@@ -1553,6 +1602,9 @@ export default function SobreMiExperimentalPage() {
               </a>
               <a 
                 href="/productos" 
+                onClick={() => {
+                  try { trackEvent({ action: 'click_final_cta', category: 'Sobre Mi', label: 'explorar_productos' }); } catch {}
+                }}
                 className="px-10 py-4 border-2 border-cyan-400 text-cyan-400 font-bold text-xl rounded-full hover:bg-cyan-400 hover:text-black transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3"
               >
                 <span>📦</span>
@@ -1577,6 +1629,9 @@ export default function SobreMiExperimentalPage() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  try { trackEvent({ action: 'click_footer_social', category: 'Sobre Mi', label: social.label.toLowerCase() }); } catch {}
+                }}
                 className={`text-2xl ${social.color} transition-colors duration-300`}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
