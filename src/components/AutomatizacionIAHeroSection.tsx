@@ -1,6 +1,7 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import { heroData } from '@/data/automatizacion-ia';
+import React from 'react';
+import { heroData } from '../data/automatizacion-ia';
+import StableRotatingHeadline from './StableRotatingHeadline';
 
 export default function AutomatizacionIAHeroSection() {
   const titles = [
@@ -12,17 +13,7 @@ export default function AutomatizacionIAHeroSection() {
     "¿Y si pudieras enfocarte solo en clientes y olvidarte de lo operativo?"
   ];
 
-  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTitleIndex((prevIndex) =>
-        prevIndex === titles.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000); // Cambia cada 3 segundos
-
-    return () => clearInterval(interval);
-  }, [titles.length]);
+  // Rotación con componente estable
 
   return (
     <section className="relative min-h-screen flex items-center px-6 py-8 bg-gradient-to-br from-purple-500/15 via-indigo-500/15 to-blue-500/15">
@@ -35,18 +26,18 @@ export default function AutomatizacionIAHeroSection() {
           <p className="text-purple-300 text-sm font-bold uppercase tracking-wider">{heroData.badge}</p>
         </div>
         
-        <h1 className="text-5xl md:text-6xl font-black mb-6 leading-tight text-white min-h-[4.5rem] md:min-h-[5.5rem] flex items-center justify-center">
-          <span className="transition-all duration-1000 ease-in-out">
-            {titles[currentTitleIndex]}
-          </span>
-        </h1>
+        <StableRotatingHeadline
+          phrases={titles}
+          intervalMs={3000}
+          className="text-5xl md:text-6xl font-black mb-6 leading-tight text-white text-center"
+        />
         
         <p className="text-xl md:text-2xl text-gray-300 mb-8 font-medium">
           {heroData.subtitle}
         </p>
         
         <div className="flex justify-center items-center gap-8 mb-12 flex-wrap">
-          {heroData.features.map((feature, index) => (
+          {heroData.features.map((feature: string, index: number) => (
             <div key={index} className="flex items-center gap-2 text-emerald-400 font-semibold">
               <span>✅</span> {feature}
             </div>

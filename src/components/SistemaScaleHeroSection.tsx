@@ -1,5 +1,6 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import StableRotatingHeadline from './StableRotatingHeadline';
 
 export default function SistemaScaleHeroSection() {
   const titles = [
@@ -11,17 +12,7 @@ export default function SistemaScaleHeroSection() {
     "¿El desorden interno ya te está costando clientes?"
   ];
 
-  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTitleIndex((prevIndex) => 
-        prevIndex === titles.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000); // Cambia cada 3 segundos
-
-    return () => clearInterval(interval);
-  }, [titles.length]);
+  // Rotación con componente estable
 
   return (
     <section className="relative min-h-screen flex items-center px-6 py-8 bg-gradient-to-br from-orange-500/15 via-purple-500/15 to-blue-500/15">
@@ -34,11 +25,11 @@ export default function SistemaScaleHeroSection() {
           <p className="text-orange-300 text-sm font-bold uppercase tracking-wider">🔥 Solo 5 cupos disponibles este mes</p>
         </div>
         
-        <h1 className="text-5xl md:text-6xl font-black mb-6 leading-tight text-white min-h-[4.5rem] md:min-h-[5.5rem] flex items-center justify-center">
-          <span className="transition-all duration-1000 ease-in-out">
-            {titles[currentTitleIndex]}
-          </span>
-        </h1>
+        <StableRotatingHeadline
+          phrases={titles}
+          intervalMs={3000}
+          className="text-5xl md:text-6xl font-black mb-6 leading-tight text-white text-center"
+        />
         
         <p className="text-xl md:text-2xl text-gray-300 mb-8 font-medium">
           Organiza tu equipo de y detecta lo que frena tu crecimiento.

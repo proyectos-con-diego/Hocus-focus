@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { heroData } from '@/data/plan-marketing';
+import StableRotatingHeadline from './StableRotatingHeadline';
 
 export default function PlanMarketingHeroSection() {
   const titles = [
@@ -11,17 +12,7 @@ export default function PlanMarketingHeroSection() {
     "¿Sientes que tu negocio ya creció, pero tu marketing se quedó atrás?"
   ];
 
-  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTitleIndex((prevIndex) => 
-        prevIndex === titles.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000); // Cambia cada 3 segundos
-
-    return () => clearInterval(interval);
-  }, [titles.length]);
+  // Rotación manejada por StableRotatingHeadline
 
   return (
     <section className="hero relative min-h-screen flex items-center px-6 py-12 bg-gradient-to-br from-red-500/15 via-purple-600/15 to-blue-500/15">
@@ -33,11 +24,11 @@ export default function PlanMarketingHeroSection() {
         <div className="urgency-badge bg-gradient-to-r from-red-500/20 to-red-700/30 border border-red-500/40 rounded-full px-6 py-3 mb-8 inline-block animate-pulse">
           <p className="text-red-300 text-sm font-bold uppercase tracking-wider">{heroData.badge}</p>
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-white leading-tight min-h-[4.5rem] md:min-h-[5.5rem] lg:min-h-[6.5rem] flex items-center justify-center">
-          <span className="transition-all duration-1000 ease-in-out">
-            {titles[currentTitleIndex]}
-          </span>
-        </h1>
+        <StableRotatingHeadline
+          phrases={titles}
+          intervalMs={3000}
+          className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-white leading-tight text-center"
+        />
         <p className="hero-subtitle text-xl md:text-2xl text-gray-200 mb-8 font-medium">
           {heroData.subtitle}
         </p>
