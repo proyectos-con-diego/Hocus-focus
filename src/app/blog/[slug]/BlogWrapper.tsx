@@ -43,6 +43,31 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
     try { trackEvent({ action: 'view_article', category: 'Blog', label: post?.slug?.current || '' }); } catch {}
   }, [post?.slug?.current]);
 
+  // Scroll depth tracking (25/50/75/100)
+  useEffect(() => {
+    try {
+      const fired: Record<number, boolean> = { 25: false, 50: false, 75: false, 100: false } as any;
+      const onScroll = () => {
+        const doc = document.documentElement;
+        const scrollTop = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+        const height = doc.scrollHeight - doc.clientHeight;
+        if (height <= 0) return;
+        const pct = Math.min(100, Math.round((scrollTop / height) * 100));
+        [25, 50, 75, 100].forEach((mark) => {
+          if (!fired[mark] && pct >= mark) {
+            try { trackEvent({ action: 'scroll_depth', category: 'Blog', label: String(mark) }); } catch {}
+            fired[mark] = true;
+          }
+        });
+        if (fired[25] && fired[50] && fired[75] && fired[100]) {
+          window.removeEventListener('scroll', onScroll as any);
+        }
+      };
+      window.addEventListener('scroll', onScroll as any, { passive: true } as any);
+      return () => window.removeEventListener('scroll', onScroll as any);
+    } catch {}
+  }, []);
+
   return (
     <>
       <ParallaxEffect />

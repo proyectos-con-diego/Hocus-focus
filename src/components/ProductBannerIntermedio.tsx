@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { event as trackEvent } from '@/lib/analytics';
 
 interface ProductBannerIntermedioProps {
   product: {
@@ -106,6 +107,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
         <Link 
           href={getProductLink(product.slug.current)}
           className="banner-cta"
+          onClick={() => { try { trackEvent({ action: 'click_intermediate_banner_cta', category: 'Blog', label: product.slug.current }); } catch {} }}
         >
           {getProductLinkText(product.slug.current)}
         </Link>
