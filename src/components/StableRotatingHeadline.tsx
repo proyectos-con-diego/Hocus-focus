@@ -12,6 +12,7 @@ export default function StableRotatingHeadline({ phrases, intervalMs = 3000, cla
   const [index, setIndex] = React.useState(0);
   const measureRef = React.useRef<HTMLDivElement | null>(null);
   const [maxHeight, setMaxHeight] = React.useState<number>(0);
+  const [isMeasuring, setIsMeasuring] = React.useState(true);
 
   // Rotate index
   React.useEffect(() => {
@@ -24,40 +25,80 @@ export default function StableRotatingHeadline({ phrases, intervalMs = 3000, cla
   const measure = React.useCallback(() => {
     const node = measureRef.current;
     if (!node) return;
+    
+    // Reset heights to get accurate measurements
+    Array.from(node.children).forEach((child) => {
+      (child as HTMLElement).style.height = 'auto';
+    });
+    
+    // Force a reflow
+    node.offsetHeight;
+    
     let tallest = 0;
     Array.from(node.children).forEach((child) => {
       const h = (child as HTMLElement).offsetHeight;
       if (h > tallest) tallest = h;
     });
+    
     setMaxHeight(tallest);
+    setIsMeasuring(false);
   }, []);
 
   React.useEffect(() => {
-    measure();
-    const ro = new ResizeObserver(() => measure());
+    if (phrases.length === 0) return;
+    
+    // Small delay to ensure DOM is ready
+    const timeoutId = setTimeout(measure, 100);
+    
+    const ro = new ResizeObserver(() => {
+      setIsMeasuring(true);
+      setTimeout(measure, 50);
+    });
+    
     if (measureRef.current) ro.observe(measureRef.current);
-    const onResize = () => measure();
+    
+    const onResize = () => {
+      setIsMeasuring(true);
+      setTimeout(measure, 50);
+    };
+    
     window.addEventListener('resize', onResize);
+    
     return () => {
+      clearTimeout(timeoutId);
       ro.disconnect();
       window.removeEventListener('resize', onResize);
     };
-  }, [measure]);
+  }, [measure, phrases.length]);
 
   return (
     <>
-      {/* Offscreen measurer */}
-      <div ref={measureRef} className="invisible fixed -z-10 top-0 left-0">
+      {/* Offscreen measurer - invisible but takes up space */}
+      <div 
+        ref={measureRef} 
+        className="invisible fixed -z-10 top-0 left-0 w-full max-w-4xl"
+        style={{ visibility: 'hidden' }}
+      >
         {phrases.map((t, k) => (
-          <div key={k} className={`${className}`}>{t}</div>
+          <div key={k} className={`${className} whitespace-normal`}>
+            {t}
+          </div>
         ))}
       </div>
 
-      <div style={{ height: maxHeight || undefined }} className="relative overflow-hidden" aria-live="polite">
+      {/* Actual display container */}
+      <div 
+        style={{ 
+          height: maxHeight > 0 ? `${maxHeight}px` : 'auto',
+          minHeight: isMeasuring ? '200px' : undefined
+        }} 
+        className="relative overflow-hidden" 
+        aria-live="polite"
+      >
         {phrases.map((t, k) => (
           <div
             key={k}
-            className={`absolute inset-0 ${className} transition-opacity duration-500 ease-out will-change-transform ${k === index ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 ${className} transition-opacity duration-500 ease-out will-change-transform whitespace-normal ${k === index ? 'opacity-100' : 'opacity-0'}`}
           >
             {t}
           </div>
