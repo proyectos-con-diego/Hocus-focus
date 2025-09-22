@@ -260,6 +260,7 @@ export default function ServiciosPage() {
       >
         <AboutMeBanner 
           onServicesClick={() => {
+            try { trackEvent({ action: 'click_cta_banner', category: 'Servicios', label: 'sobre_mi_banner' }); } catch {}
             const servicesSection = document.querySelector('#servicios');
             if (servicesSection) {
               const headerHeight = 80;
