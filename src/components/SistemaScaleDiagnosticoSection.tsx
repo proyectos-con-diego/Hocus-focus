@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
+import { event as trackEvent } from '@/lib/analytics';
 
 export default function SistemaScaleDiagnosticoSection() {
   const handleDiagnosticoClick = () => {
-    // Scroll to contact form
+    try { trackEvent({ action: 'click_diagnostico_cta', category: 'Sistema SCALE', label: 'diagnostico_section' }); } catch {}
     const contactSection = document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });

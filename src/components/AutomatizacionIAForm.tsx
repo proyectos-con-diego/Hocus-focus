@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { event as trackEvent } from '@/lib/analytics';
 
 export default function AutomatizacionIAForm() {
   return (
