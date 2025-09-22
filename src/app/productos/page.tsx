@@ -8,6 +8,7 @@ import ProductsTestimonialsSection from '@/components/ProductsTestimonialsSectio
 import ProductsFAQSection from '@/components/ProductsFAQSection';
 import { products } from '@/data/products';
 import StructuredData, { productsPageStructuredData } from '@/components/StructuredData';
+import BlogNewsletterSection from '../../components/BlogNewsletterSection';
 
 export default function ProductosNuevoPage() {
   const router = useRouter();
@@ -172,6 +173,11 @@ export default function ProductosNuevoPage() {
       {/* FAQ Section */}
       <div id="faq">
         <ProductsFAQSection />
+      </div>
+
+      {/* Newsletter Section al final */}
+      <div className="max-w-7xl mx-auto px-6">
+        <BlogNewsletterSection />
       </div>
       
       {/* FOOTER */}

@@ -9,6 +9,7 @@ import ServiciosFAQSection from '@/components/ServiciosFAQSection';
 import AboutMeBanner from '@/components/AboutMeBanner';
 import WorkflowSection from '@/components/WorkflowSection';
 import StructuredData, { servicesPageStructuredData } from '@/components/StructuredData';
+import BlogNewsletterSection from '../../components/BlogNewsletterSection';
 
 export default function ServiciosPage() {
   const [error, setError] = useState<string | null>(null);
@@ -278,6 +279,11 @@ export default function ServiciosPage() {
         />
       </section>
       
+      {/* Newsletter Section al final */}
+      <section className="max-w-7xl mx-auto px-6">
+        <BlogNewsletterSection />
+      </section>
+
       {/* Footer */}
       <footer 
         className="py-8 px-6 bg-black border-t border-gray-800"
