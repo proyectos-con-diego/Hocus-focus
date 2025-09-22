@@ -26,21 +26,35 @@ export default function StableRotatingHeadline({ phrases, intervalMs = 3000, cla
     const node = measureRef.current;
     if (!node) return;
     
-    // Reset heights to get accurate measurements
+    // Reset all styles to get natural measurements
     Array.from(node.children).forEach((child) => {
-      (child as HTMLElement).style.height = 'auto';
+      const el = child as HTMLElement;
+      el.style.height = 'auto';
+      el.style.width = 'auto';
+      el.style.maxWidth = 'none';
+      el.style.whiteSpace = 'normal';
     });
     
-    // Force a reflow
+    // Force multiple reflows to ensure accurate measurements
     node.offsetHeight;
+    node.offsetWidth;
     
     let tallest = 0;
+    let widest = 0;
+    
     Array.from(node.children).forEach((child) => {
-      const h = (child as HTMLElement).offsetHeight;
+      const el = child as HTMLElement;
+      const rect = el.getBoundingClientRect();
+      const h = rect.height;
+      const w = rect.width;
+      
       if (h > tallest) tallest = h;
+      if (w > widest) widest = w;
     });
     
-    setMaxHeight(tallest);
+    // Add some padding to ensure no text is cut off
+    const padding = 20;
+    setMaxHeight(tallest + padding);
     setIsMeasuring(false);
   }, []);
 
@@ -76,11 +90,26 @@ export default function StableRotatingHeadline({ phrases, intervalMs = 3000, cla
       {/* Offscreen measurer - invisible but takes up space */}
       <div 
         ref={measureRef} 
-        className="invisible fixed -z-10 top-0 left-0 w-full max-w-4xl"
-        style={{ visibility: 'hidden' }}
+        className="fixed -z-10 top-0 left-0 w-full max-w-6xl px-6"
+        style={{ 
+          visibility: 'hidden',
+          pointerEvents: 'none',
+          position: 'absolute',
+          top: '-9999px',
+          left: '-9999px'
+        }}
       >
         {phrases.map((t, k) => (
-          <div key={k} className={`${className} whitespace-normal`}>
+          <div 
+            key={k} 
+            className={`${className} whitespace-normal break-words`}
+            style={{ 
+              width: '100%',
+              maxWidth: 'none',
+              height: 'auto',
+              minHeight: 'auto'
+            }}
+          >
             {t}
           </div>
         ))}
@@ -90,7 +119,7 @@ export default function StableRotatingHeadline({ phrases, intervalMs = 3000, cla
       <div 
         style={{ 
           height: maxHeight > 0 ? `${maxHeight}px` : 'auto',
-          minHeight: isMeasuring ? '200px' : undefined
+          minHeight: isMeasuring ? '300px' : undefined
         }} 
         className="relative overflow-hidden" 
         aria-live="polite"
@@ -98,7 +127,10 @@ export default function StableRotatingHeadline({ phrases, intervalMs = 3000, cla
         {phrases.map((t, k) => (
           <div
             key={k}
-            className={`absolute inset-0 ${className} transition-opacity duration-500 ease-out will-change-transform whitespace-normal ${k === index ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 ${className} transition-opacity duration-500 ease-out will-change-transform whitespace-normal break-words flex items-center justify-center text-center ${k === index ? 'opacity-100' : 'opacity-0'}`}
+            style={{
+              padding: '0 1rem'
+            }}
           >
             {t}
           </div>
