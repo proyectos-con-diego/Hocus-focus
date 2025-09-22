@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function PlanMarketingForm() {
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div id="contact" className="w-full max-w-4xl mx-auto">
       <div className="bg-white/5 backdrop-blur-[20px] border border-white/10 rounded-3xl p-8">
         <div className="text-center mb-8">
           <div className="text-6xl mb-4">🚀</div>

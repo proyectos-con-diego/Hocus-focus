@@ -20,7 +20,6 @@ export default function DiagnosticoPricingSection() {
   }, []);
 
   const handleDiagnosticoClick = () => {
-    // Scroll to contact form
     const contactSection = document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
