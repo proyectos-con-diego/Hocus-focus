@@ -93,6 +93,24 @@ export default function PackStickyBannerInferior({ packs = defaultPacks }: PackS
   const [currentPackIndex, setCurrentPackIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detectar si es mobile al montar el componente
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  // Establecer estado inicial según dispositivo
+  useEffect(() => {
+    setIsMinimized(isMobile);
+  }, [isMobile]);
 
   // Si no hay packs, no mostrar nada
   if (!packs || packs.length === 0) {
