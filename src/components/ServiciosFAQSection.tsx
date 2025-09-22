@@ -36,13 +36,6 @@ export default function ServiciosFAQSection() {
             </div>
           ))}
         </div>
-        
-        {/* Botón Volver al inicio */}
-        <div className="text-center mt-12">
-          <a href="/" className="text-gray-400 hover:text-white transition-colors duration-300 text-sm">
-            ← Volver al inicio
-          </a>
-        </div>
       </div>
     </section>
   );
