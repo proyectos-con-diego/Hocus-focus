@@ -127,11 +127,8 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
   };
 
   const getProductLinkText = (slug: string) => {
-    const serviceSlugs = ['automatizaciones-ia', 'automatizacion-ia', 'sistema-scale', 'plan-de-marketing', 'plan-marketing'];
-    if (slug === 'plan-marketing' || slug === 'automatizacion-ia' || slug === 'sistema-scale') {
-      return 'Ver detalles';
-    }
-    return serviceSlugs.includes(slug) ? 'Ver servicio' : 'Ver producto';
+    // Todos los botones en páginas de artículos siempre dicen "Ver detalles"
+    return 'Ver detalles';
   };
 
   return (
