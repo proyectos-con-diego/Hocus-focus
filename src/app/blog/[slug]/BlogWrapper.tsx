@@ -34,8 +34,21 @@ interface BlogWrapperProps {
 }
 
 export default function BlogWrapper({ post, firstHalf, secondHalf, children }: BlogWrapperProps) {
-  // Obtener configuración del producto relacionado
-  const productSlug = post.relatedProduct?.slug?.current || 'default';
+  // Determinar qué producto/servicio mostrar en los banners
+  let productSlug = 'default';
+  
+  // Si el artículo tiene categoría "Marketing y empresa", mostrar Plan de Marketing CONVERT
+  const isMarketingArticle = post.categories?.some((cat: any) => 
+    cat?.title === 'Marketing y empresa' || cat?.name === 'Marketing y empresa'
+  );
+  
+  if (isMarketingArticle) {
+    productSlug = 'plan-marketing';
+  } else {
+    // Usar el producto relacionado si existe, sino usar default
+    productSlug = post.relatedProduct?.slug?.current || 'default';
+  }
+  
   const productConfig = getProductBannerConfig(productSlug);
 
   // Track vista de artículo

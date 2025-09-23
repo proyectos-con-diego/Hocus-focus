@@ -149,6 +149,18 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     ctaText: 'Ver servicio',
     ctaLink: '/servicios/automatizacion-ia',
     metrics: '⭐ 4.9/5 • 500+ clientes'
+  },
+  'plan-marketing': {
+    name: 'Plan de Marketing CONVERT',
+    slug: 'plan-marketing',
+    emoji: '📊',
+    color: '#f59e0b',
+    gradient: 'linear-gradient(45deg, #f59e0b, #d97706)',
+    title: 'Plan de Marketing CONVERT',
+    description: 'Transforma tu marketing en inversión efectiva',
+    ctaText: 'Ver detalles',
+    ctaLink: '/servicios/plan-marketing',
+    metrics: '⭐ 4.9/5 • 200+ estrategias'
   }
 };
 
