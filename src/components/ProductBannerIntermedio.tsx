@@ -42,6 +42,18 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
       'default': '🚀'
     };
     
+    // Buscar coincidencias parciales para nombres que puedan variar
+    const normalizedName = productName?.toLowerCase() || '';
+    if (normalizedName.includes('scale') || normalizedName.includes('sistema')) {
+      return icons['Sistema SCALE'];
+    }
+    if (normalizedName.includes('marketing') || normalizedName.includes('convert')) {
+      return icons['Plan de Marketing CONVERT'];
+    }
+    if (normalizedName.includes('automatizacion') || normalizedName.includes('automatizaciones')) {
+      return icons['Automatizaciones ia'];
+    }
+    
     return icons[productName] || icons.default;
   };
 
@@ -58,6 +70,18 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
       'Jaime Daily': '¿Quieres crear hábitos inteligentes?',
       'default': '¿Quieres optimizar tu productividad?'
     };
+    
+    // Buscar coincidencias parciales para nombres que puedan variar
+    const normalizedName = productName?.toLowerCase() || '';
+    if (normalizedName.includes('scale') || normalizedName.includes('sistema')) {
+      return questions['Sistema SCALE'];
+    }
+    if (normalizedName.includes('marketing') || normalizedName.includes('convert')) {
+      return questions['Plan de Marketing CONVERT'];
+    }
+    if (normalizedName.includes('automatizacion') || normalizedName.includes('automatizaciones')) {
+      return questions['Automatizaciones ia'];
+    }
     
     return questions[productName] || questions.default;
   };
@@ -86,6 +110,18 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
       'Plan de Marketing CONVERT': 'Potencia tus resultados con Marketing CONVERT.',
       'Sistema SCALE': 'Transformación digital organizada y eficiente en 30 días.'
     };
+    
+    // Buscar coincidencias parciales para nombres que puedan variar
+    const normalizedName = productName?.toLowerCase() || '';
+    if (normalizedName.includes('scale') || normalizedName.includes('sistema')) {
+      return descriptions['Sistema SCALE'];
+    }
+    if (normalizedName.includes('marketing') || normalizedName.includes('convert')) {
+      return descriptions['Plan de Marketing CONVERT'];
+    }
+    if (normalizedName.includes('automatizacion') || normalizedName.includes('automatizaciones')) {
+      return descriptions['Automatizaciones ia'];
+    }
     
     return descriptions[productName] || defaultDescription || 'Descubre cómo este producto puede ayudarte';
   };
