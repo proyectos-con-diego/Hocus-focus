@@ -27,7 +27,7 @@ export default function IntermediateBanner({ post }: IntermediateBannerProps) {
     productToShow = {
       nombre: 'Sistema SCALE',
       slug: { current: 'sistema-scale' },
-      descripcion: 'Escala tu negocio sin perder el control',
+      descripcion: 'Transformación digital organizada y eficiente en 30 días.',
       estado: 'disponible'
     };
     trackingLabel = 'sistema-scale';

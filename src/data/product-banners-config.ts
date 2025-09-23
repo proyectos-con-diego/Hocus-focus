@@ -165,11 +165,11 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
   'sistema-scale': {
     name: 'Sistema SCALE',
     slug: 'sistema-scale',
-    emoji: '🏢',
+    emoji: '🚀',
     color: '#10b981',
     gradient: 'linear-gradient(45deg, #10b981, #059669)',
     title: 'Sistema SCALE',
-    description: 'Escala tu negocio sin perder el control',
+    description: 'Transforma tu negocio en una operación eficiente y escalable en 30 días.',
     ctaText: 'Ver detalles',
     ctaLink: '/servicios/sistema-scale',
     metrics: '⭐ 4.9/5 • 150+ empresas'

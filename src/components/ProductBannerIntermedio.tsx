@@ -31,7 +31,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
   const getProductIcon = (productName: string) => {
     const icons: { [key: string]: string } = {
       'Plan de Marketing CONVERT': '📊',
-      'Sistema SCALE': '🏢',
+      'Sistema SCALE': '🚀',
       'Automatizaciones ia': '⚡',
       'Vinxi': '🦊',
       'Grilla Viralis': '🦗',
@@ -48,7 +48,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
   const getProductQuestion = (productName: string) => {
     const questions: { [key: string]: string } = {
       'Plan de Marketing CONVERT': '¿Listo para transformar tu marketing?',
-      'Sistema SCALE': '¿Quieres escalar tu negocio?',
+      'Sistema SCALE': '¿Listo para propulsar tu negocio?',
       'Automatizaciones ia': '¿Te gustaría automatizar tu negocio?',
       'Vinxi': '¿Quieres organizar tu productividad?',
       'Grilla Viralis': '¿Buscas hacer crecer tu marca?',
@@ -84,7 +84,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
     const descriptions: { [key: string]: string } = {
       'Automatizaciones ia': 'Libera 8-15 horas semanales con Automatización IA',
       'Plan de Marketing CONVERT': 'Potencia tus resultados con Marketing CONVERT.',
-      'Sistema SCALE': 'Escala tu negocio sin perder el control'
+      'Sistema SCALE': 'Transformación digital organizada y eficiente en 30 días.'
     };
     
     return descriptions[productName] || defaultDescription || 'Descubre cómo este producto puede ayudarte';
