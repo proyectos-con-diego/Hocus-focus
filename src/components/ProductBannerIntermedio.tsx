@@ -30,6 +30,7 @@ function getPetImageName(productName: string): string {
 export default function ProductBannerIntermedio({ product }: ProductBannerIntermedioProps) {
   const getProductIcon = (productName: string) => {
     const icons: { [key: string]: string } = {
+      'Plan de Marketing CONVERT': '📊',
       'Automatizaciones ia': '⚡',
       'Vinxi': '🦊',
       'Grilla Viralis': '🦗',
@@ -45,6 +46,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
 
   const getProductQuestion = (productName: string) => {
     const questions: { [key: string]: string } = {
+      'Plan de Marketing CONVERT': '¿Listo para transformar tu marketing?',
       'Automatizaciones ia': '¿Necesitas automatizar tu negocio?',
       'Vinxi': '¿Quieres organizar tu productividad?',
       'Grilla Viralis': '¿Buscas hacer crecer tu marca?',
@@ -78,6 +80,9 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
 
   const getProductLinkText = (slug: string) => {
     const serviceSlugs = ['automatizaciones-ia', 'automatizacion-ia', 'sistema-scale', 'plan-de-marketing', 'plan-marketing'];
+    if (slug === 'plan-marketing') {
+      return 'Ver detalles';
+    }
     return serviceSlugs.includes(slug) ? 'Ver servicio' : 'Ver producto';
   };
 
