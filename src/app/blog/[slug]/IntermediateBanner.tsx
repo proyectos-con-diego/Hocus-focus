@@ -53,11 +53,7 @@ export default function IntermediateBanner({ post }: IntermediateBannerProps) {
   return (
     <div ref={containerRef} className="my-12" data-testid="intermediate-banner">
       <AdIndicator />
-      {productToShow ? (
-        <ProductBannerIntermedio product={productToShow} />
-      ) : (
-        <RotatingProductBanner />
-      )}
+      <ProductBannerIntermedio product={productToShow} />
     </div>
   );
 }
