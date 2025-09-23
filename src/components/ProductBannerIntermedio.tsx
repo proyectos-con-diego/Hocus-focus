@@ -47,7 +47,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
   const getProductQuestion = (productName: string) => {
     const questions: { [key: string]: string } = {
       'Plan de Marketing CONVERT': '¿Listo para transformar tu marketing?',
-      'Automatizaciones ia': '¿Necesitas automatizar tu negocio?',
+      'Automatizaciones ia': '¿Te gustaría automatizar tu negocio?',
       'Vinxi': '¿Quieres organizar tu productividad?',
       'Grilla Viralis': '¿Buscas hacer crecer tu marca?',
       'OKRo': '¿Quieres convertir metas en logros?',
@@ -78,9 +78,18 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
     return `/productos/${slug}`;
   };
 
+  const getProductDescription = (productName: string, defaultDescription?: string | null) => {
+    const descriptions: { [key: string]: string } = {
+      'Automatizaciones ia': 'Libera 8-15 horas semanales con Automatización IA',
+      'Plan de Marketing CONVERT': 'Potencia tus resultados con Marketing CONVERT.'
+    };
+    
+    return descriptions[productName] || defaultDescription || 'Descubre cómo este producto puede ayudarte';
+  };
+
   const getProductLinkText = (slug: string) => {
     const serviceSlugs = ['automatizaciones-ia', 'automatizacion-ia', 'sistema-scale', 'plan-de-marketing', 'plan-marketing'];
-    if (slug === 'plan-marketing') {
+    if (slug === 'plan-marketing' || slug === 'automatizacion-ia') {
       return 'Ver detalles';
     }
     return serviceSlugs.includes(slug) ? 'Ver servicio' : 'Ver producto';
@@ -107,7 +116,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
         </div>
         <div className="banner-text">
           <h3>{getProductQuestion(product.nombre)}</h3>
-          <p>{product.descripcion || 'Descubre cómo este producto puede ayudarte'}</p>
+          <p>{getProductDescription(product.nombre, product.descripcion)}</p>
         </div>
         <Link 
           href={getProductLink(product.slug.current)}
