@@ -31,6 +31,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
   const getProductIcon = (productName: string) => {
     const icons: { [key: string]: string } = {
       'Plan de Marketing CONVERT': '📊',
+      'Sistema SCALE': '🏢',
       'Automatizaciones ia': '⚡',
       'Vinxi': '🦊',
       'Grilla Viralis': '🦗',
@@ -47,6 +48,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
   const getProductQuestion = (productName: string) => {
     const questions: { [key: string]: string } = {
       'Plan de Marketing CONVERT': '¿Listo para transformar tu marketing?',
+      'Sistema SCALE': '¿Quieres escalar tu negocio?',
       'Automatizaciones ia': '¿Te gustaría automatizar tu negocio?',
       'Vinxi': '¿Quieres organizar tu productividad?',
       'Grilla Viralis': '¿Buscas hacer crecer tu marca?',
@@ -81,7 +83,8 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
   const getProductDescription = (productName: string, defaultDescription?: string | null) => {
     const descriptions: { [key: string]: string } = {
       'Automatizaciones ia': 'Libera 8-15 horas semanales con Automatización IA',
-      'Plan de Marketing CONVERT': 'Potencia tus resultados con Marketing CONVERT.'
+      'Plan de Marketing CONVERT': 'Potencia tus resultados con Marketing CONVERT.',
+      'Sistema SCALE': 'Escala tu negocio sin perder el control'
     };
     
     return descriptions[productName] || defaultDescription || 'Descubre cómo este producto puede ayudarte';
@@ -89,7 +92,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
 
   const getProductLinkText = (slug: string) => {
     const serviceSlugs = ['automatizaciones-ia', 'automatizacion-ia', 'sistema-scale', 'plan-de-marketing', 'plan-marketing'];
-    if (slug === 'plan-marketing' || slug === 'automatizacion-ia') {
+    if (slug === 'plan-marketing' || slug === 'automatizacion-ia' || slug === 'sistema-scale') {
       return 'Ver detalles';
     }
     return serviceSlugs.includes(slug) ? 'Ver servicio' : 'Ver producto';

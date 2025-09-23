@@ -161,6 +161,18 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     ctaText: 'Ver detalles',
     ctaLink: '/servicios/plan-marketing',
     metrics: '⭐ 4.9/5 • 200+ estrategias'
+  },
+  'sistema-scale': {
+    name: 'Sistema SCALE',
+    slug: 'sistema-scale',
+    emoji: '🏢',
+    color: '#10b981',
+    gradient: 'linear-gradient(45deg, #10b981, #059669)',
+    title: 'Sistema SCALE',
+    description: 'Escala tu negocio sin perder el control',
+    ctaText: 'Ver detalles',
+    ctaLink: '/servicios/sistema-scale',
+    metrics: '⭐ 4.9/5 • 150+ empresas'
   }
 };
 

@@ -17,23 +17,20 @@ export default function IntermediateBanner({ post }: IntermediateBannerProps) {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   // Determinar qué producto/servicio mostrar en el banner intermedio
+  // Producto relacionado → Producto específico
+  // Sin producto → Plan SCALE
   let productToShow = post.relatedProduct;
-  let trackingLabel = post?.relatedProduct?.slug?.current || 'rotating';
+  let trackingLabel = post?.relatedProduct?.slug?.current || 'sistema-scale';
   
-  // Si el artículo tiene categoría "Marketing y empresa", mostrar Plan de Marketing CONVERT
-  const isMarketingArticle = post.categories?.some((cat: any) => 
-    cat?.title === 'Marketing y empresa' || cat?.name === 'Marketing y empresa'
-  );
-  
-  if (isMarketingArticle) {
-    // Crear un objeto de producto ficticio para el Plan de Marketing CONVERT
+  if (!productToShow) {
+    // Crear un objeto de producto ficticio para el Sistema SCALE
     productToShow = {
-      nombre: 'Plan de Marketing CONVERT',
-      slug: { current: 'plan-marketing' },
-      descripcion: 'Potencia tus resultados con Marketing CONVERT.',
+      nombre: 'Sistema SCALE',
+      slug: { current: 'sistema-scale' },
+      descripcion: 'Escala tu negocio sin perder el control',
       estado: 'disponible'
     };
-    trackingLabel = 'plan-marketing';
+    trackingLabel = 'sistema-scale';
   }
 
   // View tracking
