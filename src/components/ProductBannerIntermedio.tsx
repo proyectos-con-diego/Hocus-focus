@@ -62,12 +62,13 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
       'Plan de Marketing CONVERT': '¿Listo para transformar tu marketing?',
       'Sistema SCALE': '¿Listo para propulsar tu negocio?',
       'Automatizaciones ia': '¿Te gustaría automatizar tu negocio?',
-      'Vinxi': '¿Quieres organizar tu productividad?',
-      'Grilla Viralis': '¿Buscas hacer crecer tu marca?',
-      'OKRo': '¿Quieres convertir metas en logros?',
-      'Bafet': '¿Quieres analizar el mercado crypto?',
+      'Vinxi': '¿Tu mente también es un caos?',
+      'Grilla Viralis': '¿Quieres dominar tu contenido en redes?',
+      'OKRo': '¿Quieres convertir tus metas en logros?',
+      'Bafet': '¿Estás listo para invertir con confianza?',
       'Midas': '¿Quieres controlar tus finanzas personales?',
-      'Jaime Daily': '¿Quieres crear hábitos inteligentes?',
+      'Jaime Daily': '¿Listo para cambiar tus hábitos?',
+      'Navio': '¿Tu equipo está desorganizado?',
       'default': '¿Quieres optimizar tu productividad?'
     };
     
@@ -81,6 +82,27 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
     }
     if (normalizedName.includes('automatizacion') || normalizedName.includes('automatizaciones')) {
       return questions['Automatizaciones ia'];
+    }
+    if (normalizedName.includes('bafet')) {
+      return questions['Bafet'];
+    }
+    if (normalizedName.includes('midas')) {
+      return questions['Midas'];
+    }
+    if (normalizedName.includes('jaime')) {
+      return questions['Jaime Daily'];
+    }
+    if (normalizedName.includes('vinxi')) {
+      return questions['Vinxi'];
+    }
+    if (normalizedName.includes('grilla')) {
+      return questions['Grilla Viralis'];
+    }
+    if (normalizedName.includes('okro')) {
+      return questions['OKRo'];
+    }
+    if (normalizedName.includes('navio')) {
+      return questions['Navio'];
     }
     
     return questions[productName] || questions.default;
@@ -108,7 +130,14 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
     const descriptions: { [key: string]: string } = {
       'Automatizaciones ia': 'Libera 8-15 horas semanales con Automatización IA',
       'Plan de Marketing CONVERT': 'Potencia tus resultados con Marketing CONVERT.',
-      'Sistema SCALE': 'Transformación digital organizada y eficiente en 30 días.'
+      'Sistema SCALE': 'Transformación digital organizada y eficiente en 30 días.',
+      'Bafet': 'Controla tus criptomonedas con Bafet.',
+      'Midas': 'Midas: paz financiera sin complicaciones.',
+      'Jaime Daily': 'Transforma tu vida con Jaime Daily.',
+      'Vinxi': 'Transforma ideas en acción con Vinxi.',
+      'Grilla Viralis': 'Simplifica tu gestión de contenidos con Grilla Viralis.',
+      'OKRo': 'Transforma objetivos difusos en resultados medibles con OKRo',
+      'Navio': 'Transforma el caos en coordinación efectiva con Navio'
     };
     
     // Buscar coincidencias parciales para nombres que puedan variar
@@ -121,6 +150,27 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
     }
     if (normalizedName.includes('automatizacion') || normalizedName.includes('automatizaciones')) {
       return descriptions['Automatizaciones ia'];
+    }
+    if (normalizedName.includes('bafet')) {
+      return descriptions['Bafet'];
+    }
+    if (normalizedName.includes('midas')) {
+      return descriptions['Midas'];
+    }
+    if (normalizedName.includes('jaime')) {
+      return descriptions['Jaime Daily'];
+    }
+    if (normalizedName.includes('vinxi')) {
+      return descriptions['Vinxi'];
+    }
+    if (normalizedName.includes('grilla')) {
+      return descriptions['Grilla Viralis'];
+    }
+    if (normalizedName.includes('okro')) {
+      return descriptions['OKRo'];
+    }
+    if (normalizedName.includes('navio')) {
+      return descriptions['Navio'];
     }
     
     return descriptions[productName] || defaultDescription || 'Descubre cómo este producto puede ayudarte';

@@ -60,8 +60,8 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     emoji: '🐔',
     color: '#22c55e',
     gradient: 'linear-gradient(45deg, #22c55e, #10b981)',
-    title: 'Jaime Daily - Hábitos Inteligentes',
-    description: 'Sistema de gestión de hábitos y rutinas diarias que se adaptan a ti',
+    title: 'Jaime - Seguimiento de hábitos',
+    description: 'Transforma tus hábitos y construye la vida que deseas.',
     ctaText: 'Ver detalles',
     ctaLink: '/productos/jaime-daily',
     metrics: '⭐ 4.9/5 • 500+ clientes'
@@ -73,7 +73,7 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     color: '#3b82f6',
     gradient: 'linear-gradient(45deg, #3b82f6, #06b6d4)',
     title: 'Vinxi - Organizador de Productividad',
-    description: 'Sistema todo-en-uno para gestionar proyectos y tareas eficientemente',
+    description: 'Transforma tu caos mental en acción sostenida.',
     ctaText: 'Ver detalles',
     ctaLink: '/productos/vinxi',
     metrics: '⭐ 4.8/5 • 300+ proyectos'
@@ -84,8 +84,8 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     emoji: '🦗',
     color: '#22c55e',
     gradient: 'linear-gradient(45deg, #22c55e, #16a34a)',
-    title: 'Grilla Viralis - Crecimiento Digital',
-    description: 'Herramientas virales para escalar tu presencia digital y hacer crecer tu marca',
+    title: 'Grilla Viralis - Crecimiento digital',
+    description: 'Transforma el caos creativo en una estrategia organizada.',
     ctaText: 'Ver detalles',
     ctaLink: '/productos/grilla-viralis',
     metrics: '⭐ 4.7/5 • 200+ marcas'
@@ -96,8 +96,8 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     emoji: '🐼',
     color: '#2563eb',
     gradient: 'linear-gradient(45deg, #2563eb, #3b82f6)',
-    title: 'OKRo - Metas y Logros',
-    description: 'Metodología probada para convertir metas en logros reales y medibles',
+    title: 'OKRo - Metas y logros',
+    description: 'Convierte objetivos en resultados concretos y claros',
     ctaText: 'Ver detalles',
     ctaLink: '/productos/okro',
     metrics: '⭐ 4.9/5 • 400+ objetivos'
@@ -108,8 +108,8 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     emoji: '🐷',
     color: '#f97316',
     gradient: 'linear-gradient(45deg, #f97316, #ea580c)',
-    title: 'Midas - Finanzas Personales',
-    description: 'Dashboard financiero personal para controlar gastos y maximizar ahorros',
+    title: 'Midas - Finanzas personales',
+    description: 'Transforma el caos financiero en tranquilidad y control total.',
     ctaText: 'Ver detalles',
     ctaLink: '/productos/midas',
     metrics: '⭐ 4.8/5 • 250+ usuarios'
@@ -121,7 +121,7 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     color: '#a855f7',
     gradient: 'linear-gradient(45deg, #a855f7, #ec4899)',
     title: 'Bafet - Análisis Crypto',
-    description: 'Dashboard de monitoreo y análisis crypto para inversiones inteligentes',
+    description: 'Transforma tus inversiones en decisiones claras y estratégicas.',
     ctaText: 'Ver detalles',
     ctaLink: '/productos/bafet',
     metrics: '🚀 Beta • Próximamente'
@@ -132,8 +132,8 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     emoji: '🐺',
     color: '#06b6d4',
     gradient: 'linear-gradient(45deg, #06b6d4, #0891b2)',
-    title: 'Navio - Colaboración en Equipo',
-    description: 'Sistema colaborativo para equipos y proyectos grupales eficientes',
+    title: 'Navío 360 - Gestión de equipos',
+    description: 'Convierte el caos en claridad y potencia tu equipo al máximo.',
     ctaText: 'Ver detalles',
     ctaLink: '/productos/navio-360',
     metrics: '🚀 Beta • Próximamente'
