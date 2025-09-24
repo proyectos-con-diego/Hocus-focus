@@ -60,7 +60,7 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     emoji: '🐔',
     color: '#22c55e',
     gradient: 'linear-gradient(45deg, #22c55e, #10b981)',
-    title: 'Jaime - Seguimiento de hábitos',
+    title: 'Jaime Daily - Seguimiento de hábitos',
     description: 'Transforma tus hábitos y construye la vida que deseas.',
     ctaText: 'Ver detalles',
     ctaLink: '/productos/jaime-daily',
