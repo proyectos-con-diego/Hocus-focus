@@ -61,7 +61,7 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     color: '#22c55e',
     gradient: 'linear-gradient(45deg, #22c55e, #10b981)',
     title: 'Jaime Daily - Seguimiento de hábitos',
-    description: 'Transforma tus hábitos y construye la vida que deseas.',
+    description: 'Transforma tu vida diaria y convierte tus hábitos en tu mejor aliado.',
     ctaText: 'Ver detalles',
     ctaLink: '/productos/jaime-daily',
     metrics: '⭐ 4.9/5 • 500+ clientes'
@@ -73,7 +73,7 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     color: '#3b82f6',
     gradient: 'linear-gradient(45deg, #3b82f6, #06b6d4)',
     title: 'Vinxi - Organizador de Productividad',
-    description: 'Transforma tu caos mental en acción sostenida.',
+    description: 'Transforma el caos en claridad y potencia tu creatividad con un sistema único.',
     ctaText: 'Ver detalles',
     ctaLink: '/productos/vinxi',
     metrics: '⭐ 4.8/5 • 300+ proyectos'
@@ -157,7 +157,7 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     color: '#f59e0b',
     gradient: 'linear-gradient(45deg, #f59e0b, #d97706)',
     title: 'Plan de Marketing CONVERT',
-    description: 'Transforma tu marketing en inversión efectiva',
+    description: 'Transforma tu marketing y multiplica tus clientes con una estrategia clara y efectiva.',
     ctaText: 'Ver detalles',
     ctaLink: '/servicios/plan-marketing',
     metrics: '⭐ 4.9/5 • 200+ estrategias'
