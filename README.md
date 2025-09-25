@@ -1,6 +1,6 @@
-# Hocus Focus - Sitio Web Oficial
+# Hocuz Focuz - Sitio Web Oficial
 
-Sitio web de la agencia de IA "Hocus Focus" - Optimización y Automatización con Inteligencia Artificial.
+Sitio web de la agencia de IA "Hocuz Focuz" - Optimización y Automatización con Inteligencia Artificial.
 
 ## 🎯 Páginas Incluidas
 
@@ -68,4 +68,4 @@ Para más información sobre nuestros servicios de optimización y automatizaci�
 
 ---
 
-**Desarrollado por Hocus Focus - 2025**
+**Desarrollado por Hocuz Focuz - 2025**

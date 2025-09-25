@@ -2238,7 +2238,7 @@ export default function ProductoPage() {
     <div className="font-sans bg-black text-gray-300 min-h-screen">
       {/* Header Glass - Simplificado para páginas de productos */}
       <HeaderGlass 
-        pageTitle="🪄 Hocus Focus"
+        pageTitle="🪄 Hocuz Focuz"
         showGhostLogo={false}
         customLinks={[]}
         ctaButton={{

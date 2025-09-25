@@ -213,7 +213,7 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
       </div>
 
       <HeaderGlass 
-        pageTitle="🪄 Hocus Focus"
+        pageTitle="🪄 Hocuz Focuz"
         ctaButton={{
           text: "🐨 Asistentes IA",
           onClick: () => window.location.href = '/productos'

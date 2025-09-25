@@ -21,7 +21,7 @@ interface LayoutProps {
 
 export default function Layout({ 
   children, 
-  pageTitle = "Hocus Focus",
+  pageTitle = "Hocuz Focuz",
   pageDescription,
   showGhostLogo = true,
   customLinks,

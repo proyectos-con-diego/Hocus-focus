@@ -2,8 +2,8 @@ import React from 'react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Política de Cookies | Hocus Focus',
-  description: 'Información sobre el uso de cookies y tecnologías similares en Hocus Focus.',
+  title: 'Política de Cookies | Hocuz Focuz',
+  description: 'Información sobre el uso de cookies y tecnologías similares en Hocuz Focuz.',
 };
 
 export default function PoliticaCookiesPage() {

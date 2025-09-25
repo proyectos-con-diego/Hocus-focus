@@ -95,7 +95,7 @@ export default function ProductosNuevoPage() {
       }} />
       {/* Header Glass */}
       <HeaderGlass 
-        pageTitle="🪄 Hocus Focus"
+        pageTitle="🪄 Hocuz Focuz"
         showGhostLogo={false}
         customLinks={[
           { href: '#productos', label: 'Asistentes IA' },

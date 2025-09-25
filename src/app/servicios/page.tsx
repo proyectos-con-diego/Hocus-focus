@@ -106,7 +106,7 @@ export default function ServiciosPage() {
       <StructuredData data={servicesPageStructuredData} />
       {/* Header Glass */}
       <HeaderGlass 
-        pageTitle="🪄 Hocus Focus"
+        pageTitle="🪄 Hocuz Focuz"
         showGhostLogo={false}
         customLinks={[
           { href: '#servicios', label: 'Servicios' },

@@ -2,9 +2,9 @@ import React from 'react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Términos y Condiciones | Hocus Focus',
+  title: 'Términos y Condiciones | Hocuz Focuz',
   description:
-    'Condiciones de uso del sitio y de los servicios ofrecidos por Hocus Focus.',
+    'Condiciones de uso del sitio y de los servicios ofrecidos por Hocuz Focuz.',
 };
 
 export default function TerminosCondicionesPage() {
@@ -26,7 +26,7 @@ export default function TerminosCondicionesPage() {
         <h2 className="text-xl font-semibold">Propiedad intelectual</h2>
         <p>
           Los textos, marcas, imágenes y materiales del sitio pertenecen a sus
-          respectivos autores y/o a Hocus Focus.
+          respectivos autores y/o a Hocuz Focuz.
         </p>
 
         <h2 className="text-xl font-semibold">Limitación de responsabilidad</h2>

@@ -67,7 +67,7 @@ export default function HeaderGlass({
             href="/" 
             className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-white via-cyan-400 to-purple-600 bg-clip-text text-transparent hover:from-cyan-300 hover:via-purple-500 hover:to-blue-500 transition-all duration-300 cursor-pointer"
           >
-            Hocus Focus
+            Hocuz Focuz
           </a>
         </div>
 

@@ -2,9 +2,9 @@ import React from 'react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Contacto | Hocus Focus',
+  title: 'Contacto | Hocuz Focuz',
   description:
-    'Ponte en contacto con Hocus Focus. Escríbenos para consultas, soporte o colaboraciones.',
+    'Ponte en contacto con Hocuz Focuz. Escríbenos para consultas, soporte o colaboraciones.',
 };
 
 export default function ContactoPage() {

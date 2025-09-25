@@ -2,9 +2,9 @@ import React from 'react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Política de Privacidad | Hocus Focus',
+  title: 'Política de Privacidad | Hocuz Focuz',
   description:
-    'Conoce cómo recopilamos, usamos y protegemos tus datos personales en Hocus Focus.',
+    'Conoce cómo recopilamos, usamos y protegemos tus datos personales en Hocuz Focuz.',
 };
 
 export default function PoliticaPrivacidadPage() {
@@ -17,7 +17,7 @@ export default function PoliticaPrivacidadPage() {
 
       <section className="space-y-6 text-neutral-200">
         <p>
-          En Hocus Focus valoramos tu privacidad. Esta política explica qué
+          En Hocuz Focuz valoramos tu privacidad. Esta política explica qué
           datos recopilamos, cómo los usamos y qué derechos tienes sobre ellos.
         </p>
 

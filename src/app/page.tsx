@@ -71,7 +71,7 @@ export default function DiegoPersonalSite() {
       <StructuredData data={homePageStructuredData} />
       {/* Header Glass */}
       <HeaderGlass 
-        pageTitle="🪄 Hocus Focus"
+        pageTitle="🪄 Hocuz Focuz"
         showGhostLogo={false}
         customLinks={[
           { href: '/productos', label: 'Asistentes IA' },

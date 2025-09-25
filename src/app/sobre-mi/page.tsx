@@ -362,7 +362,7 @@ export default function SobreMiExperimentalPage() {
     {
       year: "2025",
       title: "Máster y Diseñador de soluciones con IA 🎓",
-      description: "Seguí profundizando en inteligencia artificial con un máster que me ayudó a unir piezas, integrando lo técnico con lo narrativo. Lanzar Hocus Focus fue el paso natural: ahora diseño productos y soluciones que combinan IA, automatización y estructuras centradas en las personas.",
+      description: "Seguí profundizando en inteligencia artificial con un máster que me ayudó a unir piezas, integrando lo técnico con lo narrativo. Lanzar Hocuz Focuz fue el paso natural: ahora diseño productos y soluciones que combinan IA, automatización y estructuras centradas en las personas.",
       color: "border-yellow-400"
     }
   ], []);

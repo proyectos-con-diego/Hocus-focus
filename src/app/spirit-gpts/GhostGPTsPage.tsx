@@ -86,7 +86,7 @@ const faqData: FAQItem[] = [
   {
     id: '4',
     question: '¿Pueden acceder a mis datos?',
-    answer: 'Nosotros (Hocus Focus) no podemos acceder a tus datos. Estos quedan almacenados en los servidores de OpenAI y están regidos por sus políticas de privacidad.'
+    answer: 'Nosotros (Hocuz Focuz) no podemos acceder a tus datos. Estos quedan almacenados en los servidores de OpenAI y están regidos por sus políticas de privacidad.'
   }
 ];
 
@@ -221,7 +221,7 @@ export default function SpiritsPage() {
 
       {/* Header Glass */}
       <HeaderGlass 
-        pageTitle="🪄 Hocus Focus"
+        pageTitle="🪄 Hocuz Focuz"
         showGhostLogo={false}
         customLinks={[
           { href: '/servicios', label: 'Servicios' },
