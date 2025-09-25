@@ -4,8 +4,8 @@ import Script from 'next/script';
 import { GA_TRACKING_ID } from '@/lib/analytics';
 
 export default function GoogleAnalytics() {
-  // Solo renderizar en producción y si tenemos el ID
-  if (!GA_TRACKING_ID || process.env.NODE_ENV !== 'production') {
+  // Solo renderizar si tenemos el ID
+  if (!GA_TRACKING_ID) {
     return null;
   }
 
