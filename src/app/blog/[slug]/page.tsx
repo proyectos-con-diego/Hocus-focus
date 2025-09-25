@@ -553,7 +553,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) return {};
-  const imageUrl = post.mainImage ? (typeof post.mainImage === 'string' ? post.mainImage : post.mainImage.asset?.url) : '/blog-default.png';
+  const imageUrl = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : '/blog-default.png';
   return {
     title: post.title + ' | Diego Gonzalez Vaccaro',
     description: post.excerpt || 'Artículo del blog de Diego Gonzalez Vaccaro sobre optimización, productividad y tecnología.',
@@ -600,9 +600,9 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   const firstHalf = blocks.slice(0, mid);
   const secondHalf = blocks.slice(mid);
 
-  // Obtener URL de la imagen principal con fallback
+  // Obtener URL de la imagen principal con fallback usando urlFor
   const mainImageUrl = post.mainImage ? 
-    (typeof post.mainImage === 'string' ? post.mainImage : post.mainImage.asset?.url) : 
+    urlFor(post.mainImage).width(1200).height(630).url() : 
     '/blog-default.png';
 
   return (
