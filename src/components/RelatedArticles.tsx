@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import TrackedLink from "@/components/TrackedLink";
-import { sanityClient } from "@/sanity/sanity";
+import { sanityClient, urlFor } from "@/sanity/sanity";
 
 interface RelatedArticlesProps {
   currentSlug: string;
@@ -12,7 +12,7 @@ interface Article {
   _id: string;
   title: string;
   slug: { current: string };
-  mainImage?: { asset: { url: string } };
+  mainImage?: any; // Sanity image object
   excerpt?: string;
   categories?: { title: string }[];
   publishedAt?: string;
@@ -143,7 +143,7 @@ export default async function RelatedArticles({ currentSlug, categories }: Relat
                   <div className={`h-2 bg-gradient-to-r ${colorClasses.gradient}`}></div>
                   {/* Imagen del artículo */}
                   {a.mainImage ? (
-                    <img src={typeof a.mainImage === 'string' ? a.mainImage : a.mainImage.asset?.url} alt={a.title} className="w-full h-48 object-cover" loading="lazy" />
+                    <img src={urlFor(a.mainImage).width(400).height(192).url()} alt={a.title} className="w-full h-48 object-cover" loading="lazy" />
                   ) : (
                     <img src="/blog-default.png" alt="Imagen por defecto del blog" className="w-full h-48 object-cover opacity-80" loading="lazy" />
                   )}
