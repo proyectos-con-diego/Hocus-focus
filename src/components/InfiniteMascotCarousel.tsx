@@ -75,7 +75,7 @@ export default function InfiniteMascotCarousel() {
     <section className="py-16 bg-black">
       <div className="w-full px-4">
         <div className="max-w-6xl mx-auto mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-2">Asistentes IA destacados</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-2">Agentes IA destacados</h2>
           <p className="text-lg text-center text-gray-300 opacity-80 max-w-2xl mx-auto">
             Asistentes de IA con personalidad y propósito, creados para ayudarte a lograr más cada día.
           </p>
@@ -305,7 +305,7 @@ export default function InfiniteMascotCarousel() {
                 boxShadow: '0 0 32px 0 #a21caf55, 0 8px 32px 0 #0008',
               }}
             >
-              <span className="relative z-10">🤖 Ver asistentes</span>
+              <span className="relative z-10">🤖 Ver agentes</span>
               <span className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 opacity-40 blur-lg animate-glow" />
             </Link>
           </div>

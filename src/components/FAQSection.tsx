@@ -7,8 +7,8 @@ const faqs = [
     answer: "Incluye una sesión de 45–60 minutos para conocer tu negocio y, en las siguientes 48 horas, un documento con el análisis, un roadmap personalizado y la propuesta de implementación con presupuesto. El monto se descuenta si decides avanzar con el proyecto."
   },
   {
-    question: "¿Cuál es la diferencia entre tus servicios y los asistentes virtuales IA?",
-    answer: "Los servicios son proyectos personalizados que implemento contigo. Los asistentes IA son productos listos para usar, diseñados para ayudarte en tu día a día."
+    question: "¿Cuál es la diferencia entre tus servicios y los agentes virtuales IA?",
+    answer: "Los servicios son proyectos personalizados que implemento contigo. Los agentes IA son productos listos para usar, diseñados para ayudarte en tu día a día."
   },
   {
     question: "¿De verdad se pueden ahorrar 8–20 horas semanales?",

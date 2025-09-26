@@ -7,7 +7,7 @@ export default function ProductsTestimonialsSection() {
     <div className="py-16">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-2 text-white">Lo que dicen mis usuarios</h2>
-        <p className="text-center text-gray-400 mb-12">Resultados reales de personas que usan mis asistentes</p>
+        <p className="text-center text-gray-400 mb-12">Resultados reales de personas que usan mis agentes</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
           {testimonials.map((testimonial, index) => (
             <div 

@@ -215,11 +215,11 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
       <HeaderGlass 
         pageTitle="🪄 Hocuz Focuz"
         ctaButton={{
-          text: "🐨 Asistentes IA",
+          text: "🐨 Agentes IA",
           onClick: () => window.location.href = '/productos'
         }}
         customLinks={[
-          { href: '/productos', label: 'Asistentes IA' },
+          { href: '/productos', label: 'Agentes IA' },
           { href: '/servicios', label: 'Servicios' },
           { href: '/blog', label: 'Blog' },
           { href: '/sobre-mi', label: 'Sobre Mí' }
@@ -520,7 +520,7 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
                             </Link>
                             <Link href="/productos">
                               <button className="px-10 py-4 border-2 border-white text-white rounded-full font-bold text-xl hover:bg-white hover:text-purple-900 transition-all duration-300">
-                                🐨 Ver Asistentes IA Completos
+                                🐨 Ver Agentes IA Completos
                               </button>
                             </Link>
                           </div>

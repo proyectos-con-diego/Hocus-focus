@@ -11,34 +11,6 @@ import StructuredData, { productsPageStructuredData } from '@/components/Structu
 import BlogNewsletterSection from '../../components/BlogNewsletterSection';
 import { event as trackEvent } from '@/lib/analytics';
 
-// Metadata para la página de productos
-export const metadata = {
-  title: 'ASISTENTES IA - Productos de Productividad',
-  description: 'Descubre nuestros asistentes de IA especializados: Bafet para tareas, Jaime Daily para hábitos, Midas para finanzas y más. Herramientas que transforman tu productividad.',
-  openGraph: {
-    title: 'ASISTENTES IA - Productos de Productividad',
-    description: 'Descubre nuestros asistentes de IA especializados: Bafet para tareas, Jaime Daily para hábitos, Midas para finanzas y más. Herramientas que transforman tu productividad.',
-    url: 'https://diegogonzalezvaccaro.com/productos',
-    siteName: 'Hocuz Focuz',
-    locale: 'es_ES',
-    type: 'website',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Asistentes IA Hocuz Focuz',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'ASISTENTES IA - Productos de Productividad',
-    description: 'Descubre nuestros asistentes de IA especializados: Bafet para tareas, Jaime Daily para hábitos, Midas para finanzas y más. Herramientas que transforman tu productividad.',
-    images: ['/og-image.jpg'],
-    creator: '@tu_usuario',
-  },
-};
 
 export default function ProductosNuevoPage() {
   const router = useRouter();
@@ -148,10 +120,10 @@ export default function ProductosNuevoPage() {
       <HeroSection 
         title="Asistentes IA que te hacen la vida más fácil"
         subtitle=""
-        description="Trabaja en equipo con asistentes digitales que se integran a tu rutina y te ayudan a avanzar más rápido cada día. Amarás llevarlos contigo."
-        ctaText="🚀 Ver asistentes IA"
+        description="Trabaja en equipo con agentes digitales que se integran a tu rutina y te ayudan a avanzar más rápido cada día. Amarás llevarlos contigo."
+        ctaText="🚀 Ver agentes IA"
         ctaOnClick={() => {
-          try { trackEvent({ action: 'click_hero_cta', category: 'Productos', label: 'ver_asistentes' }); } catch {}
+          try { trackEvent({ action: 'click_hero_cta', category: 'Productos', label: 'ver_agentes' }); } catch {}
           const productsSection = document.querySelector('[data-section="products"]');
           if (productsSection) {
             productsSection.scrollIntoView({ behavior: 'smooth' });
@@ -196,7 +168,7 @@ export default function ProductosNuevoPage() {
       <div id="como-funciona" className="py-12">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-2 text-white">¿Cómo funcionan?</h2>
-          <p className="text-center text-gray-400 mb-12">Proceso simple para empezar con tus asistentes</p>
+          <p className="text-center text-gray-400 mb-12">Proceso simple para empezar con tus agentes</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-16">
             <div className="text-center">
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center text-white font-bold text-3xl mx-auto mb-4">1</div>
@@ -234,8 +206,8 @@ export default function ProductosNuevoPage() {
             <span className="text-purple-300 font-semibold">Empieza hoy mismo.</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button onClick={() => { try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'ver_todos_los_asistentes' }); } catch {} }} className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300">
-              🚀 Ver todos los asistentes
+            <button onClick={() => { try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'ver_todos_los_agentes' }); } catch {} }} className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300">
+              🚀 Ver todos los agentes
             </button>
             <button onClick={() => { try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'probar_spirits_gratis' }); } catch {} ; window.location.href = '/spirit-gpts'; }} className="px-10 py-4 border-2 border-white text-white rounded-full font-bold text-xl hover:bg-white hover:text-purple-900 transition-all duration-300">
               🎁 Probar Spirits Gratis

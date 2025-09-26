@@ -8,7 +8,7 @@ export const routes = {
 } as const;
 
 export const navigationLinks = [
-  { href: routes.productos, label: 'Asistentes IA' },
+  { href: routes.productos, label: 'Agentes IA' },
   { href: routes.servicios, label: 'Servicios' },
   { href: routes.blog, label: 'Blog' },
   { href: routes.sobreMi, label: 'Sobre Mí' }

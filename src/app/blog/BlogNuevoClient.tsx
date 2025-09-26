@@ -217,7 +217,7 @@ export default function BlogNuevoClient() {
         pageTitle="🪄 Hocuz Focuz"
         showGhostLogo={false}
         customLinks={[
-          { href: '/productos', label: 'Asistentes IA' },
+          { href: '/productos', label: 'Agentes IA' },
           { href: '/servicios', label: 'Servicios' },
           { href: '/sobre-mi', label: 'Sobre Mí' }
         ]}

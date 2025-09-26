@@ -74,7 +74,7 @@ export default function DiegoPersonalSite() {
         pageTitle="🪄 Hocuz Focuz"
         showGhostLogo={false}
         customLinks={[
-          { href: '/productos', label: 'Asistentes IA' },
+          { href: '/productos', label: 'Agentes IA' },
           { href: '/servicios', label: 'Servicios' },
           { href: '/blog', label: 'Blog' },
           { href: '/sobre-mi', label: 'Sobre Mí' }
@@ -109,9 +109,9 @@ export default function DiegoPersonalSite() {
             servicesSection.scrollIntoView({ behavior: 'smooth' });
           }
         }}
-                            secondaryCtaText="Ver Asistentes IA"
+                            secondaryCtaText="Ver Agentes IA"
         secondaryCtaOnClick={() => {
-          try { trackEvent({ action: 'click_hero_cta', category: 'Home', label: 'ver_asistentes_ia' }); } catch {}
+          try { trackEvent({ action: 'click_hero_cta', category: 'Home', label: 'ver_agentes_ia' }); } catch {}
           const assistantsSection = document.querySelector('[data-section="assistants"]');
           if (assistantsSection) {
             assistantsSection.scrollIntoView({ behavior: 'smooth' });

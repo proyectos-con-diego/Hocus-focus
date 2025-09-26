@@ -139,12 +139,12 @@ export const testimonials = [
 
 export const faqs = [
   {
-    question: "¿Cómo funcionan los asistentes de IA?",
+    question: "¿Cómo funcionan los agentes de IA?",
     answer: "Son sistemas en Notion, compuestos por dashboards y bases de datos interconectadas que te ayudan a organizar información, dar recordatorios y automatizar tareas específicas.\n\nCada sistema puede ir acompañado de un bot conversacional con personalidad propia, entrenado para entender ese entorno y guiarte en su uso. Así, lo complejo se convierte en procesos simples y veloces, adaptados a tu día a día."
   },
   {
-    question: "¿Puedo usar varios asistentes a la vez?",
-    answer: "¡Absolutamente! Puedes usar múltiples asistentes simultáneamente. Cada uno está diseñado para resolver un problema específico, por lo que muchos usuarios combinan varios para crear un ecosistema completo de productividad personalizado."
+    question: "¿Puedo usar varios agentes a la vez?",
+    answer: "¡Absolutamente! Puedes usar múltiples agentes simultáneamente. Cada uno está diseñado para resolver un problema específico, por lo que muchos usuarios combinan varios para crear un ecosistema completo de productividad personalizado."
   },
   {
     question: "¿Qué incluye la versión gratuita?",
@@ -155,7 +155,7 @@ export const faqs = [
     answer: "Sí, siempre que lo uses. Cada asistente ofrece **resultados garantizados según su propósito** (ejemplo: claridad financiera con Midas, hábitos sostenibles con Jaime, proyectos organizados con Vinxi)."
   },
   {
-    question: "¿Los asistentes funcionan en móvil?",
-    answer: "Sí, todos los asistentes funcionan en **la app de Notion**, para que gestiones tus sistemas desde cualquier lugar con conexión a internet.\n\nY si cuentas con una versión **IA**, también podrás **conversar directamente con tu asistente a través de la app de ChatGPT**, usando lenguaje natural para sacarle aún más provecho."
+    question: "¿Los agentes funcionan en móvil?",
+    answer: "Sí, todos los agentes funcionan en **la app de Notion**, para que gestiones tus sistemas desde cualquier lugar con conexión a internet.\n\nY si cuentas con una versión **IA**, también podrás **conversar directamente con tu asistente a través de la app de ChatGPT**, usando lenguaje natural para sacarle aún más provecho."
   }
 ]; 

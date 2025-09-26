@@ -25,7 +25,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-3">Recursos</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li><Link href="/blog" className="hover:text-purple-400 transition-colors duration-300">📝 Blog</Link></li>
-              <li><Link href="/productos" className="hover:text-cyan-400 transition-colors duration-300">🐨 Mascotas IA</Link></li>
+              <li><Link href="/productos" className="hover:text-cyan-400 transition-colors duration-300">🐨 Agentes IA</Link></li>
               <li><Link href="/sobre-mi" className="hover:text-purple-400 transition-colors duration-300">👤 Sobre Mí</Link></li>
             </ul>
           </div>

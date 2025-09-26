@@ -339,7 +339,7 @@ export default function ProductCarouselHome() {
             href="/productos"
             className="px-8 py-4 rounded-full text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg hover:scale-105 transition-transform duration-300"
           >
-            🚀 Ver asistentes
+            🚀 Ver agentes
           </Link>
         </div>
         

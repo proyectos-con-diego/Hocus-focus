@@ -13,7 +13,7 @@ export default function ProductsFAQSection() {
     <div className="py-16">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-4 text-white">Preguntas Frecuentes</h2>
-        <p className="text-center text-gray-400 mb-12">Todo lo que necesitas saber sobre mis asistentes</p>
+        <p className="text-center text-gray-400 mb-12">Todo lo que necesitas saber sobre mis agentes</p>
         <div className="max-w-3xl mx-auto mt-10 space-y-4">
           {faqs.map((faq, idx) => (
             <div key={idx}>

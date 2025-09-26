@@ -16,7 +16,7 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-3">Servicios</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li><Link href={routes.productos} className="hover:text-purple-400 transition-colors duration-300">Asistentes IA</Link></li>
+              <li><Link href={routes.productos} className="hover:text-purple-400 transition-colors duration-300">Agentes IA</Link></li>
               <li><Link href={routes.blog} className="hover:text-purple-400 transition-colors duration-300">Blog</Link></li>
             </ul>
           </div>

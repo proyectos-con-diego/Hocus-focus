@@ -44,12 +44,12 @@ export const productsPageStructuredData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "Productos | Diego Gonzalez Vaccaro",
-  "description": "Asistentes de IA especializados para optimizar tu productividad y automatizar procesos",
+  "description": "Agentes de IA especializados para optimizar tu productividad y automatizar procesos",
   "url": "https://diegogonzalezvaccaro.com/productos",
   "mainEntity": {
     "@type": "ItemList",
-    "name": "Asistentes de IA",
-    "description": "Colección de asistentes virtuales especializados en diferentes áreas de productividad"
+    "name": "Agentes de IA",
+    "description": "Colección de agentes virtuales especializados en diferentes áreas de productividad"
   }
 };
 

@@ -454,7 +454,7 @@ export default function SobreMiExperimentalPage() {
         pageTitle="👤 Diego Gonzalez"
         showGhostLogo={false}
         customLinks={[
-          { href: '/productos', label: 'Asistentes IA' },
+          { href: '/productos', label: 'Agentes IA' },
           { href: '/servicios', label: 'Servicios' },
           { href: '/blog', label: 'Blog' },
           { href: '#contact', label: 'Contacto' }

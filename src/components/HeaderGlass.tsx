@@ -36,7 +36,7 @@ export default function HeaderGlass({
 
   // Links por defecto si no se proporcionan
   const defaultLinks = [
-            { href: '/productos', label: 'Asistentes IA' },
+            { href: '/productos', label: 'Agentes IA' },
     { href: '/servicios', label: 'Servicios' },
     { href: '/blog', label: 'Blog' },
             { href: '/sobre-mi', label: 'Sobre Mí' }

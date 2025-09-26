@@ -80,8 +80,8 @@ const faqData: FAQItem[] = [
   },
   {
     id: '2',
-    question: '¿En qué se diferencia de las Mascotas IA?',
-    answer: 'Las Mascotas IA son agentes que interactúan con herramientas externas como Notion o Excel. En cambio, los Spirits son espíritus conversacionales: te asesoran, inspiran y guían en tiempo real, pero no ejecutan tareas fuera del chat.'
+    question: '¿En qué se diferencia de las Agentes IA?',
+    answer: 'Las Agentes IA son agentes que interactúan con herramientas externas como Notion o Excel. En cambio, los Spirits son espíritus conversacionales: te asesoran, inspiran y guían en tiempo real, pero no ejecutan tareas fuera del chat.'
   },
   {
     id: '4',
