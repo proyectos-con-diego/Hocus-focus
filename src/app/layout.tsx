@@ -17,14 +17,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://diegogonzalezvaccaro.com'),
   title: {
-    default: "Diego Gonzalez Vaccaro - Optimización y Automatización",
-    template: "%s | Diego Gonzalez Vaccaro"
+    default: "Hocuz Focuz - Optimización y Automatización",
+    template: "%s | Hocuz Focuz"
   },
   description: "Transformo tu caos diario en sistemas automatizados que funcionan 24/7. Especialista en optimización de procesos, productividad y automatización con IA.",
   keywords: ["optimización", "automatización", "productividad", "IA", "sistemas", "procesos"],
   authors: [{ name: "Diego Gonzalez Vaccaro" }],
   creator: "Diego Gonzalez Vaccaro",
-  publisher: "Diego Gonzalez Vaccaro",
+  publisher: "Hocuz Focuz",
   formatDetection: {
     email: false,
     address: false,
@@ -34,21 +34,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_ES",
     url: "https://diegogonzalezvaccaro.com",
-    siteName: "Diego Gonzalez Vaccaro",
-    title: "Diego Gonzalez Vaccaro - Optimización y Automatización",
+    siteName: "Hocuz Focuz",
+    title: "Hocuz Focuz - Optimización y Automatización",
     description: "Transformo tu caos diario en sistemas automatizados que funcionan 24/7.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Diego Gonzalez Vaccaro - Optimización y Automatización",
+        alt: "Hocuz Focuz - Optimización y Automatización",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Diego Gonzalez Vaccaro - Optimización y Automatización",
+    title: "Hocuz Focuz - Optimización y Automatización",
     description: "Transformo tu caos diario en sistemas automatizados que funcionan 24/7.",
     images: ["/og-image.jpg"],
     creator: "@diegogonzalezv",

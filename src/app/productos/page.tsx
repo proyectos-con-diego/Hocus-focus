@@ -11,6 +11,35 @@ import StructuredData, { productsPageStructuredData } from '@/components/Structu
 import BlogNewsletterSection from '../../components/BlogNewsletterSection';
 import { event as trackEvent } from '@/lib/analytics';
 
+// Metadata para la página de productos
+export const metadata = {
+  title: 'ASISTENTES IA - Productos de Productividad',
+  description: 'Descubre nuestros asistentes de IA especializados: Bafet para tareas, Jaime Daily para hábitos, Midas para finanzas y más. Herramientas que transforman tu productividad.',
+  openGraph: {
+    title: 'ASISTENTES IA - Productos de Productividad',
+    description: 'Descubre nuestros asistentes de IA especializados: Bafet para tareas, Jaime Daily para hábitos, Midas para finanzas y más. Herramientas que transforman tu productividad.',
+    url: 'https://diegogonzalezvaccaro.com/productos',
+    siteName: 'Hocuz Focuz',
+    locale: 'es_ES',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Asistentes IA Hocuz Focuz',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ASISTENTES IA - Productos de Productividad',
+    description: 'Descubre nuestros asistentes de IA especializados: Bafet para tareas, Jaime Daily para hábitos, Midas para finanzas y más. Herramientas que transforman tu productividad.',
+    images: ['/og-image.jpg'],
+    creator: '@tu_usuario',
+  },
+};
+
 export default function ProductosNuevoPage() {
   const router = useRouter();
   const animationTimeoutRefs = useRef<NodeJS.Timeout[]>([]);

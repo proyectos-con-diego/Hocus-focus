@@ -555,14 +555,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!post) return {};
   const imageUrl = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : '/blog-default.png';
   return {
-    title: post.title + ' | Diego Gonzalez Vaccaro',
-    description: post.excerpt || 'Artículo del blog de Diego Gonzalez Vaccaro sobre optimización, productividad y tecnología.',
+    title: post.title + ' | Hocuz Focuz',
+    description: post.excerpt || 'Artículo del blog de Hocuz Focuz sobre optimización, productividad y tecnología.',
     openGraph: {
-      title: post.title + ' | Diego Gonzalez Vaccaro',
-      description: post.excerpt || 'Artículo del blog de Diego Gonzalez Vaccaro sobre optimización, productividad y tecnología.',
+      title: post.title + ' | Hocuz Focuz',
+      description: post.excerpt || 'Artículo del blog de Hocuz Focuz sobre optimización, productividad y tecnología.',
       type: 'article',
               url: `https://diegogonzalezvaccaro.com/blog/${post.slug.current}`,
-      siteName: 'Diego Gonzalez Vaccaro',
+      siteName: 'Hocuz Focuz',
       locale: 'es_ES',
       images: [
         {
@@ -575,8 +575,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title + ' | Diego Gonzalez Vaccaro',
-      description: post.excerpt || 'Artículo del blog de Diego Gonzalez Vaccaro sobre optimización, productividad y tecnología.',
+      title: post.title + ' | Hocuz Focuz',
+      description: post.excerpt || 'Artículo del blog de Hocuz Focuz sobre optimización, productividad y tecnología.',
       images: [imageUrl],
       creator: '@tu_usuario',
     },
