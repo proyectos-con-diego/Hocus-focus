@@ -619,11 +619,11 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             data-testid="hero-background-image"
           />
           
-          {/* Overlay más claro para dar protagonismo a la imagen */}
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/60 via-gray-900/40 to-gray-900/70" />
+          {/* Overlay púrpura con opacidad para integrar con el tema */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/40 via-purple-500/30 to-purple-700/35" />
           
-          {/* Overlay de patrón muy sutil */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/2 via-pink-600/1 to-blue-500/2" />
+          {/* Overlay oscuro sutil para mejorar legibilidad */}
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/30 via-gray-900/20 to-gray-900/40" />
           
           {/* Contenido del hero */}
           <div className="relative z-10 w-full max-w-5xl mx-auto px-6 h-full flex flex-col justify-between">
