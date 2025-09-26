@@ -290,7 +290,7 @@ export default function ServiciosPage() {
       
       {/* Newsletter Section al final */}
       <section id="newsletter" className="max-w-7xl mx-auto px-6">
-        <BlogNewsletterSection />
+        <BlogNewsletterSection source="servicios" />
       </section>
 
       {/* Navegación de regreso */}

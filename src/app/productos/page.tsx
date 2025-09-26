@@ -222,7 +222,7 @@ export default function ProductosNuevoPage() {
 
       {/* Newsletter Section al final */}
       <div id="newsletter" className="max-w-7xl mx-auto px-6">
-        <BlogNewsletterSection />
+        <BlogNewsletterSection source="productos" />
       </div>
 
       {/* Navegación de regreso */}

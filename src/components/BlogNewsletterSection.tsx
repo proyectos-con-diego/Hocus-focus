@@ -1,7 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 
-export default function BlogNewsletterSection() {
+interface BlogNewsletterSectionProps {
+  source?: string;
+}
+
+export default function BlogNewsletterSection({ source = 'blog' }: BlogNewsletterSectionProps) {
   const [formData, setFormData] = useState({ name: '', email: '', subscribeNewsletter: true });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
@@ -27,7 +31,7 @@ export default function BlogNewsletterSection() {
         },
         body: JSON.stringify({
           ...formData,
-          source: 'blog'
+          source: source
         }),
       });
 
