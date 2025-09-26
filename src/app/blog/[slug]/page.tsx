@@ -619,8 +619,8 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             data-testid="hero-background-image"
           />
           
-          {/* Overlay gradiente complejo que combina con el tema */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/40 via-purple-500/30 to-black/40" />
+          {/* Overlay gradiente más visible que combina con el tema */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/60 via-purple-500/50 to-black/70" />
           
           {/* Contenido del hero */}
           <div className="relative z-10 w-full max-w-5xl mx-auto px-6 h-full flex flex-col justify-between">
