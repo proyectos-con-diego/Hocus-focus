@@ -619,8 +619,8 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             data-testid="hero-background-image"
           />
           
-          {/* Overlay gradiente más visible que combina con el tema */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/60 via-purple-500/50 to-black/70" />
+          {/* Overlay gradiente más oscuro para mejor legibilidad */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/90" />
           
           {/* Contenido del hero */}
           <div className="relative z-10 w-full max-w-5xl mx-auto px-6 h-full flex flex-col justify-between">
@@ -628,7 +628,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             <div className="pt-8">
               <Link 
                 href="/blog"
-                className="text-purple-400 hover:text-purple-300 transition-colors duration-300 inline-flex items-center gap-2 text-sm font-medium"
+                className="text-white hover:text-purple-300 transition-colors duration-300 inline-flex items-center gap-2 text-sm font-medium bg-black/30 px-3 py-1 rounded-lg backdrop-blur-sm"
               >
                 <span className="text-lg">←</span> Volver al blog
               </Link>
@@ -641,18 +641,18 @@ export default async function BlogPost({ params }: { params: { slug: string } })
                   {post.categories?.map((category: any, index: number) => (
                     <span 
                       key={index}
-                      className={`px-3 py-1 rounded-full text-sm font-semibold border ${getTagClass(category.title)}`}
+                      className={`px-3 py-1 rounded-full text-sm font-semibold border ${getTagClass(category.title)} bg-black/40 backdrop-blur-sm`}
                     >
                       {category.title}
                     </span>
                   ))}
                 </div>
                 <div className="flex flex-col gap-1">
-                  <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight" data-testid="post-title">
+                  <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight drop-shadow-2xl" data-testid="post-title">
                     {post.title}
                   </h1>
                   {post.excerpt && (
-                    <p className="text-xl text-gray-200 leading-relaxed max-w-3xl" data-testid="post-excerpt">
+                    <p className="text-xl text-gray-100 leading-relaxed max-w-3xl drop-shadow-lg" data-testid="post-excerpt">
                       {post.excerpt}
                     </p>
                   )}
@@ -662,7 +662,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center text-lg font-bold text-white" data-testid="author-avatar">
                   {post.author?.name ? post.author.name[0] : 'A'}
                 </div>
-                <div>
+                <div className="bg-black/30 px-4 py-2 rounded-lg backdrop-blur-sm">
                   <div className="font-semibold text-white text-base leading-tight">
                     <Link 
                       href="/sobre-mi"
@@ -672,7 +672,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
                       {post.author?.name || 'Autor'}
                     </Link>
                   </div>
-                  <div className="text-gray-300 text-sm mt-0.5" data-testid="post-date-reading">
+                  <div className="text-gray-200 text-sm mt-0.5" data-testid="post-date-reading">
                     {formattedDate}
                     {readingTime && (
                       <>
