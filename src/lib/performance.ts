@@ -13,9 +13,10 @@ export const measurePerformance = (name: string) => {
         console.log(`⏱️ ${name}: ${duration.toFixed(2)}ms`);
       }
       
-      // Enviar a analytics si está disponible
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'timing_complete', {
+      // Enviar a GTM si está disponible
+      if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          event: 'timing_complete',
           name: name,
           value: Math.round(duration),
           event_category: 'Performance',

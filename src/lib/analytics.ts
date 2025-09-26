@@ -1,11 +1,13 @@
-// Configuración de Google Analytics
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
+// Configuración de Google Tag Manager
+export const GTM_ID = 'GTM-NTKQH252';
 
-// Función para enviar eventos a GA
+// Función para enviar eventos a GTM
 export const pageview = (url: string) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', GA_TRACKING_ID!, {
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({
+      event: 'page_view',
       page_location: url,
+      page_title: document.title,
     });
   }
 };
@@ -17,8 +19,9 @@ export const event = ({ action, category, label, value }: {
   label: string;
   value?: number;
 }) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', action, {
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({
+      event: action,
       event_category: category,
       event_label: label,
       value: value,
@@ -26,13 +29,19 @@ export const event = ({ action, category, label, value }: {
   }
 };
 
+// Función para enviar eventos personalizados a GTM
+export const gtmEvent = (eventName: string, parameters?: Record<string, any>) => {
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({
+      event: eventName,
+      ...parameters,
+    });
+  }
+};
+
 // Tipos para TypeScript
 declare global {
   interface Window {
-    gtag: (
-      command: 'config' | 'event',
-      targetId: string,
-      config?: Record<string, any>
-    ) => void;
+    dataLayer: any[];
   }
 }
