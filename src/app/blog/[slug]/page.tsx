@@ -606,8 +606,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     '/blog-default.png';
 
   return (
-    <div className="bg-black min-h-screen text-gray-300" data-testid="blog-post-page">
-      <BlogWrapper post={post} firstHalf={firstHalf} secondHalf={secondHalf}>
+    <BlogWrapper post={post} firstHalf={firstHalf} secondHalf={secondHalf}>
         {/* Hero Section con imagen de fondo */}
         <section className="relative h-[60vh] flex overflow-hidden" data-testid="hero-section">
           {/* Imagen de fondo con overlay */}
@@ -688,40 +687,39 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             </div>
           </div>
         </section>
-      </BlogWrapper>
 
-      {/* Artículos relacionados - Server Component */}
-      <div className="max-w-7xl mx-auto px-6 mt-16">
-        <RelatedArticles 
-          currentSlug={post.slug?.current || ''} 
-          categories={post.categories || []} 
-        />
-      </div>
-
-      {/* Newsletter Signup con diseño consistente */}
-      <div className="max-w-7xl mx-auto px-6">
-        <BlogNewsletterForm articleSlug={post.slug?.current} />
-      </div>
-
-      {/* Navegación mejorada */}
-      <section className="py-12 px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex justify-between items-center">
-            <Link 
-              href="/blog"
-              className="inline-flex items-center gap-3 text-purple-400 hover:text-purple-300 transition-colors duration-300 font-medium"
-            >
-              <span className="text-xl">←</span> Volver al blog
-            </Link>
-            <Link 
-              href="/"
-              className="inline-flex items-center gap-3 text-purple-400 hover:text-purple-300 transition-colors duration-300 font-medium"
-            >
-              Ir al inicio <span className="text-xl">→</span>
-            </Link>
-          </div>
+        {/* Artículos relacionados - Server Component */}
+        <div className="max-w-7xl mx-auto px-6 mt-16">
+          <RelatedArticles 
+            currentSlug={post.slug?.current || ''} 
+            categories={post.categories || []} 
+          />
         </div>
-      </section>
-    </div>
+
+        {/* Newsletter Signup con diseño consistente */}
+        <div className="max-w-7xl mx-auto px-6">
+          <BlogNewsletterForm articleSlug={post.slug?.current} />
+        </div>
+
+        {/* Navegación mejorada */}
+        <section className="py-12 px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex justify-between items-center">
+              <Link 
+                href="/blog"
+                className="inline-flex items-center gap-3 text-purple-400 hover:text-purple-300 transition-colors duration-300 font-medium"
+              >
+                <span className="text-xl">←</span> Volver al blog
+              </Link>
+              <Link 
+                href="/"
+                className="inline-flex items-center gap-3 text-purple-400 hover:text-purple-300 transition-colors duration-300 font-medium"
+              >
+                Ir al inicio <span className="text-xl">→</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </BlogWrapper>
   );
 } 

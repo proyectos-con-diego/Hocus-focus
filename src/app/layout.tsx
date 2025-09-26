@@ -80,7 +80,7 @@ export default function RootLayout({
         <GoogleTagManagerHead />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-gray-300 min-h-screen`}
       >
         <GoogleTagManagerBody />
         <PageTracker />

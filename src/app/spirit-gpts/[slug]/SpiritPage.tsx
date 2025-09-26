@@ -195,7 +195,7 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-gray-300 overflow-x-hidden">
+    <>
       {/* Partículas de fondo */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {particles.map((particle) => (
@@ -785,6 +785,6 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
         isOpen={isLeadFormOpen}
         onClose={() => setIsLeadFormOpen(false)}
       />
-    </div>
+    </>
   );
 }
