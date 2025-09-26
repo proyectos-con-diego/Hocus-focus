@@ -51,7 +51,15 @@ async function getPost(slug: string) {
       readTime,
       categories[]->{title},
       author->{name, image, bio},
-      mainImage,
+      mainImage{
+        asset->{
+          _id,
+          url,
+          metadata
+        },
+        alt,
+        caption
+      },
       slug,
       isHidden,
       "relatedProduct": relatedProduct->{
@@ -600,7 +608,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   const firstHalf = blocks.slice(0, mid);
   const secondHalf = blocks.slice(mid);
 
-  // Obtener URL de la imagen principal con fallback usando urlFor
+  // Obtener URL de la imagen principal con fallback
   const mainImageUrl = post.mainImage ? 
     urlFor(post.mainImage).width(1200).height(630).url() : 
     '/blog-default.png';
