@@ -1,4 +1,14 @@
-import { sanityClient, urlFor } from '../../../sanity/sanity';
+import { createClient } from '@sanity/client';
+import { urlFor } from '../../../sanity/sanity';
+
+// Configuración del cliente Sanity del lado del servidor (igual que en API route)
+const sanityClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-01-01',
+  useCdn: false, // Siempre obtener datos frescos
+  token: process.env.SANITY_API_TOKEN, // Token opcional para contenido privado
+});
 import { PortableText } from '@portabletext/react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
