@@ -18,6 +18,9 @@ import BlogWrapper from './BlogWrapper';
 import RelatedArticles from '../../../components/RelatedArticles';
 import BlogNewsletterForm from './BlogNewsletterForm';
 
+// Configuración de revalidación para regenerar páginas cuando cambie el contenido
+export const revalidate = 60; // Revalidar cada 60 segundos
+
 // Función para generar rutas estáticas (solo artículos públicos)
 export async function generateStaticParams() {
   try {

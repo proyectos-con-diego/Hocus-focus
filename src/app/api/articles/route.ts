@@ -10,6 +10,9 @@ const sanityClient = createClient({
   token: process.env.SANITY_API_TOKEN, // Token opcional para contenido privado
 });
 
+// Configuración de revalidación para la API
+export const revalidate = 60; // Revalidar cada 60 segundos
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
