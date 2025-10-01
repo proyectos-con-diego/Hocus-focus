@@ -24,8 +24,7 @@ export const products: Product[] = [
     currentPrice: "$5.99",
     discount: "-40%",
     beneficioDestacado: "Tu compañero de rutinas",
-    badge: "hábitos",
-    isPopular: true
+    badge: "hábitos"
   },
   { 
     name: "Vinxi", 
@@ -37,7 +36,8 @@ export const products: Product[] = [
     currentPrice: "$9.99",
     discount: "-67%",
     beneficioDestacado: "Ideas organizadas y accesibles",
-    badge: "proyectos"
+    badge: "proyectos",
+    isPopular: true
   },
   { 
     name: "Grilla Viralis", 
