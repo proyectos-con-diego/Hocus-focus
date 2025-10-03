@@ -2633,18 +2633,43 @@ export default function ProductoPage() {
       {/* Pricing Section o VIP Form */}
       {product.ctaClass === 'tertiary' ? (
         // Formulario VIP Multi-Paso para productos en lista de espera
-        <section className="py-20 px-6 bg-gray-900/20" data-section="pricing">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4 text-white">Únete a la Lista VIP</h2>
-              <p className="text-xl text-gray-400">Sé el primero en acceder a {product.name}</p>
+        <section className="py-20 px-6 bg-gradient-to-br from-gray-900/30 to-gray-800/20 relative overflow-hidden" data-section="pricing">
+          {/* Efectos de fondo */}
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5"></div>
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-cyan-400/10 to-purple-500/10 rounded-full blur-3xl"></div>
+          
+          <div className="relative z-10 max-w-4xl mx-auto">
+            {/* Encabezado estilizado */}
+            <div className="text-center mb-16">
+              <div className="inline-block mb-6">
+                <div className="text-6xl mb-4">{product.emoji}</div>
+                <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
+              </div>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                <span className="text-white">Únete a la Lista</span>{' '}
+                <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                  VIP
+                </span>
+              </h2>
+              <p className="text-2xl md:text-3xl text-cyan-400 mb-4 font-medium">
+                {product.name}
+              </p>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                Sé el primero en acceder a este producto cuando esté disponible. Recibe notificaciones exclusivas y acceso prioritario.
+              </p>
             </div>
-            <MultiStepForm
-              productName={product.name}
-              productSlug={slug}
-              productType="vip"
-              source={`product-${slug}`}
-            />
+            
+            {/* Formulario centrado */}
+            <div className="flex justify-center">
+              <div className="w-full max-w-2xl">
+                <MultiStepForm
+                  productName={product.name}
+                  productSlug={slug}
+                  productType="vip"
+                  source={`product-${slug}`}
+                />
+              </div>
+            </div>
           </div>
         </section>
       ) : (
