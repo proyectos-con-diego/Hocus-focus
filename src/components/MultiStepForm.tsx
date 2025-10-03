@@ -26,8 +26,6 @@ interface FormData {
 }
 
 interface MultiStepFormProps {
-  isOpen: boolean;
-  onClose: () => void;
   productName: string;
   productSlug: string;
   productType: 'vip' | 'spirit' | 'mini';
@@ -35,8 +33,6 @@ interface MultiStepFormProps {
 }
 
 const MultiStepForm: React.FC<MultiStepFormProps> = ({
-  isOpen,
-  onClose,
   productName,
   productSlug,
   productType,
@@ -267,25 +263,6 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         />
       </div>
 
-      {productType === 'vip' && (
-        <div>
-          <label className="block text-white text-sm font-medium mb-2">
-            ¿Cuándo planeas implementar una solución como esta?
-          </label>
-          <select
-            value={formData.specificQuestions.implementationTimeline || ''}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, implementationTimeline: e.target.value } }))}
-            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
-          >
-            <option value="">Selecciona una opción</option>
-            <option value="Inmediatamente">Inmediatamente</option>
-            <option value="En 1-3 meses">En 1-3 meses</option>
-            <option value="En 3-6 meses">En 3-6 meses</option>
-            <option value="En más de 6 meses">En más de 6 meses</option>
-            <option value="Solo explorando opciones">Solo explorando opciones</option>
-          </select>
-        </div>
-      )}
 
       {productType === 'spirit' && (
         <div>
@@ -362,13 +339,10 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     </div>
   );
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-900 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-700">
+    <div className="bg-gray-900 rounded-2xl max-w-2xl w-full border border-gray-700">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-700">
+        <div className="p-6 border-b border-gray-700">
           <div>
             <h2 className="text-2xl font-bold text-white">
               {productType === 'vip' && 'Únete a la lista VIP'}
@@ -377,12 +351,6 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             </h2>
             <p className="text-gray-400 mt-1">{productName}</p>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors text-2xl"
-          >
-            ×
-          </button>
         </div>
 
         {/* Progress Bar */}
@@ -429,7 +397,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             ) : (
               <button
                 onClick={handleSubmit}
-                disabled={isSubmitting || !validateCurrentStep()}
+                disabled={isSubmitting}
                 className="px-8 py-3 rounded-xl bg-gradient-to-r from-green-400 to-emerald-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {isSubmitting ? 'Enviando...' : 'Enviar solicitud'}

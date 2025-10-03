@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 // Removed direct Sanity import - using API route instead
@@ -2090,8 +2090,8 @@ export default function ProductoPage() {
   const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
   const [loadingArticles, setLoadingArticles] = useState(true);
 
-  // Estado para el formulario multi-paso
-  const [isMultiStepFormOpen, setIsMultiStepFormOpen] = useState(false);
+  // Ref para el formulario incrustado
+  const formRef = useRef<HTMLDivElement>(null);
 
   // Función para abrir modal VIP - Deshabilitada temporalmente
   // const openVipModal = () => {
@@ -2099,10 +2099,10 @@ export default function ProductoPage() {
   //   setIsVipModalOpen(true);
   // };
 
-  // Función para abrir formulario multi-paso VIP
+  // Función para hacer scroll al formulario VIP incrustado
   const openVipModal = () => {
     try { trackEvent({ action: 'click_vip_list', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
-    setIsMultiStepFormOpen(true);
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   // Función para scroll a la sección de pricing
@@ -2838,16 +2838,22 @@ export default function ProductoPage() {
       {/* Banner sticky inferior con packs del producto */}
       <PackStickyBannerInferior packs={getPacksForProduct(product?.name || '')} />
 
-      {/* Formulario Multi-Paso VIP */}
+      {/* Formulario Multi-Paso VIP Incrustado */}
       {product?.ctaClass === 'tertiary' && (
-        <MultiStepForm
-          isOpen={isMultiStepFormOpen}
-          onClose={() => setIsMultiStepFormOpen(false)}
-          productName={product?.name || 'Producto'}
-          productSlug={slug}
-          productType="vip"
-          source={`product-${slug}`}
-        />
+        <section ref={formRef} className="py-20 px-6 bg-gray-900/20">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-white">Únete a la Lista VIP</h2>
+              <p className="text-xl text-gray-400">Sé el primero en acceder a {product?.name || 'este producto'}</p>
+            </div>
+            <MultiStepForm
+              productName={product?.name || 'Producto'}
+              productSlug={slug}
+              productType="vip"
+              source={`product-${slug}`}
+            />
+          </div>
+        </section>
       )}
 
     </div>
