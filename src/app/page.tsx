@@ -15,7 +15,7 @@ import FAQSection from "../components/FAQSection";
 import Footer from "../components/Footer";
 import StructuredData, { homePageStructuredData } from "../components/StructuredData";
 import { event as trackEvent } from "../lib/analytics";
-import TestForm from "../components/TestForm";
+// import TestForm from "../components/TestForm"; // Eliminado
 
 
 export default function DiegoPersonalSite() {
@@ -193,11 +193,6 @@ export default function DiegoPersonalSite() {
         >
           <span className="text-white text-2xl" aria-hidden="true">💬</span>
         </button>
-      </div>
-      
-      {/* Formulario de prueba temporal */}
-      <div className="py-16 bg-gray-900">
-        <TestForm />
       </div>
     </div>
   );

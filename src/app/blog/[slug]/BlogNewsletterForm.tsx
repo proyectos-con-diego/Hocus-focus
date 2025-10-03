@@ -16,7 +16,7 @@ export default function BlogNewsletterForm({ articleSlug }: BlogNewsletterFormPr
   });
   const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
     formType: 'newsletter',
-    source: 'blog-newsletter'
+    source: 'blog-post'
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,37 +29,26 @@ export default function BlogNewsletterForm({ articleSlug }: BlogNewsletterFormPr
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
-
+    console.log('🔥 BlogNewsletterForm: handleSubmit llamado!', { formData, isSubmitting });
+    
+    try { trackEvent({ action: 'submit_article_newsletter', category: 'Blog', label: articleSlug || 'sin_slug' }); } catch {}
+    
     try {
-      try { trackEvent({ action: 'submit_article_newsletter', category: 'Blog', label: articleSlug || 'sin_slug' }); } catch {}
-      const response = await fetch('/api/notion-newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          source: articleSlug ? `blog-article-${articleSlug}` : 'blog-article'
-        }),
+      const success = await submitToMake({
+        name: formData.name,
+        email: formData.email,
+        subscribeNewsletter: formData.subscribeNewsletter
       });
 
-      const result = await response.json();
+      console.log('✅ BlogNewsletterForm: Resultado:', success);
 
-      if (response.ok) {
-        setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
+      if (success) {
         setFormData({ name: '', email: '', subscribeNewsletter: true });
         try { trackEvent({ action: 'article_newsletter_success', category: 'Blog', label: articleSlug || 'sin_slug' }); } catch {}
-      } else {
-        setSubmitMessage(result.error || 'Error al suscribirse');
-        try { trackEvent({ action: 'article_newsletter_error', category: 'Blog', label: 'error_respuesta' }); } catch {}
       }
     } catch (error) {
-      setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
+      console.error('❌ BlogNewsletterForm: Error:', error);
       try { trackEvent({ action: 'article_newsletter_error', category: 'Blog', label: 'error_conexion' }); } catch {}
-    } finally {
-      setIsSubmitting(false);
     }
   };
 

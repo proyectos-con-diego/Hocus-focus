@@ -7,7 +7,7 @@ export default function NewsletterSignup() {
   
   const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
     formType: 'newsletter',
-    source: 'newsletter-signup'
+    source: 'general'
   });
 
   const handleSubmit = async (e: React.FormEvent) => {

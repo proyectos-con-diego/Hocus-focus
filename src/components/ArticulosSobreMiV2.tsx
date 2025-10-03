@@ -11,7 +11,7 @@ export default function ArticulosSobreMiV2() {
   const [formData, setFormData] = useState({ name: '', email: '', subscribeNewsletter: true });
   const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
     formType: 'newsletter',
-    source: 'blog-newsletter'
+    source: 'sobre-mi'
   });
   const [loading, setLoading] = useState(true);
 

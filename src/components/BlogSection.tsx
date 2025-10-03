@@ -77,7 +77,7 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
   const [formData, setFormData] = useState({ name: '', email: '', subscribeNewsletter: true });
   const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
     formType: 'newsletter',
-    source: 'blog-newsletter'
+    source: 'home'
   });
 
   useEffect(() => {
