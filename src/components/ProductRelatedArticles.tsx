@@ -1,5 +1,6 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useMakeWebhook } from '../../hooks/useMakeWebhook';
 import Link from 'next/link';
 // Removed direct Sanity import - using API route instead
 
@@ -87,8 +88,10 @@ export default function ProductRelatedArticles({ productSlug, productColor }: Pr
   
   // Estado para el formulario de newsletter
   const [formData, setFormData] = useState({ name: '', email: '', subscribeNewsletter: true });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
+    formType: 'newsletter',
+    source: 'blog-newsletter'
+  });
 
   useEffect(() => {
     setLoadingArticles(true);

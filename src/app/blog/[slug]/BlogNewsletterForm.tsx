@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useMakeWebhook } from '../../../hooks/useMakeWebhook';
 import { event as trackEvent } from '../../../lib/analytics';
 
 interface BlogNewsletterFormProps {
@@ -13,8 +14,10 @@ export default function BlogNewsletterForm({ articleSlug }: BlogNewsletterFormPr
     email: '',
     subscribeNewsletter: true
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
+    formType: 'newsletter',
+    source: 'blog-newsletter'
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;

@@ -8,8 +8,10 @@ export default function ArticulosSobreMiV2() {
   
   // Estado para el formulario de newsletter
   const [formData, setFormData] = useState({ name: '', email: '', subscribeNewsletter: true });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
+    formType: 'newsletter',
+    source: 'blog-newsletter'
+  });
   const [loading, setLoading] = useState(true);
 
   // Función para obtener colores por categoría (igual que en productos)

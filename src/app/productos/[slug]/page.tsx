@@ -8,6 +8,7 @@ import BlogSection from '../../../components/BlogSection';
 import ProductRelatedArticles from '../../../components/ProductRelatedArticles';
 import StarRating from '../../../components/StarRating';
 import PackStickyBannerInferior from '../../../components/PackStickyBannerInferior';
+import VipListModal from '../../../components/VipListModal';
 import { getPacksForProduct } from '../../../data/packs';
 import { event as trackEvent } from '@/lib/analytics';
 
@@ -2083,10 +2084,17 @@ export default function ProductoPage() {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [hasTrackedPricingView, setHasTrackedPricingView] = useState(false);
   const [hasTrackedFormView, setHasTrackedFormView] = useState(false);
+  const [isVipModalOpen, setIsVipModalOpen] = useState(false);
 
   // Estado para los artículos relacionados
   const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
   const [loadingArticles, setLoadingArticles] = useState(true);
+
+  // Función para abrir modal VIP
+  const openVipModal = () => {
+    try { trackEvent({ action: 'click_vip_list', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
+    setIsVipModalOpen(true);
+  };
 
   // Función para scroll a la sección de pricing
   const scrollToPricing = () => {
@@ -2298,7 +2306,7 @@ export default function ProductoPage() {
                 <button 
                   className="px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-lg hover:scale-105 transform transition-all duration-300 touch-manipulation"
                   style={{ background: mainGradient, color: '#fff' }}
-                  onClick={scrollToPricing}
+                  onClick={product.ctaClass === 'tertiary' ? openVipModal : scrollToPricing}
                 >
                   {product.cta}
                 </button>
@@ -2729,9 +2737,13 @@ export default function ProductoPage() {
                 <div className="text-3xl font-bold mb-2" style={{ color: mainColor }}>{product.price}</div>
                 {product.oldPrice && <div className="text-sm text-gray-400 line-through mb-2">{product.oldPrice}</div>}
                 <div className="mb-4 text-gray-300">Incluye acceso a todas las funciones principales.</div>
-                <button className="w-full py-3 rounded-lg font-bold text-white hover:scale-105 transition-transform duration-300" style={{ background: mainGradient }}>
+                <button 
+                  className="w-full py-3 rounded-lg font-bold text-white hover:scale-105 transition-transform duration-300" 
+                  style={{ background: mainGradient }}
+                  onClick={product.ctaClass === 'tertiary' ? openVipModal : scrollToPricing}
+                >
                   {product.cta}
-                        </button>
+                </button>
                           </div>
                         </div>
                 )}
@@ -2782,7 +2794,7 @@ export default function ProductoPage() {
             <button 
               className="px-10 py-4 rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300" 
               style={{ background: mainGradient, color: '#fff' }}
-              onClick={scrollToPricing}
+              onClick={product.ctaClass === 'tertiary' ? openVipModal : scrollToPricing}
             >
               {product.ctaFinal ? product.ctaFinal.primary : product.cta}
             </button>
@@ -2816,6 +2828,14 @@ export default function ProductoPage() {
 
       {/* Banner sticky inferior con packs del producto */}
       <PackStickyBannerInferior packs={getPacksForProduct(product?.name || '')} />
+
+      {/* Modal VIP List */}
+      <VipListModal 
+        isOpen={isVipModalOpen}
+        onClose={() => setIsVipModalOpen(false)}
+        productName={product?.name}
+        productSlug={slug}
+      />
 
     </div>
   );
