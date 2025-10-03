@@ -2749,7 +2749,7 @@ export default function ProductoPage() {
                 <button 
                   className="w-full py-3 rounded-lg font-bold text-white hover:scale-105 transition-transform duration-300" 
                   style={{ background: mainGradient }}
-                  onClick={scrollToPricing}
+                  onClick={product.ctaClass === 'tertiary' ? openVipModal : scrollToPricing}
                 >
                   {product.cta}
                 </button>
