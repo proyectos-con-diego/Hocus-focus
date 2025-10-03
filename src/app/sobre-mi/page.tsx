@@ -9,6 +9,7 @@ import CompaniesBanner from '../../components/CompaniesBanner';
 import { getReadingContext } from '../../data/blog';
 import SobreMiFAQSection from '../../components/SobreMiFAQSection';
 import { event as trackEvent } from '../../lib/analytics';
+import { useMakeWebhook } from '../../hooks/useMakeWebhook';
 
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
@@ -110,8 +111,11 @@ export default function SobreMiExperimentalPage() {
     message: '',
     subscribeNewsletter: true
   });
-  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
-  const [contactMessage, setContactMessage] = useState('');
+
+  const { submitToMake: submitContact, isSubmitting: isSubmittingContact, submitMessage: contactMessage, submitStatus: contactStatus, clearMessage: clearContactMessage } = useMakeWebhook({
+    formType: 'contact',
+    source: 'contacto-sobre-mi'
+  });
 
 
 

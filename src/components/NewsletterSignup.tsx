@@ -1,42 +1,26 @@
 'use client';
 import React, { useState } from 'react';
+import { useMakeWebhook } from '../hooks/useMakeWebhook';
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  
+  const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
+    formType: 'newsletter',
+    source: 'newsletter-signup'
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
+    
+    const success = await submitToMake({
+      name: email.split('@')[0], // Usar parte del email como nombre
+      email: email,
+      subscribeNewsletter: true
+    });
 
-    try {
-      const response = await fetch('/api/notion-newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: email.split('@')[0], // Usar parte del email como nombre
-          email: email,
-          subscribeNewsletter: true,
-          source: 'newsletter-signup'
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
-        setEmail('');
-      } else {
-        setSubmitMessage(result.error || 'Error al suscribirse');
-      }
-    } catch (error) {
-      setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
-    } finally {
-      setIsSubmitting(false);
+    if (success) {
+      setEmail('');
     }
   };
 
