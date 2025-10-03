@@ -39,6 +39,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
   source
 }) => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -82,7 +83,10 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
   const handleSubmit = async () => {
     try {
-      await submitToMake(formData);
+      const success = await submitToMake(formData);
+      if (success) {
+        setIsSubmitted(true);
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -369,42 +373,65 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
       {/* Form Content */}
       <div className="px-6 pb-6">
-        {currentStep === 1 && renderStep1()}
-        {currentStep === 2 && renderStep2()}
-        {currentStep === 3 && renderStep3()}
-        {currentStep === 4 && renderStep4()}
+        {isSubmitted ? (
+          <div className="text-center py-8">
+            <div className="text-6xl mb-4">🎉</div>
+            <h3 className="text-2xl font-bold text-white mb-4">¡Perfecto!</h3>
+            <p className="text-lg text-gray-300 mb-6">
+              Te has unido a la lista VIP. Te notificaremos cuando {productName} esté disponible.
+            </p>
+            {submitMessage && (
+              <div className={`p-4 rounded-xl ${
+                submitMessage.includes('Gracias') || submitMessage.includes('Excelente') || submitMessage.includes('Perfecto')
+                  ? 'bg-green-500/20 border border-green-500/30 text-green-300'
+                  : 'bg-red-500/20 border border-red-500/30 text-red-300'
+              }`}>
+                {submitMessage}
+              </div>
+            )}
+          </div>
+        ) : (
+          <>
+            {currentStep === 1 && renderStep1()}
+            {currentStep === 2 && renderStep2()}
+            {currentStep === 3 && renderStep3()}
+            {currentStep === 4 && renderStep4()}
+          </>
+        )}
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between p-6 border-t border-gray-700">
-        <button
-          onClick={prevStep}
-          disabled={currentStep === 1}
-          className="px-6 py-3 rounded-xl border border-gray-600 text-gray-300 hover:border-gray-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Anterior
-        </button>
+      {!isSubmitted && (
+        <div className="flex items-center justify-between p-6 border-t border-gray-700">
+          <button
+            onClick={prevStep}
+            disabled={currentStep === 1}
+            className="px-6 py-3 rounded-xl border border-gray-600 text-gray-300 hover:border-gray-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Anterior
+          </button>
 
-        <div className="flex gap-3">
-          {currentStep < totalSteps ? (
-            <button
-              onClick={nextStep}
-              disabled={!validateCurrentStep()}
-              className="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-            >
-              Siguiente
-            </button>
-          ) : (
-            <button
-              onClick={handleSubmit}
-              disabled={isSubmitting}
-              className="px-8 py-3 rounded-xl bg-gradient-to-r from-green-400 to-emerald-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-            >
-              {isSubmitting ? 'Enviando...' : 'Enviar solicitud'}
-            </button>
-          )}
+          <div className="flex gap-3">
+            {currentStep < totalSteps ? (
+              <button
+                onClick={nextStep}
+                disabled={!validateCurrentStep()}
+                className="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                Siguiente
+              </button>
+            ) : (
+              <button
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className="px-8 py-3 rounded-xl bg-gradient-to-r from-green-400 to-emerald-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                {isSubmitting ? 'Enviando...' : 'Enviar solicitud'}
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
