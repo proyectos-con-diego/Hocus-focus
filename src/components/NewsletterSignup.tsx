@@ -12,12 +12,15 @@ export default function NewsletterSignup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('🚀 NewsletterSignup: Enviando formulario...', { email });
     
     const success = await submitToMake({
       name: email.split('@')[0], // Usar parte del email como nombre
       email: email,
       subscribeNewsletter: true
     });
+
+    console.log('✅ NewsletterSignup: Resultado:', success);
 
     if (success) {
       setEmail('');
