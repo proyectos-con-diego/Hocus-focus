@@ -16,7 +16,7 @@ export default function BlogNewsletterForm({ articleSlug }: BlogNewsletterFormPr
   });
   const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
     formType: 'newsletter',
-    source: 'blog-post'
+    source: articleSlug ? `blog-${articleSlug}` : 'blog-post'
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
