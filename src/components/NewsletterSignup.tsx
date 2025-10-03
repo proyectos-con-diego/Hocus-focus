@@ -11,19 +11,24 @@ export default function NewsletterSignup() {
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log('🔥 NewsletterSignup: handleSubmit llamado!', { email, isSubmitting });
     e.preventDefault();
     console.log('🚀 NewsletterSignup: Enviando formulario...', { email });
     
-    const success = await submitToMake({
-      name: email.split('@')[0], // Usar parte del email como nombre
-      email: email,
-      subscribeNewsletter: true
-    });
+    try {
+      const success = await submitToMake({
+        name: email.split('@')[0], // Usar parte del email como nombre
+        email: email,
+        subscribeNewsletter: true
+      });
 
-    console.log('✅ NewsletterSignup: Resultado:', success);
+      console.log('✅ NewsletterSignup: Resultado:', success);
 
-    if (success) {
-      setEmail('');
+      if (success) {
+        setEmail('');
+      }
+    } catch (error) {
+      console.error('❌ NewsletterSignup: Error:', error);
     }
   };
 
@@ -64,6 +69,7 @@ export default function NewsletterSignup() {
             <button 
               type="submit" 
               disabled={isSubmitting || !email.trim()}
+              onClick={() => console.log('🖱️ NewsletterSignup: Botón clickeado!', { email, isSubmitting, disabled: isSubmitting || !email.trim() })}
               className="px-4 sm:px-6 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 disabled:from-gray-500 disabled:to-gray-600 disabled:cursor-not-allowed text-white font-bold transition-all hover:scale-105 text-sm sm:text-base"
               aria-label="Suscribirse al newsletter"
             >
