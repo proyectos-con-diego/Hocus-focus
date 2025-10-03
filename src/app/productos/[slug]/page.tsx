@@ -8,7 +8,7 @@ import BlogSection from '../../../components/BlogSection';
 import ProductRelatedArticles from '../../../components/ProductRelatedArticles';
 import StarRating from '../../../components/StarRating';
 import PackStickyBannerInferior from '../../../components/PackStickyBannerInferior';
-import VipListModal from '../../../components/VipListModal';
+// import VipListModal from '../../../components/VipListModal'; // Deshabilitado temporalmente
 import { getPacksForProduct } from '../../../data/packs';
 import { event as trackEvent } from '@/lib/analytics';
 
@@ -2084,17 +2084,17 @@ export default function ProductoPage() {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [hasTrackedPricingView, setHasTrackedPricingView] = useState(false);
   const [hasTrackedFormView, setHasTrackedFormView] = useState(false);
-  const [isVipModalOpen, setIsVipModalOpen] = useState(false);
+  // const [isVipModalOpen, setIsVipModalOpen] = useState(false); // Deshabilitado temporalmente
 
   // Estado para los artículos relacionados
   const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
   const [loadingArticles, setLoadingArticles] = useState(true);
 
-  // Función para abrir modal VIP
-  const openVipModal = () => {
-    try { trackEvent({ action: 'click_vip_list', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
-    setIsVipModalOpen(true);
-  };
+  // Función para abrir modal VIP - Deshabilitada temporalmente
+  // const openVipModal = () => {
+  //   try { trackEvent({ action: 'click_vip_list', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
+  //   setIsVipModalOpen(true);
+  // };
 
   // Función para scroll a la sección de pricing
   const scrollToPricing = () => {
@@ -2306,7 +2306,7 @@ export default function ProductoPage() {
                 <button 
                   className="px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-lg hover:scale-105 transform transition-all duration-300 touch-manipulation"
                   style={{ background: mainGradient, color: '#fff' }}
-                  onClick={product.ctaClass === 'tertiary' ? openVipModal : scrollToPricing}
+                  onClick={scrollToPricing}
                 >
                   {product.cta}
                 </button>
@@ -2740,7 +2740,7 @@ export default function ProductoPage() {
                 <button 
                   className="w-full py-3 rounded-lg font-bold text-white hover:scale-105 transition-transform duration-300" 
                   style={{ background: mainGradient }}
-                  onClick={product.ctaClass === 'tertiary' ? openVipModal : scrollToPricing}
+                  onClick={scrollToPricing}
                 >
                   {product.cta}
                 </button>
@@ -2829,13 +2829,13 @@ export default function ProductoPage() {
       {/* Banner sticky inferior con packs del producto */}
       <PackStickyBannerInferior packs={getPacksForProduct(product?.name || '')} />
 
-      {/* Modal VIP List */}
-      <VipListModal 
+      {/* Modal VIP List - Deshabilitado temporalmente */}
+      {/* <VipListModal 
         isOpen={isVipModalOpen}
         onClose={() => setIsVipModalOpen(false)}
         productName={product?.name}
         productSlug={slug}
-      />
+      /> */}
 
     </div>
   );

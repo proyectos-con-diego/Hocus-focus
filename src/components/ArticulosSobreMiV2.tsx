@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { sanityClient } from '@/sanity/sanity';
+import { useMakeWebhook } from '../hooks/useMakeWebhook';
 
 export default function ArticulosSobreMiV2() {
   const [articulos, setArticulos] = useState<any[]>([]);

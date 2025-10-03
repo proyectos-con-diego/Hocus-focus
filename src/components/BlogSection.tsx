@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { useMakeWebhook } from '../../hooks/useMakeWebhook';
+import { useMakeWebhook } from '../hooks/useMakeWebhook';
 import Link from 'next/link';
 
 // Función para obtener clases de color de categoría
