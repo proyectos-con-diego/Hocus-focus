@@ -126,32 +126,24 @@ export default function ProductRelatedArticles({ productSlug, productColor }: Pr
 
   // Función para manejar el envío del formulario
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log('🔥 ProductRelatedArticles: handleSubmit llamado!', { formData, isSubmitting });
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
+    console.log('🚀 ProductRelatedArticles: Enviando formulario...', { formData });
     
     try {
-      const response = await fetch('/api/notion-newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          source: `product-${productSlug}`
-        }),
+      const success = await submitToMake({
+        name: formData.name,
+        email: formData.email,
+        subscribeNewsletter: formData.subscribeNewsletter
       });
-      
-      const result = await response.json();
-      
-      if (response.ok) {
-        setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
+
+      console.log('✅ ProductRelatedArticles: Resultado:', success);
+
+      if (success) {
         setFormData({ name: '', email: '', subscribeNewsletter: true });
-      } else {
-        setSubmitMessage(result.error || 'Error al suscribirse');
       }
     } catch (error) {
-      setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
-    } finally {
-      setIsSubmitting(false);
+      console.error('❌ ProductRelatedArticles: Error:', error);
     }
   };
 

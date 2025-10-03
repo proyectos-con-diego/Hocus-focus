@@ -110,34 +110,24 @@ export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log('🔥 BlogSection: handleSubmit llamado!', { formData, isSubmitting });
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
-
+    console.log('🚀 BlogSection: Enviando formulario...', { formData });
+    
     try {
-      const response = await fetch('/api/notion-newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          source: 'homepage'
-        }),
+      const success = await submitToMake({
+        name: formData.name,
+        email: formData.email,
+        subscribeNewsletter: formData.subscribeNewsletter
       });
 
-      const result = await response.json();
+      console.log('✅ BlogSection: Resultado:', success);
 
-      if (response.ok) {
-        setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
+      if (success) {
         setFormData({ name: '', email: '', subscribeNewsletter: true });
-      } else {
-        setSubmitMessage(result.error || 'Error al suscribirse');
       }
     } catch (error) {
-      setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
-    } finally {
-      setIsSubmitting(false);
+      console.error('❌ BlogSection: Error:', error);
     }
   };
 
