@@ -2630,13 +2630,31 @@ export default function ProductoPage() {
                 </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-20 px-6 bg-gray-900/20" data-section="pricing">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-white">Planes y precios</h2>
-            <p className="text-xl text-gray-400">Elige el plan que mejor se adapte a tus necesidades</p>
-                      </div>
+      {/* Pricing Section o VIP Form */}
+      {product.ctaClass === 'tertiary' ? (
+        // Formulario VIP Multi-Paso para productos en lista de espera
+        <section className="py-20 px-6 bg-gray-900/20" data-section="pricing">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-white">Únete a la Lista VIP</h2>
+              <p className="text-xl text-gray-400">Sé el primero en acceder a {product.name}</p>
+            </div>
+            <MultiStepForm
+              productName={product.name}
+              productSlug={slug}
+              productType="vip"
+              source={`product-${slug}`}
+            />
+          </div>
+        </section>
+      ) : (
+        // Sección de Pricing normal para productos disponibles
+        <section className="py-20 px-6 bg-gray-900/20" data-section="pricing">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-white">Planes y precios</h2>
+              <p className="text-xl text-gray-400">Elige el plan que mejor se adapte a tus necesidades</p>
+            </div>
           {product.plans ? (
             <div className={`grid grid-cols-1 gap-8 mx-auto ${
               product.plans.length === 1
@@ -2781,8 +2799,9 @@ export default function ProductoPage() {
               </div>
             </div>
           )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-20 px-6 relative overflow-hidden" style={{ background: mainGradient }}>
@@ -2838,23 +2857,6 @@ export default function ProductoPage() {
       {/* Banner sticky inferior con packs del producto */}
       <PackStickyBannerInferior packs={getPacksForProduct(product?.name || '')} />
 
-      {/* Formulario Multi-Paso VIP Incrustado */}
-      {product?.ctaClass === 'tertiary' && (
-        <section ref={formRef} className="py-20 px-6 bg-gray-900/20">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4 text-white">Únete a la Lista VIP</h2>
-              <p className="text-xl text-gray-400">Sé el primero en acceder a {product?.name || 'este producto'}</p>
-            </div>
-            <MultiStepForm
-              productName={product?.name || 'Producto'}
-              productSlug={slug}
-              productType="vip"
-              source={`product-${slug}`}
-            />
-          </div>
-        </section>
-      )}
 
     </div>
   );
