@@ -59,7 +59,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     source: `${productType}-${productSlug}`
   });
 
-  const totalSteps = 4;
+  const totalSteps = 3;
 
   const updateFormData = (field: keyof FormData, value: string) => {
     setFormData(prev => ({
@@ -359,9 +359,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <span className="text-sm text-gray-400">Paso {currentStep} de {totalSteps}</span>
           <span className="text-sm text-gray-400">{Math.round((currentStep / totalSteps) * 100)}%</span>
         </div>
-        <div className="w-full bg-gray-700 rounded-full h-2">
+        <div className="w-full bg-gray-700 rounded-full h-1">
           <div 
-            className="bg-gradient-to-r from-cyan-400 to-purple-600 h-2 rounded-full transition-all duration-300"
+            className="bg-gradient-to-r from-cyan-400 to-purple-600 h-1 rounded-full transition-all duration-300"
             style={{ width: `${(currentStep / totalSteps) * 100}%` }}
           />
         </div>
