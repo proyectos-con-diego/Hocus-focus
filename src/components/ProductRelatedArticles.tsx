@@ -90,7 +90,7 @@ export default function ProductRelatedArticles({ productSlug, productColor }: Pr
   const [formData, setFormData] = useState({ name: '', email: '', subscribeNewsletter: true });
   const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
     formType: 'newsletter',
-    source: 'product-page'
+    source: productSlug ? `product-${productSlug}` : 'product-page'
   });
 
   useEffect(() => {
