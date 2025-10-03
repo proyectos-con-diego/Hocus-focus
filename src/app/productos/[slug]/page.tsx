@@ -2096,6 +2096,12 @@ export default function ProductoPage() {
   //   setIsVipModalOpen(true);
   // };
 
+  // Función temporal para productos VIP - hace scroll a pricing
+  const openVipModal = () => {
+    try { trackEvent({ action: 'click_vip_list', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
+    scrollToPricing();
+  };
+
   // Función para scroll a la sección de pricing
   const scrollToPricing = () => {
     try { trackEvent({ action: 'click_cta_pricing', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
