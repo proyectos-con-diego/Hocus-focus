@@ -120,6 +120,7 @@ function formatDataForMake(data: any) {
         productInterest: data.productInterest || '',
         productType: data.productType || '',
         productName: data.productName || '',
+        productLabel: `${data.productName || ''}_${data.productType || ''}`.toLowerCase(),
         
         // Preguntas Específicas
         specificQuestions: data.specificQuestions || {},
