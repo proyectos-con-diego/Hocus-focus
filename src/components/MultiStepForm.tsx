@@ -341,69 +341,68 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
   return (
     <div className="bg-gray-900 rounded-2xl max-w-2xl w-full border border-gray-700">
-        {/* Header */}
-        <div className="p-6 border-b border-gray-700">
-          <div>
-            <h2 className="text-2xl font-bold text-white">
-              {productType === 'vip' && 'Únete a la lista VIP'}
-              {productType === 'spirit' && 'Solicitar Spirit'}
-              {productType === 'mini' && 'Obtener versión MINI'}
-            </h2>
-            <p className="text-gray-400 mt-1">{productName}</p>
-          </div>
+      {/* Header */}
+      <div className="p-6 border-b border-gray-700">
+        <div>
+          <h2 className="text-2xl font-bold text-white">
+            {productType === 'vip' && 'Únete a la lista VIP'}
+            {productType === 'spirit' && 'Solicitar Spirit'}
+            {productType === 'mini' && 'Obtener versión MINI'}
+          </h2>
+          <p className="text-gray-400 mt-1">{productName}</p>
         </div>
+      </div>
 
-        {/* Progress Bar */}
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-gray-400">Paso {currentStep} de {totalSteps}</span>
-            <span className="text-sm text-gray-400">{Math.round((currentStep / totalSteps) * 100)}%</span>
-          </div>
-          <div className="w-full bg-gray-700 rounded-full h-2">
-            <div 
-              className="bg-gradient-to-r from-cyan-400 to-purple-600 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${(currentStep / totalSteps) * 100}%` }}
-            />
-          </div>
+      {/* Progress Bar */}
+      <div className="px-6 py-4">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm text-gray-400">Paso {currentStep} de {totalSteps}</span>
+          <span className="text-sm text-gray-400">{Math.round((currentStep / totalSteps) * 100)}%</span>
         </div>
-
-        {/* Form Content */}
-        <div className="px-6 pb-6">
-          {currentStep === 1 && renderStep1()}
-          {currentStep === 2 && renderStep2()}
-          {currentStep === 3 && renderStep3()}
-          {currentStep === 4 && renderStep4()}
+        <div className="w-full bg-gray-700 rounded-full h-2">
+          <div 
+            className="bg-gradient-to-r from-cyan-400 to-purple-600 h-2 rounded-full transition-all duration-300"
+            style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+          />
         </div>
+      </div>
 
-        {/* Footer */}
-        <div className="flex items-center justify-between p-6 border-t border-gray-700">
-          <button
-            onClick={prevStep}
-            disabled={currentStep === 1}
-            className="px-6 py-3 rounded-xl border border-gray-600 text-gray-300 hover:border-gray-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Anterior
-          </button>
+      {/* Form Content */}
+      <div className="px-6 pb-6">
+        {currentStep === 1 && renderStep1()}
+        {currentStep === 2 && renderStep2()}
+        {currentStep === 3 && renderStep3()}
+        {currentStep === 4 && renderStep4()}
+      </div>
 
-          <div className="flex gap-3">
-            {currentStep < totalSteps ? (
-              <button
-                onClick={nextStep}
-                disabled={!validateCurrentStep()}
-                className="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-              >
-                Siguiente
-              </button>
-            ) : (
-              <button
-                onClick={handleSubmit}
-                disabled={isSubmitting}
-                className="px-8 py-3 rounded-xl bg-gradient-to-r from-green-400 to-emerald-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-              >
-                {isSubmitting ? 'Enviando...' : 'Enviar solicitud'}
-              </button>
-            )}
-          </div>
+      {/* Footer */}
+      <div className="flex items-center justify-between p-6 border-t border-gray-700">
+        <button
+          onClick={prevStep}
+          disabled={currentStep === 1}
+          className="px-6 py-3 rounded-xl border border-gray-600 text-gray-300 hover:border-gray-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Anterior
+        </button>
+
+        <div className="flex gap-3">
+          {currentStep < totalSteps ? (
+            <button
+              onClick={nextStep}
+              disabled={!validateCurrentStep()}
+              className="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              Siguiente
+            </button>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="px-8 py-3 rounded-xl bg-gradient-to-r from-green-400 to-emerald-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              {isSubmitting ? 'Enviando...' : 'Enviar solicitud'}
+            </button>
+          )}
         </div>
       </div>
     </div>
