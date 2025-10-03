@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { useMakeWebhook } from '../hooks/useMakeWebhook';
 
 interface BlogNewsletterSectionProps {
   source?: string;
@@ -7,8 +8,11 @@ interface BlogNewsletterSectionProps {
 
 export default function BlogNewsletterSection({ source = 'blog' }: BlogNewsletterSectionProps) {
   const [formData, setFormData] = useState({ name: '', email: '', subscribeNewsletter: true });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  
+  const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
+    formType: 'newsletter',
+    source: source
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -20,33 +24,11 @@ export default function BlogNewsletterSection({ source = 'blog' }: BlogNewslette
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
+    
+    const success = await submitToMake(formData);
 
-    try {
-      const response = await fetch('/api/notion-newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          source: source
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitMessage('¡Gracias! Te has suscrito exitosamente.');
-        setFormData({ name: '', email: '', subscribeNewsletter: true });
-      } else {
-        setSubmitMessage(result.error || 'Error al suscribirse');
-      }
-    } catch (error) {
-      setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
-    } finally {
-      setIsSubmitting(false);
+    if (success) {
+      setFormData({ name: '', email: '', subscribeNewsletter: true });
     }
   };
   return (

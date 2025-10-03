@@ -7,6 +7,7 @@ import HeaderGlass from '../../components/HeaderGlass';
 import { spirits } from '../../data/spirits';
 import Link from 'next/link';
 import { event as trackEvent } from '../../lib/analytics';
+import { useMakeWebhook } from '../../hooks/useMakeWebhook';
 
 // La interfaz Spirit se importa desde ../../data/spirits
 
@@ -99,8 +100,11 @@ export default function SpiritsPage() {
     email: '',
     subscribeNewsletter: true
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+
+  const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
+    formType: 'spirit_idea',
+    source: 'spirit_ideas'
+  });
   const { handleMouseMove, handleMouseLeave } = useDynamicGradient();
 
   const toggleFAQ = (index: number) => {
@@ -118,36 +122,16 @@ export default function SpiritsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
+    
+    const success = await submitToMake({
+      name: formData.name,
+      email: formData.email,
+      idea: formData.idea,
+      subscribeNewsletter: formData.subscribeNewsletter
+    });
 
-    try {
-      const response = await fetch('/api/notion-newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          idea: formData.idea,
-          subscribeNewsletter: formData.subscribeNewsletter,
-          source: 'spirits-convocatoria'
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmitMessage('¡Gracias! Tu idea ha sido enviada. La revisaremos pronto.');
-        setFormData({ idea: '', name: '', email: '', subscribeNewsletter: true });
-      } else {
-        setSubmitMessage(result.error || 'Error al enviar tu idea');
-      }
-    } catch (error) {
-      setSubmitMessage('Error de conexión. Inténtalo de nuevo.');
-    } finally {
-      setIsSubmitting(false);
+    if (success) {
+      setFormData({ idea: '', name: '', email: '', subscribeNewsletter: true });
     }
   };
 

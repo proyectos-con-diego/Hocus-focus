@@ -142,45 +142,24 @@ export default function SobreMiExperimentalPage() {
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmittingContact(true);
-    setContactMessage('');
+    
+    // Track form submission
+    try { trackEvent({ action: 'submit_contact_form', category: 'Sobre Mi', label: 'formulario_contacto' }); } catch {}
 
-    try {
-      // Track form submission
-      try { trackEvent({ action: 'submit_contact_form', category: 'Sobre Mi', label: 'formulario_contacto' }); } catch {}
+    const success = await submitContact({
+      name: contactData.name,
+      email: contactData.email,
+      message: contactData.message,
+      subscribeNewsletter: contactData.subscribeNewsletter
+    });
 
-      const response = await fetch('/api/notion-newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: contactData.name,
-          email: contactData.email,
-          idea: contactData.message, // Usamos el campo 'idea' para el mensaje
-          subscribeNewsletter: contactData.subscribeNewsletter,
-          source: 'contacto-sobre-mi'
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setContactMessage('¡Gracias! Tu mensaje ha sido enviado. Te responderé pronto.');
-        setContactData({ name: '', email: '', message: '', subscribeNewsletter: true });
-        // Track successful submission
-        try { trackEvent({ action: 'contact_form_success', category: 'Sobre Mi', label: 'envio_exitoso' }); } catch {}
-      } else {
-        setContactMessage(result.error || 'Error al enviar el mensaje');
-        // Track form error
-        try { trackEvent({ action: 'contact_form_error', category: 'Sobre Mi', label: 'error_envio' }); } catch {}
-      }
-    } catch (error) {
-      setContactMessage('Error de conexión. Inténtalo de nuevo.');
-      // Track connection error
-      try { trackEvent({ action: 'contact_form_error', category: 'Sobre Mi', label: 'error_conexion' }); } catch {}
-    } finally {
-      setIsSubmittingContact(false);
+    if (success) {
+      setContactData({ name: '', email: '', message: '', subscribeNewsletter: true });
+      // Track successful submission
+      try { trackEvent({ action: 'contact_form_success', category: 'Sobre Mi', label: 'envio_exitoso' }); } catch {}
+    } else {
+      // Track form error
+      try { trackEvent({ action: 'contact_form_error', category: 'Sobre Mi', label: 'error_envio' }); } catch {}
     }
   };
 
