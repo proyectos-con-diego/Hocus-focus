@@ -96,7 +96,7 @@ export default function BlogNewsletterForm({ articleSlug }: BlogNewsletterFormPr
         
         {submitMessage && (
           <div className={`w-full max-w-4xl mx-auto mb-6 p-4 rounded-xl text-center font-medium ${
-            submitMessage.includes('Gracias') 
+            submitMessage.includes('Gracias') || submitMessage.includes('Excelente') || submitMessage.includes('Perfecto')
               ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
               : 'bg-red-500/20 text-red-400 border border-red-500/30'
           }`}>

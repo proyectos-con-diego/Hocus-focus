@@ -48,7 +48,7 @@ export default function NewsletterSignup() {
           
           {submitMessage && (
             <div className={`w-full max-w-md mx-auto mb-4 p-3 rounded-xl text-center font-medium text-sm ${
-              submitMessage.includes('Gracias') 
+              submitMessage.includes('Gracias') || submitMessage.includes('Excelente') || submitMessage.includes('Perfecto')
                 ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
                 : 'bg-red-500/20 text-red-400 border border-red-500/30'
             }`}>
