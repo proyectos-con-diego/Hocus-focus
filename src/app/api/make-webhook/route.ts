@@ -105,14 +105,33 @@ function formatDataForMake(data: any) {
       return {
         ...baseData,
         Tipo: 'message',
+        // Información Personal
         name: data.name || '',
         email: data.email || '',
-        product: data.product || '',
-        sector: data.sector || '',
+        age: data.age || '',
+        country: data.country || '',
+        
+        // Información Profesional
+        occupation: data.occupation || '',
+        industry: data.industry || '',
+        teamSize: data.teamSize || '',
+        
+        // Información del Producto
+        productInterest: data.productInterest || '',
+        productType: data.productType || '',
+        productName: data.productName || '',
+        
+        // Preguntas Específicas
+        specificQuestions: data.specificQuestions || {},
+        
+        // Campos legacy (mantener para compatibilidad)
+        product: data.product || data.productName || '',
+        sector: data.sector || data.industry || '',
         experience: data.experience || '',
         currentChallenges: data.currentChallenges || '',
         goals: data.goals || '',
         aiFamiliarity: data.aiFamiliarity || '',
+        
         subscribeNewsletter: data.subscribeNewsletter || false,
         origin: data.source || 'vip_list',
       };
