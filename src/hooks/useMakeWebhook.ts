@@ -34,7 +34,7 @@ export function useMakeWebhook({ formType, source }: UseMakeWebhookOptions): Use
 
       console.log('📤 Enviando a Make.com:', makeData);
 
-      const response = await fetch('/api/debug-form', {
+      const response = await fetch('/api/make-webhook', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
