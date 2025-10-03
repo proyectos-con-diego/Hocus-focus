@@ -71,13 +71,13 @@ function calculateReadingTime(body: any): number {
 // Importar la función centralizada del sistema de blog
 import { getReadingContext } from '@/data/blog';
 
-export default function BlogSection({ hoverColor }: { hoverColor?: string }) {
+export default function BlogSection({ hoverColor, source = 'home' }: { hoverColor?: string; source?: string }) {
   const [latestArticles, setLatestArticles] = useState<any[]>([]);
   const [loadingArticles, setLoadingArticles] = useState(true);
   const [formData, setFormData] = useState({ name: '', email: '', subscribeNewsletter: true });
   const { submitToMake, isSubmitting, submitMessage, submitStatus, clearMessage } = useMakeWebhook({
     formType: 'newsletter',
-    source: 'home'
+    source: source
   });
 
   useEffect(() => {

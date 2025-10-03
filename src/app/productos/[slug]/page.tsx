@@ -10,7 +10,7 @@ import StarRating from '../../../components/StarRating';
 import PackStickyBannerInferior from '../../../components/PackStickyBannerInferior';
 // import VipListModal from '../../../components/VipListModal'; // Deshabilitado temporalmente
 import { getPacksForProduct } from '../../../data/packs';
-import { event as trackEvent } from '@/lib/analytics';
+import { event as trackEvent } from '../../../lib/analytics';
 
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
