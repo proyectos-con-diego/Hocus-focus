@@ -8,7 +8,7 @@ import BlogSection from '../../../components/BlogSection';
 import ProductRelatedArticles from '../../../components/ProductRelatedArticles';
 import StarRating from '../../../components/StarRating';
 import PackStickyBannerInferior from '../../../components/PackStickyBannerInferior';
-// import VipListModal from '../../../components/VipListModal'; // Deshabilitado temporalmente
+import MultiStepForm from '../../../components/MultiStepForm';
 import { getPacksForProduct } from '../../../data/packs';
 import { event as trackEvent } from '../../../lib/analytics';
 
@@ -2090,16 +2090,19 @@ export default function ProductoPage() {
   const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
   const [loadingArticles, setLoadingArticles] = useState(true);
 
+  // Estado para el formulario multi-paso
+  const [isMultiStepFormOpen, setIsMultiStepFormOpen] = useState(false);
+
   // Función para abrir modal VIP - Deshabilitada temporalmente
   // const openVipModal = () => {
   //   try { trackEvent({ action: 'click_vip_list', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
   //   setIsVipModalOpen(true);
   // };
 
-  // Función temporal para productos VIP - hace scroll a pricing
+  // Función para abrir formulario multi-paso VIP
   const openVipModal = () => {
     try { trackEvent({ action: 'click_vip_list', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
-    scrollToPricing();
+    setIsMultiStepFormOpen(true);
   };
 
   // Función para scroll a la sección de pricing
@@ -2835,13 +2838,17 @@ export default function ProductoPage() {
       {/* Banner sticky inferior con packs del producto */}
       <PackStickyBannerInferior packs={getPacksForProduct(product?.name || '')} />
 
-      {/* Modal VIP List - Deshabilitado temporalmente */}
-      {/* <VipListModal 
-        isOpen={isVipModalOpen}
-        onClose={() => setIsVipModalOpen(false)}
-        productName={product?.name}
-        productSlug={slug}
-      /> */}
+      {/* Formulario Multi-Paso VIP */}
+      {product?.ctaClass === 'tertiary' && (
+        <MultiStepForm
+          isOpen={isMultiStepFormOpen}
+          onClose={() => setIsMultiStepFormOpen(false)}
+          productName={product?.name || 'Producto'}
+          productSlug={slug}
+          productType="vip"
+          source={`product-${slug}`}
+        />
+      )}
 
     </div>
   );
