@@ -416,17 +416,19 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
   return (
     <div className="bg-gray-900 rounded-2xl max-w-2xl w-full border border-gray-700">
-      {/* Header */}
-      <div className="p-6 border-b border-gray-700">
-        <div>
-          <h2 className="text-2xl font-bold text-white">
-            {productType === 'vip' && 'Únete a la lista VIP'}
-            {productType === 'spirit' && 'Solicitar Spirit'}
-            {productType === 'mini' && `Obtener ${productName} MINI`}
-          </h2>
-          <p className="text-gray-400 mt-1">{productName}</p>
+      {/* Header - Solo mostrar si no es modal */}
+      {!isOpen && (
+        <div className="p-6 border-b border-gray-700">
+          <div>
+            <h2 className="text-2xl font-bold text-white">
+              {productType === 'vip' && 'Únete a la lista VIP'}
+              {productType === 'spirit' && 'Solicitar Spirit'}
+              {productType === 'mini' && `Obtener ${productName} MINI`}
+            </h2>
+            <p className="text-gray-400 mt-1">{productName}</p>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Progress Bar */}
       <div className="px-6 py-4">
