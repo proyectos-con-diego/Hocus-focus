@@ -430,34 +430,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
       )}
 
       {/* Progress Bar */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-medium text-gray-300">Paso {currentStep} de {totalSteps}</span>
-          <span className="text-sm font-medium text-gray-300">{Math.round(((currentStep - 1) / totalSteps) * 100)}%</span>
-        </div>
-        
-        {/* Barra de progreso segmentada como Tally */}
-        <div className="flex items-center justify-center space-x-2">
-          {[1, 2, 3].map((step) => (
-            <div key={step} className="flex items-center">
-              <div 
-                className={`w-12 h-2 rounded-full transition-all duration-300 ${
-                  currentStep > step 
-                    ? 'bg-gradient-to-r from-cyan-400 to-purple-600' 
-                    : currentStep === step
-                    ? 'bg-gradient-to-r from-cyan-400 to-purple-600'
-                    : 'bg-gray-700'
-                }`}
-              />
-              {step < 3 && (
-                <div 
-                  className={`w-2 h-0.5 mx-1 transition-all duration-300 ${
-                    currentStep > step ? 'bg-cyan-400' : 'bg-gray-600'
-                  }`}
-                />
-              )}
-            </div>
-          ))}
+      <div className="mb-6">
+        <div className="flex items-center justify-between space-x-2">
+          <div className={`flex-1 h-1 rounded-full transition-all duration-500 ease-out ${currentStep > 1 ? 'bg-gradient-to-r from-cyan-400 to-purple-600' : 'bg-gray-800/50'}`} />
+          <div className={`flex-1 h-1 rounded-full transition-all duration-500 ease-out ${currentStep > 2 ? 'bg-gradient-to-r from-cyan-400 to-purple-600' : 'bg-gray-800/50'}`} />
+          <div className={`flex-1 h-1 rounded-full transition-all duration-500 ease-out ${currentStep > 3 ? 'bg-gradient-to-r from-cyan-400 to-purple-600' : 'bg-gray-800/50'}`} />
         </div>
       </div>
 
