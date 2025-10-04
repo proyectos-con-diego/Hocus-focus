@@ -52,6 +52,8 @@ const MiniFormModal: React.FC<MiniFormModalProps> = ({
               productSlug={productSlug}
               productType="mini"
               source={`product-${productSlug}`}
+              isOpen={true}
+              onClose={onClose}
             />
           </div>
         </div>
