@@ -36,7 +36,7 @@ const MiniFormModal: React.FC<MiniFormModalProps> = ({
           {/* Header del modal */}
           <div className="p-8 text-center">
             <h2 className="text-4xl font-bold text-white mb-3">
-              Obtener {productName.split(' ')[0]}{' '}
+              Obtener {productName}{' '}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
                 MINI
               </span>

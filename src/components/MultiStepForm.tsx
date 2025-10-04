@@ -458,6 +458,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <div className="text-center py-8">
             <div className="text-6xl mb-4">🎉</div>
             <h3 className="text-2xl font-bold text-white mb-4">¡Perfecto!</h3>
+            {productType === 'mini' && (
+              <p className="text-white mb-6">
+                Tu acceso está listo. Haz clic en el botón para comenzar.
+              </p>
+            )}
             <p className="text-lg text-gray-300 mb-6">
               {productType === 'vip' && `Te has unido a la lista VIP. Te notificaremos cuando ${productName} esté disponible.`}
               {productType === 'spirit' && `Tu solicitud de Spirit ha sido enviada. Te contactaremos pronto.`}
