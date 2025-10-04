@@ -52,7 +52,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     specificQuestions: {},
     source,
     productType,
-    productName
+    productName,
+    // Campos para "Otro"
+    otherCountry: '',
+    otherIndustry: '',
+    otherProductInterest: ''
   });
 
   const { submitToMake, isSubmitting, submitMessage, submitStatus } = useMakeWebhook({
@@ -95,9 +99,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
   const validateCurrentStep = () => {
     switch (currentStep) {
       case 1:
-        return formData.name.trim() && formData.email.trim() && formData.age && formData.country;
+        const basicValid = formData.name.trim() && formData.email.trim() && formData.age && formData.country;
+        const countryValid = formData.country !== 'Otro' || (formData.country === 'Otro' && formData.otherCountry.trim());
+        return basicValid && countryValid;
       case 2:
-        return formData.occupation.trim() && formData.industry && formData.teamSize;
+        const industryValid = formData.industry !== 'Otro' || (formData.industry === 'Otro' && formData.otherIndustry.trim());
+        return formData.occupation.trim() && formData.industry && formData.teamSize && industryValid;
       case 3:
         return formData.productInterest.trim();
       case 4:
@@ -149,6 +156,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             required
           >
             <option value="">Selecciona tu edad</option>
+            <option value="menos-18">Menos de 18 años</option>
             <option value="18-25">18-25 años</option>
             <option value="26-35">26-35 años</option>
             <option value="36-45">36-45 años</option>
@@ -184,6 +192,16 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             <option value="Brasil">Brasil</option>
             <option value="Otro">Otro</option>
           </select>
+          {formData.country === 'Otro' && (
+            <input
+              type="text"
+              value={formData.otherCountry}
+              onChange={(e) => updateFormData('otherCountry', e.target.value)}
+              placeholder="Especifica tu país"
+              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
+              required
+            />
+          )}
         </div>
       </div>
     </div>
@@ -229,6 +247,16 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <option value="Sin fines de lucro">Sin fines de lucro</option>
           <option value="Otro">Otro</option>
         </select>
+        {formData.industry === 'Otro' && (
+          <input
+            type="text"
+            value={formData.otherIndustry}
+            onChange={(e) => updateFormData('otherIndustry', e.target.value)}
+            placeholder="Especifica tu industria"
+            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
+            required
+          />
+        )}
       </div>
 
       <div>
@@ -285,6 +313,16 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             <option value="Automatización">Automatización</option>
             <option value="Otro">Otro</option>
           </select>
+          {formData.specificQuestions.spiritType === 'Otro' && (
+            <input
+              type="text"
+              value={formData.otherProductInterest}
+              onChange={(e) => updateFormData('otherProductInterest', e.target.value)}
+              placeholder="Especifica qué tipo de Spirit te interesa"
+              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
+              required
+            />
+          )}
         </div>
       )}
     </div>
@@ -310,7 +348,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           </div>
           <div>
             <span className="text-gray-400">País:</span>
-            <span className="text-white ml-2">{formData.country}</span>
+            <span className="text-white ml-2">{formData.country === 'Otro' ? formData.otherCountry : formData.country}</span>
           </div>
           <div>
             <span className="text-gray-400">Ocupación:</span>
@@ -318,7 +356,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           </div>
           <div>
             <span className="text-gray-400">Industria:</span>
-            <span className="text-white ml-2">{formData.industry}</span>
+            <span className="text-white ml-2">{formData.industry === 'Otro' ? formData.otherIndustry : formData.industry}</span>
           </div>
           <div>
             <span className="text-gray-400">Equipo:</span>
