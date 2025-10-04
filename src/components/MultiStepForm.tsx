@@ -361,12 +361,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
       <div className="px-6 py-4">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm text-gray-400">Paso {currentStep} de {totalSteps}</span>
-          <span className="text-sm text-gray-400">{Math.round((currentStep / totalSteps) * 100)}%</span>
+          <span className="text-sm text-gray-400">{Math.round(((currentStep - 1) / totalSteps) * 100)}%</span>
         </div>
         <div className="w-full bg-gray-700 rounded-full h-1">
           <div 
             className="bg-gradient-to-r from-cyan-400 to-purple-600 h-1 rounded-full transition-all duration-300"
-            style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+            style={{ width: `${((currentStep - 1) / totalSteps) * 100}%` }}
           />
         </div>
       </div>
