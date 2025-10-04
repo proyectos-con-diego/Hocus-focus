@@ -9,6 +9,7 @@ import ProductRelatedArticles from '../../../components/ProductRelatedArticles';
 import StarRating from '../../../components/StarRating';
 import PackStickyBannerInferior from '../../../components/PackStickyBannerInferior';
 import MultiStepForm from '../../../components/MultiStepForm';
+import MiniFormModal from '../../../components/MiniFormModal';
 import { getPacksForProduct } from '../../../data/packs';
 import { event as trackEvent } from '../../../lib/analytics';
 
@@ -2085,6 +2086,7 @@ export default function ProductoPage() {
   const [hasTrackedPricingView, setHasTrackedPricingView] = useState(false);
   const [hasTrackedFormView, setHasTrackedFormView] = useState(false);
   // const [isVipModalOpen, setIsVipModalOpen] = useState(false); // Deshabilitado temporalmente
+  const [isMiniModalOpen, setIsMiniModalOpen] = useState(false);
 
   // Estado para los artículos relacionados
   const [relatedArticles, setRelatedArticles] = useState<any[]>([]);
@@ -2092,6 +2094,12 @@ export default function ProductoPage() {
 
   // Ref para el formulario incrustado
   const formRef = useRef<HTMLDivElement>(null);
+
+  // Función para abrir modal MINI
+  const openMiniModal = () => {
+    try { trackEvent({ action: 'click_mini_form', category: 'Producto', label: product?.name || 'unknown' }); } catch {}
+    setIsMiniModalOpen(true);
+  };
 
   // Función para abrir modal VIP - Deshabilitada temporalmente
   // const openVipModal = () => {
@@ -2770,8 +2778,8 @@ export default function ProductoPage() {
                       }
                     }} onClick={() => {
                       if (plan.badge === 'GRATIS') {
-                        // Para botones GRATIS, redirigir a una página de acceso gratuito o abrir modal
-                        window.open('https://notion.so', '_blank');
+                        // Para botones GRATIS, abrir modal MINI
+                        openMiniModal();
                       } else {
                         // Para otros botones, usar la funcionalidad existente
                         scrollToPricing();
@@ -2882,6 +2890,13 @@ export default function ProductoPage() {
       {/* Banner sticky inferior con packs del producto */}
       <PackStickyBannerInferior packs={getPacksForProduct(product?.name || '')} />
 
+      {/* Modal para formulario MINI */}
+      <MiniFormModal
+        isOpen={isMiniModalOpen}
+        onClose={() => setIsMiniModalOpen(false)}
+        productName={product?.name || 'Producto'}
+        productSlug={slug}
+      />
 
     </div>
   );
