@@ -136,7 +136,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           type="text"
           value={formData.name}
           onChange={(e) => updateFormData('name', e.target.value)}
-          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:bg-white/20 focus:border-cyan-400 transition-all"
+          className="w-full px-4 py-4 rounded-2xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border-0"
           placeholder="Tu nombre completo"
           required
         />
@@ -150,7 +150,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           type="email"
           value={formData.email}
           onChange={(e) => updateFormData('email', e.target.value)}
-          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:bg-white/20 focus:border-cyan-400 transition-all"
+          className="w-full px-4 py-4 rounded-2xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border-0"
           placeholder="tu@email.com"
           required
         />
@@ -229,7 +229,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           type="text"
           value={formData.occupation}
           onChange={(e) => updateFormData('occupation', e.target.value)}
-          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:bg-white/20 focus:border-cyan-400 transition-all"
+          className="w-full px-4 py-4 rounded-2xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border-0"
           placeholder="Ej: Desarrollador, Marketing Manager, Emprendedor..."
           required
         />
@@ -415,7 +415,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
   );
 
   return (
-    <div className="bg-gray-900 rounded-2xl max-w-2xl w-full border border-gray-700">
+    <div className="max-w-2xl w-full">
       {/* Header - Solo mostrar si no es modal y no es VIP (para evitar redundancia) */}
       {!isOpen && productType !== 'vip' && (
         <div className="p-6 border-b border-gray-700">
@@ -430,14 +430,14 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
       )}
 
       {/* Progress Bar */}
-      <div className="px-6 py-4">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-gray-400">Paso {currentStep} de {totalSteps}</span>
-          <span className="text-sm text-gray-400">{Math.round(((currentStep - 1) / totalSteps) * 100)}%</span>
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-sm font-medium text-gray-300">Paso {currentStep} de {totalSteps}</span>
+          <span className="text-sm font-medium text-gray-300">{Math.round(((currentStep - 1) / totalSteps) * 100)}%</span>
         </div>
-        <div className="w-full bg-gray-700 rounded-full h-1">
+        <div className="w-full bg-gray-800/50 rounded-full h-1.5">
           <div 
-            className="bg-gradient-to-r from-cyan-400 to-purple-600 h-1 rounded-full transition-all duration-300"
+            className="bg-gradient-to-r from-cyan-400 to-purple-600 h-1.5 rounded-full transition-all duration-500 ease-out"
             style={{ width: `${((currentStep - 1) / totalSteps) * 100}%` }}
           />
         </div>
@@ -476,21 +476,21 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
       {/* Footer */}
       {!isSubmitted && (
-        <div className="flex items-center justify-between p-6 border-t border-gray-700">
-          <button
-            onClick={prevStep}
-            disabled={currentStep === 1}
-            className="px-6 py-3 rounded-xl border border-gray-600 text-gray-300 hover:border-gray-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Anterior
-          </button>
+        <div className="flex items-center justify-between pt-8">
+        <button
+          onClick={prevStep}
+          disabled={currentStep === 1}
+          className="px-8 py-4 rounded-2xl bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border-0"
+        >
+          Anterior
+        </button>
 
           <div className="flex gap-3">
             {currentStep < totalSteps ? (
               <button
                 onClick={nextStep}
                 disabled={!validateCurrentStep()}
-                className="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-semibold hover:scale-105 hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 Siguiente
               </button>
@@ -498,7 +498,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
               <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="px-8 py-3 rounded-xl bg-gradient-to-r from-green-400 to-emerald-600 text-white font-semibold hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="px-8 py-4 rounded-2xl bg-gradient-to-r from-green-400 to-emerald-600 text-white font-semibold hover:scale-105 hover:shadow-lg hover:shadow-green-400/25 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {isSubmitting ? 'Enviando...' : 'Enviar solicitud'}
               </button>

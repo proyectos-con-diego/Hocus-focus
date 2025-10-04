@@ -32,21 +32,19 @@ const MiniFormModal: React.FC<MiniFormModalProps> = ({
         </button>
 
         {/* Contenido del modal */}
-        <div className="bg-gray-900 rounded-2xl border border-gray-700 shadow-2xl">
+        <div className="bg-gray-900/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/10">
           {/* Header del modal */}
-          <div className="p-6 border-b border-gray-700">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold text-white mb-2">
-                Obtener {productName} MINI
-              </h2>
-              <p className="text-gray-400">
-                Versión gratuita disponible
-              </p>
-            </div>
+          <div className="p-8 text-center">
+            <h2 className="text-4xl font-bold text-white mb-3">
+              Obtener {productName} MINI
+            </h2>
+            <p className="text-gray-300 text-lg">
+              Versión gratuita disponible
+            </p>
           </div>
 
           {/* Formulario multi-paso */}
-          <div className="p-6">
+          <div className="px-8 pb-8">
             <MultiStepForm
               productName={productName}
               productSlug={productSlug}
