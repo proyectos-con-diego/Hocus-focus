@@ -446,9 +446,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
       {/* Progress Bar */}
       <div className="mb-6">
         <div className="flex items-center justify-between space-x-2">
-          <div className={`flex-1 h-1 rounded-full transition-all duration-500 ease-out ${currentStep > 1 ? 'bg-gradient-to-r from-cyan-400 to-purple-600' : 'bg-gray-800/50'}`} />
-          <div className={`flex-1 h-1 rounded-full transition-all duration-500 ease-out ${currentStep > 2 ? 'bg-gradient-to-r from-cyan-400 to-purple-600' : 'bg-gray-800/50'}`} />
-          <div className={`flex-1 h-1 rounded-full transition-all duration-500 ease-out ${currentStep > 3 ? 'bg-gradient-to-r from-cyan-400 to-purple-600' : 'bg-gray-800/50'}`} />
+          <div className={`flex-1 h-1 rounded-full transition-all duration-500 ease-out ${isSubmitted || currentStep > 1 ? 'bg-gradient-to-r from-cyan-400 to-purple-600' : 'bg-gray-800/50'}`} />
+          <div className={`flex-1 h-1 rounded-full transition-all duration-500 ease-out ${isSubmitted || currentStep > 2 ? 'bg-gradient-to-r from-cyan-400 to-purple-600' : 'bg-gray-800/50'}`} />
+          <div className={`flex-1 h-1 rounded-full transition-all duration-500 ease-out ${isSubmitted || currentStep > 3 ? 'bg-gradient-to-r from-cyan-400 to-purple-600' : 'bg-gray-800/50'}`} />
         </div>
       </div>
 
@@ -480,7 +480,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
               </div>
             )}
             
-            {submitMessage && (
+            {/* Solo mostrar submitMessage si NO es MINI */}
+            {submitMessage && productType !== 'mini' && (
               <div className={`p-4 rounded-xl ${
                 submitMessage.includes('Gracias') || submitMessage.includes('Excelente') || submitMessage.includes('Perfecto')
                   ? 'bg-green-500/20 border border-green-500/30 text-green-300'
