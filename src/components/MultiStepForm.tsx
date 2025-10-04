@@ -109,8 +109,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
       const success = await submitToMake(formData);
       if (success) {
         setIsSubmitted(true);
-        // Si es un modal, cerrarlo después de un breve delay
-        if (isOpen && onClose) {
+        // Para productos MINI, mantener el modal abierto para que puedan acceder al botón
+        // Solo cerrar automáticamente si NO es MINI
+        if (isOpen && onClose && productType !== 'mini') {
           setTimeout(() => {
             onClose();
           }, 2000); // 2 segundos para que el usuario vea el mensaje de confirmación
