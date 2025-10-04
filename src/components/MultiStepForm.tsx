@@ -56,7 +56,9 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     // Campos para "Otro"
     otherCountry: '',
     otherIndustry: '',
-    otherProductInterest: ''
+    otherProductInterest: '',
+    // Suscripción al newsletter
+    subscribeNewsletter: false
   });
 
   const { submitToMake, isSubmitting, submitMessage, submitStatus } = useMakeWebhook({
@@ -66,7 +68,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
   const totalSteps = 3;
 
-  const updateFormData = (field: keyof FormData, value: string) => {
+  const updateFormData = (field: keyof FormData, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -325,6 +327,24 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           )}
         </div>
       )}
+
+      {/* Checkbox de suscripción al newsletter */}
+      <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+        <label className="flex items-start space-x-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={formData.subscribeNewsletter}
+            onChange={(e) => updateFormData('subscribeNewsletter', e.target.checked)}
+            className="mt-1 w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+          />
+          <div className="text-sm text-white">
+            <span className="font-medium">🎁 Recibir recursos exclusivos</span>
+            <p className="text-gray-300 mt-1">
+              Quiero recibir artículos y recursos sobre productividad, IA y optimización en mi email.
+            </p>
+          </div>
+        </label>
+      </div>
     </div>
   );
 
@@ -365,6 +385,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <div>
             <span className="text-gray-400">Producto:</span>
             <span className="text-white ml-2">{formData.productName}</span>
+          </div>
+          <div>
+            <span className="text-gray-400">Newsletter:</span>
+            <span className="text-white ml-2">
+              {formData.subscribeNewsletter ? '✅ Sí, quiero recibir recursos' : '❌ No, gracias'}
+            </span>
           </div>
         </div>
       </div>
