@@ -416,12 +416,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
   return (
     <div className="bg-gray-900 rounded-2xl max-w-2xl w-full border border-gray-700">
-      {/* Header - Solo mostrar si no es modal */}
-      {!isOpen && (
+      {/* Header - Solo mostrar si no es modal y no es VIP (para evitar redundancia) */}
+      {!isOpen && productType !== 'vip' && (
         <div className="p-6 border-b border-gray-700">
           <div>
             <h2 className="text-2xl font-bold text-white">
-              {productType === 'vip' && 'Únete a la lista VIP'}
               {productType === 'spirit' && 'Solicitar Spirit'}
               {productType === 'mini' && `Obtener ${productName} MINI`}
             </h2>
