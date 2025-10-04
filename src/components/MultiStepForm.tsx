@@ -431,15 +431,33 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
       {/* Progress Bar */}
       <div className="mb-8">
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-4">
           <span className="text-sm font-medium text-gray-300">Paso {currentStep} de {totalSteps}</span>
           <span className="text-sm font-medium text-gray-300">{Math.round(((currentStep - 1) / totalSteps) * 100)}%</span>
         </div>
-        <div className="w-full bg-gray-800/50 rounded-full h-1.5">
-          <div 
-            className="bg-gradient-to-r from-cyan-400 to-purple-600 h-1.5 rounded-full transition-all duration-500 ease-out"
-            style={{ width: `${((currentStep - 1) / totalSteps) * 100}%` }}
-          />
+        
+        {/* Barra de progreso segmentada como Tally */}
+        <div className="flex items-center justify-center space-x-2">
+          {[1, 2, 3].map((step) => (
+            <div key={step} className="flex items-center">
+              <div 
+                className={`w-12 h-2 rounded-full transition-all duration-300 ${
+                  currentStep > step 
+                    ? 'bg-gradient-to-r from-cyan-400 to-purple-600' 
+                    : currentStep === step
+                    ? 'bg-gradient-to-r from-cyan-400 to-purple-600'
+                    : 'bg-gray-700'
+                }`}
+              />
+              {step < 3 && (
+                <div 
+                  className={`w-2 h-0.5 mx-1 transition-all duration-300 ${
+                    currentStep > step ? 'bg-cyan-400' : 'bg-gray-600'
+                  }`}
+                />
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
