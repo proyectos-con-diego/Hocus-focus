@@ -91,6 +91,19 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     }
   };
 
+  // Función para obtener el enlace de Notion según el producto
+  const getNotionLink = () => {
+    const links = {
+      'vinxi': 'https://www.notion.so/diegoproyectos/Vinxi-Mini-a9fa3b9e599c409882dc3c2e4e4448b2',
+      'jaime daily': 'https://www.notion.so/diegoproyectos/Habitus-Prime-Mini-6e4e229029a04c21972974a04b7a99df',
+      'okro': 'https://www.notion.so/diegoproyectos/OKRo-Mini-17d70e875cb180cca2b3c908399bdd40',
+      'grilla viralis': 'https://www.notion.so/diegoproyectos/Grilla-Viralis-Mini-12670e875cb180f3b7cdc0ba17f73c91'
+    };
+    
+    const productKey = productName.toLowerCase();
+    return links[productKey] || null;
+  };
+
   const handleSubmit = async () => {
     try {
       const success = await submitToMake(formData);
@@ -449,6 +462,24 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
               {productType === 'spirit' && `Tu solicitud de Spirit ha sido enviada. Te contactaremos pronto.`}
               {productType === 'mini' && `Te hemos enviado el acceso a ${productName} MINI por email. ¡Revisa tu bandeja de entrada!`}
             </p>
+            
+            {/* Botón de acceso para productos MINI */}
+            {productType === 'mini' && getNotionLink() && (
+              <div className="mb-6">
+                <a
+                  href={getNotionLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-semibold hover:scale-105 hover:shadow-lg hover:shadow-cyan-400/25 transition-all duration-200"
+                >
+                  <span>Acceder a {productName} MINI</span>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            )}
+            
             {submitMessage && (
               <div className={`p-4 rounded-xl ${
                 submitMessage.includes('Gracias') || submitMessage.includes('Excelente') || submitMessage.includes('Perfecto')
