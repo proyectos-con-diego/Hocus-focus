@@ -109,11 +109,11 @@ function formatDataForMake(data: any) {
         name: data.name || '',
         email: data.email || '',
         age: data.age || '',
-        country: data.country || '',
+        country: data.country === 'Otro' ? data.otherCountry || '' : data.country || '',
         
         // Información Profesional
         occupation: data.occupation || '',
-        industry: data.industry || '',
+        industry: data.industry === 'Otro' ? data.otherIndustry || '' : data.industry || '',
         teamSize: data.teamSize || '',
         
         // Información del Producto
@@ -125,9 +125,14 @@ function formatDataForMake(data: any) {
         // Preguntas Específicas
         specificQuestions: data.specificQuestions || {},
         
+        // Campos "Otro" específicos
+        otherCountry: data.otherCountry || '',
+        otherIndustry: data.otherIndustry || '',
+        otherProductInterest: data.otherProductInterest || '',
+        
         // Campos legacy (mantener para compatibilidad)
         product: data.product || data.productName || '',
-        sector: data.sector || data.industry || '',
+        sector: data.sector || (data.industry === 'Otro' ? data.otherIndustry || '' : data.industry || ''),
         experience: data.experience || '',
         currentChallenges: data.currentChallenges || '',
         goals: data.goals || '',
