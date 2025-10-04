@@ -48,14 +48,17 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
     setNewsletterMessage('');
 
     try {
-      const response = await fetch('/api/notion-newsletter', {
+      const response = await fetch('/api/make-webhook', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...newsletterData,
-          source: `spirit-${spirit.slug}`
+          formType: 'newsletter',
+          source: `spirit-${spirit.slug}`,
+          name: newsletterData.name,
+          email: newsletterData.email,
+          subscribeNewsletter: newsletterData.subscribeNewsletter
         }),
       });
 
