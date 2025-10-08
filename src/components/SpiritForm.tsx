@@ -53,9 +53,9 @@ export default function SpiritForm({
   const stepsOrder = [
     'basic',
     ...(isVinxi ? ['vinxi_storage', 'vinxi_difficulty', 'vinxi_help'] as const : []),
+    'delegation_text',
     'ai_life_aspects',
-    'ai_tools',
-    'delegation_text'
+    'ai_tools'
   ];
   const totalSteps = stepsOrder.length;
 
@@ -319,28 +319,21 @@ export default function SpiritForm({
     <div className="space-y-6">
       <div>
         <label className="block text-white text-2xl font-semibold mb-3">
-          ¿Cuál es tu mayor dificultad al organizar tus ideas o proyectos?
+          ¿Cuál es tu mayor dificultad al organizar tus ideas o proyectos? *
         </label>
-        <p className="text-gray-400 italic mb-4">Selecciona lo que mejor describa tu perfil.</p>
-        <div className="space-y-3">
-          {[
-            { value: 'muchas_ideas', label: 'Tengo demasiadas ideas al mismo tiempo' },
-            { value: 'priorizar', label: 'Me cuesta priorizar' },
-            { value: 'no_termino', label: 'No termino lo que empiezo' },
-            { value: 'otro', label: 'Otro' }
-          ].map((opt) => (
-            <label key={opt.value} className="flex items-center space-x-3 cursor-pointer">
-              <input
-                type="radio"
-                name="vinxiDifficulty"
-                checked={formData.vinxiDifficulty === opt.value}
-                onChange={() => updateFormData('vinxiDifficulty', opt.value)}
-                className="w-5 h-5 text-cyan-400 bg-white/10 border-white/20 rounded-full focus:ring-cyan-400 focus:ring-2"
-              />
-              <span className="text-white text-base md:text-lg font-medium">{opt.label}</span>
-            </label>
-          ))}
-        </div>
+        <select
+          value={formData.vinxiDifficulty}
+          onChange={(e) => updateFormData('vinxiDifficulty', e.target.value)}
+          className="w-full px-4 py-4 rounded-xl bg-gray-800/50 text-white focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="muchas_ideas">Tengo demasiadas ideas al mismo tiempo</option>
+          <option value="priorizar">Me cuesta priorizar</option>
+          <option value="no_termino">No termino lo que empiezo</option>
+          <option value="otro">Otro</option>
+        </select>
+        
         {formData.vinxiDifficulty === 'otro' && (
           <div className="mt-4">
             <input
@@ -411,36 +404,29 @@ export default function SpiritForm({
     <div className="space-y-6">
       <div>
         <label className="block text-white text-2xl font-semibold mb-3">
-          ¿Dónde guardas actualmente tus ideas o pendientes?
+          ¿Dónde guardas actualmente tus ideas o pendientes? *
         </label>
-        <p className="text-gray-400 italic mb-4">Elige la más representativa.</p>
-        <div className="space-y-3">
-          {[
-            { value: 'notas_sueltas', label: 'Notas sueltas / post-its' },
-            { value: 'apps_organizacion', label: 'En apps como Notion, Todoist o Asana' },
-            { value: 'notas_voz', label: 'Notas de voz' },
-            { value: 'sin_sistema', label: 'No tengo sistema definido' },
-            { value: 'otro', label: 'Otro' }
-          ].map((opt) => (
-            <label key={opt.value} className="flex items-center space-x-3 cursor-pointer">
-              <input
-                type="radio"
-                name="vinxiStorage"
-                checked={formData.vinxiStorage === opt.value}
-                onChange={() => updateFormData('vinxiStorage', opt.value)}
-                className="w-5 h-5 text-cyan-400 bg-white/10 border-white/20 rounded-full focus:ring-cyan-400 focus:ring-2"
-              />
-              <span className="text-white text-base md:text-lg font-medium">{opt.label}</span>
-            </label>
-          ))}
-        </div>
+        <select
+          value={formData.vinxiStorage}
+          onChange={(e) => updateFormData('vinxiStorage', e.target.value)}
+          className="w-full px-4 py-4 rounded-xl bg-gray-800/50 text-white focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="notas_sueltas">Notas sueltas / post-its</option>
+          <option value="apps_organizacion">En apps como Notion, Todoist o Asana</option>
+          <option value="notas_voz">Notas de voz</option>
+          <option value="sin_sistema">No tengo sistema definido</option>
+          <option value="otro">Otro</option>
+        </select>
+        
         {formData.vinxiStorage === 'otro' && (
           <div className="mt-4">
             <input
               type="text"
               value={formData.vinxiOtherStorage}
               onChange={(e) => updateFormData('vinxiOtherStorage', e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duración-200 border border-gray-700/50"
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
               placeholder="Especifica dónde guardas tus ideas"
               required
             />
