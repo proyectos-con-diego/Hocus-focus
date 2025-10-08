@@ -46,7 +46,7 @@ export default function SpiritForm({
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { submitToMake, isSubmitting, submitMessage, submitStatus } = useMakeWebhook({
-    formType: 'spirit_idea',
+    formType: 'spirit_form',
     source: `spirit-${spiritSlug}`
   });
 
@@ -128,7 +128,7 @@ export default function SpiritForm({
         spiritName,
         spiritSlug,
         source: `spirit-${spiritSlug}`,
-        productType: 'spirit_idea'
+        productType: 'spirit_form'
       });
       
       if (success) {

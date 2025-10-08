@@ -101,6 +101,43 @@ function formatDataForMake(data: any) {
         origin: data.source || 'spirit_ideas',
       };
 
+    case 'spirit_form':
+      return {
+        ...baseData,
+        Tipo: 'message',
+        // Información Personal
+        name: data.name || '',
+        email: data.email || '',
+        age: data.age || '',
+        country: data.country || '',
+        
+        // Preguntas Específicas VINXI
+        vinxiDifficulty: data.vinxiDifficulty || '',
+        vinxiOtherDifficulty: data.vinxiOtherDifficulty || '',
+        vinxiHelpTypes: data.vinxiHelpTypes || [],
+        vinxiOtherHelp: data.vinxiOtherHelp || '',
+        vinxiStorage: data.vinxiStorage || '',
+        vinxiOtherStorage: data.vinxiOtherStorage || '',
+        
+        // Preguntas Genéricas
+        aiTools: data.aiTools || [],
+        otherAiTools: data.otherAiTools || '',
+        delegationTask: data.delegationTask || '',
+        delegationTasks: data.delegationTasks || [],
+        otherDelegationTasks: data.otherDelegationTasks || '',
+        aiLifeAspects: data.aiLifeAspects || [],
+        otherAiLifeAspects: data.otherAiLifeAspects || '',
+        
+        // Información del Spirit
+        spiritName: data.spiritName || '',
+        spiritSlug: data.spiritSlug || '',
+        productType: data.productType || 'spirit_form',
+        
+        // Suscripción
+        subscribeNewsletter: data.subscribeNewsletter || false,
+        origin: data.source || 'spirit_form',
+      };
+
     case 'vip_list':
       return {
         ...baseData,
