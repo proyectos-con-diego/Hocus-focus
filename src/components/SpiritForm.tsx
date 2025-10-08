@@ -36,7 +36,9 @@ export default function SpiritForm({
     vinxiHelpTypes: [] as string[],
     vinxiOtherHelp: '',
     vinxiStorage: '',
-    vinxiOtherStorage: ''
+    vinxiOtherStorage: '',
+    // Suscripción
+    subscribeNewsletter: true
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -54,7 +56,7 @@ export default function SpiritForm({
   ];
   const totalSteps = stepsOrder.length;
 
-  const updateFormData = (field: string, value: string | string[]) => {
+  const updateFormData = (field: string, value: string | string[] | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -217,6 +219,21 @@ export default function SpiritForm({
           <option value="Brasil">Brasil</option>
           <option value="Otro">Otro</option>
         </select>
+      </div>
+
+      {/* Suscripción al newsletter */}
+      <div>
+        <label className="flex items-center space-x-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={formData.subscribeNewsletter}
+            onChange={(e) => updateFormData('subscribeNewsletter', e.target.checked)}
+            className="w-5 h-5 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+          />
+          <span className="text-white text-base font-medium">
+            Quiero recibir actualizaciones sobre nuevos Spirits y contenido exclusivo
+          </span>
+        </label>
       </div>
     </div>
   );
