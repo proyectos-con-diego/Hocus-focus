@@ -49,7 +49,7 @@ export default function SpiritForm({
 
   const stepsOrder = [
     'basic',
-    ...(isVinxi ? ['vinxi_difficulty', 'vinxi_help', 'vinxi_storage'] as const : []),
+    ...(isVinxi ? ['vinxi_storage', 'vinxi_difficulty', 'vinxi_help'] as const : []),
     'ai_tools',
     'delegation_text',
     'delegation_tasks'
