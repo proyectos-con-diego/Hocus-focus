@@ -55,8 +55,7 @@ export default function SpiritForm({
     ...(isVinxi ? ['vinxi_storage', 'vinxi_difficulty', 'vinxi_help'] as const : []),
     'ai_life_aspects',
     'ai_tools',
-    'delegation_text',
-    'delegation_tasks'
+    'delegation_text'
   ];
   const totalSteps = stepsOrder.length;
 
@@ -106,11 +105,6 @@ export default function SpiritForm({
       }
       case 'delegation_text':
         return formData.delegationTask.trim();
-      case 'delegation_tasks': {
-        const hasDelegationTasks = formData.delegationTasks.length > 0;
-        const hasOtherDelegationTasks = !formData.delegationTasks.includes('otro') || (formData.delegationTasks.includes('otro') && formData.otherDelegationTasks.trim());
-        return hasDelegationTasks && hasOtherDelegationTasks;
-      }
       case 'ai_life_aspects': {
         const hasAiLifeAspects = formData.aiLifeAspects.length > 0;
         const hasOtherAiLifeAspects = !formData.aiLifeAspects.includes('otro') || (formData.aiLifeAspects.includes('otro') && formData.otherAiLifeAspects.trim());
@@ -319,59 +313,6 @@ export default function SpiritForm({
     </div>
   );
 
-  const renderStep4 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-white text-xl font-semibold mb-2">
-          ¿Con cuál de estas tareas te gustaría experimentar delegación inteligente? *
-        </label>
-        <p className="text-gray-400 text-sm mb-4">Puedes marcar más de una.</p>
-        
-        <div className="space-y-3">
-          {[
-            { value: 'calendario', label: 'Gestionar mi calendario o recordatorios' },
-            { value: 'priorizar', label: 'Priorizar pendientes o proyectos' },
-            { value: 'resumir', label: 'Resumir textos, correos o artículos' },
-            { value: 'ideas', label: 'Generar ideas creativas' },
-            { value: 'redactar', label: 'Redactar mensajes o textos' },
-            { value: 'organizar', label: 'Organizar archivos o información' },
-            { value: 'otro', label: 'Otro' }
-          ].map((option) => (
-            <label key={option.value} className="flex items-center space-x-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.delegationTasks.includes(option.value)}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    updateFormData('delegationTasks', [...formData.delegationTasks, option.value]);
-                  } else {
-                    updateFormData('delegationTasks', formData.delegationTasks.filter(task => task !== option.value));
-                  }
-                }}
-                className="w-5 h-5 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
-              />
-              <span className="text-white text-base md:text-lg font-medium">
-                {option.label}
-              </span>
-            </label>
-          ))}
-        </div>
-        
-        {formData.delegationTasks.includes('otro') && (
-          <div className="mt-4">
-            <input
-              type="text"
-              value={formData.otherDelegationTasks}
-              onChange={(e) => updateFormData('otherDelegationTasks', e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
-              placeholder="Especifica qué otras tareas te gustaría delegar..."
-              required
-            />
-          </div>
-        )}
-      </div>
-    </div>
-  );
 
   // ----- VINXI RENDERERS -----
   const renderVinxiDifficulty = () => (
@@ -617,7 +558,6 @@ export default function SpiritForm({
               vinxi_storage: renderVinxiStorage ? renderVinxiStorage() : <></>,
               ai_tools: renderStep2(),
               delegation_text: renderStep3(),
-              delegation_tasks: renderStep4(),
               ai_life_aspects: renderAiLifeAspects()
             };
             const stepId = stepsOrder[currentStep - 1];
