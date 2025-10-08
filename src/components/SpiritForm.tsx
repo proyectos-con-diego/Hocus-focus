@@ -53,8 +53,8 @@ export default function SpiritForm({
   const stepsOrder = [
     'basic',
     ...(isVinxi ? ['vinxi_storage', 'vinxi_difficulty', 'vinxi_help'] as const : []),
-    'delegation_text',
     'ai_life_aspects',
+    'delegation_text',
     'ai_tools'
   ];
   const totalSteps = stepsOrder.length;
@@ -581,9 +581,9 @@ export default function SpiritForm({
               vinxi_difficulty: renderVinxiDifficulty ? renderVinxiDifficulty() : <></>,
               vinxi_help: renderVinxiHelp ? renderVinxiHelp() : <></>,
               vinxi_storage: renderVinxiStorage ? renderVinxiStorage() : <></>,
-              ai_tools: renderStep2(),
+              ai_life_aspects: renderAiLifeAspects(),
               delegation_text: renderStep3(),
-              ai_life_aspects: renderAiLifeAspects()
+              ai_tools: renderStep2()
             };
             const stepId = stepsOrder[currentStep - 1];
             return stepMap[stepId] || null;
