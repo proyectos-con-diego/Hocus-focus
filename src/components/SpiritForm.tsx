@@ -53,10 +53,10 @@ export default function SpiritForm({
   const stepsOrder = [
     'basic',
     ...(isVinxi ? ['vinxi_storage', 'vinxi_difficulty', 'vinxi_help'] as const : []),
+    'ai_life_aspects',
     'ai_tools',
     'delegation_text',
-    'delegation_tasks',
-    'ai_life_aspects'
+    'delegation_tasks'
   ];
   const totalSteps = stepsOrder.length;
 
