@@ -396,12 +396,15 @@ export default function SpiritForm({
         <label className="block text-white text-2xl font-semibold mb-3">
           ¿Qué tipo de ayuda te resultaría más útil en un asistente como Vinxi Spirit?
         </label>
+        <p className="text-gray-400 text-sm mb-4">Puedes marcar más de una.</p>
         <div className="space-y-3">
           {[
             { value: 'convertir_ideas', label: 'Convertir ideas dispersas en planes' },
             { value: 'priorizar_urgencia', label: 'Priorizar tareas según urgencia' },
             { value: 'mantener_foco', label: 'Mantener el foco diario' },
             { value: 'organizar_proyectos', label: 'Organizar proyectos complejos' },
+            { value: 'recordatorios', label: 'Recordatorios puntuales' },
+            { value: 'motivacion', label: 'Motivación breve' },
             { value: 'otro', label: 'Otro' }
           ].map((opt) => (
             <label key={opt.value} className="flex items-center space-x-3 cursor-pointer">
@@ -445,9 +448,9 @@ export default function SpiritForm({
         </label>
         <div className="space-y-3">
           {[
-            { value: 'cabeza_notas', label: 'En la cabeza / Notas sueltas' },
-            { value: 'notion', label: 'En Notion' },
-            { value: 'todoist_asana', label: 'En apps como Todoist o Asana' },
+            { value: 'notas_sueltas', label: 'Notas sueltas / post-its' },
+            { value: 'apps_organizacion', label: 'En apps como Notion, Todoist o Asana' },
+            { value: 'notas_voz', label: 'Notas de voz' },
             { value: 'sin_sistema', label: 'No tengo sistema definido' },
             { value: 'otro', label: 'Otro' }
           ].map((opt) => (
