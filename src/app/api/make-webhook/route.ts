@@ -112,21 +112,51 @@ function formatDataForMake(data: any) {
         country: data.country || '',
         
         // Preguntas Específicas VINXI
-        vinxiDifficulty: data.vinxiDifficulty || '',
-        vinxiOtherDifficulty: data.vinxiOtherDifficulty || '',
-        vinxiHelpTypes: Array.isArray(data.vinxiHelpTypes) ? data.vinxiHelpTypes.join(', ') : (data.vinxiHelpTypes || ''),
-        vinxiOtherHelp: data.vinxiOtherHelp || '',
-        vinxiStorage: data.vinxiStorage || '',
-        vinxiOtherStorage: data.vinxiOtherStorage || '',
+        vinxiDifficulty: data.vinxiDifficulty === 'otro' && data.vinxiOtherDifficulty 
+          ? data.vinxiOtherDifficulty 
+          : (data.vinxiDifficulty || ''),
+        vinxiHelpTypes: (() => {
+          const helpTypes = Array.isArray(data.vinxiHelpTypes) ? data.vinxiHelpTypes : [];
+          const hasOther = helpTypes.includes('otro') && data.vinxiOtherHelp;
+          if (hasOther) {
+            const filteredTypes = helpTypes.filter((type: string) => type !== 'otro');
+            return [...filteredTypes, data.vinxiOtherHelp].join(', ');
+          }
+          return helpTypes.join(', ');
+        })(),
+        vinxiStorage: data.vinxiStorage === 'otro' && data.vinxiOtherStorage 
+          ? data.vinxiOtherStorage 
+          : (data.vinxiStorage || ''),
         
         // Preguntas Genéricas
-        aiTools: Array.isArray(data.aiTools) ? data.aiTools.join(', ') : (data.aiTools || ''),
-        otherAiTools: data.otherAiTools || '',
+        aiTools: (() => {
+          const tools = Array.isArray(data.aiTools) ? data.aiTools : [];
+          const hasOther = tools.includes('otro') && data.otherAiTools;
+          if (hasOther) {
+            const filteredTools = tools.filter((tool: string) => tool !== 'otro');
+            return [...filteredTools, data.otherAiTools].join(', ');
+          }
+          return tools.join(', ');
+        })(),
         delegationTask: data.delegationTask || '',
-        delegationTasks: Array.isArray(data.delegationTasks) ? data.delegationTasks.join(', ') : (data.delegationTasks || ''),
-        otherDelegationTasks: data.otherDelegationTasks || '',
-        aiLifeAspects: Array.isArray(data.aiLifeAspects) ? data.aiLifeAspects.join(', ') : (data.aiLifeAspects || ''),
-        otherAiLifeAspects: data.otherAiLifeAspects || '',
+        delegationTasks: (() => {
+          const tasks = Array.isArray(data.delegationTasks) ? data.delegationTasks : [];
+          const hasOther = tasks.includes('otro') && data.otherDelegationTasks;
+          if (hasOther) {
+            const filteredTasks = tasks.filter((task: string) => task !== 'otro');
+            return [...filteredTasks, data.otherDelegationTasks].join(', ');
+          }
+          return tasks.join(', ');
+        })(),
+        aiLifeAspects: (() => {
+          const aspects = Array.isArray(data.aiLifeAspects) ? data.aiLifeAspects : [];
+          const hasOther = aspects.includes('otro') && data.otherAiLifeAspects;
+          if (hasOther) {
+            const filteredAspects = aspects.filter((aspect: string) => aspect !== 'otro');
+            return [...filteredAspects, data.otherAiLifeAspects].join(', ');
+          }
+          return aspects.join(', ');
+        })(),
         
         // Información del Spirit
         spiritName: data.spiritName || '',
