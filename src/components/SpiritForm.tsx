@@ -472,6 +472,7 @@ export default function SpiritForm({
         <label className="block text-white text-2xl font-semibold mb-3">
           ¿Dónde guardas actualmente tus ideas o pendientes?
         </label>
+        <p className="text-gray-400 italic mb-4">Elige la más representativa.</p>
         <div className="space-y-3">
           {[
             { value: 'notas_sueltas', label: 'Notas sueltas / post-its' },
