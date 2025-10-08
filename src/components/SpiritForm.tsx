@@ -19,6 +19,7 @@ export default function SpiritForm({
   spiritDescription 
 }: SpiritFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
+  const isVinxi = spiritSlug === 'vinxi-spirit';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -28,7 +29,14 @@ export default function SpiritForm({
     otherAiTools: '',
     delegationTask: '',
     delegationTasks: [] as string[],
-    otherDelegationTasks: ''
+    otherDelegationTasks: '',
+    // Preguntas específicas (Vinxi)
+    vinxiDifficulty: '',
+    vinxiOtherDifficulty: '',
+    vinxiHelpTypes: [] as string[],
+    vinxiOtherHelp: '',
+    vinxiStorage: '',
+    vinxiOtherStorage: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -37,7 +45,14 @@ export default function SpiritForm({
     source: `spirit-${spiritSlug}`
   });
 
-  const totalSteps = 4;
+  const stepsOrder = [
+    'basic',
+    ...(isVinxi ? ['vinxi_difficulty', 'vinxi_help', 'vinxi_storage'] as const : []),
+    'ai_tools',
+    'delegation_text',
+    'delegation_tasks'
+  ];
+  const totalSteps = stepsOrder.length;
 
   const updateFormData = (field: string, value: string | string[]) => {
     setFormData(prev => ({
@@ -59,19 +74,37 @@ export default function SpiritForm({
   };
 
   const validateCurrentStep = () => {
-    switch (currentStep) {
-      case 1:
+    const stepId = stepsOrder[currentStep - 1];
+    switch (stepId) {
+      case 'basic':
         return formData.name.trim() && formData.email.trim() && formData.age && formData.country;
-      case 2:
+      case 'vinxi_difficulty': {
+        const val = (formData as any).vinxiDifficulty || '';
+        const needsOther = val === 'otro';
+        return !!val && (!needsOther || !!formData.vinxiOtherDifficulty.trim());
+      }
+      case 'vinxi_help': {
+        const hasAny = formData.vinxiHelpTypes.length > 0;
+        const needsOther = formData.vinxiHelpTypes.includes('otro');
+        return hasAny && (!needsOther || !!formData.vinxiOtherHelp.trim());
+      }
+      case 'vinxi_storage': {
+        const has = !!formData.vinxiStorage;
+        const needsOther = formData.vinxiStorage === 'otro';
+        return has && (!needsOther || !!formData.vinxiOtherStorage.trim());
+      }
+      case 'ai_tools': {
         const hasAiTools = formData.aiTools.length > 0;
         const hasOtherAiTools = !formData.aiTools.includes('otro') || (formData.aiTools.includes('otro') && formData.otherAiTools.trim());
         return hasAiTools && hasOtherAiTools;
-      case 3:
+      }
+      case 'delegation_text':
         return formData.delegationTask.trim();
-      case 4:
+      case 'delegation_tasks': {
         const hasDelegationTasks = formData.delegationTasks.length > 0;
         const hasOtherDelegationTasks = !formData.delegationTasks.includes('otro') || (formData.delegationTasks.includes('otro') && formData.otherDelegationTasks.trim());
         return hasDelegationTasks && hasOtherDelegationTasks;
+      }
       default:
         return false;
     }
@@ -191,7 +224,7 @@ export default function SpiritForm({
   const renderStep2 = () => (
     <div className="space-y-6">
       <div>
-        <label className="block text-white text-lg font-medium mb-2">
+        <label className="block text-white text-xl font-semibold mb-2">
           ¿Qué herramientas con inteligencia artificial usas actualmente (si usas alguna)? *
         </label>
         <p className="text-gray-400 text-sm mb-4">Puedes marcar más de una.</p>
@@ -217,9 +250,9 @@ export default function SpiritForm({
                     updateFormData('aiTools', formData.aiTools.filter(tool => tool !== option.value));
                   }
                 }}
-                className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+                className="w-5 h-5 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
               />
-              <span className="text-white text-sm font-medium">
+              <span className="text-white text-base md:text-lg font-medium">
                 {option.label}
               </span>
             </label>
@@ -263,7 +296,7 @@ export default function SpiritForm({
   const renderStep4 = () => (
     <div className="space-y-6">
       <div>
-        <label className="block text-white text-lg font-medium mb-2">
+        <label className="block text-white text-xl font-semibold mb-2">
           ¿Con cuál de estas tareas te gustaría experimentar delegación inteligente? *
         </label>
         <p className="text-gray-400 text-sm mb-4">Puedes marcar más de una.</p>
@@ -289,9 +322,9 @@ export default function SpiritForm({
                     updateFormData('delegationTasks', formData.delegationTasks.filter(task => task !== option.value));
                   }
                 }}
-                className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+                className="w-5 h-5 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
               />
-              <span className="text-white text-sm font-medium">
+              <span className="text-white text-base md:text-lg font-medium">
                 {option.label}
               </span>
             </label>
@@ -306,6 +339,138 @@ export default function SpiritForm({
               onChange={(e) => updateFormData('otherDelegationTasks', e.target.value)}
               className="w-full px-4 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
               placeholder="Especifica qué otras tareas te gustaría delegar..."
+              required
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  // ----- VINXI RENDERERS -----
+  const renderVinxiDifficulty = () => (
+    <div className="space-y-6">
+      <div>
+        <label className="block text-white text-2xl font-semibold mb-3">
+          ¿Cuál es tu mayor dificultad al organizar tus ideas o proyectos?
+        </label>
+        <p className="text-gray-400 italic mb-4">Selecciona lo que mejor describa tu perfil.</p>
+        <div className="space-y-3">
+          {[
+            { value: 'muchas_ideas', label: 'Tengo demasiadas ideas al mismo tiempo' },
+            { value: 'priorizar', label: 'Me cuesta priorizar' },
+            { value: 'no_termino', label: 'No termino lo que empiezo' },
+            { value: 'otro', label: 'Otro' }
+          ].map((opt) => (
+            <label key={opt.value} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="radio"
+                name="vinxiDifficulty"
+                checked={formData.vinxiDifficulty === opt.value}
+                onChange={() => updateFormData('vinxiDifficulty', opt.value)}
+                className="w-5 h-5 text-cyan-400 bg-white/10 border-white/20 rounded-full focus:ring-cyan-400 focus:ring-2"
+              />
+              <span className="text-white text-base md:text-lg font-medium">{opt.label}</span>
+            </label>
+          ))}
+        </div>
+        {formData.vinxiDifficulty === 'otro' && (
+          <div className="mt-4">
+            <input
+              type="text"
+              value={formData.vinxiOtherDifficulty}
+              onChange={(e) => updateFormData('vinxiOtherDifficulty', e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
+              placeholder="Especifica tu dificultad"
+              required
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  const renderVinxiHelp = () => (
+    <div className="space-y-6">
+      <div>
+        <label className="block text-white text-2xl font-semibold mb-3">
+          ¿Qué tipo de ayuda te resultaría más útil en un asistente como Vinxi Spirit?
+        </label>
+        <div className="space-y-3">
+          {[
+            { value: 'convertir_ideas', label: 'Convertir ideas dispersas en planes' },
+            { value: 'priorizar_urgencia', label: 'Priorizar tareas según urgencia' },
+            { value: 'mantener_foco', label: 'Mantener el foco diario' },
+            { value: 'organizar_proyectos', label: 'Organizar proyectos complejos' },
+            { value: 'otro', label: 'Otro' }
+          ].map((opt) => (
+            <label key={opt.value} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formData.vinxiHelpTypes.includes(opt.value)}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    updateFormData('vinxiHelpTypes', [...formData.vinxiHelpTypes, opt.value]);
+                  } else {
+                    updateFormData('vinxiHelpTypes', formData.vinxiHelpTypes.filter(v => v !== opt.value));
+                  }
+                }}
+                className="w-5 h-5 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+              />
+              <span className="text-white text-base md:text-lg font-medium">{opt.label}</span>
+            </label>
+          ))}
+        </div>
+        {formData.vinxiHelpTypes.includes('otro') && (
+          <div className="mt-4">
+            <input
+              type="text"
+              value={formData.vinxiOtherHelp}
+              onChange={(e) => updateFormData('vinxiOtherHelp', e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
+              placeholder="Especifica qué tipo de ayuda"
+              required
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  const renderVinxiStorage = () => (
+    <div className="space-y-6">
+      <div>
+        <label className="block text-white text-2xl font-semibold mb-3">
+          ¿Dónde guardas actualmente tus ideas o pendientes?
+        </label>
+        <div className="space-y-3">
+          {[
+            { value: 'cabeza_notas', label: 'En la cabeza / Notas sueltas' },
+            { value: 'notion', label: 'En Notion' },
+            { value: 'todoist_asana', label: 'En apps como Todoist o Asana' },
+            { value: 'sin_sistema', label: 'No tengo sistema definido' },
+            { value: 'otro', label: 'Otro' }
+          ].map((opt) => (
+            <label key={opt.value} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="radio"
+                name="vinxiStorage"
+                checked={formData.vinxiStorage === opt.value}
+                onChange={() => updateFormData('vinxiStorage', opt.value)}
+                className="w-5 h-5 text-cyan-400 bg-white/10 border-white/20 rounded-full focus:ring-cyan-400 focus:ring-2"
+              />
+              <span className="text-white text-base md:text-lg font-medium">{opt.label}</span>
+            </label>
+          ))}
+        </div>
+        {formData.vinxiStorage === 'otro' && (
+          <div className="mt-4">
+            <input
+              type="text"
+              value={formData.vinxiOtherStorage}
+              onChange={(e) => updateFormData('vinxiOtherStorage', e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duración-200 border border-gray-700/50"
+              placeholder="Especifica dónde guardas tus ideas"
               required
             />
           </div>
@@ -363,10 +528,19 @@ export default function SpiritForm({
 
         {/* Formulario */}
         <div className="space-y-6">
-          {currentStep === 1 && renderStep1()}
-          {currentStep === 2 && renderStep2()}
-          {currentStep === 3 && renderStep3()}
-          {currentStep === 4 && renderStep4()}
+          {(() => {
+            const stepMap: Record<string, React.ReactNode> = {
+              basic: renderStep1(),
+              vinxi_difficulty: renderVinxiDifficulty ? renderVinxiDifficulty() : <></>,
+              vinxi_help: renderVinxiHelp ? renderVinxiHelp() : <></>,
+              vinxi_storage: renderVinxiStorage ? renderVinxiStorage() : <></>,
+              ai_tools: renderStep2(),
+              delegation_text: renderStep3(),
+              delegation_tasks: renderStep4()
+            };
+            const stepId = stepsOrder[currentStep - 1];
+            return stepMap[stepId] || null;
+          })()}
 
           {/* Mensaje de estado */}
           {submitMessage && (
