@@ -38,7 +38,10 @@ export default function SpiritForm({
     vinxiStorage: '',
     vinxiOtherStorage: '',
     // Suscripción
-    subscribeNewsletter: true
+    subscribeNewsletter: true,
+    // Pregunta genérica adicional
+    aiLifeAspects: [] as string[],
+    otherAiLifeAspects: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -52,7 +55,8 @@ export default function SpiritForm({
     ...(isVinxi ? ['vinxi_storage', 'vinxi_difficulty', 'vinxi_help'] as const : []),
     'ai_tools',
     'delegation_text',
-    'delegation_tasks'
+    'delegation_tasks',
+    'ai_life_aspects'
   ];
   const totalSteps = stepsOrder.length;
 
@@ -106,6 +110,11 @@ export default function SpiritForm({
         const hasDelegationTasks = formData.delegationTasks.length > 0;
         const hasOtherDelegationTasks = !formData.delegationTasks.includes('otro') || (formData.delegationTasks.includes('otro') && formData.otherDelegationTasks.trim());
         return hasDelegationTasks && hasOtherDelegationTasks;
+      }
+      case 'ai_life_aspects': {
+        const hasAiLifeAspects = formData.aiLifeAspects.length > 0;
+        const hasOtherAiLifeAspects = !formData.aiLifeAspects.includes('otro') || (formData.aiLifeAspects.includes('otro') && formData.otherAiLifeAspects.trim());
+        return hasAiLifeAspects && hasOtherAiLifeAspects;
       }
       default:
         return false;
@@ -499,6 +508,57 @@ export default function SpiritForm({
     </div>
   );
 
+  const renderAiLifeAspects = () => (
+    <div className="space-y-6">
+      <div>
+        <label className="block text-white text-xl font-semibold mb-2">
+          ¿En qué aspectos de tu vida ya te apoyas de la IA? *
+        </label>
+        <p className="text-gray-400 text-sm mb-4">Puedes marcar más de una.</p>
+        
+        <div className="space-y-3">
+          {[
+            { value: 'trabajos', label: 'Trabajos' },
+            { value: 'estudios', label: 'Estudios' },
+            { value: 'tareas_domesticas', label: 'Tareas domésticas' },
+            { value: 'otro', label: 'Otro' }
+          ].map((option) => (
+            <label key={option.value} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formData.aiLifeAspects.includes(option.value)}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    updateFormData('aiLifeAspects', [...formData.aiLifeAspects, option.value]);
+                  } else {
+                    updateFormData('aiLifeAspects', formData.aiLifeAspects.filter(aspect => aspect !== option.value));
+                  }
+                }}
+                className="w-5 h-5 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+              />
+              <span className="text-white text-base md:text-lg font-medium">
+                {option.label}
+              </span>
+            </label>
+          ))}
+        </div>
+        
+        {formData.aiLifeAspects.includes('otro') && (
+          <div className="mt-4">
+            <input
+              type="text"
+              value={formData.otherAiLifeAspects}
+              onChange={(e) => updateFormData('otherAiLifeAspects', e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
+              placeholder="Especifica en qué otros aspectos usas IA..."
+              required
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   if (isSubmitted) {
     return (
       <div className="w-full max-w-4xl mx-auto">
@@ -556,7 +616,8 @@ export default function SpiritForm({
               vinxi_storage: renderVinxiStorage ? renderVinxiStorage() : <></>,
               ai_tools: renderStep2(),
               delegation_text: renderStep3(),
-              delegation_tasks: renderStep4()
+              delegation_tasks: renderStep4(),
+              ai_life_aspects: renderAiLifeAspects()
             };
             const stepId = stepsOrder[currentStep - 1];
             return stepMap[stepId] || null;
