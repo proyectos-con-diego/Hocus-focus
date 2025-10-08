@@ -25,8 +25,10 @@ export default function SpiritForm({
     age: '',
     country: '',
     aiTools: [] as string[],
+    otherAiTools: '',
     delegationTask: '',
-    delegationTasks: [] as string[]
+    delegationTasks: [] as string[],
+    otherDelegationTasks: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -61,11 +63,15 @@ export default function SpiritForm({
       case 1:
         return formData.name.trim() && formData.email.trim() && formData.age && formData.country;
       case 2:
-        return formData.aiTools.length > 0;
+        const hasAiTools = formData.aiTools.length > 0;
+        const hasOtherAiTools = !formData.aiTools.includes('otro') || (formData.aiTools.includes('otro') && formData.otherAiTools.trim());
+        return hasAiTools && hasOtherAiTools;
       case 3:
         return formData.delegationTask.trim();
       case 4:
-        return formData.delegationTasks.length > 0;
+        const hasDelegationTasks = formData.delegationTasks.length > 0;
+        const hasOtherDelegationTasks = !formData.delegationTasks.includes('otro') || (formData.delegationTasks.includes('otro') && formData.otherDelegationTasks.trim());
+        return hasDelegationTasks && hasOtherDelegationTasks;
       default:
         return false;
     }
@@ -185,20 +191,20 @@ export default function SpiritForm({
   const renderStep2 = () => (
     <div className="space-y-6">
       <div>
-        <label className="block text-white text-sm font-medium mb-2">
+        <label className="block text-white text-lg font-medium mb-2">
           ¿Qué herramientas con inteligencia artificial usas actualmente (si usas alguna)? *
         </label>
         <p className="text-gray-400 text-sm mb-4">Puedes marcar más de una.</p>
         
         <div className="space-y-3">
           {[
-            { value: 'ninguna', label: 'No uso ninguna aún', color: 'bg-white' },
-            { value: 'chatgpt', label: 'ChatGPT u otros bots conversacionales', color: 'bg-white' },
-            { value: 'edicion', label: 'Herramientas de edición de imagen o video con IA (ej. Photoshop, Runway, CapCut, etc.)', color: 'bg-yellow-400' },
-            { value: 'escritura', label: 'Asistentes de escritura o resumen (ej. Grammarly, Notion AI, Quillbot)', color: 'bg-green-400' },
-            { value: 'automatizacion', label: 'Plataformas de automatización (ej. Make, Zapier)', color: 'bg-blue-400' },
-            { value: 'productividad', label: 'Herramientas de productividad (ej. calendarios inteligentes, asistentes de voz)', color: 'bg-purple-400' },
-            { value: 'otro', label: 'Otro', color: 'bg-pink-400' }
+            { value: 'ninguna', label: 'No uso ninguna aún' },
+            { value: 'chatgpt', label: 'ChatGPT u otros bots conversacionales' },
+            { value: 'edicion', label: 'Herramientas de edición de imagen o video con IA (ej. Photoshop, Runway, CapCut, etc.)' },
+            { value: 'escritura', label: 'Asistentes de escritura o resumen (ej. Grammarly, Notion AI, Quillbot)' },
+            { value: 'automatizacion', label: 'Plataformas de automatización (ej. Make, Zapier)' },
+            { value: 'productividad', label: 'Herramientas de productividad (ej. calendarios inteligentes, asistentes de voz)' },
+            { value: 'otro', label: 'Otro' }
           ].map((option) => (
             <label key={option.value} className="flex items-center space-x-3 cursor-pointer">
               <input
@@ -213,12 +219,25 @@ export default function SpiritForm({
                 }}
                 className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
               />
-              <span className={`px-3 py-2 rounded-lg text-sm font-medium ${option.color} text-gray-900`}>
+              <span className="text-white text-sm font-medium">
                 {option.label}
               </span>
             </label>
           ))}
         </div>
+        
+        {formData.aiTools.includes('otro') && (
+          <div className="mt-4">
+            <input
+              type="text"
+              value={formData.otherAiTools}
+              onChange={(e) => updateFormData('otherAiTools', e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
+              placeholder="Especifica qué otras herramientas de IA usas..."
+              required
+            />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -226,7 +245,7 @@ export default function SpiritForm({
   const renderStep3 = () => (
     <div className="space-y-6">
       <div>
-        <label className="block text-white text-sm font-medium mb-2">
+        <label className="block text-white text-lg font-medium mb-2">
           Si tuvieras un asistente con IA 🤖 disponible todos los días para ayudarte en lo que necesites... ¿qué tarea concreta de tu trabajo o de tu rutina le delegarías primero? *
         </label>
         <textarea
@@ -244,20 +263,20 @@ export default function SpiritForm({
   const renderStep4 = () => (
     <div className="space-y-6">
       <div>
-        <label className="block text-white text-sm font-medium mb-2">
+        <label className="block text-white text-lg font-medium mb-2">
           ¿Con cuál de estas tareas te gustaría experimentar delegación inteligente? *
         </label>
         <p className="text-gray-400 text-sm mb-4">Puedes marcar más de una.</p>
         
         <div className="space-y-3">
           {[
-            { value: 'calendario', label: 'Gestionar mi calendario o recordatorios', color: 'bg-pink-400' },
-            { value: 'priorizar', label: 'Priorizar pendientes o proyectos', color: 'bg-orange-400' },
-            { value: 'resumir', label: 'Resumir textos, correos o artículos', color: 'bg-yellow-400' },
-            { value: 'ideas', label: 'Generar ideas creativas', color: 'bg-green-400' },
-            { value: 'redactar', label: 'Redactar mensajes o textos', color: 'bg-blue-400' },
-            { value: 'organizar', label: 'Organizar archivos o información', color: 'bg-purple-400' },
-            { value: 'otro', label: 'Otro', color: 'bg-pink-400' }
+            { value: 'calendario', label: 'Gestionar mi calendario o recordatorios' },
+            { value: 'priorizar', label: 'Priorizar pendientes o proyectos' },
+            { value: 'resumir', label: 'Resumir textos, correos o artículos' },
+            { value: 'ideas', label: 'Generar ideas creativas' },
+            { value: 'redactar', label: 'Redactar mensajes o textos' },
+            { value: 'organizar', label: 'Organizar archivos o información' },
+            { value: 'otro', label: 'Otro' }
           ].map((option) => (
             <label key={option.value} className="flex items-center space-x-3 cursor-pointer">
               <input
@@ -272,12 +291,25 @@ export default function SpiritForm({
                 }}
                 className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
               />
-              <span className={`px-3 py-2 rounded-lg text-sm font-medium ${option.color} text-gray-900`}>
+              <span className="text-white text-sm font-medium">
                 {option.label}
               </span>
             </label>
           ))}
         </div>
+        
+        {formData.delegationTasks.includes('otro') && (
+          <div className="mt-4">
+            <input
+              type="text"
+              value={formData.otherDelegationTasks}
+              onChange={(e) => updateFormData('otherDelegationTasks', e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
+              placeholder="Especifica qué otras tareas te gustaría delegar..."
+              required
+            />
+          </div>
+        )}
       </div>
     </div>
   );
