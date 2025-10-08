@@ -173,55 +173,58 @@ export default function SpiritForm({
         />
       </div>
 
-      {/* Edad */}
-      <div>
-        <label className="block text-white text-sm font-medium mb-2">
-          Edad: *
-        </label>
-        <select
-          value={formData.age}
-          onChange={(e) => updateFormData('age', e.target.value)}
-          className="w-full px-4 py-4 rounded-xl bg-gray-800/50 text-white focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
-          required
-        >
-          <option value="">Selecciona tu edad</option>
-          <option value="menos-18">Menos de 18 años</option>
-          <option value="18-25">18-25 años</option>
-          <option value="26-35">26-35 años</option>
-          <option value="36-45">36-45 años</option>
-          <option value="46-55">46-55 años</option>
-          <option value="56+">56+ años</option>
-        </select>
-      </div>
+      {/* Edad y País - Lado a lado */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Edad */}
+        <div>
+          <label className="block text-white text-sm font-medium mb-2">
+            Edad *
+          </label>
+          <select
+            value={formData.age}
+            onChange={(e) => updateFormData('age', e.target.value)}
+            className="w-full px-4 py-4 rounded-xl bg-gray-800/50 text-white focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
+            required
+          >
+            <option value="">Selecciona tu edad</option>
+            <option value="menos-18">Menos de 18 años</option>
+            <option value="18-25">18-25 años</option>
+            <option value="26-35">26-35 años</option>
+            <option value="36-45">36-45 años</option>
+            <option value="46-55">46-55 años</option>
+            <option value="56+">56+ años</option>
+          </select>
+        </div>
 
-      {/* País */}
-      <div>
-        <label className="block text-white text-sm font-medium mb-2">
-          País: *
-        </label>
-        <select
-          value={formData.country}
-          onChange={(e) => updateFormData('country', e.target.value)}
-          className="w-full px-4 py-4 rounded-xl bg-gray-800/50 text-white focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
-          required
-        >
-          <option value="">Selecciona tu país</option>
-          <option value="Argentina">Argentina</option>
-          <option value="Chile">Chile</option>
-          <option value="Colombia">Colombia</option>
-          <option value="México">México</option>
-          <option value="España">España</option>
-          <option value="Perú">Perú</option>
-          <option value="Uruguay">Uruguay</option>
-          <option value="Venezuela">Venezuela</option>
-          <option value="Ecuador">Ecuador</option>
-          <option value="Bolivia">Bolivia</option>
-          <option value="Paraguay">Paraguay</option>
-          <option value="Estados Unidos">Estados Unidos</option>
-          <option value="Canadá">Canadá</option>
-          <option value="Brasil">Brasil</option>
-          <option value="Otro">Otro</option>
-        </select>
+        {/* País */}
+        <div>
+          <label className="block text-white text-sm font-medium mb-2">
+            País *
+          </label>
+          <select
+            value={formData.country}
+            onChange={(e) => updateFormData('country', e.target.value)}
+            className="w-full px-4 py-4 rounded-xl bg-gray-800/50 text-white focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
+            required
+          >
+            <option value="">Selecciona tu país</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Chile">Chile</option>
+            <option value="Colombia">Colombia</option>
+            <option value="México">México</option>
+            <option value="España">España</option>
+            <option value="Perú">Perú</option>
+            <option value="Uruguay">Uruguay</option>
+            <option value="Venezuela">Venezuela</option>
+            <option value="Ecuador">Ecuador</option>
+            <option value="Bolivia">Bolivia</option>
+            <option value="Paraguay">Paraguay</option>
+            <option value="Estados Unidos">Estados Unidos</option>
+            <option value="Canadá">Canadá</option>
+            <option value="Brasil">Brasil</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
       </div>
 
       {/* Suscripción al newsletter */}
