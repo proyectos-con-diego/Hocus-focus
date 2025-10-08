@@ -120,9 +120,9 @@ function formatDataForMake(data: any) {
           const hasOther = helpTypes.includes('otro') && data.vinxiOtherHelp;
           if (hasOther) {
             const filteredTypes = helpTypes.filter((type: string) => type !== 'otro');
-            return [...filteredTypes, data.vinxiOtherHelp].join(', ');
+            return [...filteredTypes, data.vinxiOtherHelp].join(' | ');
           }
-          return helpTypes.join(', ');
+          return helpTypes.join(' | ');
         })(),
         vinxiStorage: data.vinxiStorage === 'otro' && data.vinxiOtherStorage 
           ? data.vinxiOtherStorage 
@@ -134,9 +134,9 @@ function formatDataForMake(data: any) {
           const hasOther = tools.includes('otro') && data.otherAiTools;
           if (hasOther) {
             const filteredTools = tools.filter((tool: string) => tool !== 'otro');
-            return [...filteredTools, data.otherAiTools].join(', ');
+            return [...filteredTools, data.otherAiTools].join(' | ');
           }
-          return tools.join(', ');
+          return tools.join(' | ');
         })(),
         delegationTask: data.delegationTask || '',
         delegationTasks: (() => {
@@ -144,18 +144,18 @@ function formatDataForMake(data: any) {
           const hasOther = tasks.includes('otro') && data.otherDelegationTasks;
           if (hasOther) {
             const filteredTasks = tasks.filter((task: string) => task !== 'otro');
-            return [...filteredTasks, data.otherDelegationTasks].join(', ');
+            return [...filteredTasks, data.otherDelegationTasks].join(' | ');
           }
-          return tasks.join(', ');
+          return tasks.join(' | ');
         })(),
         aiLifeAspects: (() => {
           const aspects = Array.isArray(data.aiLifeAspects) ? data.aiLifeAspects : [];
           const hasOther = aspects.includes('otro') && data.otherAiLifeAspects;
           if (hasOther) {
             const filteredAspects = aspects.filter((aspect: string) => aspect !== 'otro');
-            return [...filteredAspects, data.otherAiLifeAspects].join(', ');
+            return [...filteredAspects, data.otherAiLifeAspects].join(' | ');
           }
-          return aspects.join(', ');
+          return aspects.join(' | ');
         })(),
         
         // Información del Spirit
