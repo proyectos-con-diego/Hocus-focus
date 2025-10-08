@@ -336,21 +336,6 @@ export default function SpiritForm({
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="bg-white/5 backdrop-blur-[20px] border border-white/10 rounded-3xl p-8">
-        {/* Header del formulario */}
-        <div className="text-center mb-8">
-          <div className="text-6xl mb-4">{spiritIcon}</div>
-          <h2 className="text-4xl font-bold text-white mb-2">
-            {spiritName.split(' ')[0]}{' '}
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-              {spiritName.split(' ')[1]}
-            </span>
-          </h2>
-          <p className="text-cyan-300 text-xl mb-4">{spiritSubtitle}</p>
-          <p className="text-white/80 text-lg max-w-2xl mx-auto">
-            {spiritDescription}
-          </p>
-        </div>
-
         {/* Sección de CTA */}
         <div className="bg-gray-800/30 rounded-2xl p-6 mb-8">
           <div className="flex items-center justify-center mb-4">

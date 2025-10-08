@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useMakeWebhook } from '../../hooks/useMakeWebhook';
+import { useMakeWebhook } from '../../../hooks/useMakeWebhook';
 import { motion } from 'framer-motion';
 import HeaderGlass from '../../../components/HeaderGlass';
 import { Spirit } from '../../../data/spirits';
@@ -32,6 +32,18 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
   const [newsletterData, setNewsletterData] = useState({ name: '', email: '', subscribeNewsletter: true });
   const [isSubmittingNewsletter, setIsSubmittingNewsletter] = useState(false);
   const [newsletterMessage, setNewsletterMessage] = useState('');
+
+  // Descripción preferida por Spirit (usamos la que antes estaba en el formulario)
+  const formDescriptions: Record<string, string> = {
+    'vinxi-spirit': 'Organiza tus ideas dispersas en planes claros y accionables.',
+    'okro-spirit': 'Define objetivos claros y alcanzables con OKRs que realmente funcionen.',
+    'grilla-spirit': 'Convierte tu lluvia de ideas en una estrategia de contenido con rumbo y resultados.',
+    'nosferatu-spirit': 'Extrae la esencia de cada imagen para crear variaciones coherentes sin perder su identidad.',
+    'tataroto-spirit': 'Usa el tarot como espejo simbólico para iluminar lo que hoy no ves con claridad.',
+    'promptify-spirit': 'Afina y estructura tus prompts para que tus bots den su mejor versión.',
+    'cryptopher-spirit': 'Ilumina el pre-mercado con análisis claros y señales clave para decisiones informadas.'
+  };
+  const landing = getSpiritLandingById(spirit.id);
 
   // Funciones para el formulario de newsletter
   const handleNewsletterInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -251,10 +263,7 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
                 {spirit.subtitle}
               </p>
               <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                {(() => {
-                  const landing = getSpiritLandingById(spirit.id);
-                  return landing ? landing.description : spirit.description;
-                })()}
+                {formDescriptions[spirit.slug] || (landing ? landing.description : spirit.description)}
               </p>
             </motion.div>
 
