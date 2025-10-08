@@ -138,6 +138,47 @@ function formatDataForMake(data: any) {
         origin: data.source || 'spirit_form',
       };
 
+    case 'mini_form':
+      return {
+        ...baseData,
+        Tipo: 'message',
+        // Información Personal
+        name: data.name || '',
+        email: data.email || '',
+        age: data.age || '',
+        country: data.country === 'Otro' ? (data.otherCountry || 'Otro') : (data.country || ''),
+        
+        // Información Profesional
+        occupation: data.occupation || '',
+        industry: data.industry === 'Otro' ? (data.otherIndustry || 'Otro') : (data.industry || ''),
+        teamSize: data.teamSize || '',
+        
+        // Información del Producto MINI
+        productInterest: data.productInterest || '',
+        productType: data.productType || 'mini',
+        productName: data.productName || '',
+        productLabel: `${data.productName || ''}_mini`.toLowerCase(),
+        
+        // Preguntas Específicas
+        specificQuestions: data.specificQuestions || {},
+        
+        // Campos "Otro" específicos
+        otherCountry: data.otherCountry || '',
+        otherIndustry: data.otherIndustry || '',
+        otherProductInterest: data.otherProductInterest || '',
+        
+        // Campos legacy (mantener para compatibilidad)
+        product: data.product || data.productName || '',
+        sector: data.sector || (data.industry === 'Otro' ? (data.otherIndustry || 'Otro') : (data.industry || '')),
+        experience: data.experience || '',
+        currentChallenges: data.currentChallenges || '',
+        goals: data.goals || '',
+        aiFamiliarity: data.aiFamiliarity || '',
+        
+        subscribeNewsletter: data.subscribeNewsletter || false,
+        origin: data.source || 'mini_form',
+      };
+
     case 'vip_list':
       return {
         ...baseData,
@@ -153,11 +194,11 @@ function formatDataForMake(data: any) {
         industry: data.industry === 'Otro' ? (data.otherIndustry || 'Otro') : (data.industry || ''),
         teamSize: data.teamSize || '',
         
-        // Información del Producto
+        // Información del Producto VIP
         productInterest: data.productInterest || '',
-        productType: data.productType || '',
+        productType: data.productType || 'vip',
         productName: data.productName || '',
-        productLabel: `${data.productName || ''}_${data.productType || ''}`.toLowerCase(),
+        productLabel: `${data.productName || ''}_vip`.toLowerCase(),
         
         // Preguntas Específicas
         specificQuestions: data.specificQuestions || {},

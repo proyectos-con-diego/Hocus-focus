@@ -19,6 +19,14 @@ interface FormData {
   productInterest: string;
   specificQuestions: { [key: string]: string };
   
+  // Campos "Otro"
+  otherCountry: string;
+  otherIndustry: string;
+  otherProductInterest: string;
+  
+  // Suscripción
+  subscribeNewsletter: boolean;
+  
   // Metadata
   source: string;
   productType: 'vip' | 'spirit' | 'mini';
@@ -66,7 +74,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
   });
 
   const { submitToMake, isSubmitting, submitMessage, submitStatus } = useMakeWebhook({
-    formType: 'vip_list',
+    formType: productType === 'mini' ? 'mini_form' : 'vip_list',
     source: `${productType}-${productSlug}`
   });
 
@@ -93,7 +101,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
   // Función para obtener el enlace de Notion según el producto
   const getNotionLink = () => {
-    const links = {
+    const links: { [key: string]: string } = {
       'vinxi': 'https://www.notion.so/diegoproyectos/Vinxi-Mini-a9fa3b9e599c409882dc3c2e4e4448b2',
       'jaime daily': 'https://www.notion.so/diegoproyectos/Habitus-Prime-Mini-6e4e229029a04c21972974a04b7a99df',
       'okro': 'https://www.notion.so/diegoproyectos/OKRo-Mini-17d70e875cb180cca2b3c908399bdd40',
@@ -101,7 +109,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     };
     
     const productKey = productName.toLowerCase();
-    return links[productKey] || null;
+    return links[productKey] || undefined;
   };
 
   const handleSubmit = async () => {
