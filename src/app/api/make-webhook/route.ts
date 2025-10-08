@@ -114,18 +114,18 @@ function formatDataForMake(data: any) {
         // Preguntas Específicas VINXI
         vinxiDifficulty: data.vinxiDifficulty || '',
         vinxiOtherDifficulty: data.vinxiOtherDifficulty || '',
-        vinxiHelpTypes: data.vinxiHelpTypes || [],
+        vinxiHelpTypes: Array.isArray(data.vinxiHelpTypes) ? data.vinxiHelpTypes.join(', ') : (data.vinxiHelpTypes || ''),
         vinxiOtherHelp: data.vinxiOtherHelp || '',
         vinxiStorage: data.vinxiStorage || '',
         vinxiOtherStorage: data.vinxiOtherStorage || '',
         
         // Preguntas Genéricas
-        aiTools: data.aiTools || [],
+        aiTools: Array.isArray(data.aiTools) ? data.aiTools.join(', ') : (data.aiTools || ''),
         otherAiTools: data.otherAiTools || '',
         delegationTask: data.delegationTask || '',
-        delegationTasks: data.delegationTasks || [],
+        delegationTasks: Array.isArray(data.delegationTasks) ? data.delegationTasks.join(', ') : (data.delegationTasks || ''),
         otherDelegationTasks: data.otherDelegationTasks || '',
-        aiLifeAspects: data.aiLifeAspects || [],
+        aiLifeAspects: Array.isArray(data.aiLifeAspects) ? data.aiLifeAspects.join(', ') : (data.aiLifeAspects || ''),
         otherAiLifeAspects: data.otherAiLifeAspects || '',
         
         // Información del Spirit
@@ -159,7 +159,7 @@ function formatDataForMake(data: any) {
         productName: data.productName || '',
         productLabel: `${data.productName || ''}_mini`.toLowerCase(),
         
-        // Preguntas Específicas
+        // Preguntas Específicas (convertir arrays a strings)
         specificQuestions: data.specificQuestions || {},
         
         // Campos "Otro" específicos
