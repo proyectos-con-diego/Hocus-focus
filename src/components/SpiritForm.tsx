@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { useMakeWebhook } from '../hooks/useMakeWebhook';
+import SpiritAccessButton from './SpiritAccessButton';
+import { getSpiritAccessUrl } from '../data/spirit-access-urls';
 
 interface SpiritFormProps {
   spiritName: string;
@@ -527,6 +529,20 @@ export default function SpiritForm({
   );
 
   if (isSubmitted) {
+    const accessUrl = getSpiritAccessUrl(spiritSlug);
+    
+    if (accessUrl) {
+      return (
+        <SpiritAccessButton
+          spiritName={spiritName}
+          spiritSlug={spiritSlug}
+          spiritIcon={spiritIcon}
+          accessUrl={accessUrl}
+        />
+      );
+    }
+    
+    // Fallback para spirits que no tienen URL de acceso
     return (
       <div className="w-full max-w-4xl mx-auto">
         <div className="bg-white/5 backdrop-blur-[20px] border border-white/10 rounded-3xl p-8">
