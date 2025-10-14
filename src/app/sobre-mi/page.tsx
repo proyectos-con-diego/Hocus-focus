@@ -561,9 +561,23 @@ export default function SobreMiExperimentalPage() {
                 {/* Efecto de brillo híbrido */}
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-orange-500/20 to-cyan-400/20 rounded-full blur-3xl scale-150 animate-pulse"></div>
                 
-                {/* Avatar placeholder con colores híbridos */}
-                <div className="relative z-10 w-80 h-80 rounded-full bg-gradient-to-br from-yellow-400 via-orange-500 to-cyan-400 flex items-center justify-center text-6xl font-bold text-black shadow-2xl shadow-yellow-400/30">
-                  👤
+                {/* Avatar con foto real */}
+                <div className="relative z-10 w-80 h-80 rounded-full overflow-hidden shadow-2xl shadow-yellow-400/30 border-4 border-white/20">
+                  <img 
+                    src="/Integrantes/Diego Gonzalez/Diego Gonzalez.jpeg" 
+                    alt="Diego Gonzalez - Marketero especializado en automatizaciones con IA" 
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                    onError={(e) => {
+                      // Fallback al emoji si la imagen no carga
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const fallback = document.createElement('div');
+                      fallback.className = 'w-full h-full bg-gradient-to-br from-yellow-400 via-orange-500 to-cyan-400 flex items-center justify-center text-6xl font-bold text-black';
+                      fallback.textContent = '👤';
+                      target.parentNode?.insertBefore(fallback, target);
+                    }}
+                  />
                 </div>
               </motion.div>
             </div>
