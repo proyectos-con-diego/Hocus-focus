@@ -562,11 +562,11 @@ export default function SobreMiExperimentalPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-orange-500/20 to-cyan-400/20 rounded-full blur-3xl scale-150 animate-pulse"></div>
                 
                 {/* Avatar con foto real */}
-                <div className="relative z-10 w-80 h-80 rounded-full overflow-hidden shadow-2xl shadow-yellow-400/30 border-4 border-white/20">
+                <div className="relative z-10 w-96 h-96 rounded-full overflow-hidden shadow-2xl shadow-yellow-400/30 border-4 border-white/20">
                   <img 
                     src="/Integrantes/Diego Gonzalez/Diego Gonzalez.jpeg" 
                     alt="Diego Gonzalez - Marketero especializado en automatizaciones con IA" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover scale-x-[-1]"
                     loading="eager"
                     onError={(e) => {
                       // Fallback al emoji si la imagen no carga
