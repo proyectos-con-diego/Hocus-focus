@@ -537,16 +537,6 @@ export default function ServiceForm({
             }
           })()}
 
-          {/* Mensaje de estado */}
-          {submitMessage && (
-            <div className={`p-4 rounded-xl ${
-              submitStatus === 'success'
-                ? 'bg-green-500/20 border border-green-500/30 text-green-300'
-                : 'bg-red-500/20 border border-red-500/30 text-red-300'
-            }`}>
-              {submitMessage}
-            </div>
-          )}
 
           {/* Navegación */}
           <div className="flex items-center justify-between pt-8">
