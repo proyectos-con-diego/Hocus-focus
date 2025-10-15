@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMakeWebhook } from '../hooks/useMakeWebhook';
 
 interface ServiceFormProps {
@@ -33,11 +33,109 @@ export default function ServiceForm({
     numeroTelefono: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [userCountry, setUserCountry] = useState<string>('');
 
   const { submitToMake, isSubmitting, submitMessage, submitStatus } = useMakeWebhook({
     formType: 'service_form',
     source: `service-${serviceSlug}`
   });
+
+  // Detectar país del usuario
+  useEffect(() => {
+    const detectUserCountry = async () => {
+      try {
+        // Usar la API de geolocalización del navegador
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              const { latitude, longitude } = position.coords;
+              
+              // Usar una API de geocodificación inversa (gratuita)
+              const response = await fetch(
+                `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=es`
+              );
+              const data = await response.json();
+              
+              if (data.countryCode) {
+                setUserCountry(data.countryCode);
+                // Mapear código de país a código de teléfono
+                const countryToCode: { [key: string]: string } = {
+                  'MX': '+52',
+                  'US': '+1',
+                  'CA': '+1',
+                  'ES': '+34',
+                  'AR': '+54',
+                  'CL': '+56',
+                  'CO': '+57',
+                  'PE': '+51',
+                  'VE': '+58',
+                  'EC': '+593',
+                  'BO': '+591',
+                  'PY': '+595',
+                  'UY': '+598',
+                  'BR': '+55'
+                };
+                
+                const suggestedCode = countryToCode[data.countryCode];
+                if (suggestedCode && !formData.codigoPais) {
+                  updateFormData('codigoPais', suggestedCode);
+                }
+              }
+            },
+            () => {
+              // Si falla la geolocalización, usar IP geolocation como fallback
+              fetchUserCountryByIP();
+            },
+            {
+              timeout: 5000,
+              enableHighAccuracy: false
+            }
+          );
+        } else {
+          // Si no hay geolocalización, usar IP geolocation
+          fetchUserCountryByIP();
+        }
+      } catch (error) {
+        console.log('No se pudo detectar el país del usuario:', error);
+      }
+    };
+
+    const fetchUserCountryByIP = async () => {
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        
+        if (data.country_code) {
+          setUserCountry(data.country_code);
+          const countryToCode: { [key: string]: string } = {
+            'MX': '+52',
+            'US': '+1',
+            'CA': '+1',
+            'ES': '+34',
+            'AR': '+54',
+            'CL': '+56',
+            'CO': '+57',
+            'PE': '+51',
+            'VE': '+58',
+            'EC': '+593',
+            'BO': '+591',
+            'PY': '+595',
+            'UY': '+598',
+            'BR': '+55'
+          };
+          
+          const suggestedCode = countryToCode[data.country_code];
+          if (suggestedCode && !formData.codigoPais) {
+            updateFormData('codigoPais', suggestedCode);
+          }
+        }
+      } catch (error) {
+        console.log('No se pudo detectar el país por IP:', error);
+      }
+    };
+
+    detectUserCountry();
+  }, []);
 
   const totalSteps = 4;
 
@@ -301,6 +399,11 @@ export default function ServiceForm({
         <div>
           <label className="block text-white font-semibold mb-2">
             Código del país *
+            {userCountry && formData.codigoPais && (
+              <span className="text-xs text-green-400 ml-2">
+                ✓ Detectado automáticamente
+              </span>
+            )}
           </label>
           <select
             value={formData.codigoPais}
