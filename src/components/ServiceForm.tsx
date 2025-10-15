@@ -27,7 +27,8 @@ export default function ServiceForm({
     industria: '',
     tamanoEquipo: '',
     nombreNegocio: '',
-    urgencia: ''
+    urgencia: '',
+    telefono: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -66,7 +67,7 @@ export default function ServiceForm({
       case 3:
         return formData.tamanoEquipo.trim() !== '' && formData.nombreNegocio.trim() !== '';
       case 4:
-        return formData.urgencia.trim() !== '';
+        return formData.urgencia.trim() !== '' && formData.telefono.trim() !== '';
       default:
         return false;
     }
@@ -107,7 +108,8 @@ export default function ServiceForm({
       industria: '',
       tamanoEquipo: '',
       nombreNegocio: '',
-      urgencia: ''
+      urgencia: '',
+      telefono: ''
     });
   };
 
@@ -260,8 +262,8 @@ export default function ServiceForm({
   const renderStep4 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Urgencia de Implementación</h3>
-        <p className="text-gray-400">¿Cuándo te gustaría comenzar?</p>
+        <h3 className="text-2xl font-bold text-white mb-2">Información de Contacto Final</h3>
+        <p className="text-gray-400">Completa tu información para contactarte</p>
       </div>
 
       <div>
@@ -281,6 +283,20 @@ export default function ServiceForm({
           <option value="Bajo (más de 3 meses)">Bajo (más de 3 meses)</option>
           <option value="Solo explorando opciones">Solo explorando opciones</option>
         </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          Teléfono *
+        </label>
+        <input
+          type="tel"
+          value={formData.telefono}
+          onChange={(e) => updateFormData('telefono', e.target.value)}
+          className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+          placeholder="+1 234 567 8900"
+          required
+        />
       </div>
     </div>
   );
