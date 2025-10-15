@@ -255,16 +255,16 @@ function formatDataForMake(data: any) {
         ...baseData,
         Tipo: 'message',
         // Información Personal
-        nombres: data.nombres || '',
-        apellidos: data.apellidos || '',
+        name: data.nombres || '',
+        surname: data.apellidos || '',
         email: data.email || '',
         
         // Información Profesional
-        ocupacion: data.ocupacion || '',
-        industria: data.industria === 'Otro' ? (data.otraIndustria || 'Otro') : (data.industria || ''),
+        occupation: data.ocupacion || '',
+        industry: data.industria === 'Otro' ? (data.otraIndustria || 'Otro') : (data.industria || ''),
         
         // Información del Negocio
-        tamanoEquipo: data.tamanoEquipo || '',
+        teamSize: data.tamanoEquipo || '',
         nombreNegocio: data.nombreNegocio || '',
         
         // Información de Contacto
