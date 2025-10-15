@@ -262,7 +262,6 @@ function formatDataForMake(data: any) {
         // Información Profesional
         ocupacion: data.ocupacion || '',
         industria: data.industria === 'Otro' ? (data.otraIndustria || 'Otro') : (data.industria || ''),
-        otraIndustria: data.otraIndustria || '',
         
         // Información del Negocio
         tamanoEquipo: data.tamanoEquipo || '',
