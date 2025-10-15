@@ -29,7 +29,8 @@ export default function ServiceForm({
     tamanoEquipo: '',
     nombreNegocio: '',
     urgencia: '',
-    telefono: ''
+    codigoPais: '',
+    numeroTelefono: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -68,7 +69,7 @@ export default function ServiceForm({
       case 3:
         return formData.tamanoEquipo.trim() !== '' && formData.nombreNegocio.trim() !== '';
       case 4:
-        return formData.urgencia.trim() !== '' && formData.telefono.trim() !== '';
+        return formData.urgencia.trim() !== '' && formData.codigoPais.trim() !== '' && formData.numeroTelefono.trim() !== '';
       default:
         return false;
     }
@@ -111,7 +112,8 @@ export default function ServiceForm({
       tamanoEquipo: '',
       nombreNegocio: '',
       urgencia: '',
-      telefono: ''
+      codigoPais: '',
+      numeroTelefono: ''
     });
   };
 
@@ -297,18 +299,46 @@ export default function ServiceForm({
         </select>
       </div>
 
-      <div>
-        <label className="block text-white font-semibold mb-2">
-          Teléfono *
-        </label>
-        <input
-          type="tel"
-          value={formData.telefono}
-          onChange={(e) => updateFormData('telefono', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
-          placeholder="+1 234 567 8900"
-          required
-        />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label className="block text-white font-semibold mb-2">
+            Código del país *
+          </label>
+          <select
+            value={formData.codigoPais}
+            onChange={(e) => updateFormData('codigoPais', e.target.value)}
+            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+            required
+          >
+            <option value="">País</option>
+            <option value="+1">🇺🇸 +1 (USA/Canadá)</option>
+            <option value="+52">🇲🇽 +52 (México)</option>
+            <option value="+34">🇪🇸 +34 (España)</option>
+            <option value="+54">🇦🇷 +54 (Argentina)</option>
+            <option value="+56">🇨🇱 +56 (Chile)</option>
+            <option value="+57">🇨🇴 +57 (Colombia)</option>
+            <option value="+51">🇵🇪 +51 (Perú)</option>
+            <option value="+58">🇻🇪 +58 (Venezuela)</option>
+            <option value="+593">🇪🇨 +593 (Ecuador)</option>
+            <option value="+591">🇧🇴 +591 (Bolivia)</option>
+            <option value="+595">🇵🇾 +595 (Paraguay)</option>
+            <option value="+598">🇺🇾 +598 (Uruguay)</option>
+            <option value="+55">🇧🇷 +55 (Brasil)</option>
+          </select>
+        </div>
+        <div className="md:col-span-2">
+          <label className="block text-white font-semibold mb-2">
+            Número de teléfono *
+          </label>
+          <input
+            type="tel"
+            value={formData.numeroTelefono}
+            onChange={(e) => updateFormData('numeroTelefono', e.target.value)}
+            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+            placeholder="234 567 8900"
+            required
+          />
+        </div>
       </div>
     </div>
   );
@@ -316,7 +346,7 @@ export default function ServiceForm({
   if (isSubmitted) {
     return (
       <div className="w-full max-w-4xl mx-auto">
-        <div className="bg-white/5 backdrop-blur-[20px] border border-white/10 rounded-3xl p-8">
+        <div className="bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-2xl p-8 shadow-2xl shadow-purple-500/20">
           <div className="text-center">
             <div className="text-6xl mb-6">🎉</div>
             <h2 className="text-4xl font-bold text-white mb-4">
@@ -340,7 +370,7 @@ export default function ServiceForm({
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="bg-white/5 backdrop-blur-[20px] border border-white/10 rounded-3xl p-8">
+      <div className="bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-2xl p-8 shadow-2xl shadow-purple-500/20">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="text-6xl mb-4">{serviceIcon}</div>
