@@ -455,6 +455,7 @@ export default function ServiceForm({
                 if (value.length > 5) { // + + 4 dígitos = 5 caracteres total
                   value = value.slice(0, 5);
                 }
+                console.log('Guardando otroCodigoPais:', value);
                 updateFormData('otroCodigoPais', value);
               }}
               placeholder="+123"
