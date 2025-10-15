@@ -290,12 +290,10 @@ export default function ServiceForm({
           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
           required
         >
-          <option value="">Selecciona la urgencia</option>
-          <option value="Inmediata (esta semana)">Inmediata (esta semana)</option>
-          <option value="Alto (este mes)">Alto (este mes)</option>
-          <option value="Medio (próximos 2-3 meses)">Medio (próximos 2-3 meses)</option>
-          <option value="Bajo (más de 3 meses)">Bajo (más de 3 meses)</option>
-          <option value="Solo explorando opciones">Solo explorando opciones</option>
+          <option value="">Selecciona o crea una opción</option>
+          <option value="Solo estoy explorando opciones">Solo estoy explorando opciones</option>
+          <option value="Quiero implementarlo pronto">Quiero implementarlo pronto</option>
+          <option value="Lo necesito resolver cuanto antes">Lo necesito resolver cuanto antes</option>
         </select>
       </div>
 
