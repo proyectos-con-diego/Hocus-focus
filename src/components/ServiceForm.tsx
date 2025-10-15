@@ -172,6 +172,18 @@ export default function ServiceForm({
         const codigoPaisValid = formData.codigoPais.trim() !== '';
         const otroCodigoValid = formData.codigoPais !== 'Otro' || (formData.codigoPais === 'Otro' && formData.otroCodigoPais.trim() !== '');
         const numeroValid = formData.numeroTelefono.trim() !== '';
+        
+        console.log('Validación paso 4:', {
+          urgencia: formData.urgencia,
+          codigoPais: formData.codigoPais,
+          otroCodigoPais: formData.otroCodigoPais,
+          numeroTelefono: formData.numeroTelefono,
+          urgenciaValid,
+          codigoPaisValid,
+          otroCodigoValid,
+          numeroValid
+        });
+        
         return urgenciaValid && codigoPaisValid && otroCodigoValid && numeroValid;
       default:
         return false;
