@@ -270,8 +270,8 @@ function formatDataForMake(data: any) {
         // Información de Contacto
         urgencia: data.urgencia || '',
         // Campos separados para debug
-        codigoPaisSeparado: data.codigoPais === 'Otro' ? (data.otroCodigoPais || '') : (data.codigoPais || ''),
-        numeroTelefonoSeparado: data.numeroTelefono || '',
+        codigoPais: data.codigoPais === 'Otro' ? (data.otroCodigoPais || '') : (data.codigoPais || ''),
+        numeroTelefono: data.numeroTelefono || '',
         telefono: `${data.codigoPais === 'Otro' ? (data.otroCodigoPais || '') : (data.codigoPais || '')}${data.numeroTelefono || ''}`,
         
         // Metadata del Servicio
