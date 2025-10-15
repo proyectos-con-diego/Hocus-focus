@@ -491,8 +491,8 @@ export default function ServiceForm({
 
   if (isSubmitted) {
     return (
-      <div className="w-full max-w-4xl mx-auto min-h-screen flex items-center justify-center py-16">
-        <div className="bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-2xl p-12 shadow-2xl shadow-purple-500/20 w-full">
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-2xl p-12 shadow-2xl shadow-purple-500/20">
           <div className="text-center">
             <div className="text-8xl mb-8">🎉</div>
             <h2 className="text-5xl font-bold text-white mb-6">
