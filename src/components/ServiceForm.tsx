@@ -25,6 +25,7 @@ export default function ServiceForm({
     email: '',
     ocupacion: '',
     industria: '',
+    otraIndustria: '',
     tamanoEquipo: '',
     nombreNegocio: '',
     urgencia: '',
@@ -106,6 +107,7 @@ export default function ServiceForm({
       email: '',
       ocupacion: '',
       industria: '',
+      otraIndustria: '',
       tamanoEquipo: '',
       nombreNegocio: '',
       urgencia: '',
@@ -129,7 +131,7 @@ export default function ServiceForm({
             type="text"
             value={formData.nombres}
             onChange={(e) => updateFormData('nombres', e.target.value)}
-            className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
             placeholder="Tu nombre"
             required
           />
@@ -142,7 +144,7 @@ export default function ServiceForm({
             type="text"
             value={formData.apellidos}
             onChange={(e) => updateFormData('apellidos', e.target.value)}
-            className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
             placeholder="Tus apellidos"
             required
           />
@@ -157,7 +159,7 @@ export default function ServiceForm({
           type="email"
           value={formData.email}
           onChange={(e) => updateFormData('email', e.target.value)}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
           placeholder="tu@email.com"
           required
         />
@@ -180,7 +182,7 @@ export default function ServiceForm({
           type="text"
           value={formData.ocupacion}
           onChange={(e) => updateFormData('ocupacion', e.target.value)}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
           placeholder="Ej: CEO, Gerente, Emprendedor, etc."
           required
         />
@@ -193,7 +195,7 @@ export default function ServiceForm({
         <select
           value={formData.industria}
           onChange={(e) => updateFormData('industria', e.target.value)}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
           required
         >
           <option value="">Selecciona una industria</option>
@@ -212,6 +214,16 @@ export default function ServiceForm({
           <option value="Marketing/Agencias">Marketing/Agencias</option>
           <option value="Otro">Otro</option>
         </select>
+        {formData.industria === 'Otro' && (
+          <input
+            type="text"
+            value={formData.otraIndustria}
+            onChange={(e) => updateFormData('otraIndustria', e.target.value)}
+            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors mt-2"
+            placeholder="Especifica tu industria"
+            required
+          />
+        )}
       </div>
     </div>
   );
@@ -230,7 +242,7 @@ export default function ServiceForm({
         <select
           value={formData.tamanoEquipo}
           onChange={(e) => updateFormData('tamanoEquipo', e.target.value)}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
           required
         >
           <option value="">Selecciona el tamaño</option>
@@ -251,7 +263,7 @@ export default function ServiceForm({
           type="text"
           value={formData.nombreNegocio}
           onChange={(e) => updateFormData('nombreNegocio', e.target.value)}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
           placeholder="Nombre de tu empresa o negocio"
           required
         />
@@ -273,7 +285,7 @@ export default function ServiceForm({
         <select
           value={formData.urgencia}
           onChange={(e) => updateFormData('urgencia', e.target.value)}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
           required
         >
           <option value="">Selecciona la urgencia</option>
@@ -293,7 +305,7 @@ export default function ServiceForm({
           type="tel"
           value={formData.telefono}
           onChange={(e) => updateFormData('telefono', e.target.value)}
-          className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
           placeholder="+1 234 567 8900"
           required
         />
@@ -387,25 +399,10 @@ export default function ServiceForm({
               type="button"
               onClick={prevStep}
               disabled={currentStep === 1}
-              className="px-8 py-4 rounded-2xl bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 hover:text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border-0"
+              className="px-8 py-4 rounded-2xl bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-white/20"
             >
               Anterior
             </button>
-
-            <div className="flex gap-3">
-              {Array.from({ length: totalSteps }, (_, index) => (
-                <div
-                  key={index}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    currentStep === index + 1
-                      ? 'bg-purple-500'
-                      : currentStep > index + 1
-                      ? 'bg-purple-400'
-                      : 'bg-gray-600'
-                  }`}
-                />
-              ))}
-            </div>
 
             <button
               type="submit"
