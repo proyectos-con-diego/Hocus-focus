@@ -399,7 +399,7 @@ export default function ServiceForm({
         <div>
           <label className="block text-white font-semibold mb-2">
             Código del país *
-            {userCountry && formData.codigoPais && (
+            {userCountry && formData.codigoPais && formData.codigoPais !== 'Otro' && (
               <span className="text-xs text-green-400 ml-2">
                 ✓ Detectado automáticamente
               </span>
@@ -409,7 +409,7 @@ export default function ServiceForm({
             <div className="space-y-2">
               <input
                 type="text"
-                value={formData.codigoPais === 'Otro' ? '' : formData.codigoPais}
+                value=""
                 onChange={(e) => updateFormData('codigoPais', e.target.value)}
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
                 placeholder="Ej: +123, +44, +86"
