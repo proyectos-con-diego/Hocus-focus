@@ -269,7 +269,10 @@ function formatDataForMake(data: any) {
         
         // Información de Contacto
         urgencia: data.urgencia || '',
-        telefono: `${data.codigoPais || ''}${data.numeroTelefono || ''}`,
+        // Campos separados para debug
+        codigoPaisSeparado: data.codigoPais === 'Otro' ? (data.otroCodigoPais || '') : (data.codigoPais || ''),
+        numeroTelefonoSeparado: data.numeroTelefono || '',
+        telefono: `${data.codigoPais === 'Otro' ? (data.otroCodigoPais || '') : (data.codigoPais || '')}${data.numeroTelefono || ''}`,
         
         // Metadata del Servicio
         serviceName: data.serviceName || '',
