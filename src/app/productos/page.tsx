@@ -99,7 +99,7 @@ export default function ProductosNuevoPage() {
         pageTitle="🪄 Hocuz Focuz"
         showGhostLogo={false}
         customLinks={[
-          { href: '#productos', label: 'Asistentes IA' },
+          { href: '#productos', label: 'Agentes IA' },
           { href: '#como-funciona', label: '¿Cómo funciona?' },
           { href: '#testimonios', label: 'Testimonios' },
           { href: '#faq', label: 'FAQ' }
@@ -118,7 +118,7 @@ export default function ProductosNuevoPage() {
 
       {/* Hero Section */}
       <HeroSection 
-        title="Asistentes IA que te hacen la vida más fácil"
+        title="Agentes IA que te hacen la vida más fácil"
         subtitle=""
         description="Trabaja en equipo con agentes digitales que se integran a tu rutina y te ayudan a avanzar más rápido cada día. Amarás llevarlos contigo."
         ctaText="🚀 Ver agentes IA"
@@ -139,7 +139,7 @@ export default function ProductosNuevoPage() {
           {/* Section Header */}
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4" style={{ fontSize: '2.8rem', fontWeight: 800 }}>
-              Asistentes IA para hábitos, proyectos, finanzas y más
+              Agentes IA para hábitos, proyectos, finanzas y más
             </h2>
             <p className="text-xl opacity-80" style={{ fontSize: '1.2rem', opacity: 0.8 }}>
               Cada una resuelve un problema específico de tu vida digital
@@ -172,13 +172,13 @@ export default function ProductosNuevoPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-16">
             <div className="text-center">
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center text-white font-bold text-3xl mx-auto mb-4">1</div>
-              <h3 className="text-xl font-semibold text-white mb-2">Elige tu asistente</h3>
-              <p className="text-gray-400">Selecciona el asistente que mejor se adapte a tus necesidades actuales</p>
+              <h3 className="text-xl font-semibold text-white mb-2">Elige tu agente</h3>
+              <p className="text-gray-400">Selecciona el agente que mejor se adapte a tus necesidades actuales</p>
             </div>
             <div className="text-center">
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-3xl mx-auto mb-4">2</div>
               <h3 className="text-xl font-semibold text-white mb-2">Configuración personalizada</h3>
-              <p className="text-gray-400">Adapta el asistente a tu estilo de vida y objetivos específicos</p>
+              <p className="text-gray-400">Adapta el agente a tu estilo de vida y objetivos específicos</p>
             </div>
             <div className="text-center">
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold text-3xl mx-auto mb-4">3</div>
