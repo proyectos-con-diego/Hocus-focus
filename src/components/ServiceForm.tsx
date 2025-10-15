@@ -30,6 +30,7 @@ export default function ServiceForm({
     nombreNegocio: '',
     urgencia: '',
     codigoPais: '',
+    otroCodigoPais: '',
     numeroTelefono: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -167,7 +168,11 @@ export default function ServiceForm({
       case 3:
         return formData.tamanoEquipo.trim() !== '' && formData.nombreNegocio.trim() !== '';
       case 4:
-        return formData.urgencia.trim() !== '' && formData.codigoPais.trim() !== '' && formData.numeroTelefono.trim() !== '';
+        const urgenciaValid = formData.urgencia.trim() !== '';
+        const codigoPaisValid = formData.codigoPais.trim() !== '';
+        const otroCodigoValid = formData.codigoPais !== 'Otro' || (formData.codigoPais === 'Otro' && formData.otroCodigoPais.trim() !== '');
+        const numeroValid = formData.numeroTelefono.trim() !== '';
+        return urgenciaValid && codigoPaisValid && otroCodigoValid && numeroValid;
       default:
         return false;
     }
@@ -211,6 +216,7 @@ export default function ServiceForm({
       nombreNegocio: '',
       urgencia: '',
       codigoPais: '',
+      otroCodigoPais: '',
       numeroTelefono: ''
     });
   };
@@ -399,53 +405,38 @@ export default function ServiceForm({
         <div>
           <label className="block text-white font-semibold mb-2">
             Código del país *
-            {userCountry && formData.codigoPais && formData.codigoPais !== 'Otro' && (
-              <span className="text-xs text-green-400 ml-2">
-                ✓ Detectado automáticamente
-              </span>
-            )}
           </label>
-          {formData.codigoPais === 'Otro' ? (
-            <div className="space-y-2">
-              <input
-                type="text"
-                value=""
-                onChange={(e) => updateFormData('codigoPais', e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
-                placeholder="Ej: +123, +44, +86"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => updateFormData('codigoPais', '')}
-                className="text-xs text-gray-400 hover:text-white transition-colors"
-              >
-                ← Volver a seleccionar país
-              </button>
-            </div>
-          ) : (
-            <select
-              value={formData.codigoPais}
-              onChange={(e) => updateFormData('codigoPais', e.target.value)}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          <select
+            value={formData.codigoPais}
+            onChange={(e) => updateFormData('codigoPais', e.target.value)}
+            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+            required
+          >
+            <option value="">País</option>
+            <option value="+1">🇺🇸 +1 (USA/Canadá)</option>
+            <option value="+52">🇲🇽 +52 (México)</option>
+            <option value="+34">🇪🇸 +34 (España)</option>
+            <option value="+54">🇦🇷 +54 (Argentina)</option>
+            <option value="+56">🇨🇱 +56 (Chile)</option>
+            <option value="+57">🇨🇴 +57 (Colombia)</option>
+            <option value="+51">🇵🇪 +51 (Perú)</option>
+            <option value="+58">🇻🇪 +58 (Venezuela)</option>
+            <option value="+593">🇪🇨 +593 (Ecuador)</option>
+            <option value="+591">🇧🇴 +591 (Bolivia)</option>
+            <option value="+595">🇵🇾 +595 (Paraguay)</option>
+            <option value="+598">🇺🇾 +598 (Uruguay)</option>
+            <option value="+55">🇧🇷 +55 (Brasil)</option>
+            <option value="Otro">🌍 Otro (escribir código)</option>
+          </select>
+          {formData.codigoPais === 'Otro' && (
+            <input
+              type="text"
+              value={formData.otroCodigoPais}
+              onChange={(e) => updateFormData('otroCodigoPais', e.target.value)}
+              placeholder="Ej: +123, +44, +86"
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors mt-2"
               required
-            >
-              <option value="">País</option>
-              <option value="+1">🇺🇸 +1 (USA/Canadá)</option>
-              <option value="+52">🇲🇽 +52 (México)</option>
-              <option value="+34">🇪🇸 +34 (España)</option>
-              <option value="+54">🇦🇷 +54 (Argentina)</option>
-              <option value="+56">🇨🇱 +56 (Chile)</option>
-              <option value="+57">🇨🇴 +57 (Colombia)</option>
-              <option value="+51">🇵🇪 +51 (Perú)</option>
-              <option value="+58">🇻🇪 +58 (Venezuela)</option>
-              <option value="+593">🇪🇨 +593 (Ecuador)</option>
-              <option value="+591">🇧🇴 +591 (Bolivia)</option>
-              <option value="+595">🇵🇾 +595 (Paraguay)</option>
-              <option value="+598">🇺🇾 +598 (Uruguay)</option>
-              <option value="+55">🇧🇷 +55 (Brasil)</option>
-              <option value="Otro">🌍 Otro (escribir código)</option>
-            </select>
+            />
           )}
         </div>
         <div className="md:col-span-2">
