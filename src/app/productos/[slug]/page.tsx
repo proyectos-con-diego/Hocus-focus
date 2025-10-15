@@ -1098,7 +1098,7 @@ const products = [
       title: "¿Listo para dejar de improvisar con tus criptoinversiones?",
       description: "Con Bafet, cada orden, cada plan y cada movimiento tienen sentido.<br /><span class=\"text-purple-300 font-semibold\">Toma el control de tu trading hoy.</span>",
       primary: "🚀 Únirme a la lista VIP",
-      secondary: "📞 Ver demo en vivo"
+      secondary: "🎬 Ver demo"
     },
     faqs: [
       { 
@@ -1884,7 +1884,7 @@ const products = [
       title: "¿Listo para que tu equipo navegue sin caos?",
       description: "Coordina tareas, visualiza el progreso y lidera con claridad.<br /><span class=\"text-cyan-300 font-semibold\">Tu equipo lo agradecerá.</span>",
       primary: "🚀 Únirme a la lista VIP",
-      secondary: "📞 Ver demo en vivo"
+      secondary: "🎬 Ver demo"
     },
     faqs: [
       { 
@@ -2334,7 +2334,7 @@ export default function ProductoPage() {
                   onClick={goToHowItWorks}
                 >
                   <span className="relative z-10 group-hover:text-white transition-colors duration-300">
-                    📞 Ver demo en vivo
+                    🎬 Ver demo
                   </span>
                   <span
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -2863,7 +2863,7 @@ export default function ProductoPage() {
               className="px-10 py-4 border-2 border-white text-white rounded-full font-bold text-xl hover:bg-white hover:text-black transition-all duration-300"
               onClick={goToHowItWorks}
             >
-              📞 Ver demo en vivo
+              🎬 Ver demo
             </button>
           </div>
         </div>
