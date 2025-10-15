@@ -48,12 +48,17 @@ export default function SistemaScaleHeroSection() {
         </div>
         
         <div className="mb-8">
-          <a 
-            href="#diagnostico" 
+          <button 
+            onClick={() => {
+              const element = document.getElementById('diagnostico');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="inline-block px-12 py-5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full font-black text-xl text-white uppercase tracking-wider shadow-2xl hover:scale-105 transition-all duration-300 hover:shadow-orange-500/40"
           >
             🚀 QUIERO MI DIAGNÓSTICO SCALE
-          </a>
+          </button>
           <p className="text-purple-300 text-sm font-semibold mt-4">
             💎 Garantía: Un plan concreto para implementar SCALE o te devuelvo el 100%.
           </p>

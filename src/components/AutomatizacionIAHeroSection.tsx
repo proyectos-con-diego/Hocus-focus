@@ -45,12 +45,17 @@ export default function AutomatizacionIAHeroSection() {
         </div>
         
         <div className="mb-8">
-          <a 
-            href="#diagnostico" 
+          <button 
+            onClick={() => {
+              const element = document.getElementById('diagnostico');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="inline-block px-12 py-5 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full font-black text-xl text-white uppercase tracking-wider shadow-2xl hover:scale-105 transition-all duration-300 hover:shadow-purple-500/40"
           >
             🤖 Quiero Automatizar Mi Negocio
-          </a>
+          </button>
           <p className="text-purple-300 text-sm font-semibold mt-4">
             {heroData.guarantee}
           </p>

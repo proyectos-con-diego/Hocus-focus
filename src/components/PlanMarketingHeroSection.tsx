@@ -40,12 +40,17 @@ export default function PlanMarketingHeroSection() {
           ))}
         </div>
         <div className="cta-container mb-4">
-          <a 
-            href="#diagnostico" 
+          <button 
+            onClick={() => {
+              const element = document.getElementById('diagnostico');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="btn-primary px-8 py-4 bg-gradient-to-r from-red-500 to-red-700 rounded-full font-extrabold text-lg text-white shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 inline-block uppercase tracking-wider"
           >
             🚀 QUIERO MI DIAGNÓSTICO DE MARKETING
-          </a>
+          </button>
           <p className="guarantee-text text-purple-300 text-sm font-semibold mt-4">
             {heroData.guarantee}
           </p>
