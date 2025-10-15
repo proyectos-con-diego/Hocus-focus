@@ -269,8 +269,7 @@ function formatDataForMake(data: any) {
         
         // Información de Contacto
         urgencia: data.urgencia || '',
-        codigoPais: data.codigoPais || '',
-        numeroTelefono: data.numeroTelefono || '',
+        telefono: `${data.codigoPais || ''}${data.numeroTelefono || ''}`,
         
         // Metadata del Servicio
         serviceName: data.serviceName || '',
