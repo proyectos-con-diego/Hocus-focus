@@ -196,6 +196,7 @@ export default function ServiceForm({
       return;
     }
 
+    console.log('FormData being sent:', formData);
     const success = await submitToMake(formData);
     if (success) {
       setIsSubmitted(true);
