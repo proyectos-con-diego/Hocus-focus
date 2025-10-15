@@ -273,6 +273,26 @@ function formatDataForMake(data: any) {
         codigoPais: data.codigoPais === 'Otro' ? (data.otroCodigoPais || '') : (data.codigoPais || ''),
         numeroTelefono: data.numeroTelefono || '',
         telefono: `${data.codigoPais === 'Otro' ? (data.otroCodigoPais || '') : (data.codigoPais || '')}${data.numeroTelefono || ''}`,
+        // Mapear código de país a nombre del país
+        country: (() => {
+          const codigo = data.codigoPais === 'Otro' ? (data.otroCodigoPais || '') : (data.codigoPais || '');
+          const countryMap: { [key: string]: string } = {
+            '+1': 'USA/Canadá',
+            '+52': 'México',
+            '+34': 'España',
+            '+54': 'Argentina',
+            '+56': 'Chile',
+            '+57': 'Colombia',
+            '+51': 'Perú',
+            '+58': 'Venezuela',
+            '+593': 'Ecuador',
+            '+591': 'Bolivia',
+            '+595': 'Paraguay',
+            '+598': 'Uruguay',
+            '+55': 'Brasil'
+          };
+          return countryMap[codigo] || (codigo ? `Otro (${codigo})` : '');
+        })(),
         
         // Metadata del Servicio
         serviceName: data.serviceName || '',
