@@ -78,7 +78,7 @@ export default function ServiceForm({
                 };
                 
                 const suggestedCode = countryToCode[data.countryCode];
-                if (suggestedCode && !formData.codigoPais) {
+                if (suggestedCode) {
                   updateFormData('codigoPais', suggestedCode);
                 }
               }
@@ -126,7 +126,7 @@ export default function ServiceForm({
           };
           
           const suggestedCode = countryToCode[data.country_code];
-          if (suggestedCode && !formData.codigoPais) {
+          if (suggestedCode) {
             updateFormData('codigoPais', suggestedCode);
           }
         }
