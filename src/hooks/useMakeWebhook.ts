@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 interface UseMakeWebhookOptions {
-  formType: 'newsletter' | 'contact' | 'spirit_idea' | 'spirit_form' | 'mini_form' | 'vip_list';
+  formType: 'newsletter' | 'contact' | 'spirit_idea' | 'spirit_form' | 'mini_form' | 'vip_list' | 'service_form';
   source?: string;
 }
 
@@ -91,6 +91,8 @@ function getSuccessMessage(formType: string): string {
       return '¡Excelente! Te hemos enviado el enlace a tu versión MINI gratuita.';
     case 'vip_list':
       return '¡Perfecto! Te has unido a la lista VIP. Te notificaremos cuando esté disponible.';
+    case 'service_form':
+      return '¡Excelente! Hemos recibido tu solicitud. Te contactaremos en las próximas 2 horas.';
     default:
       return '¡Gracias! Hemos recibido tu información.';
   }
