@@ -491,20 +491,20 @@ export default function ServiceForm({
 
   if (isSubmitted) {
     return (
-      <div className="w-full max-w-4xl mx-auto">
-        <div className="bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-2xl p-8 shadow-2xl shadow-purple-500/20">
+      <div className="w-full max-w-4xl mx-auto min-h-screen flex items-center justify-center py-16">
+        <div className="bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-2xl p-12 shadow-2xl shadow-purple-500/20 w-full">
           <div className="text-center">
-            <div className="text-6xl mb-6">🎉</div>
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <div className="text-8xl mb-8">🎉</div>
+            <h2 className="text-5xl font-bold text-white mb-6">
               ¡Gracias por tu interés!
             </h2>
-            <p className="text-gray-300 mb-6 text-lg">
+            <p className="text-gray-300 mb-10 text-xl max-w-2xl mx-auto leading-relaxed">
               Hemos recibido tu solicitud para <span className="text-purple-400 font-semibold">{serviceName}</span>. 
               Te contactaremos en las próximas 2 horas para coordinar tu llamada estratégica.
             </p>
             <button
               onClick={resetForm}
-              className="px-8 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300"
+              className="px-12 py-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-full font-semibold hover:scale-105 transition-all duration-300 text-lg"
             >
               Enviar otra solicitud
             </button>
@@ -534,7 +534,7 @@ export default function ServiceForm({
               <div
                 key={index}
                 className={`flex-1 h-1 rounded-full transition-all duration-500 ease-out ${
-                  currentStep > index ? 'bg-gradient-to-r from-purple-400 to-indigo-600' : 'bg-gray-800/50'
+                  currentStep > index + 1 ? 'bg-gradient-to-r from-purple-400 to-indigo-600' : 'bg-gray-800/50'
                 }`}
               />
             ))}
