@@ -30,6 +30,7 @@ export default function ServiceForm({
     nombreNegocio: '',
     urgencia: '',
     codigoPais: '',
+    otroPais: '',
     numeroTelefono: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -69,7 +70,11 @@ export default function ServiceForm({
       case 3:
         return formData.tamanoEquipo.trim() !== '' && formData.nombreNegocio.trim() !== '';
       case 4:
-        return formData.urgencia.trim() !== '' && formData.codigoPais.trim() !== '' && formData.numeroTelefono.trim() !== '';
+        const urgenciaValid = formData.urgencia.trim() !== '';
+        const codigoPaisValid = formData.codigoPais.trim() !== '';
+        const otroPaisValid = formData.codigoPais !== 'Otro' || (formData.codigoPais === 'Otro' && formData.otroPais.trim() !== '');
+        const numeroValid = formData.numeroTelefono.trim() !== '';
+        return urgenciaValid && codigoPaisValid && otroPaisValid && numeroValid;
       default:
         return false;
     }
@@ -113,6 +118,7 @@ export default function ServiceForm({
       nombreNegocio: '',
       urgencia: '',
       codigoPais: '',
+      otroPais: '',
       numeroTelefono: ''
     });
   };
@@ -290,7 +296,7 @@ export default function ServiceForm({
           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
           required
         >
-          <option value="">Selecciona o crea una opción</option>
+          <option value="">Selecciona la urgencia</option>
           <option value="Solo estoy explorando opciones">Solo estoy explorando opciones</option>
           <option value="Quiero implementarlo pronto">Quiero implementarlo pronto</option>
           <option value="Lo necesito resolver cuanto antes">Lo necesito resolver cuanto antes</option>
@@ -322,7 +328,18 @@ export default function ServiceForm({
             <option value="+595">🇵🇾 +595 (Paraguay)</option>
             <option value="+598">🇺🇾 +598 (Uruguay)</option>
             <option value="+55">🇧🇷 +55 (Brasil)</option>
+            <option value="Otro">🌍 Otro</option>
           </select>
+          {formData.codigoPais === 'Otro' && (
+            <input
+              type="text"
+              value={formData.otroPais}
+              onChange={(e) => updateFormData('otroPais', e.target.value)}
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors mt-2"
+              placeholder="Especifica tu país"
+              required
+            />
+          )}
         </div>
         <div className="md:col-span-2">
           <label className="block text-white font-semibold mb-2">
