@@ -421,7 +421,14 @@ export default function ServiceForm({
           </label>
           <select
             value={formData.codigoPais}
-            onChange={(e) => updateFormData('codigoPais', e.target.value)}
+            onChange={(e) => {
+              const newValue = e.target.value;
+              updateFormData('codigoPais', newValue);
+              // Si no es "Otro", limpiar el campo personalizado
+              if (newValue !== 'Otro') {
+                updateFormData('otroCodigoPais', '');
+              }
+            }}
             className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
             required
           >
