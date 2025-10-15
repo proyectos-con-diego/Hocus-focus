@@ -432,9 +432,21 @@ export default function ServiceForm({
             <input
               type="text"
               value={formData.otroCodigoPais}
-              onChange={(e) => updateFormData('otroCodigoPais', e.target.value)}
-              placeholder="Ej: +123, +44, +86"
+              onChange={(e) => {
+                let value = e.target.value;
+                // Asegurar que empiece con +
+                if (value && !value.startsWith('+')) {
+                  value = '+' + value;
+                }
+                // Limitar a máximo 4 caracteres después del +
+                if (value.length > 5) { // + + 4 dígitos = 5 caracteres total
+                  value = value.slice(0, 5);
+                }
+                updateFormData('otroCodigoPais', value);
+              }}
+              placeholder="+123"
               className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors mt-2"
+              maxLength={5}
               required
             />
           )}
