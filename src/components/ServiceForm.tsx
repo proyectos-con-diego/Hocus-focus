@@ -359,7 +359,7 @@ export default function ServiceForm({
 
       <div>
         <label className="block text-white font-semibold mb-2">
-          Tamaño del equipo con el que trabaja directamente *
+          Tamaño del equipo con el que trabajas directamente *
         </label>
         <select
           value={formData.tamanoEquipo}
@@ -371,9 +371,8 @@ export default function ServiceForm({
           <option value="Solo yo (1 persona)">Solo yo (1 persona)</option>
           <option value="2-5 personas">2-5 personas</option>
           <option value="6-10 personas">6-10 personas</option>
-          <option value="11-25 personas">11-25 personas</option>
-          <option value="26-50 personas">26-50 personas</option>
-          <option value="Más de 50 personas">Más de 50 personas</option>
+          <option value="10-25 personas">10-25 personas</option>
+          <option value="25+ personas">25+ personas</option>
         </select>
       </div>
 
