@@ -22,7 +22,7 @@ export default function SistemaScaleHeroSection() {
       
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <div className="bg-gradient-to-r from-orange-500/20 to-orange-600/30 border border-orange-500/40 rounded-full px-6 py-3 mb-8 inline-block animate-pulse">
-          <p className="text-orange-300 text-sm font-bold uppercase tracking-wider">🔥 Solo 5 cupos disponibles este mes</p>
+          <p className="text-orange-300 text-sm font-bold uppercase tracking-wider">📋 Lista de espera - Únete para acceso prioritario</p>
         </div>
         
         <StableRotatingHeadline
