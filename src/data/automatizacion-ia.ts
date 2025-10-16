@@ -59,7 +59,7 @@ export interface PricingData {
 
 // Hero section data
 export const heroData: HeroData = {
-  badge: '🚀 BETA - Solo 5 cupos disponibles',
+  badge: '📋 Lista de espera - Únete para acceso prioritario',
   title: '¿Y si tuvieras un empleado que trabaja 24/7 sin sueldo?',
   subtitle: 'Automatizo 3 procesos clave de tu negocio tradicional usando IA, ahorrándote 8-15 horas semanales sin complicaciones técnicas',
   features: [

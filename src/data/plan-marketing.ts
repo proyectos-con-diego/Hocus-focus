@@ -57,7 +57,7 @@ export interface HeroData {
 
 // Hero section data
 export const heroData: HeroData = {
-  badge: '🔥 Solo 5 cupos disponibles este mes',
+  badge: '📋 Lista de espera - Únete para acceso prioritario',
   title: '¿Tu marketing parece más un gasto que una inversión?',
   subtitle: 'Haz que cada dólar invertido en marketing trabaje para ti con un sistema probado y rentable.',
   features: [

@@ -63,7 +63,7 @@ export interface PackageData {
 
 // Hero section data
 export const heroData: HeroData = {
-  badge: '🔥 Solo 5 cupos disponibles este mes',
+  badge: '📋 Lista de espera - Únete para acceso prioritario',
   title: '¿Tu equipo trabaja en el caos?',
   subtitle: 'Convierte tu negocio desorganizado en una operación profesional con el Sistema SCALE que funciona',
   features: [

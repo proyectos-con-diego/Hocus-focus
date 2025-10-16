@@ -68,7 +68,7 @@ export interface HeroData {
 
 // Hero section data
 export const heroData: HeroData = {
-  badge: '🚀 EARLY ACCESS: Solo los primeros 10 clientes',
+  badge: '📋 Lista de espera - Únete para acceso prioritario',
   title: '¿Pierdes tiempo en',
   subtitle: 'tareas',
   description: 'Después de 10+ años optimizando procesos, he creado la metodología exacta que uso para recuperar 20+ horas semanales. Ahora quiero compartirla contigo.',
