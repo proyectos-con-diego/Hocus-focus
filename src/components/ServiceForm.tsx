@@ -252,6 +252,7 @@ export default function ServiceForm({
             onChange={(e) => updateFormData('nombres', e.target.value)}
             className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
             placeholder="Tu nombre"
+            autoComplete="given-name"
             required
           />
         </div>
@@ -265,6 +266,7 @@ export default function ServiceForm({
             onChange={(e) => updateFormData('apellidos', e.target.value)}
             className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
             placeholder="Tus apellidos"
+            autoComplete="family-name"
             required
           />
         </div>
@@ -280,6 +282,7 @@ export default function ServiceForm({
           onChange={(e) => updateFormData('email', e.target.value)}
           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
           placeholder="tu@email.com"
+          autoComplete="email"
           required
         />
       </div>
@@ -384,6 +387,7 @@ export default function ServiceForm({
           onChange={(e) => updateFormData('nombreNegocio', e.target.value)}
           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
           placeholder="Nombre de tu empresa o negocio"
+          autoComplete="organization"
           required
         />
       </div>
@@ -482,6 +486,9 @@ export default function ServiceForm({
             onChange={(e) => updateFormData('numeroTelefono', e.target.value)}
             className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
             placeholder="234 567 8900"
+            autoComplete="tel-national"
+            inputMode="numeric"
+            pattern="[0-9\s\-\(\)]+"
             required
           />
         </div>
