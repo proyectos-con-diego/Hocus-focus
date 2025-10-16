@@ -12,6 +12,7 @@ import SistemaScalePackageSection from '@/components/SistemaScalePackageSection'
 
 import SistemaScaleFAQSection from '@/components/SistemaScaleFAQSection';
 import SistemaScaleForm from '@/components/SistemaScaleForm';
+import Footer from '@/components/Footer';
 import StructuredData, { sistemaScaleStructuredData } from '@/components/StructuredData';
 import { event as trackEvent } from '@/lib/analytics';
 
@@ -30,6 +31,7 @@ export default function SistemaScalePage() {
       <SistemaScalePackageSection />
       <SistemaScaleFAQSection />
       <SistemaScaleForm />
+      <Footer />
     </main>
   );
 } 

@@ -11,6 +11,7 @@ import AutomatizacionIACaseStudiesSection from '@/components/AutomatizacionIACas
 import AutomatizacionIAPricingSection from '@/components/AutomatizacionIAPricingSection';
 import AutomatizacionIAFAQSection from '@/components/AutomatizacionIAFAQSection';
 import AutomatizacionIAForm from '@/components/AutomatizacionIAForm';
+import Footer from '@/components/Footer';
 import StructuredData, { automatizacionIAStructuredData } from '@/components/StructuredData';
 import { event as trackEvent } from '@/lib/analytics';
 
@@ -29,6 +30,7 @@ export default function AutomatizacionIAPage() {
       <AutomatizacionIAPricingSection />
       <AutomatizacionIAFAQSection />
       <AutomatizacionIAForm />
+      <Footer />
     </main>
   );
 } 

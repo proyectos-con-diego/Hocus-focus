@@ -10,6 +10,7 @@ import DiagnosticoPricingSection from '@/components/DiagnosticoPricingSection';
 import PlanMarketingPricingSection from '@/components/PlanMarketingPricingSection';
 import PlanMarketingFAQSection from '@/components/PlanMarketingFAQSection';
 import PlanMarketingForm from '@/components/PlanMarketingForm';
+import Footer from '@/components/Footer';
 import StructuredData, { planMarketingStructuredData } from '@/components/StructuredData';
 
 export default function PlanMarketingPage() {
@@ -25,6 +26,7 @@ export default function PlanMarketingPage() {
       <DiagnosticoPricingSection />
       <PlanMarketingFAQSection />
       <PlanMarketingForm />
+      <Footer />
     </main>
   );
 } 
