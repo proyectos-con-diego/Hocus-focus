@@ -506,7 +506,7 @@ export default function ServiceForm({
             </h2>
             <p className="text-gray-300 mb-10 text-xl max-w-2xl mx-auto leading-relaxed">
               Hemos recibido tu solicitud para <span className="text-purple-400 font-semibold">{serviceName}</span>. 
-              Te contactaremos en las próximas 2 horas para coordinar tu llamada estratégica.
+              Te contactaremos pronto para coordinar tu llamada estratégica.
             </p>
             <button
               onClick={resetForm}
