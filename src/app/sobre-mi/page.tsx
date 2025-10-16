@@ -1612,35 +1612,11 @@ export default function SobreMiExperimentalPage() {
         </div>
       </section>
 
-      {/* Footer Híbrido */}
-      <footer className="py-12 bg-black border-t border-gray-800">
+      {/* Footer */}
+      <footer className="py-8 bg-black border-t border-gray-800">
         <div className="max-w-6xl mx-auto text-center px-5">
-          <div className="flex justify-center space-x-6 mb-6">
-            {[
-              { icon: "💼", label: "LinkedIn", url: "https://www.linkedin.com/in/diego-gonzalez-v/", color: "text-cyan-400 hover:text-cyan-300" },
-              { icon: "📸", label: "Instagram", url: "https://www.instagram.com/proyectoscondiego/", color: "text-yellow-400 hover:text-yellow-300" },
-              { icon: "📺", label: "YouTube", url: "https://www.youtube.com/@ProyectosconDiego", color: "text-red-400 hover:text-red-300" }
-            ].map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  try { trackEvent({ action: 'click_footer_social', category: 'Sobre Mi', label: social.label.toLowerCase() }); } catch {}
-                }}
-                className={`text-2xl ${social.color} transition-colors duration-300`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {social.icon}
-              </motion.a>
-            ))}
-          </div>
-          <p className="text-gray-500">
-            © 2025 Diego Gonzalez Vaccaro. Combinando{' '}
-            <span className="text-yellow-400">creatividad</span> con{' '}
-            <span className="text-cyan-400">tecnología</span>.
+          <p className="text-gray-500 text-sm">
+            © 2025 Hocuz Focuz. Transformando caos en sistemas automatizados.
           </p>
         </div>
       </footer>

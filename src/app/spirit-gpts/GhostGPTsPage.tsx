@@ -674,7 +674,7 @@ export default function SpiritsPage() {
       <footer id="contacto" className="py-12 sm:py-16 border-t border-white/10 text-center relative z-10 bg-white/1 backdrop-blur-[5px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-5">
           <div className="text-white/60">
-            <p className="text-sm sm:text-base">&copy; 2025 Spirits. Todos los derechos reservados en todas las dimensiones.</p>
+            <p className="text-sm sm:text-base">&copy; 2025 Hocuz Focuz. Transformando caos en sistemas automatizados.</p>
           </div>
         </div>
       </footer>
