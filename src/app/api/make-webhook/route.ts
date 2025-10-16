@@ -295,6 +295,9 @@ function formatDataForMake(data: any) {
           return countryMap[codigo] || (codigo ? `Otro (${codigo})` : '');
         })(),
         
+        // Newsletter Subscription
+        subscribeNewsletter: data.subscribeNewsletter || false,
+        
         // Metadata del Servicio
         serviceName: data.serviceName || '',
         serviceSlug: data.serviceSlug || '',

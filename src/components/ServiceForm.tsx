@@ -32,7 +32,8 @@ export default function ServiceForm({
     nombreNegocio: '',
     tamanoEquipo: '',
     urgencia: '',
-    contextoAdicional: ''
+    contextoAdicional: '',
+    subscribeNewsletter: true
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [userCountry, setUserCountry] = useState<string>('');
@@ -141,7 +142,7 @@ export default function ServiceForm({
 
   const totalSteps = 3;
 
-  const updateFormData = (field: string, value: string) => {
+  const updateFormData = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -217,7 +218,8 @@ export default function ServiceForm({
       nombreNegocio: '',
       tamanoEquipo: '',
       urgencia: '',
-      contextoAdicional: ''
+      contextoAdicional: '',
+      subscribeNewsletter: true
     });
   };
 
@@ -347,6 +349,20 @@ export default function ServiceForm({
             required
           />
         </div>
+      </div>
+
+      {/* Newsletter Subscription Checkbox */}
+      <div className="flex items-start space-x-3 pt-4">
+        <input
+          type="checkbox"
+          id="subscribeNewsletter"
+          checked={formData.subscribeNewsletter}
+          onChange={(e) => updateFormData('subscribeNewsletter', e.target.checked)}
+          className="mt-1 w-4 h-4 text-purple-600 bg-white/10 border-white/20 rounded focus:ring-purple-500 focus:ring-2"
+        />
+        <label htmlFor="subscribeNewsletter" className="text-sm text-gray-300 leading-relaxed">
+          También quiero suscribirme para recibir artículos y recursos exclusivos en mi email.
+        </label>
       </div>
     </div>
   );
