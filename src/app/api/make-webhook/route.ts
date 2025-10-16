@@ -269,6 +269,7 @@ function formatDataForMake(data: any) {
         
         // Información de Contacto
         urgencia: data.urgencia || '',
+        contextoAdicional: data.contextoAdicional || '',
         // Campos separados para debug
         codigoPais: data.codigoPais === 'Otro' ? (data.otroCodigoPais || '') : (data.codigoPais || ''),
         numeroTelefono: data.numeroTelefono || '',

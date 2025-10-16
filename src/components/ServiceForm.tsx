@@ -23,15 +23,16 @@ export default function ServiceForm({
     nombres: '',
     apellidos: '',
     email: '',
+    codigoPais: '',
+    otroCodigoPais: '',
+    numeroTelefono: '',
     ocupacion: '',
     industria: '',
     otraIndustria: '',
-    tamanoEquipo: '',
     nombreNegocio: '',
+    tamanoEquipo: '',
     urgencia: '',
-    codigoPais: '',
-    otroCodigoPais: '',
-    numeroTelefono: ''
+    contextoAdicional: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [userCountry, setUserCountry] = useState<string>('');
@@ -138,7 +139,7 @@ export default function ServiceForm({
     detectUserCountry();
   }, []);
 
-  const totalSteps = 4;
+  const totalSteps = 3;
 
   const updateFormData = (field: string, value: string) => {
     setFormData(prev => ({
@@ -162,29 +163,14 @@ export default function ServiceForm({
   const validateCurrentStep = () => {
     switch (currentStep) {
       case 1:
-        return formData.nombres.trim() !== '' && formData.apellidos.trim() !== '' && formData.email.trim() !== '';
-      case 2:
-        return formData.ocupacion.trim() !== '' && formData.industria.trim() !== '';
-      case 3:
-        return formData.tamanoEquipo.trim() !== '' && formData.nombreNegocio.trim() !== '';
-      case 4:
-        const urgenciaValid = formData.urgencia.trim() !== '';
         const codigoPaisValid = formData.codigoPais.trim() !== '';
         const otroCodigoValid = formData.codigoPais !== 'Otro' || (formData.codigoPais === 'Otro' && formData.otroCodigoPais.trim() !== '');
         const numeroValid = formData.numeroTelefono.trim() !== '';
-        
-        console.log('Validación paso 4:', {
-          urgencia: formData.urgencia,
-          codigoPais: formData.codigoPais,
-          otroCodigoPais: formData.otroCodigoPais,
-          numeroTelefono: formData.numeroTelefono,
-          urgenciaValid,
-          codigoPaisValid,
-          otroCodigoValid,
-          numeroValid
-        });
-        
-        return urgenciaValid && codigoPaisValid && otroCodigoValid && numeroValid;
+        return formData.nombres.trim() !== '' && formData.apellidos.trim() !== '' && formData.email.trim() !== '' && codigoPaisValid && otroCodigoValid && numeroValid;
+      case 2:
+        return formData.ocupacion.trim() !== '' && formData.industria.trim() !== '' && formData.nombreNegocio.trim() !== '';
+      case 3:
+        return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       default:
         return false;
     }
@@ -222,23 +208,24 @@ export default function ServiceForm({
       nombres: '',
       apellidos: '',
       email: '',
+      codigoPais: '',
+      otroCodigoPais: '',
+      numeroTelefono: '',
       ocupacion: '',
       industria: '',
       otraIndustria: '',
-      tamanoEquipo: '',
       nombreNegocio: '',
+      tamanoEquipo: '',
       urgencia: '',
-      codigoPais: '',
-      otroCodigoPais: '',
-      numeroTelefono: ''
+      contextoAdicional: ''
     });
   };
 
   const renderStep1 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Información Personal</h3>
-        <p className="text-gray-400">Cuéntanos un poco sobre ti</p>
+        <h3 className="text-2xl font-bold text-white mb-2">Información Personal y Contacto</h3>
+        <p className="text-gray-400">Cuéntanos sobre ti y cómo contactarte</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -286,13 +273,88 @@ export default function ServiceForm({
           required
         />
       </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label className="block text-white font-semibold mb-2">
+            Código del país *
+          </label>
+          <select
+            value={formData.codigoPais}
+            onChange={(e) => {
+              const newValue = e.target.value;
+              updateFormData('codigoPais', newValue);
+              // Si no es "Otro", limpiar el campo personalizado
+              if (newValue !== 'Otro') {
+                updateFormData('otroCodigoPais', '');
+              }
+            }}
+            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+            required
+          >
+            <option value="">País</option>
+            <option value="+1">🇺🇸 +1 (USA/Canadá)</option>
+            <option value="+52">🇲🇽 +52 (México)</option>
+            <option value="+34">🇪🇸 +34 (España)</option>
+            <option value="+54">🇦🇷 +54 (Argentina)</option>
+            <option value="+56">🇨🇱 +56 (Chile)</option>
+            <option value="+57">🇨🇴 +57 (Colombia)</option>
+            <option value="+51">🇵🇪 +51 (Perú)</option>
+            <option value="+58">🇻🇪 +58 (Venezuela)</option>
+            <option value="+593">🇪🇨 +593 (Ecuador)</option>
+            <option value="+591">🇧🇴 +591 (Bolivia)</option>
+            <option value="+595">🇵🇾 +595 (Paraguay)</option>
+            <option value="+598">🇺🇾 +598 (Uruguay)</option>
+            <option value="+55">🇧🇷 +55 (Brasil)</option>
+            <option value="Otro">🌍 Otro (escribir código)</option>
+          </select>
+          {formData.codigoPais === 'Otro' && (
+            <input
+              type="text"
+              value={formData.otroCodigoPais}
+              onChange={(e) => {
+                let value = e.target.value;
+                // Asegurar que empiece con +
+                if (value && !value.startsWith('+')) {
+                  value = '+' + value;
+                }
+                // Limitar a máximo 4 caracteres después del +
+                if (value.length > 5) { // + + 4 dígitos = 5 caracteres total
+                  value = value.slice(0, 5);
+                }
+                updateFormData('otroCodigoPais', value);
+              }}
+              placeholder="+123"
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors mt-2"
+              maxLength={5}
+              required
+            />
+          )}
+        </div>
+        <div className="md:col-span-2">
+          <label className="block text-white font-semibold mb-2">
+            Número de teléfono *
+          </label>
+          <input
+            type="tel"
+            value={formData.numeroTelefono}
+            onChange={(e) => updateFormData('numeroTelefono', e.target.value)}
+            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+            placeholder="234 567 8900"
+            autoComplete="tel-national"
+            inputMode="numeric"
+            pattern="[0-9\s\-\(\)]+"
+            required
+          />
+        </div>
+      </div>
     </div>
   );
 
   const renderStep2 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Información Profesional</h3>
+        <h3 className="text-2xl font-bold text-white mb-2">Información Profesional y del Negocio</h3>
         <p className="text-gray-400">Ayúdanos a entender tu contexto laboral</p>
       </div>
 
@@ -347,14 +409,28 @@ export default function ServiceForm({
           />
         )}
       </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          Nombre del negocio *
+        </label>
+        <input
+          type="text"
+          value={formData.nombreNegocio}
+          onChange={(e) => updateFormData('nombreNegocio', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+          placeholder="Nombre de tu empresa o negocio"
+          required
+        />
+      </div>
     </div>
   );
 
   const renderStep3 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Información del Negocio</h3>
-        <p className="text-gray-400">Háblanos sobre tu empresa</p>
+        <h3 className="text-2xl font-bold text-white mb-2">Sobre tu negocio y expectativas</h3>
+        <p className="text-gray-400">Háblanos sobre tu empresa y lo que buscas</p>
       </div>
 
       <div>
@@ -378,29 +454,6 @@ export default function ServiceForm({
 
       <div>
         <label className="block text-white font-semibold mb-2">
-          Nombre del negocio *
-        </label>
-        <input
-          type="text"
-          value={formData.nombreNegocio}
-          onChange={(e) => updateFormData('nombreNegocio', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
-          placeholder="Nombre de tu empresa o negocio"
-          required
-        />
-      </div>
-    </div>
-  );
-
-  const renderStep4 = () => (
-    <div className="space-y-6">
-      <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Información de Contacto Final</h3>
-        <p className="text-gray-400">Completa tu información para contactarte</p>
-      </div>
-
-      <div>
-        <label className="block text-white font-semibold mb-2">
           ¿Con qué urgencia buscas implementar este servicio en tu negocio? *
         </label>
         <select
@@ -416,83 +469,22 @@ export default function ServiceForm({
         </select>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <label className="block text-white font-semibold mb-2">
-            Código del país *
-          </label>
-          <select
-            value={formData.codigoPais}
-            onChange={(e) => {
-              const newValue = e.target.value;
-              updateFormData('codigoPais', newValue);
-              // Si no es "Otro", limpiar el campo personalizado
-              if (newValue !== 'Otro') {
-                updateFormData('otroCodigoPais', '');
-              }
-            }}
-            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
-            required
-          >
-            <option value="">País</option>
-            <option value="+1">🇺🇸 +1 (USA/Canadá)</option>
-            <option value="+52">🇲🇽 +52 (México)</option>
-            <option value="+34">🇪🇸 +34 (España)</option>
-            <option value="+54">🇦🇷 +54 (Argentina)</option>
-            <option value="+56">🇨🇱 +56 (Chile)</option>
-            <option value="+57">🇨🇴 +57 (Colombia)</option>
-            <option value="+51">🇵🇪 +51 (Perú)</option>
-            <option value="+58">🇻🇪 +58 (Venezuela)</option>
-            <option value="+593">🇪🇨 +593 (Ecuador)</option>
-            <option value="+591">🇧🇴 +591 (Bolivia)</option>
-            <option value="+595">🇵🇾 +595 (Paraguay)</option>
-            <option value="+598">🇺🇾 +598 (Uruguay)</option>
-            <option value="+55">🇧🇷 +55 (Brasil)</option>
-            <option value="Otro">🌍 Otro (escribir código)</option>
-          </select>
-          {formData.codigoPais === 'Otro' && (
-            <input
-              type="text"
-              value={formData.otroCodigoPais}
-              onChange={(e) => {
-                let value = e.target.value;
-                // Asegurar que empiece con +
-                if (value && !value.startsWith('+')) {
-                  value = '+' + value;
-                }
-                // Limitar a máximo 4 caracteres después del +
-                if (value.length > 5) { // + + 4 dígitos = 5 caracteres total
-                  value = value.slice(0, 5);
-                }
-                console.log('Guardando otroCodigoPais:', value);
-                updateFormData('otroCodigoPais', value);
-              }}
-              placeholder="+123"
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors mt-2"
-              maxLength={5}
-              required
-            />
-          )}
-        </div>
-        <div className="md:col-span-2">
-          <label className="block text-white font-semibold mb-2">
-            Número de teléfono *
-          </label>
-          <input
-            type="tel"
-            value={formData.numeroTelefono}
-            onChange={(e) => updateFormData('numeroTelefono', e.target.value)}
-            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
-            placeholder="234 567 8900"
-            autoComplete="tel-national"
-            inputMode="numeric"
-            pattern="[0-9\s\-\(\)]+"
-            required
-          />
-        </div>
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          Cuéntanos todo lo que quieras compartir sobre tu negocio, tus retos o lo que esperas del diagnóstico
+        </label>
+        <textarea
+          value={formData.contextoAdicional}
+          onChange={(e) => updateFormData('contextoAdicional', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
+          placeholder="Comparte cualquier información adicional que consideres relevante..."
+          rows={5}
+        />
+        <p className="text-xs text-gray-400 mt-2">Este campo es opcional</p>
       </div>
     </div>
   );
+
 
   if (isSubmitted) {
     return (
@@ -562,8 +554,6 @@ export default function ServiceForm({
                 return renderStep2();
               case 3:
                 return renderStep3();
-              case 4:
-                return renderStep4();
               default:
                 return null;
             }
