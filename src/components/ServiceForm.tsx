@@ -387,7 +387,6 @@ export default function ServiceForm({
           onChange={(e) => updateFormData('nombreNegocio', e.target.value)}
           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
           placeholder="Nombre de tu empresa o negocio"
-          autoComplete="organization"
           required
         />
       </div>
