@@ -126,7 +126,7 @@ export default function PlanMarketingContactSection() {
                 </button>
               </form>
               <p className="contact-note text-center text-gray-400 text-sm mt-4">
-                📞 Te contacto en las próximas 2 horas para coordinar tu llamada estratégica gratuita
+                📞 Te contactamos pronto para coordinar tu llamada estratégica gratuita
               </p>
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function PlanMarketingContactSection() {
       <footer className="py-6 px-6 bg-black border-t border-gray-800">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-gray-600 text-xs">
-            © 2025 Plan de Marketing CONVERT. Todos los derechos reservados.
+            © 2025 Hocuz Focuz. Todos los derechos reservados.
           </p>
         </div>
       </footer>

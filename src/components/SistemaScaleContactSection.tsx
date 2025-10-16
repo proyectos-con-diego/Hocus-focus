@@ -145,7 +145,7 @@ export default function SistemaScaleContactSection() {
             </form>
             
             <p className="text-center text-gray-400 text-sm mt-6">
-              📞 Te contacto en 2 horas para agendar tu sesión estratégica gratuita donde analizamos tu situación específica
+              📞 Te contactamos pronto para agendar tu sesión estratégica gratuita donde analizamos tu situación específica
             </p>
           </div>
         </div>
@@ -155,7 +155,7 @@ export default function SistemaScaleContactSection() {
       <footer className="py-6 px-6 bg-black border-t border-gray-800">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-gray-600 text-xs">
-            © 2025 Sistema SCALE. Todos los derechos reservados.
+            © 2025 Hocuz Focuz. Todos los derechos reservados.
           </p>
         </div>
       </footer>

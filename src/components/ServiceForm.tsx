@@ -595,7 +595,7 @@ export default function ServiceForm({
           </div>
 
           <p className="text-center text-gray-400 text-sm">
-            Al completar el formulario, te contactaremos pronto para coordinar tu llamada estratégica.
+            Completa el formulario y te contactaremos pronto para coordinar una llamada estratégica.
           </p>
         </form>
       </div>
