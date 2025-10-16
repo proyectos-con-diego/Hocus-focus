@@ -317,7 +317,7 @@ export default function ServiciosPage() {
       >
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-gray-500 text-sm" data-testid="copyright">
-            © 2025 Diego Gonzalez Vaccaro. Empezando mi aventura como consultor independiente.
+            © 2025 Hocuz Focuz. Transformando caos en sistemas automatizados.
           </p>
         </div>
       </footer>

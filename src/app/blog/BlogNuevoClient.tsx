@@ -415,7 +415,7 @@ export default function BlogNuevoClient() {
       >
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-500 text-sm" data-testid="blog-copyright">
-            © 2025 Diego González Vaccaro. Compartiendo lo que he aprendido optimizando procesos.
+            © 2025 Hocuz Focuz. Transformando caos en sistemas automatizados.
           </p>
         </div>
       </footer>
