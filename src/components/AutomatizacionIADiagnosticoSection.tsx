@@ -5,9 +5,9 @@ import { event as trackEvent } from '@/lib/analytics';
 export default function AutomatizacionIADiagnosticoSection() {
   const handleDiagnosticoClick = () => {
     try { trackEvent({ action: 'click_diagnostico_cta', category: 'Automatizacion IA', label: 'diagnostico_section' }); } catch {}
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+    const formSection = document.getElementById('formulario');
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

@@ -3,10 +3,10 @@ import React from 'react';
 
 export default function AutomatizacionIAQuePasaDespuesSection() {
   const handleDiagnosticoClick = () => {
-    // Scroll to contact form
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+    // Scroll to form
+    const formSection = document.getElementById('formulario');
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

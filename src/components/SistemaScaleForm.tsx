@@ -4,7 +4,7 @@ import ServiceForm from './ServiceForm';
 
 export default function SistemaScaleForm() {
   return (
-    <div id="diagnostico" className="w-full max-w-4xl mx-auto py-16">
+    <div id="formulario" className="w-full max-w-4xl mx-auto py-16">
       <ServiceForm
         serviceName="Diagnóstico SCALE"
         serviceSlug="sistema-scale"

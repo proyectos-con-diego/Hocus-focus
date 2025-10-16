@@ -20,9 +20,9 @@ export default function DiagnosticoPricingSection() {
   }, []);
 
   const handleDiagnosticoClick = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+    const formSection = document.getElementById('formulario');
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
