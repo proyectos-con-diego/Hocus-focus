@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            © 2025 Diego Gonzalez Vaccaro. Transformando caos en sistemas automatizados.
+            © 2025 Hocuz Focuz. Transformando caos en sistemas automatizados.
           </p>
           <div className="flex flex-wrap gap-4 text-xs text-gray-400">
             <Link href="/contacto" className="hover:text-cyan-400 transition-colors">Contacto</Link>
