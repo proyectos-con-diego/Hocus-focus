@@ -41,7 +41,12 @@ export default function ServiceForm({
     inversionMarketing: '',
     resultadoValioso: '',
     paginaWeb: '',
-    redesSociales: ''
+    redesSociales: '',
+    // Preguntas específicas de automatización
+    horasRepetitivas: '',
+    tipoTareasRepetitivas: '',
+    herramientasAutomatizacion: '',
+    nivelInversionTecnologica: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [userCountry, setUserCountry] = useState<string>('');
@@ -148,7 +153,7 @@ export default function ServiceForm({
     detectUserCountry();
   }, []);
 
-  const totalSteps = serviceSlug === 'plan-marketing' ? 5 : 3;
+  const totalSteps = serviceSlug === 'plan-marketing' ? 5 : (serviceSlug === 'automatizacion-ia' ? 5 : 3);
 
   const updateFormData = (field: string, value: string | boolean) => {
     setFormData(prev => ({
@@ -182,14 +187,23 @@ export default function ServiceForm({
         if (serviceSlug === 'plan-marketing') {
           return formData.generacionClientes.trim() !== '' && formData.problemaMarketing.trim() !== '' && formData.inversionMarketing.trim() !== '';
         }
+        if (serviceSlug === 'automatizacion-ia') {
+          return formData.horasRepetitivas.trim() !== '' && formData.tipoTareasRepetitivas.trim() !== '';
+        }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 4:
         if (serviceSlug === 'plan-marketing') {
           return formData.equipoMarketing.trim() !== '' && formData.resultadoValioso.trim() !== '';
         }
+        if (serviceSlug === 'automatizacion-ia') {
+          return formData.herramientasAutomatizacion.trim() !== '' && formData.nivelInversionTecnologica.trim() !== '';
+        }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 5:
         if (serviceSlug === 'plan-marketing') {
+          return formData.urgencia.trim() !== '';
+        }
+        if (serviceSlug === 'automatizacion-ia') {
           return formData.urgencia.trim() !== '';
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
@@ -248,7 +262,12 @@ export default function ServiceForm({
       inversionMarketing: '',
       resultadoValioso: '',
       paginaWeb: '',
-      redesSociales: ''
+      redesSociales: '',
+      // Preguntas específicas de automatización
+      horasRepetitivas: '',
+      tipoTareasRepetitivas: '',
+      herramientasAutomatizacion: '',
+      nivelInversionTecnologica: ''
     });
   };
 
@@ -536,6 +555,97 @@ export default function ServiceForm({
     </div>
   );
 
+  const renderAutomationStep3 = () => (
+    <div className="space-y-6">
+      <div className="text-center mb-6">
+        <h3 className="text-2xl font-bold text-white mb-2">Diagnóstico de Automatización</h3>
+        <p className="text-gray-400">Ayúdanos a entender tu situación actual con tareas repetitivas</p>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Hoy en día, cuántas horas semanales crees que pierdes en tareas repetitivas? *
+        </label>
+        <select
+          value={formData.horasRepetitivas}
+          onChange={(e) => updateFormData('horasRepetitivas', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Menos de 5h">Menos de 5h</option>
+          <option value="Entre 5 y 10h">Entre 5 y 10h</option>
+          <option value="Entre 11 y 20h">Entre 11 y 20h</option>
+          <option value="Más de 20h">Más de 20h</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Qué tipo de tareas repetitivas te consumen más tiempo? *
+        </label>
+        <select
+          value={formData.tipoTareasRepetitivas}
+          onChange={(e) => updateFormData('tipoTareasRepetitivas', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Facturación y recordatorios">Facturación y recordatorios</option>
+          <option value="Respuesta de correos">Respuesta de correos</option>
+          <option value="Selección de candidatos">Selección de candidatos</option>
+          <option value="Propuestas comerciales">Propuestas comerciales</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+    </div>
+  );
+
+  const renderAutomationStep4 = () => (
+    <div className="space-y-6">
+      <div className="text-center mb-6">
+        <h3 className="text-2xl font-bold text-white mb-2">Más sobre tu Automatización</h3>
+        <p className="text-gray-400">Completa el diagnóstico</p>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Ya usas alguna herramienta de automatización? *
+        </label>
+        <select
+          value={formData.herramientasAutomatizacion}
+          onChange={(e) => updateFormData('herramientasAutomatizacion', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Sí, pero poco aprovechada">Sí, pero poco aprovechada</option>
+          <option value="Sí, y la usamos bastante">Sí, y la usamos bastante</option>
+          <option value="No, todo es manual">No, todo es manual</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Cómo describirías el nivel de inversión actual de tu empresa en herramientas tecnológicas o de automatización? *
+        </label>
+        <select
+          value={formData.nivelInversionTecnologica}
+          onChange={(e) => updateFormData('nivelInversionTecnologica', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Muy bajo - Solo herramientas básicas">Muy bajo - Solo herramientas básicas</option>
+          <option value="Bajo - Algunas herramientas gratuitas">Bajo - Algunas herramientas gratuitas</option>
+          <option value="Medio - Inversión moderada en tecnología">Medio - Inversión moderada en tecnología</option>
+          <option value="Alto - Presupuesto significativo para tecnología">Alto - Presupuesto significativo para tecnología</option>
+          <option value="Muy alto - Inversión robusta en automatización">Muy alto - Inversión robusta en automatización</option>
+        </select>
+      </div>
+    </div>
+  );
+
   const renderStep2 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
@@ -742,10 +852,16 @@ export default function ServiceForm({
                 if (serviceSlug === 'plan-marketing') {
                   return renderMarketingStep3();
                 }
+                if (serviceSlug === 'automatizacion-ia') {
+                  return renderAutomationStep3();
+                }
                 return renderStep3();
               case 4:
                 if (serviceSlug === 'plan-marketing') {
                   return renderMarketingStep4();
+                }
+                if (serviceSlug === 'automatizacion-ia') {
+                  return renderAutomationStep4();
                 }
                 return renderStep3();
               case 5:

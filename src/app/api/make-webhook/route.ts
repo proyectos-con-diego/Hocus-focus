@@ -307,6 +307,12 @@ function formatDataForMake(data: any) {
         paginaWeb: data.paginaWeb || '',
         redesSociales: data.redesSociales || '',
         
+        // Preguntas específicas de automatización (solo para automatizacion-ia)
+        horasRepetitivas: data.horasRepetitivas || '',
+        tipoTareasRepetitivas: data.tipoTareasRepetitivas || '',
+        herramientasAutomatizacion: data.herramientasAutomatizacion || '',
+        nivelInversionTecnologica: data.nivelInversionTecnologica || '',
+        
         // Metadata del Servicio
         serviceName: data.serviceName || '',
         serviceSlug: data.serviceSlug || '',
