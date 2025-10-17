@@ -309,7 +309,7 @@ function formatDataForMake(data: any) {
         
         // Preguntas específicas de automatización (solo para automatizacion-ia)
         horasRepetitivas: data.horasRepetitivas || '',
-        tipoTareasRepetitivas: data.tipoTareasRepetitivas || '',
+        tipoTareasRepetitivas: data.tipoTareasRepetitivas === 'Otro' ? (data.otroTipoTareasRepetitivas || 'Otro') : (data.tipoTareasRepetitivas || ''),
         herramientasAutomatizacion: Array.isArray(data.herramientasAutomatizacion) ? 
           data.herramientasAutomatizacion.map((herramienta: string) => 
             herramienta === 'Otros' ? (data.otrasHerramientas || 'Otros') : herramienta

@@ -43,6 +43,7 @@ export default function ServiceForm({
     redesSociales: string;
     horasRepetitivas: string;
     tipoTareasRepetitivas: string;
+    otroTipoTareasRepetitivas: string;
     herramientasAutomatizacion: string[];
     otrasHerramientas: string;
     nivelInversionTecnologica: string;
@@ -80,6 +81,7 @@ export default function ServiceForm({
     // Preguntas específicas de automatización
     horasRepetitivas: '',
     tipoTareasRepetitivas: '',
+    otroTipoTareasRepetitivas: '',
     herramientasAutomatizacion: [],
     otrasHerramientas: '',
     nivelInversionTecnologica: '',
@@ -232,7 +234,10 @@ export default function ServiceForm({
           return formData.generacionClientes.trim() !== '' && formData.problemaMarketing.trim() !== '' && formData.inversionMarketing.trim() !== '';
         }
         if (serviceSlug === 'automatizacion-ia') {
-          return formData.horasRepetitivas.trim() !== '' && formData.tipoTareasRepetitivas.trim() !== '';
+          const horasValid = formData.horasRepetitivas.trim() !== '';
+          const tipoValid = formData.tipoTareasRepetitivas.trim() !== '';
+          const otroTipoValid = formData.tipoTareasRepetitivas !== 'Otro' || (formData.tipoTareasRepetitivas === 'Otro' && formData.otroTipoTareasRepetitivas.trim() !== '');
+          return horasValid && tipoValid && otroTipoValid;
         }
         if (serviceSlug === 'sistema-scale') {
           const empleadosValid = formData.numeroEmpleados.trim() !== '';
@@ -324,6 +329,7 @@ export default function ServiceForm({
       // Preguntas específicas de automatización
       horasRepetitivas: '',
       tipoTareasRepetitivas: '',
+      otroTipoTareasRepetitivas: '',
       herramientasAutomatizacion: [],
       otrasHerramientas: '',
       nivelInversionTecnologica: '',
@@ -653,7 +659,13 @@ export default function ServiceForm({
         </label>
         <select
           value={formData.tipoTareasRepetitivas}
-          onChange={(e) => updateFormData('tipoTareasRepetitivas', e.target.value)}
+          onChange={(e) => {
+            const newValue = e.target.value;
+            updateFormData('tipoTareasRepetitivas', newValue);
+            if (newValue !== 'Otro') {
+              updateFormData('otroTipoTareasRepetitivas', '');
+            }
+          }}
           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
           required
         >
@@ -664,6 +676,22 @@ export default function ServiceForm({
           <option value="Propuestas comerciales">Propuestas comerciales</option>
           <option value="Otro">Otro</option>
         </select>
+        
+        {formData.tipoTareasRepetitivas === 'Otro' && (
+          <div className="mt-4">
+            <label className="block text-white font-semibold mb-2">
+              Especifica qué tipo de tareas:
+            </label>
+            <input
+              type="text"
+              value={formData.otroTipoTareasRepetitivas}
+              onChange={(e) => updateFormData('otroTipoTareasRepetitivas', e.target.value)}
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+              placeholder="Describe las tareas específicas..."
+              required
+            />
+          </div>
+        )}
       </div>
     </div>
   );
