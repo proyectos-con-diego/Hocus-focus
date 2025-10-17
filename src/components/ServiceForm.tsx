@@ -666,8 +666,8 @@ export default function ServiceForm({
             'Productividad (Google Workspace, Microsoft 365, Notion)',
             'Gestión de proyectos (Trello, Asana, Monday.com, Airtable)',
             'Marketing (Mailchimp, Typeform, Calendly, Slack)',
-            'Otros',
-            'Ninguna herramienta específica'
+            'Ninguna herramienta específica',
+            'Otros'
           ].map((herramienta) => (
             <label key={herramienta} className="flex items-center space-x-3 cursor-pointer">
               <input
