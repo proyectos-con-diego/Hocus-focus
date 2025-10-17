@@ -18,6 +18,20 @@ export default function ServiceForm({
   serviceSubtitle, 
   serviceDescription 
 }: ServiceFormProps) {
+  
+  // Función para obtener los colores del degradé según el servicio
+  const getServiceGradient = (slug: string) => {
+    switch (slug) {
+      case 'plan-marketing':
+        return 'from-red-400 to-red-600'; // Rojo para Marketing
+      case 'automatizacion-ia':
+        return 'from-purple-400 to-indigo-500'; // Púrpura para Automatización
+      case 'sistema-scale':
+        return 'from-orange-400 to-orange-600'; // Naranja para SCALE
+      default:
+        return 'from-purple-400 to-indigo-500'; // Púrpura por defecto
+    }
+  };
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<{
     nombres: string;
@@ -1156,7 +1170,7 @@ export default function ServiceForm({
               ¡Gracias por tu interés!
             </h2>
             <p className="text-gray-300 mb-10 text-xl max-w-2xl mx-auto leading-relaxed">
-              Hemos recibido tu solicitud para <span className="text-purple-400 font-semibold">{serviceName}</span>. 
+              Hemos recibido tu solicitud para <span className={`bg-gradient-to-r ${getServiceGradient(serviceSlug)} bg-clip-text text-transparent font-semibold`}>{serviceName}</span>. 
               Te contactaremos pronto para coordinar tu llamada estratégica.
             </p>
             <button
@@ -1183,8 +1197,10 @@ export default function ServiceForm({
             <p className="text-purple-300 text-xs font-bold uppercase tracking-wider">📋 Lista de espera - Acceso prioritario</p>
           </div>
           
-          <h2 className="text-3xl font-bold text-white mb-2">
-            {serviceName}
+          <h2 className="text-3xl font-bold mb-2">
+            <span className={`bg-gradient-to-r ${getServiceGradient(serviceSlug)} bg-clip-text text-transparent`}>
+              {serviceName}
+            </span>
           </h2>
           <p className="text-purple-400 font-semibold mb-2">{serviceSubtitle}</p>
           <p className="text-gray-300">{serviceDescription}</p>
