@@ -50,7 +50,6 @@ export default function ServiceForm({
     sistemaOrganizacion: string[];
     problemaScale: string[];
     objetivoScale: string;
-    cuelloBotella: string;
     numeroEmpleados: string;
     // Campos "Otro" para SCALE
     otroSistemaOrganizacion: string;
@@ -89,7 +88,6 @@ export default function ServiceForm({
     sistemaOrganizacion: [],
     problemaScale: [],
     objetivoScale: '',
-    cuelloBotella: '',
     numeroEmpleados: '',
     // Campos "Otro" para SCALE
     otroSistemaOrganizacion: '',
@@ -239,11 +237,11 @@ export default function ServiceForm({
           return formData.horasRepetitivas.trim() !== '' && formData.tipoTareasRepetitivas.trim() !== '';
         }
         if (serviceSlug === 'sistema-scale') {
+          const empleadosValid = formData.numeroEmpleados.trim() !== '';
+          const otroEmpleadosValid = formData.numeroEmpleados !== 'Otro' || (formData.numeroEmpleados === 'Otro' && formData.otroNumeroEmpleados.trim() !== '');
           const sistemaValid = formData.sistemaOrganizacion.length > 0;
           const otroSistemaValid = !formData.sistemaOrganizacion.includes('Otro') || (formData.sistemaOrganizacion.includes('Otro') && formData.otroSistemaOrganizacion.trim() !== '');
-          const problemaValid = formData.problemaScale.length > 0;
-          const otroProblemaValid = !formData.problemaScale.includes('Otro') || (formData.problemaScale.includes('Otro') && formData.otroProblemaScale.trim() !== '');
-          return sistemaValid && otroSistemaValid && problemaValid && otroProblemaValid;
+          return empleadosValid && otroEmpleadosValid && sistemaValid && otroSistemaValid;
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 4:
@@ -254,7 +252,9 @@ export default function ServiceForm({
           return formData.nivelInversionTecnologica.trim() !== '' && formData.herramientasAutomatizacion.length > 0;
         }
         if (serviceSlug === 'sistema-scale') {
-          return formData.objetivoScale.trim() !== '' && formData.cuelloBotella.trim() !== '';
+          const problemaValid = formData.problemaScale.length > 0;
+          const otroProblemaValid = !formData.problemaScale.includes('Otro') || (formData.problemaScale.includes('Otro') && formData.otroProblemaScale.trim() !== '');
+          return problemaValid && otroProblemaValid && formData.objetivoScale.trim() !== '';
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 5:
@@ -265,9 +265,7 @@ export default function ServiceForm({
           return formData.urgencia.trim() !== '';
         }
         if (serviceSlug === 'sistema-scale') {
-          const empleadosValid = formData.numeroEmpleados.trim() !== '';
-          const otroEmpleadosValid = formData.numeroEmpleados !== 'Otro' || (formData.numeroEmpleados === 'Otro' && formData.otroNumeroEmpleados.trim() !== '');
-          return empleadosValid && otroEmpleadosValid && formData.urgencia.trim() !== '';
+          return formData.urgencia.trim() !== '';
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       default:
@@ -336,7 +334,6 @@ export default function ServiceForm({
       sistemaOrganizacion: [],
       problemaScale: [],
       objetivoScale: '',
-      cuelloBotella: '',
       numeroEmpleados: '',
       // Campos "Otro" para SCALE
       otroSistemaOrganizacion: '',
@@ -754,13 +751,55 @@ export default function ServiceForm({
   const renderScaleStep3 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Diagnóstico de SCALE</h3>
-        <p className="text-gray-400">Ayúdanos a entender tu situación actual de organización</p>
+        <h3 className="text-2xl font-bold text-white mb-2">Información del Equipo</h3>
+        <p className="text-gray-400">Ayúdanos a entender el tamaño de tu organización</p>
       </div>
 
       <div>
         <label className="block text-white font-semibold mb-2">
-          ¿Hoy usan algún sistema de organización (Notion, Asana, Trello, Excel, otro)? *
+          Número de empleados actuales *
+        </label>
+        <select
+          value={formData.numeroEmpleados}
+          onChange={(e) => {
+            const newValue = e.target.value;
+            updateFormData('numeroEmpleados', newValue);
+            if (newValue !== 'Otro') {
+              updateFormData('otroNumeroEmpleados', '');
+            }
+          }}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="-10">-10</option>
+          <option value="11-20">11-20</option>
+          <option value="21-50">21-50</option>
+          <option value="51-200">51-200</option>
+          <option value="+200">+200</option>
+          <option value="Otro">Otro</option>
+        </select>
+        
+        {formData.numeroEmpleados === 'Otro' && (
+          <div className="mt-4">
+            <label className="block text-white font-semibold mb-2">
+              Especifica el número de empleados:
+            </label>
+            <input
+              type="text"
+              value={formData.otroNumeroEmpleados}
+              onChange={(e) => updateFormData('otroNumeroEmpleados', e.target.value)}
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+              placeholder="Ej: 150, 300, etc."
+              required
+            />
+          </div>
+        )}
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Qué sistemas de organización utilizan actualmente? *
         </label>
         <div className="space-y-3">
           {[
@@ -808,10 +847,19 @@ export default function ServiceForm({
           </div>
         )}
       </div>
+    </div>
+  );
+
+  const renderScaleStep4 = () => (
+    <div className="space-y-6">
+      <div className="text-center mb-6">
+        <h3 className="text-2xl font-bold text-white mb-2">Diagnóstico de Problemas</h3>
+        <p className="text-gray-400">Identifica los desafíos actuales</p>
+      </div>
 
       <div>
         <label className="block text-white font-semibold mb-2">
-          ¿Cuál de estos problemas sientes que describe mejor tu situación? *
+          ¿Cuál de estos problemas sientes que describen mejor tu situación? *
         </label>
         <div className="space-y-3">
           {[
@@ -861,15 +909,6 @@ export default function ServiceForm({
           </div>
         )}
       </div>
-    </div>
-  );
-
-  const renderScaleStep4 = () => (
-    <div className="space-y-6">
-      <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Más sobre tu SCALE</h3>
-        <p className="text-gray-400">Completa el diagnóstico</p>
-      </div>
 
       <div>
         <label className="block text-white font-semibold mb-2">
@@ -891,20 +930,6 @@ export default function ServiceForm({
           <option value="Optimizar la comunicación interna">Optimizar la comunicación interna</option>
         </select>
       </div>
-
-      <div>
-        <label className="block text-white font-semibold mb-2">
-          Si pudieras resolver un solo cuello de botella en tu operación, cuál sería? *
-        </label>
-        <textarea
-          value={formData.cuelloBotella}
-          onChange={(e) => updateFormData('cuelloBotella', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
-          placeholder="Describe el cuello de botella más crítico que te gustaría resolver..."
-          rows={4}
-          required
-        />
-      </div>
     </div>
   );
 
@@ -913,48 +938,6 @@ export default function ServiceForm({
       <div className="text-center mb-6">
         <h3 className="text-2xl font-bold text-white mb-2">Información Final</h3>
         <p className="text-gray-400">Completa tu información</p>
-      </div>
-
-      <div>
-        <label className="block text-white font-semibold mb-2">
-          Número de empleados actuales *
-        </label>
-        <select
-          value={formData.numeroEmpleados}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            updateFormData('numeroEmpleados', newValue);
-            if (newValue !== 'Otro') {
-              updateFormData('otroNumeroEmpleados', '');
-            }
-          }}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
-          required
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="-10">-10</option>
-          <option value="11-20">11-20</option>
-          <option value="21-50">21-50</option>
-          <option value="51-200">51-200</option>
-          <option value="+200">+200</option>
-          <option value="Otro">Otro</option>
-        </select>
-        
-        {formData.numeroEmpleados === 'Otro' && (
-          <div className="mt-4">
-            <label className="block text-white font-semibold mb-2">
-              Especifica el número de empleados:
-            </label>
-            <input
-              type="text"
-              value={formData.otroNumeroEmpleados}
-              onChange={(e) => updateFormData('otroNumeroEmpleados', e.target.value)}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
-              placeholder="Ej: 150, 300, etc."
-              required
-            />
-          </div>
-        )}
       </div>
 
       <div>
