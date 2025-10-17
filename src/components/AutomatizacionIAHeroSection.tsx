@@ -1,9 +1,11 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { heroData } from '../data/automatizacion-ia';
 import StableRotatingHeadline from './StableRotatingHeadline';
 
 export default function AutomatizacionIAHeroSection() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  
   const titles = [
     "¿Y si tuvieras un empleado que trabaja 24/7 sin sueldo?",
     "¿Cuántas horas pierdes cada semana en tareas repetitivas?",
@@ -13,7 +15,14 @@ export default function AutomatizacionIAHeroSection() {
     "¿Y si pudieras enfocarte solo en clientes y olvidarte de lo operativo?"
   ];
 
-  // Rotación con componente estable
+  useEffect(() => {
+    // Simular carga de datos para evitar layout shift
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center px-6 py-8 bg-gradient-to-br from-purple-500/15 via-indigo-500/15 to-blue-500/15">
@@ -22,8 +31,17 @@ export default function AutomatizacionIAHeroSection() {
       }}></div>
       
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <div className="bg-gradient-to-r from-purple-500/20 to-indigo-500/30 border border-purple-500/40 rounded-full px-6 py-3 mb-8 inline-block animate-pulse">
-          <p className="text-purple-300 text-sm font-bold uppercase tracking-wider">{heroData.badge}</p>
+        {/* Badge con altura fija para evitar layout shift */}
+        <div className="urgency-badge-container mb-8" style={{ minHeight: '3rem' }}>
+          {isLoaded ? (
+            <div className="bg-gradient-to-r from-purple-500/20 to-indigo-500/30 border border-purple-500/40 rounded-full px-6 py-3 inline-block animate-pulse">
+              <p className="text-purple-300 text-sm font-bold uppercase tracking-wider">{heroData.badge}</p>
+            </div>
+          ) : (
+            <div className="bg-gray-700/30 border border-gray-600/40 rounded-full px-6 py-3 inline-block">
+              <p className="text-gray-400 text-sm font-bold uppercase tracking-wider">Cargando...</p>
+            </div>
+          )}
         </div>
         
         <StableRotatingHeadline

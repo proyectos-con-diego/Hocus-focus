@@ -1,9 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { heroData } from '@/data/plan-marketing';
+import { heroData } from '../data/plan-marketing';
 import StableRotatingHeadline from './StableRotatingHeadline';
 
 export default function PlanMarketingHeroSection() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  
   const titles = [
     "¿Tu marketing parece más un gasto que una inversión?",
     "¿Cansado de probar tácticas sin ver resultados claros?",
@@ -12,7 +14,14 @@ export default function PlanMarketingHeroSection() {
     "¿Sientes que tu negocio ya creció, pero tu marketing se quedó atrás?"
   ];
 
-  // Rotación manejada por StableRotatingHeadline
+  useEffect(() => {
+    // Simular carga de datos para evitar layout shift
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section className="hero relative min-h-screen flex items-center px-6 py-12 bg-gradient-to-br from-red-500/15 via-purple-600/15 to-blue-500/15">
@@ -21,8 +30,17 @@ export default function PlanMarketingHeroSection() {
         <div className="absolute right-[10%] top-[20%] w-80 h-80 bg-purple-500/20 rounded-full blur-2xl" />
       </div>
       <div className="hero-content relative z-10 max-w-3xl mx-auto text-center">
-        <div className="urgency-badge bg-gradient-to-r from-red-500/20 to-red-700/30 border border-red-500/40 rounded-full px-6 py-3 mb-8 inline-block animate-pulse">
-          <p className="text-red-300 text-sm font-bold uppercase tracking-wider">{heroData.badge}</p>
+        {/* Badge con altura fija para evitar layout shift */}
+        <div className="urgency-badge-container mb-8" style={{ minHeight: '3rem' }}>
+          {isLoaded ? (
+            <div className="urgency-badge bg-gradient-to-r from-red-500/20 to-red-700/30 border border-red-500/40 rounded-full px-6 py-3 inline-block animate-pulse">
+              <p className="text-red-300 text-sm font-bold uppercase tracking-wider">{heroData.badge}</p>
+            </div>
+          ) : (
+            <div className="urgency-badge bg-gray-700/30 border border-gray-600/40 rounded-full px-6 py-3 inline-block">
+              <p className="text-gray-400 text-sm font-bold uppercase tracking-wider">Cargando...</p>
+            </div>
+          )}
         </div>
         <StableRotatingHeadline
           phrases={titles}
@@ -33,7 +51,7 @@ export default function PlanMarketingHeroSection() {
           {heroData.subtitle}
         </p>
         <div className="social-proof flex flex-wrap justify-center items-center gap-6 mb-8">
-          {heroData.features.map((feature, index) => (
+          {heroData.features.map((feature: string, index: number) => (
             <div key={index} className="proof-item flex items-center gap-2 text-emerald-400 font-semibold">
               <span>✅</span> {feature}
             </div>
