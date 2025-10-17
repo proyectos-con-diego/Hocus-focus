@@ -297,7 +297,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
             required
           >
-            <option value="" className="text-gray-400">Selecciona tu edad</option>
+            <option value="" style={{ color: '#9CA3AF' }}>Selecciona tu edad</option>
             <option value="menos-18">Menos de 18 años</option>
             <option value="18-25">18-25 años</option>
             <option value="26-35">26-35 años</option>
@@ -317,7 +317,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
             required
           >
-            <option value="" className="text-gray-400">Selecciona tu país</option>
+            <option value="" style={{ color: '#9CA3AF' }}>Selecciona tu país</option>
             {countries.map((country) => (
               <option key={country} value={country}>
                 {country}
@@ -365,7 +365,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           required
         >
-          <option value="">Selecciona tu industria</option>
+          <option value="" style={{ color: '#9CA3AF' }}>Selecciona tu industria</option>
           <option value="Tecnología">Tecnología</option>
           <option value="Marketing">Marketing</option>
           <option value="Ventas">Ventas</option>
@@ -401,7 +401,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           required
         >
-          <option value="">Selecciona el tamaño</option>
+          <option value="" style={{ color: '#9CA3AF' }}>Selecciona el tamaño</option>
           <option value="Solo yo">Solo yo</option>
           <option value="2-5 personas">2-5 personas</option>
           <option value="6-20 personas">6-20 personas</option>
@@ -438,7 +438,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, spiritType: e.target.value } }))}
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           >
-            <option value="">Selecciona una opción</option>
+            <option value="" style={{ color: '#9CA3AF' }}>Selecciona una opción</option>
             <option value="Productividad">Productividad</option>
             <option value="Creatividad">Creatividad</option>
             <option value="Análisis">Análisis</option>
