@@ -636,11 +636,10 @@ export default function ServiceForm({
           required
         >
           <option value="">Selecciona una opción</option>
-          <option value="Muy bajo - Solo herramientas básicas">Muy bajo - Solo herramientas básicas</option>
-          <option value="Bajo - Algunas herramientas gratuitas">Bajo - Algunas herramientas gratuitas</option>
-          <option value="Medio - Inversión moderada en tecnología">Medio - Inversión moderada en tecnología</option>
-          <option value="Alto - Presupuesto significativo para tecnología">Alto - Presupuesto significativo para tecnología</option>
-          <option value="Muy alto - Inversión robusta en automatización">Muy alto - Inversión robusta en automatización</option>
+          <option value="Casi nulo todo se hace manual">Casi nulo todo se hace manual</option>
+          <option value="Básico usamos algunas herramientas gratuitas">Básico usamos algunas herramientas gratuitas</option>
+          <option value="Moderado usamos algunas herramientas pagadas pero sin automatizar">Moderado usamos algunas herramientas pagadas pero sin automatizar</option>
+          <option value="Alto ya tenemos procesos automatizados y queremos escalar">Alto ya tenemos procesos automatizados y queremos escalar</option>
         </select>
       </div>
     </div>
