@@ -313,18 +313,31 @@ function formatDataForMake(data: any) {
         herramientasAutomatizacion: Array.isArray(data.herramientasAutomatizacion) ? 
           data.herramientasAutomatizacion.map((herramienta: string) => 
             herramienta === 'Otros' ? (data.otrasHerramientas || 'Otros') : herramienta
-          ).join(', ') : 
-          (data.herramientasAutomatizacion || ''),
+          ) : 
+          (data.herramientasAutomatizacion || []),
         nivelInversionTecnologica: data.nivelInversionTecnologica || '',
         // Preguntas específicas de SCALE
         sistemaOrganizacion: Array.isArray(data.sistemaOrganizacion) ? 
-          data.sistemaOrganizacion.map((s: string) => s === 'Otro' ? (data.otroSistemaOrganizacion || 'Otro') : s).join(', ') : 
-          (data.sistemaOrganizacion || ''),
+          data.sistemaOrganizacion.map((s: string) => s === 'Otro' ? (data.otroSistemaOrganizacion || 'Otro') : s) : 
+          (data.sistemaOrganizacion || []),
         problemaScale: Array.isArray(data.problemaScale) ? 
-          data.problemaScale.map((p: string) => p === 'Otro' ? (data.otroProblemaScale || 'Otro') : p).join(', ') : 
-          (data.problemaScale || ''),
+          data.problemaScale.map((p: string) => p === 'Otro' ? (data.otroProblemaScale || 'Otro') : p) : 
+          (data.problemaScale || []),
         objetivoScale: data.objetivoScale || '',
         numeroEmpleados: data.numeroEmpleados || '',
+        
+        // Versiones de string para compatibilidad (si se necesitan)
+        herramientasAutomatizacionString: Array.isArray(data.herramientasAutomatizacion) ? 
+          data.herramientasAutomatizacion.map((herramienta: string) => 
+            herramienta === 'Otros' ? (data.otrasHerramientas || 'Otros') : herramienta
+          ).join(', ') : 
+          (data.herramientasAutomatizacion || ''),
+        sistemaOrganizacionString: Array.isArray(data.sistemaOrganizacion) ? 
+          data.sistemaOrganizacion.map((s: string) => s === 'Otro' ? (data.otroSistemaOrganizacion || 'Otro') : s).join(', ') : 
+          (data.sistemaOrganizacion || ''),
+        problemaScaleString: Array.isArray(data.problemaScale) ? 
+          data.problemaScale.map((p: string) => p === 'Otro' ? (data.otroProblemaScale || 'Otro') : p).join(', ') : 
+          (data.problemaScale || ''),
         
         // Metadata del Servicio
         serviceName: data.serviceName || '',
