@@ -160,6 +160,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           onChange={(e) => updateFormData('name', e.target.value)}
           className="w-full px-4 py-4 rounded-2xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border-0"
           placeholder="Tu nombre completo"
+          autoComplete="name"
           required
         />
       </div>
@@ -174,6 +175,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           onChange={(e) => updateFormData('email', e.target.value)}
           className="w-full px-4 py-4 rounded-2xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border-0"
           placeholder="tu@email.com"
+          autoComplete="email"
           required
         />
       </div>
