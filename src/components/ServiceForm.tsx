@@ -47,8 +47,8 @@ export default function ServiceForm({
     otrasHerramientas: string;
     nivelInversionTecnologica: string;
     // Preguntas específicas de SCALE
-    sistemaOrganizacion: string;
-    problemaScale: string;
+    sistemaOrganizacion: string[];
+    problemaScale: string[];
     objetivoScale: string;
     cuelloBotella: string;
     numeroEmpleados: string;
@@ -86,8 +86,8 @@ export default function ServiceForm({
     otrasHerramientas: '',
     nivelInversionTecnologica: '',
     // Preguntas específicas de SCALE
-    sistemaOrganizacion: '',
-    problemaScale: '',
+    sistemaOrganizacion: [],
+    problemaScale: [],
     objetivoScale: '',
     cuelloBotella: '',
     numeroEmpleados: '',
@@ -239,10 +239,10 @@ export default function ServiceForm({
           return formData.horasRepetitivas.trim() !== '' && formData.tipoTareasRepetitivas.trim() !== '';
         }
         if (serviceSlug === 'sistema-scale') {
-          const sistemaValid = formData.sistemaOrganizacion.trim() !== '';
-          const otroSistemaValid = formData.sistemaOrganizacion !== 'Otro' || (formData.sistemaOrganizacion === 'Otro' && formData.otroSistemaOrganizacion.trim() !== '');
-          const problemaValid = formData.problemaScale.trim() !== '';
-          const otroProblemaValid = formData.problemaScale !== 'Otro' || (formData.problemaScale === 'Otro' && formData.otroProblemaScale.trim() !== '');
+          const sistemaValid = formData.sistemaOrganizacion.length > 0;
+          const otroSistemaValid = !formData.sistemaOrganizacion.includes('Otro') || (formData.sistemaOrganizacion.includes('Otro') && formData.otroSistemaOrganizacion.trim() !== '');
+          const problemaValid = formData.problemaScale.length > 0;
+          const otroProblemaValid = !formData.problemaScale.includes('Otro') || (formData.problemaScale.includes('Otro') && formData.otroProblemaScale.trim() !== '');
           return sistemaValid && otroSistemaValid && problemaValid && otroProblemaValid;
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
@@ -333,8 +333,8 @@ export default function ServiceForm({
       otrasHerramientas: '',
       nivelInversionTecnologica: '',
       // Preguntas específicas de SCALE
-      sistemaOrganizacion: '',
-      problemaScale: '',
+      sistemaOrganizacion: [],
+      problemaScale: [],
       objetivoScale: '',
       cuelloBotella: '',
       numeroEmpleados: '',
@@ -762,27 +762,37 @@ export default function ServiceForm({
         <label className="block text-white font-semibold mb-2">
           ¿Hoy usan algún sistema de organización (Notion, Asana, Trello, Excel, otro)? *
         </label>
-        <select
-          value={formData.sistemaOrganizacion}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            updateFormData('sistemaOrganizacion', newValue);
-            if (newValue !== 'Otro') {
-              updateFormData('otroSistemaOrganizacion', '');
-            }
-          }}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
-          required
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="Notion">Notion</option>
-          <option value="Excel">Excel</option>
-          <option value="Asana">Asana</option>
-          <option value="Trello">Trello</option>
-          <option value="Otro">Otro</option>
-        </select>
+        <div className="space-y-3">
+          {[
+            'Notion',
+            'Excel', 
+            'Asana',
+            'Trello',
+            'Otro'
+          ].map((sistema) => (
+            <label key={sistema} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formData.sistemaOrganizacion.includes(sistema)}
+                onChange={(e) => {
+                  const currentSistemas = formData.sistemaOrganizacion;
+                  if (e.target.checked) {
+                    updateFormData('sistemaOrganizacion', [...currentSistemas, sistema]);
+                  } else {
+                    updateFormData('sistemaOrganizacion', currentSistemas.filter(s => s !== sistema));
+                    if (sistema === 'Otro') {
+                      updateFormData('otroSistemaOrganizacion', '');
+                    }
+                  }
+                }}
+                className="w-4 h-4 text-purple-600 bg-white/10 border-white/20 rounded focus:ring-purple-500 focus:ring-2"
+              />
+              <span className="text-white">{sistema}</span>
+            </label>
+          ))}
+        </div>
         
-        {formData.sistemaOrganizacion === 'Otro' && (
+        {formData.sistemaOrganizacion.includes('Otro') && (
           <div className="mt-4">
             <label className="block text-white font-semibold mb-2">
               Especifica qué otro sistema usan:
@@ -803,29 +813,39 @@ export default function ServiceForm({
         <label className="block text-white font-semibold mb-2">
           ¿Cuál de estos problemas sientes que describe mejor tu situación? *
         </label>
-        <select
-          value={formData.problemaScale}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            updateFormData('problemaScale', newValue);
-            if (newValue !== 'Otro') {
-              updateFormData('otroProblemaScale', '');
-            }
-          }}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
-          required
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="No sé qué hace mi equipo">No sé qué hace mi equipo</option>
-          <option value="Proyectos siempre se retrasan">Proyectos siempre se retrasan</option>
-          <option value="Reuniones interminables">Reuniones interminables</option>
-          <option value="No puedo delegar">No puedo delegar</option>
-          <option value="Decisiones sin datos">Decisiones sin datos</option>
-          <option value="No hago seguimiento constante">No hago seguimiento constante</option>
-          <option value="Otro">Otro</option>
-        </select>
+        <div className="space-y-3">
+          {[
+            'No sé qué hace mi equipo',
+            'Proyectos siempre se retrasan',
+            'Reuniones interminables',
+            'No puedo delegar',
+            'Decisiones sin datos',
+            'No hago seguimiento constante',
+            'Otro'
+          ].map((problema) => (
+            <label key={problema} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formData.problemaScale.includes(problema)}
+                onChange={(e) => {
+                  const currentProblemas = formData.problemaScale;
+                  if (e.target.checked) {
+                    updateFormData('problemaScale', [...currentProblemas, problema]);
+                  } else {
+                    updateFormData('problemaScale', currentProblemas.filter(p => p !== problema));
+                    if (problema === 'Otro') {
+                      updateFormData('otroProblemaScale', '');
+                    }
+                  }
+                }}
+                className="w-4 h-4 text-purple-600 bg-white/10 border-white/20 rounded focus:ring-purple-500 focus:ring-2"
+              />
+              <span className="text-white">{problema}</span>
+            </label>
+          ))}
+        </div>
         
-        {formData.problemaScale === 'Otro' && (
+        {formData.problemaScale.includes('Otro') && (
           <div className="mt-4">
             <label className="block text-white font-semibold mb-2">
               Especifica cuál es el problema:
@@ -855,14 +875,21 @@ export default function ServiceForm({
         <label className="block text-white font-semibold mb-2">
           ¿Qué te gustaría lograr con SCALE en los próximos 3-6 meses? *
         </label>
-        <input
-          type="text"
+        <select
           value={formData.objetivoScale}
           onChange={(e) => updateFormData('objetivoScale', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
-          placeholder="Describe tus objetivos específicos..."
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
           required
-        />
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Mejorar la visibilidad de tareas y proyectos">Mejorar la visibilidad de tareas y proyectos</option>
+          <option value="Reducir reuniones innecesarias">Reducir reuniones innecesarias</option>
+          <option value="Automatizar procesos repetitivos">Automatizar procesos repetitivos</option>
+          <option value="Mejorar la delegación y seguimiento">Mejorar la delegación y seguimiento</option>
+          <option value="Tomar decisiones basadas en datos">Tomar decisiones basadas en datos</option>
+          <option value="Escalar el equipo sin perder control">Escalar el equipo sin perder control</option>
+          <option value="Optimizar la comunicación interna">Optimizar la comunicación interna</option>
+        </select>
       </div>
 
       <div>

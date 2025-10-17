@@ -314,8 +314,12 @@ function formatDataForMake(data: any) {
         otrasHerramientas: data.otrasHerramientas || '',
         nivelInversionTecnologica: data.nivelInversionTecnologica || '',
         // Preguntas específicas de SCALE
-        sistemaOrganizacion: data.sistemaOrganizacion === 'Otro' ? (data.otroSistemaOrganizacion || 'Otro') : (data.sistemaOrganizacion || ''),
-        problemaScale: data.problemaScale === 'Otro' ? (data.otroProblemaScale || 'Otro') : (data.problemaScale || ''),
+        sistemaOrganizacion: Array.isArray(data.sistemaOrganizacion) ? 
+          data.sistemaOrganizacion.map((s: string) => s === 'Otro' ? (data.otroSistemaOrganizacion || 'Otro') : s).join(', ') : 
+          (data.sistemaOrganizacion || ''),
+        problemaScale: Array.isArray(data.problemaScale) ? 
+          data.problemaScale.map((p: string) => p === 'Otro' ? (data.otroProblemaScale || 'Otro') : p).join(', ') : 
+          (data.problemaScale || ''),
         objetivoScale: data.objetivoScale || '',
         cuelloBotella: data.cuelloBotella || '',
         numeroEmpleados: data.numeroEmpleados === 'Otro' ? (data.otroNumeroEmpleados || 'Otro') : (data.numeroEmpleados || ''),
