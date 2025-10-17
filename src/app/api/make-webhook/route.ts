@@ -264,7 +264,9 @@ function formatDataForMake(data: any) {
         industry: data.industria === 'Otro' ? (data.otraIndustria || 'Otro') : (data.industria || ''),
         
         // Información del Negocio
-        teamSize: data.serviceSlug === 'sistema-scale' ? (data.numeroEmpleados || '') : (data.tamanoEquipo || ''),
+        teamSize: data.serviceSlug === 'sistema-scale' ? (data.numeroEmpleados || '') : 
+                  data.serviceSlug === 'plan-marketing' ? (data.equipoMarketing || '') : 
+                  (data.tamanoEquipo || ''),
         nombreNegocio: data.nombreNegocio || '',
         
         // Información de Contacto
@@ -301,7 +303,6 @@ function formatDataForMake(data: any) {
         // Preguntas específicas de marketing (solo para plan-marketing)
         generacionClientes: data.generacionClientes || '',
         problemaMarketing: data.problemaMarketing || '',
-        equipoMarketing: data.equipoMarketing || '',
         inversionMarketing: data.inversionMarketing || '',
         resultadoValioso: data.resultadoValioso || '',
         paginaWeb: data.paginaWeb || '',
