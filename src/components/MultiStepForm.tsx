@@ -324,12 +324,6 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
               </option>
             ))}
           </select>
-          {userCountry && formData.country && formData.country !== 'Otro' && (
-            <p className="text-green-400 text-xs mt-2 flex items-center">
-              <span className="mr-1">✓</span>
-              Detectado automáticamente
-            </p>
-          )}
           {formData.country === 'Otro' && (
             <input
               type="text"
