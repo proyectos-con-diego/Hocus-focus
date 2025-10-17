@@ -264,7 +264,7 @@ function formatDataForMake(data: any) {
         industry: data.industria === 'Otro' ? (data.otraIndustria || 'Otro') : (data.industria || ''),
         
         // Información del Negocio
-        teamSize: data.tamanoEquipo || '',
+        teamSize: data.serviceSlug === 'sistema-scale' ? (data.numeroEmpleados || '') : (data.tamanoEquipo || ''),
         nombreNegocio: data.nombreNegocio || '',
         
         // Información de Contacto
@@ -326,7 +326,6 @@ function formatDataForMake(data: any) {
           data.problemaScale.map((p: string) => p === 'Otro' ? (data.otroProblemaScale || 'Otro') : p) : 
           (data.problemaScale || []),
         objetivoScale: data.objetivoScale || '',
-        numeroEmpleados: data.numeroEmpleados || '',
         
         // Versiones de string para compatibilidad (si se necesitan)
         herramientasAutomatizacionString: Array.isArray(data.herramientasAutomatizacion) ? 
