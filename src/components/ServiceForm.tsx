@@ -235,7 +235,7 @@ export default function ServiceForm({
         if (serviceSlug === 'plan-marketing') {
           const generacionValid = formData.generacionClientes.length > 0;
           const otraGeneracionValid = !formData.generacionClientes.includes('Otro') || (formData.generacionClientes.includes('Otro') && formData.otraGeneracionClientes.trim() !== '');
-          return generacionValid && otraGeneracionValid && formData.problemaMarketing.trim() !== '' && formData.inversionMarketing.trim() !== '';
+          return generacionValid && otraGeneracionValid && formData.problemaMarketing.trim() !== '';
         }
         if (serviceSlug === 'automatizacion-ia') {
           const horasValid = formData.horasRepetitivas.trim() !== '';
@@ -252,7 +252,7 @@ export default function ServiceForm({
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 4:
         if (serviceSlug === 'plan-marketing') {
-          return formData.equipoMarketing.trim() !== '' && formData.resultadoValioso.trim() !== '';
+          return formData.equipoMarketing.trim() !== '' && formData.inversionMarketing.trim() !== '' && formData.resultadoValioso.trim() !== '';
         }
         if (serviceSlug === 'automatizacion-ia') {
           return formData.nivelInversionTecnologica.trim() !== '' && formData.herramientasAutomatizacion.length > 0;
