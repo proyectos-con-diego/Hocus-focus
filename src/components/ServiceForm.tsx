@@ -32,6 +32,22 @@ export default function ServiceForm({
         return 'from-purple-400 to-indigo-500'; // Púrpura por defecto
     }
   };
+
+  // Función para separar "Diagnóstico" del nombre del servicio
+  const renderServiceTitle = (fullName: string, slug: string) => {
+    const parts = fullName.split(' ');
+    const diagnostico = parts[0]; // "Diagnóstico"
+    const serviceName = parts.slice(1).join(' '); // Resto del nombre
+    
+    return (
+      <>
+        <span className="text-white">{diagnostico} </span>
+        <span className={`bg-gradient-to-r ${getServiceGradient(slug)} bg-clip-text text-transparent`}>
+          {serviceName}
+        </span>
+      </>
+    );
+  };
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<{
     nombres: string;
@@ -1170,7 +1186,7 @@ export default function ServiceForm({
               ¡Gracias por tu interés!
             </h2>
             <p className="text-gray-300 mb-10 text-xl max-w-2xl mx-auto leading-relaxed">
-              Hemos recibido tu solicitud para el diagnóstico de <span className={`bg-gradient-to-r ${getServiceGradient(serviceSlug)} bg-clip-text text-transparent font-semibold`}>{serviceName}</span>. 
+              Hemos recibido tu solicitud para <span className={`bg-gradient-to-r ${getServiceGradient(serviceSlug)} bg-clip-text text-transparent font-semibold`}>{serviceName}</span>. 
               Te contactaremos pronto para coordinar tu llamada estratégica.
             </p>
             <button
@@ -1198,10 +1214,7 @@ export default function ServiceForm({
           </div>
           
           <h2 className="text-3xl font-bold mb-2">
-            <span className="text-white">Diagnóstico </span>
-            <span className={`bg-gradient-to-r ${getServiceGradient(serviceSlug)} bg-clip-text text-transparent`}>
-              {serviceName}
-            </span>
+            {renderServiceTitle(serviceName, serviceSlug)}
           </h2>
           <p className="text-purple-400 font-semibold mb-2">{serviceSubtitle}</p>
           <p className="text-gray-300">{serviceDescription}</p>
