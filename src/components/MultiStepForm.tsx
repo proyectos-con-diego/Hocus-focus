@@ -52,6 +52,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [userCountry, setUserCountry] = useState<string>('');
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -77,6 +78,111 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     formType: productType === 'mini' ? 'mini_form' : 'vip_list',
     source: `${productType}-${productSlug}`
   });
+
+  // Lista de países ordenada alfabéticamente
+  const countries = [
+    'Argentina',
+    'Bolivia',
+    'Brasil',
+    'Canadá',
+    'Chile',
+    'Colombia',
+    'Ecuador',
+    'España',
+    'Estados Unidos',
+    'México',
+    'Paraguay',
+    'Perú',
+    'Uruguay',
+    'Venezuela',
+    'Otro'
+  ];
+
+  // Función para detectar el país del usuario
+  const detectUserCountry = async () => {
+    try {
+      // Intentar geolocalización del navegador
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            try {
+              const response = await fetch(
+                `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`
+              );
+              const data = await response.json();
+              const countryCode = data.countryCode;
+              
+              // Mapear códigos de país a nombres
+              const countryMap: { [key: string]: string } = {
+                'AR': 'Argentina',
+                'BO': 'Bolivia',
+                'BR': 'Brasil',
+                'CA': 'Canadá',
+                'CL': 'Chile',
+                'CO': 'Colombia',
+                'EC': 'Ecuador',
+                'ES': 'España',
+                'US': 'Estados Unidos',
+                'MX': 'México',
+                'PY': 'Paraguay',
+                'PE': 'Perú',
+                'UY': 'Uruguay',
+                'VE': 'Venezuela'
+              };
+              
+              const countryName = countryMap[countryCode];
+              if (countryName && countries.includes(countryName)) {
+                setUserCountry(countryName);
+                updateFormData('country', countryName);
+              }
+            } catch (error) {
+              console.log('Error en geolocalización:', error);
+            }
+          },
+          async () => {
+            // Fallback a IP geolocation
+            try {
+              const response = await fetch('https://ipapi.co/json/');
+              const data = await response.json();
+              const countryCode = data.country_code;
+              
+              const countryMap: { [key: string]: string } = {
+                'AR': 'Argentina',
+                'BO': 'Bolivia',
+                'BR': 'Brasil',
+                'CA': 'Canadá',
+                'CL': 'Chile',
+                'CO': 'Colombia',
+                'EC': 'Ecuador',
+                'ES': 'España',
+                'US': 'Estados Unidos',
+                'MX': 'México',
+                'PY': 'Paraguay',
+                'PE': 'Perú',
+                'UY': 'Uruguay',
+                'VE': 'Venezuela'
+              };
+              
+              const countryName = countryMap[countryCode];
+              if (countryName && countries.includes(countryName)) {
+                setUserCountry(countryName);
+                updateFormData('country', countryName);
+              }
+            } catch (error) {
+              console.log('Error en IP geolocation:', error);
+            }
+          }
+        );
+      }
+    } catch (error) {
+      console.log('Error en detección de país:', error);
+    }
+  };
+
+  // Detectar país al cargar el componente
+  useEffect(() => {
+    detectUserCountry();
+  }, []);
 
   const totalSteps = 3;
 
@@ -212,22 +318,18 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             required
           >
             <option value="">Selecciona tu país</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Chile">Chile</option>
-            <option value="Colombia">Colombia</option>
-            <option value="México">México</option>
-            <option value="España">España</option>
-            <option value="Perú">Perú</option>
-            <option value="Uruguay">Uruguay</option>
-            <option value="Venezuela">Venezuela</option>
-            <option value="Ecuador">Ecuador</option>
-            <option value="Bolivia">Bolivia</option>
-            <option value="Paraguay">Paraguay</option>
-            <option value="Estados Unidos">Estados Unidos</option>
-            <option value="Canadá">Canadá</option>
-            <option value="Brasil">Brasil</option>
-            <option value="Otro">Otro</option>
+            {countries.map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
+            ))}
           </select>
+          {userCountry && formData.country && formData.country !== 'Otro' && (
+            <p className="text-green-400 text-xs mt-2 flex items-center">
+              <span className="mr-1">✓</span>
+              Detectado automáticamente
+            </p>
+          )}
           {formData.country === 'Otro' && (
             <input
               type="text"
