@@ -189,6 +189,9 @@ export default function ServiceForm({
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 5:
+        if (serviceSlug === 'plan-marketing') {
+          return formData.urgencia.trim() !== '';
+        }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       default:
         return false;
@@ -617,24 +620,26 @@ export default function ServiceForm({
         <p className="text-gray-400">Háblanos sobre tu empresa y lo que buscas</p>
       </div>
 
-      <div>
-        <label className="block text-white font-semibold mb-2">
-          Tamaño del equipo con el que trabajas directamente *
-        </label>
-        <select
-          value={formData.tamanoEquipo}
-          onChange={(e) => updateFormData('tamanoEquipo', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
-          required
-        >
-          <option value="">Selecciona el tamaño</option>
-          <option value="Solo yo (1 persona)">Solo yo (1 persona)</option>
-          <option value="2-5 personas">2-5 personas</option>
-          <option value="6-10 personas">6-10 personas</option>
-          <option value="10-25 personas">10-25 personas</option>
-          <option value="25+ personas">25+ personas</option>
-        </select>
-      </div>
+      {serviceSlug !== 'plan-marketing' && (
+        <div>
+          <label className="block text-white font-semibold mb-2">
+            Tamaño del equipo con el que trabajas directamente *
+          </label>
+          <select
+            value={formData.tamanoEquipo}
+            onChange={(e) => updateFormData('tamanoEquipo', e.target.value)}
+            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+            required
+          >
+            <option value="">Selecciona el tamaño</option>
+            <option value="Solo yo (1 persona)">Solo yo (1 persona)</option>
+            <option value="2-5 personas">2-5 personas</option>
+            <option value="6-10 personas">6-10 personas</option>
+            <option value="10-25 personas">10-25 personas</option>
+            <option value="25+ personas">25+ personas</option>
+          </select>
+        </div>
+      )}
 
       <div>
         <label className="block text-white font-semibold mb-2">
