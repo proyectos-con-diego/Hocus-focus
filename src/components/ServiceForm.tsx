@@ -481,7 +481,7 @@ export default function ServiceForm({
           <option value="No, lo manejo yo mismo">No, lo manejo yo mismo</option>
           <option value="Sí, 1-2 personas">Sí, 1-2 personas</option>
           <option value="Sí, 3-5 personas">Sí, 3-5 personas</option>
-          <option value="Sí, 5-10 personas">Sí, 5-10 personas</option>
+          <option value="Sí, 6-10 personas">Sí, 6-10 personas</option>
           <option value="Sí, más de 10 personas">Sí, más de 10 personas</option>
         </select>
       </div>
