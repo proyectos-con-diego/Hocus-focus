@@ -310,7 +310,7 @@ function formatDataForMake(data: any) {
         // Preguntas específicas de automatización (solo para automatizacion-ia)
         horasRepetitivas: data.horasRepetitivas || '',
         tipoTareasRepetitivas: data.tipoTareasRepetitivas || '',
-        herramientasAutomatizacion: data.herramientasAutomatizacion || '',
+        herramientasAutomatizacion: Array.isArray(data.herramientasAutomatizacion) ? data.herramientasAutomatizacion.join(', ') : (data.herramientasAutomatizacion || ''),
         nivelInversionTecnologica: data.nivelInversionTecnologica || '',
         
         // Metadata del Servicio

@@ -19,7 +19,33 @@ export default function ServiceForm({
   serviceDescription 
 }: ServiceFormProps) {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    nombres: string;
+    apellidos: string;
+    email: string;
+    codigoPais: string;
+    otroCodigoPais: string;
+    numeroTelefono: string;
+    ocupacion: string;
+    industria: string;
+    otraIndustria: string;
+    nombreNegocio: string;
+    tamanoEquipo: string;
+    urgencia: string;
+    contextoAdicional: string;
+    subscribeNewsletter: boolean;
+    generacionClientes: string;
+    problemaMarketing: string;
+    equipoMarketing: string;
+    inversionMarketing: string;
+    resultadoValioso: string;
+    paginaWeb: string;
+    redesSociales: string;
+    horasRepetitivas: string;
+    tipoTareasRepetitivas: string;
+    herramientasAutomatizacion: string[];
+    nivelInversionTecnologica: string;
+  }>({
     nombres: '',
     apellidos: '',
     email: '',
@@ -45,7 +71,7 @@ export default function ServiceForm({
     // Preguntas específicas de automatización
     horasRepetitivas: '',
     tipoTareasRepetitivas: '',
-    herramientasAutomatizacion: '',
+    herramientasAutomatizacion: [],
     nivelInversionTecnologica: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -155,7 +181,7 @@ export default function ServiceForm({
 
   const totalSteps = serviceSlug === 'plan-marketing' ? 5 : (serviceSlug === 'automatizacion-ia' ? 5 : 3);
 
-  const updateFormData = (field: string, value: string | boolean) => {
+  const updateFormData = (field: string, value: string | boolean | string[]) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -196,7 +222,7 @@ export default function ServiceForm({
           return formData.equipoMarketing.trim() !== '' && formData.resultadoValioso.trim() !== '';
         }
         if (serviceSlug === 'automatizacion-ia') {
-          return formData.herramientasAutomatizacion.trim() !== '' && formData.nivelInversionTecnologica.trim() !== '';
+          return formData.nivelInversionTecnologica.trim() !== '' && formData.herramientasAutomatizacion.length > 0;
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 5:
@@ -266,7 +292,7 @@ export default function ServiceForm({
       // Preguntas específicas de automatización
       horasRepetitivas: '',
       tipoTareasRepetitivas: '',
-      herramientasAutomatizacion: '',
+      herramientasAutomatizacion: [],
       nivelInversionTecnologica: ''
     });
   };
@@ -610,23 +636,6 @@ export default function ServiceForm({
 
       <div>
         <label className="block text-white font-semibold mb-2">
-          ¿Ya usas alguna herramienta de automatización? *
-        </label>
-        <select
-          value={formData.herramientasAutomatizacion}
-          onChange={(e) => updateFormData('herramientasAutomatizacion', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
-          required
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="Sí, pero poco aprovechada">Sí, pero poco aprovechada</option>
-          <option value="Sí, y la usamos bastante">Sí, y la usamos bastante</option>
-          <option value="No, todo es manual">No, todo es manual</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-white font-semibold mb-2">
           ¿Cómo describirías el nivel de inversión actual de tu empresa en herramientas tecnológicas o de automatización? *
         </label>
         <select
@@ -641,6 +650,51 @@ export default function ServiceForm({
           <option value="Moderado usamos algunas herramientas pagadas pero sin automatizar">Moderado usamos algunas herramientas pagadas pero sin automatizar</option>
           <option value="Alto ya tenemos procesos automatizados y queremos escalar">Alto ya tenemos procesos automatizados y queremos escalar</option>
         </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Qué herramientas o plataformas usas actualmente para gestionar tus procesos o tareas repetitivas? *
+        </label>
+        <div className="space-y-3">
+          {[
+            'Zapier',
+            'Make (Integromat)',
+            'Microsoft Power Automate',
+            'IFTTT',
+            'HubSpot',
+            'Salesforce',
+            'Google Workspace',
+            'Microsoft 365',
+            'Slack',
+            'Trello',
+            'Asana',
+            'Monday.com',
+            'Airtable',
+            'Notion',
+            'Calendly',
+            'Typeform',
+            'Mailchimp',
+            'Ninguna herramienta específica'
+          ].map((herramienta) => (
+            <label key={herramienta} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formData.herramientasAutomatizacion.includes(herramienta)}
+                onChange={(e) => {
+                  const currentTools = formData.herramientasAutomatizacion;
+                  if (e.target.checked) {
+                    updateFormData('herramientasAutomatizacion', [...currentTools, herramienta]);
+                  } else {
+                    updateFormData('herramientasAutomatizacion', currentTools.filter(tool => tool !== herramienta));
+                  }
+                }}
+                className="w-4 h-4 text-purple-600 bg-white/10 border-white/20 rounded focus:ring-purple-500 focus:ring-2"
+              />
+              <span className="text-white">{herramienta}</span>
+            </label>
+          ))}
+        </div>
       </div>
     </div>
   );
