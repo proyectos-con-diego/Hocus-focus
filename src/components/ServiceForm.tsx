@@ -772,7 +772,7 @@ export default function ServiceForm({
           required
         >
           <option value="">Selecciona una opción</option>
-          <option value="-10">-10</option>
+          <option value="&lt;10">&lt;10</option>
           <option value="11-20">11-20</option>
           <option value="21-50">21-50</option>
           <option value="51-200">51-200</option>
@@ -859,7 +859,7 @@ export default function ServiceForm({
 
       <div>
         <label className="block text-white font-semibold mb-2">
-          ¿Cuál de estos problemas sientes que describen mejor tu situación? *
+          ¿Cuál de estos problemas sientes que describe mejor tu situación? *
         </label>
         <div className="space-y-3">
           {[
@@ -959,7 +959,7 @@ export default function ServiceForm({
 
       <div>
         <label className="block text-white font-semibold mb-2">
-          Cuéntanos todo sobre los retos de tu negocio y lo que esperas del diagnóstico:
+          Cuéntanos todo sobre los retos de tu negocio y lo que esperas del servicio {serviceSlug === 'sistema-scale' ? 'SCALE' : serviceSlug === 'automatizacion-ia' ? 'AUTOMATE' : serviceSlug === 'plan-marketing' ? 'CONVERT' : 'SCALE'}:
         </label>
         <textarea
           value={formData.contextoAdicional}
@@ -1094,7 +1094,7 @@ export default function ServiceForm({
 
       <div>
         <label className="block text-white font-semibold mb-2">
-          Cuéntanos todo sobre los retos de tu negocio y lo que esperas del diagnóstico:
+          Cuéntanos todo sobre los retos de tu negocio y lo que esperas del servicio {serviceSlug === 'sistema-scale' ? 'SCALE' : serviceSlug === 'automatizacion-ia' ? 'AUTOMATE' : serviceSlug === 'plan-marketing' ? 'CONVERT' : 'SCALE'}:
         </label>
         <textarea
           value={formData.contextoAdicional}
