@@ -310,8 +310,11 @@ function formatDataForMake(data: any) {
         // Preguntas específicas de automatización (solo para automatizacion-ia)
         horasRepetitivas: data.horasRepetitivas || '',
         tipoTareasRepetitivas: data.tipoTareasRepetitivas || '',
-        herramientasAutomatizacion: Array.isArray(data.herramientasAutomatizacion) ? data.herramientasAutomatizacion.join(', ') : (data.herramientasAutomatizacion || ''),
-        otrasHerramientas: data.otrasHerramientas || '',
+        herramientasAutomatizacion: Array.isArray(data.herramientasAutomatizacion) ? 
+          data.herramientasAutomatizacion.map((herramienta: string) => 
+            herramienta === 'Otros' ? (data.otrasHerramientas || 'Otros') : herramienta
+          ).join(', ') : 
+          (data.herramientasAutomatizacion || ''),
         nivelInversionTecnologica: data.nivelInversionTecnologica || '',
         // Preguntas específicas de SCALE
         sistemaOrganizacion: Array.isArray(data.sistemaOrganizacion) ? 
