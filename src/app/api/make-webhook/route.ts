@@ -301,12 +301,23 @@ function formatDataForMake(data: any) {
         subscribeNewsletter: data.subscribeNewsletter || false,
         
         // Preguntas específicas de marketing (solo para plan-marketing)
-        generacionClientes: data.generacionClientes || '',
+        generacionClientes: Array.isArray(data.generacionClientes) ? 
+          data.generacionClientes.map((opcion: string) => 
+            opcion === 'Otro' ? (data.otraGeneracionClientes || 'Otro') : opcion
+          ) : 
+          (data.generacionClientes || []),
         problemaMarketing: data.problemaMarketing || '',
         inversionMarketing: data.inversionMarketing || '',
         resultadoValioso: data.resultadoValioso || '',
         paginaWeb: data.paginaWeb || '',
         redesSociales: data.redesSociales || '',
+        
+        // Versión string para compatibilidad
+        generacionClientesString: Array.isArray(data.generacionClientes) ? 
+          data.generacionClientes.map((opcion: string) => 
+            opcion === 'Otro' ? (data.otraGeneracionClientes || 'Otro') : opcion
+          ).join(', ') : 
+          (data.generacionClientes || ''),
         
         // Preguntas específicas de automatización (solo para automatizacion-ia)
         horasRepetitivas: data.horasRepetitivas || '',

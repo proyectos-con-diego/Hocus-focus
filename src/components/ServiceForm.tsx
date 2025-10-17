@@ -34,7 +34,8 @@ export default function ServiceForm({
     urgencia: string;
     contextoAdicional: string;
     subscribeNewsletter: boolean;
-    generacionClientes: string;
+    generacionClientes: string[];
+    otraGeneracionClientes: string;
     problemaMarketing: string;
     equipoMarketing: string;
     inversionMarketing: string;
@@ -71,7 +72,8 @@ export default function ServiceForm({
     contextoAdicional: '',
     subscribeNewsletter: true,
     // Preguntas específicas de marketing
-    generacionClientes: '',
+    generacionClientes: [],
+    otraGeneracionClientes: '',
     problemaMarketing: '',
     equipoMarketing: '',
     inversionMarketing: '',
@@ -231,7 +233,9 @@ export default function ServiceForm({
         return formData.ocupacion.trim() !== '' && formData.industria.trim() !== '' && formData.nombreNegocio.trim() !== '';
       case 3:
         if (serviceSlug === 'plan-marketing') {
-          return formData.generacionClientes.trim() !== '' && formData.problemaMarketing.trim() !== '' && formData.inversionMarketing.trim() !== '';
+          const generacionValid = formData.generacionClientes.length > 0;
+          const otraGeneracionValid = !formData.generacionClientes.includes('Otro') || (formData.generacionClientes.includes('Otro') && formData.otraGeneracionClientes.trim() !== '');
+          return generacionValid && otraGeneracionValid && formData.problemaMarketing.trim() !== '' && formData.inversionMarketing.trim() !== '';
         }
         if (serviceSlug === 'automatizacion-ia') {
           const horasValid = formData.horasRepetitivas.trim() !== '';
@@ -319,7 +323,8 @@ export default function ServiceForm({
       contextoAdicional: '',
       subscribeNewsletter: true,
       // Preguntas específicas de marketing
-      generacionClientes: '',
+      generacionClientes: [],
+      otraGeneracionClientes: '',
       problemaMarketing: '',
       equipoMarketing: '',
       inversionMarketing: '',
@@ -499,19 +504,51 @@ export default function ServiceForm({
         <label className="block text-white font-semibold mb-2">
           ¿Cómo están generando clientes actualmente? *
         </label>
-        <select
-          value={formData.generacionClientes}
-          onChange={(e) => updateFormData('generacionClientes', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
-          required
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="Ads pagados">Ads pagados</option>
-          <option value="Orgánicamente en redes sociales">Orgánicamente en redes sociales</option>
-          <option value="Por recomendaciones">Por recomendaciones</option>
-          <option value="Página web">Página web</option>
-          <option value="Otro">Otro</option>
-        </select>
+        <div className="space-y-3">
+          {[
+            'Ads pagados',
+            'Orgánicamente en redes sociales',
+            'Por recomendaciones',
+            'Página web',
+            'Otro'
+          ].map((opcion) => (
+            <label key={opcion} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formData.generacionClientes.includes(opcion)}
+                onChange={(e) => {
+                  const currentOpciones = formData.generacionClientes;
+                  if (e.target.checked) {
+                    updateFormData('generacionClientes', [...currentOpciones, opcion]);
+                  } else {
+                    updateFormData('generacionClientes', currentOpciones.filter(o => o !== opcion));
+                    if (opcion === 'Otro') {
+                      updateFormData('otraGeneracionClientes', '');
+                    }
+                  }
+                }}
+                className="w-4 h-4 text-purple-600 bg-white/10 border-white/20 rounded focus:ring-purple-500 focus:ring-2"
+              />
+              <span className="text-white">{opcion}</span>
+            </label>
+          ))}
+        </div>
+        
+        {formData.generacionClientes.includes('Otro') && (
+          <div className="mt-4">
+            <label className="block text-white font-semibold mb-2">
+              Especifica cómo generan clientes:
+            </label>
+            <input
+              type="text"
+              value={formData.otraGeneracionClientes}
+              onChange={(e) => updateFormData('otraGeneracionClientes', e.target.value)}
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+              placeholder="Describe cómo generan clientes..."
+              required
+            />
+          </div>
+        )}
       </div>
 
       <div>
