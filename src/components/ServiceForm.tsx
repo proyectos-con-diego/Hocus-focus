@@ -584,9 +584,9 @@ export default function ServiceForm({
         >
           <option value="">Selecciona una opción</option>
           <option value="Menos de $500">Menos de $500</option>
-          <option value="$500-$1,500">$500-$1,500</option>
-          <option value="$1,500-$3,000">$1,500-$3,000</option>
-          <option value="+$3,000">+$3,000</option>
+          <option value="$500-$1500">$500-$1,500</option>
+          <option value="$1500-$3000">$1,500-$3,000</option>
+          <option value="+$3000">+$3,000</option>
         </select>
       </div>
     </div>
