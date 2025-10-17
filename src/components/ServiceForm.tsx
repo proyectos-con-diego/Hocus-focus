@@ -180,12 +180,12 @@ export default function ServiceForm({
         return formData.ocupacion.trim() !== '' && formData.industria.trim() !== '' && formData.nombreNegocio.trim() !== '';
       case 3:
         if (serviceSlug === 'plan-marketing') {
-          return formData.generacionClientes.trim() !== '' && formData.problemaMarketing.trim() !== '';
+          return formData.generacionClientes.trim() !== '' && formData.problemaMarketing.trim() !== '' && formData.inversionMarketing.trim() !== '';
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 4:
         if (serviceSlug === 'plan-marketing') {
-          return formData.equipoMarketing.trim() !== '' && formData.inversionMarketing.trim() !== '' && formData.resultadoValioso.trim() !== '';
+          return formData.equipoMarketing.trim() !== '' && formData.resultadoValioso.trim() !== '';
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 5:
@@ -439,6 +439,24 @@ export default function ServiceForm({
           <option value="Otro">Otro</option>
         </select>
       </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Cuál es tu inversión mensual aproximada en marketing? *
+        </label>
+        <select
+          value={formData.inversionMarketing}
+          onChange={(e) => updateFormData('inversionMarketing', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Menos de $500">Menos de $500</option>
+          <option value="$500-$1,500">$500-$1,500</option>
+          <option value="$1,500-$3,000">$1,500-$3,000</option>
+          <option value="+$3,000">+$3,000</option>
+        </select>
+      </div>
     </div>
   );
 
@@ -464,24 +482,6 @@ export default function ServiceForm({
           <option value="Sí, 1-2 personas">Sí, 1-2 personas</option>
           <option value="Sí, 3-5 personas">Sí, 3-5 personas</option>
           <option value="Sí, más de 5 personas">Sí, más de 5 personas</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-white font-semibold mb-2">
-          ¿Cuál es tu inversión mensual aproximada en marketing? *
-        </label>
-        <select
-          value={formData.inversionMarketing}
-          onChange={(e) => updateFormData('inversionMarketing', e.target.value)}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
-          required
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="Menos de $500">Menos de $500</option>
-          <option value="$500-$1,500">$500-$1,500</option>
-          <option value="$1,500-$3,000">$1,500-$3,000</option>
-          <option value="+$3,000">+$3,000</option>
         </select>
       </div>
 
