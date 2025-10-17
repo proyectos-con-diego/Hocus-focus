@@ -352,7 +352,6 @@ export default function ServiceForm({
   const renderStep1 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Información Personal y Contacto</h3>
         <p className="text-gray-400">Cuéntanos sobre ti y cómo contactarte</p>
       </div>
       
@@ -496,7 +495,6 @@ export default function ServiceForm({
   const renderMarketingStep3 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Diagnóstico de Marketing</h3>
         <p className="text-gray-400">Ayúdanos a entender tu situación actual</p>
       </div>
 
@@ -595,7 +593,6 @@ export default function ServiceForm({
   const renderMarketingStep4 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Más sobre tu Marketing</h3>
         <p className="text-gray-400">Completa el diagnóstico</p>
       </div>
 
@@ -668,7 +665,6 @@ export default function ServiceForm({
   const renderAutomationStep3 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Diagnóstico de Automatización</h3>
         <p className="text-gray-400">Ayúdanos a entender tu situación actual con tareas repetitivas</p>
       </div>
 
@@ -746,7 +742,6 @@ export default function ServiceForm({
   const renderAutomationStep4 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Más sobre tu Automatización</h3>
         <p className="text-gray-400">Completa el diagnóstico</p>
       </div>
 
@@ -822,7 +817,6 @@ export default function ServiceForm({
   const renderScaleStep3 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Información del Equipo</h3>
         <p className="text-gray-400">Ayúdanos a entender el tamaño de tu organización</p>
       </div>
 
@@ -901,7 +895,6 @@ export default function ServiceForm({
   const renderScaleStep4 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Diagnóstico de Problemas</h3>
         <p className="text-gray-400">Identifica los desafíos actuales</p>
       </div>
 
@@ -984,7 +977,6 @@ export default function ServiceForm({
   const renderScaleStep5 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Información Final</h3>
         <p className="text-gray-400">Completa tu información</p>
       </div>
 
@@ -1023,7 +1015,6 @@ export default function ServiceForm({
   const renderStep2 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Información Profesional y del Negocio</h3>
         <p className="text-gray-400">Ayúdanos a entender tu contexto laboral</p>
       </div>
 
@@ -1098,7 +1089,6 @@ export default function ServiceForm({
   const renderStep3 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-white mb-2">Sobre tu negocio y expectativas</h3>
         <p className="text-gray-400">Háblanos sobre tu empresa y lo que buscas</p>
       </div>
 
