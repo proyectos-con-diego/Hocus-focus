@@ -658,23 +658,12 @@ export default function ServiceForm({
         </label>
         <div className="space-y-3">
           {[
-            'Zapier',
-            'Make (Integromat)',
-            'Microsoft Power Automate',
-            'IFTTT',
-            'HubSpot',
-            'Salesforce',
-            'Google Workspace',
-            'Microsoft 365',
-            'Slack',
-            'Trello',
-            'Asana',
-            'Monday.com',
-            'Airtable',
-            'Notion',
-            'Calendly',
-            'Typeform',
-            'Mailchimp',
+            'Automatización (Zapier, Make, n8n, Power Automate)',
+            'CRM (HubSpot, Salesforce, Pipedrive)',
+            'Productividad (Google Workspace, Microsoft 365, Notion)',
+            'Gestión de proyectos (Trello, Asana, Monday.com, Airtable)',
+            'Marketing (Mailchimp, Typeform, Calendly, Slack)',
+            'Otros',
             'Ninguna herramienta específica'
           ].map((herramienta) => (
             <label key={herramienta} className="flex items-center space-x-3 cursor-pointer">
