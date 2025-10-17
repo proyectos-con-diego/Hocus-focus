@@ -54,7 +54,6 @@ export default function ServiceForm({
     // Campos "Otro" para SCALE
     otroSistemaOrganizacion: string;
     otroProblemaScale: string;
-    otroNumeroEmpleados: string;
   }>({
     nombres: '',
     apellidos: '',
@@ -91,8 +90,7 @@ export default function ServiceForm({
     numeroEmpleados: '',
     // Campos "Otro" para SCALE
     otroSistemaOrganizacion: '',
-    otroProblemaScale: '',
-    otroNumeroEmpleados: ''
+    otroProblemaScale: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [userCountry, setUserCountry] = useState<string>('');
@@ -238,10 +236,9 @@ export default function ServiceForm({
         }
         if (serviceSlug === 'sistema-scale') {
           const empleadosValid = formData.numeroEmpleados.trim() !== '';
-          const otroEmpleadosValid = formData.numeroEmpleados !== 'Otro' || (formData.numeroEmpleados === 'Otro' && formData.otroNumeroEmpleados.trim() !== '');
           const sistemaValid = formData.sistemaOrganizacion.length > 0;
           const otroSistemaValid = !formData.sistemaOrganizacion.includes('Otro') || (formData.sistemaOrganizacion.includes('Otro') && formData.otroSistemaOrganizacion.trim() !== '');
-          return empleadosValid && otroEmpleadosValid && sistemaValid && otroSistemaValid;
+          return empleadosValid && sistemaValid && otroSistemaValid;
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 4:
@@ -337,8 +334,7 @@ export default function ServiceForm({
       numeroEmpleados: '',
       // Campos "Otro" para SCALE
       otroSistemaOrganizacion: '',
-      otroProblemaScale: '',
-      otroNumeroEmpleados: ''
+      otroProblemaScale: ''
     });
   };
 
@@ -761,13 +757,7 @@ export default function ServiceForm({
         </label>
         <select
           value={formData.numeroEmpleados}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            updateFormData('numeroEmpleados', newValue);
-            if (newValue !== 'Otro') {
-              updateFormData('otroNumeroEmpleados', '');
-            }
-          }}
+          onChange={(e) => updateFormData('numeroEmpleados', e.target.value)}
           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
           required
         >
@@ -777,24 +767,7 @@ export default function ServiceForm({
           <option value="21-50">21-50</option>
           <option value="51-200">51-200</option>
           <option value="+200">+200</option>
-          <option value="Otro">Otro</option>
         </select>
-        
-        {formData.numeroEmpleados === 'Otro' && (
-          <div className="mt-4">
-            <label className="block text-white font-semibold mb-2">
-              Especifica el número de empleados:
-            </label>
-            <input
-              type="text"
-              value={formData.otroNumeroEmpleados}
-              onChange={(e) => updateFormData('otroNumeroEmpleados', e.target.value)}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
-              placeholder="Ej: 150, 300, etc."
-              required
-            />
-          </div>
-        )}
       </div>
 
       <div>

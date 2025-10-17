@@ -321,7 +321,7 @@ function formatDataForMake(data: any) {
           data.problemaScale.map((p: string) => p === 'Otro' ? (data.otroProblemaScale || 'Otro') : p).join(', ') : 
           (data.problemaScale || ''),
         objetivoScale: data.objetivoScale || '',
-        numeroEmpleados: data.numeroEmpleados === 'Otro' ? (data.otroNumeroEmpleados || 'Otro') : (data.numeroEmpleados || ''),
+        numeroEmpleados: data.numeroEmpleados || '',
         
         // Metadata del Servicio
         serviceName: data.serviceName || '',
