@@ -314,11 +314,11 @@ function formatDataForMake(data: any) {
         otrasHerramientas: data.otrasHerramientas || '',
         nivelInversionTecnologica: data.nivelInversionTecnologica || '',
         // Preguntas específicas de SCALE
-        sistemaOrganizacion: data.sistemaOrganizacion || '',
-        problemaScale: data.problemaScale || '',
+        sistemaOrganizacion: data.sistemaOrganizacion === 'Otro' ? (data.otroSistemaOrganizacion || 'Otro') : (data.sistemaOrganizacion || ''),
+        problemaScale: data.problemaScale === 'Otro' ? (data.otroProblemaScale || 'Otro') : (data.problemaScale || ''),
         objetivoScale: data.objetivoScale || '',
         cuelloBotella: data.cuelloBotella || '',
-        numeroEmpleados: data.numeroEmpleados || '',
+        numeroEmpleados: data.numeroEmpleados === 'Otro' ? (data.otroNumeroEmpleados || 'Otro') : (data.numeroEmpleados || ''),
         
         // Metadata del Servicio
         serviceName: data.serviceName || '',
