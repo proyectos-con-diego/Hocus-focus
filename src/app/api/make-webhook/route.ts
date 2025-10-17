@@ -313,6 +313,12 @@ function formatDataForMake(data: any) {
         herramientasAutomatizacion: Array.isArray(data.herramientasAutomatizacion) ? data.herramientasAutomatizacion.join(', ') : (data.herramientasAutomatizacion || ''),
         otrasHerramientas: data.otrasHerramientas || '',
         nivelInversionTecnologica: data.nivelInversionTecnologica || '',
+        // Preguntas específicas de SCALE
+        sistemaOrganizacion: data.sistemaOrganizacion || '',
+        problemaScale: data.problemaScale || '',
+        objetivoScale: data.objetivoScale || '',
+        cuelloBotella: data.cuelloBotella || '',
+        numeroEmpleados: data.numeroEmpleados || '',
         
         // Metadata del Servicio
         serviceName: data.serviceName || '',

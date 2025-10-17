@@ -46,6 +46,12 @@ export default function ServiceForm({
     herramientasAutomatizacion: string[];
     otrasHerramientas: string;
     nivelInversionTecnologica: string;
+    // Preguntas específicas de SCALE
+    sistemaOrganizacion: string;
+    problemaScale: string;
+    objetivoScale: string;
+    cuelloBotella: string;
+    numeroEmpleados: string;
   }>({
     nombres: '',
     apellidos: '',
@@ -74,7 +80,13 @@ export default function ServiceForm({
     tipoTareasRepetitivas: '',
     herramientasAutomatizacion: [],
     otrasHerramientas: '',
-    nivelInversionTecnologica: ''
+    nivelInversionTecnologica: '',
+    // Preguntas específicas de SCALE
+    sistemaOrganizacion: '',
+    problemaScale: '',
+    objetivoScale: '',
+    cuelloBotella: '',
+    numeroEmpleados: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [userCountry, setUserCountry] = useState<string>('');
@@ -181,7 +193,7 @@ export default function ServiceForm({
     detectUserCountry();
   }, []);
 
-  const totalSteps = serviceSlug === 'plan-marketing' ? 5 : (serviceSlug === 'automatizacion-ia' ? 5 : 3);
+  const totalSteps = serviceSlug === 'plan-marketing' ? 5 : (serviceSlug === 'automatizacion-ia' ? 5 : (serviceSlug === 'sistema-scale' ? 5 : 3));
 
   const updateFormData = (field: string, value: string | boolean | string[]) => {
     setFormData(prev => ({
@@ -218,6 +230,9 @@ export default function ServiceForm({
         if (serviceSlug === 'automatizacion-ia') {
           return formData.horasRepetitivas.trim() !== '' && formData.tipoTareasRepetitivas.trim() !== '';
         }
+        if (serviceSlug === 'sistema-scale') {
+          return formData.sistemaOrganizacion.trim() !== '' && formData.problemaScale.trim() !== '';
+        }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 4:
         if (serviceSlug === 'plan-marketing') {
@@ -226,6 +241,9 @@ export default function ServiceForm({
         if (serviceSlug === 'automatizacion-ia') {
           return formData.nivelInversionTecnologica.trim() !== '' && formData.herramientasAutomatizacion.length > 0;
         }
+        if (serviceSlug === 'sistema-scale') {
+          return formData.objetivoScale.trim() !== '' && formData.cuelloBotella.trim() !== '';
+        }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       case 5:
         if (serviceSlug === 'plan-marketing') {
@@ -233,6 +251,9 @@ export default function ServiceForm({
         }
         if (serviceSlug === 'automatizacion-ia') {
           return formData.urgencia.trim() !== '';
+        }
+        if (serviceSlug === 'sistema-scale') {
+          return formData.numeroEmpleados.trim() !== '' && formData.urgencia.trim() !== '';
         }
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       default:
@@ -296,7 +317,13 @@ export default function ServiceForm({
       tipoTareasRepetitivas: '',
       herramientasAutomatizacion: [],
       otrasHerramientas: '',
-      nivelInversionTecnologica: ''
+      nivelInversionTecnologica: '',
+      // Preguntas específicas de SCALE
+      sistemaOrganizacion: '',
+      problemaScale: '',
+      objetivoScale: '',
+      cuelloBotella: '',
+      numeroEmpleados: ''
     });
   };
 
@@ -706,6 +733,150 @@ export default function ServiceForm({
     </div>
   );
 
+  const renderScaleStep3 = () => (
+    <div className="space-y-6">
+      <div className="text-center mb-6">
+        <h3 className="text-2xl font-bold text-white mb-2">Diagnóstico de SCALE</h3>
+        <p className="text-gray-400">Ayúdanos a entender tu situación actual de organización</p>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Hoy usan algún sistema de organización (Notion, Asana, Trello, Excel, otro)? *
+        </label>
+        <select
+          value={formData.sistemaOrganizacion}
+          onChange={(e) => updateFormData('sistemaOrganizacion', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Notion">Notion</option>
+          <option value="Excel">Excel</option>
+          <option value="Asana">Asana</option>
+          <option value="Trello">Trello</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Cuál de estos problemas sientes que describe mejor tu situación? *
+        </label>
+        <select
+          value={formData.problemaScale}
+          onChange={(e) => updateFormData('problemaScale', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="No sé qué hace mi equipo">No sé qué hace mi equipo</option>
+          <option value="Proyectos siempre se retrasan">Proyectos siempre se retrasan</option>
+          <option value="Reuniones interminables">Reuniones interminables</option>
+          <option value="No puedo delegar">No puedo delegar</option>
+          <option value="Decisiones sin datos">Decisiones sin datos</option>
+          <option value="No hago seguimiento constante">No hago seguimiento constante</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+    </div>
+  );
+
+  const renderScaleStep4 = () => (
+    <div className="space-y-6">
+      <div className="text-center mb-6">
+        <h3 className="text-2xl font-bold text-white mb-2">Más sobre tu SCALE</h3>
+        <p className="text-gray-400">Completa el diagnóstico</p>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Qué te gustaría lograr con SCALE en los próximos 3-6 meses? *
+        </label>
+        <input
+          type="text"
+          value={formData.objetivoScale}
+          onChange={(e) => updateFormData('objetivoScale', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+          placeholder="Describe tus objetivos específicos..."
+          required
+        />
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          Si pudieras resolver un solo cuello de botella en tu operación, cuál sería? *
+        </label>
+        <textarea
+          value={formData.cuelloBotella}
+          onChange={(e) => updateFormData('cuelloBotella', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
+          placeholder="Describe el cuello de botella más crítico que te gustaría resolver..."
+          rows={4}
+          required
+        />
+      </div>
+    </div>
+  );
+
+  const renderScaleStep5 = () => (
+    <div className="space-y-6">
+      <div className="text-center mb-6">
+        <h3 className="text-2xl font-bold text-white mb-2">Información Final</h3>
+        <p className="text-gray-400">Completa tu información</p>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          Número de empleados actuales *
+        </label>
+        <select
+          value={formData.numeroEmpleados}
+          onChange={(e) => updateFormData('numeroEmpleados', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="-10">-10</option>
+          <option value="11-20">11-20</option>
+          <option value="21-50">21-50</option>
+          <option value="51-200">51-200</option>
+          <option value="+200">+200</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Con qué urgencia buscas implementar este servicio en tu negocio? *
+        </label>
+        <select
+          value={formData.urgencia}
+          onChange={(e) => updateFormData('urgencia', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona la urgencia</option>
+          <option value="Solo estoy explorando opciones">Solo estoy explorando opciones</option>
+          <option value="Quiero implementarlo pronto">Quiero implementarlo pronto</option>
+          <option value="Lo necesito resolver cuanto antes">Lo necesito resolver cuanto antes</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          Cuéntanos todo sobre los retos de tu negocio y lo que esperas del diagnóstico:
+        </label>
+        <textarea
+          value={formData.contextoAdicional}
+          onChange={(e) => updateFormData('contextoAdicional', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors resize-none"
+          placeholder="Comparte cualquier información adicional que consideres relevante..."
+          rows={5}
+        />
+      </div>
+    </div>
+  );
+
   const renderStep2 = () => (
     <div className="space-y-6">
       <div className="text-center mb-6">
@@ -915,6 +1086,9 @@ export default function ServiceForm({
                 if (serviceSlug === 'automatizacion-ia') {
                   return renderAutomationStep3();
                 }
+                if (serviceSlug === 'sistema-scale') {
+                  return renderScaleStep3();
+                }
                 return renderStep3();
               case 4:
                 if (serviceSlug === 'plan-marketing') {
@@ -923,8 +1097,20 @@ export default function ServiceForm({
                 if (serviceSlug === 'automatizacion-ia') {
                   return renderAutomationStep4();
                 }
+                if (serviceSlug === 'sistema-scale') {
+                  return renderScaleStep4();
+                }
                 return renderStep3();
               case 5:
+                if (serviceSlug === 'plan-marketing') {
+                  return renderStep3();
+                }
+                if (serviceSlug === 'automatizacion-ia') {
+                  return renderStep3();
+                }
+                if (serviceSlug === 'sistema-scale') {
+                  return renderScaleStep5();
+                }
                 return renderStep3();
               default:
                 return null;
