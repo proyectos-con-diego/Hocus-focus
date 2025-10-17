@@ -35,6 +35,7 @@ const MiniFormModal: React.FC<MiniFormModalProps> = ({
         <div className="bg-gradient-to-br from-gray-900 to-black border border-purple-500/30 rounded-2xl p-8 shadow-2xl shadow-purple-500/20">
           {/* Header del modal */}
           <div className="text-center mb-6">
+            <div className="text-6xl mb-4">🎁</div>
             <h2 className="text-4xl font-bold text-white mb-3">
               Obtener {productName}{' '}
               <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
