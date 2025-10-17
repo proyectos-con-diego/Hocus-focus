@@ -43,7 +43,7 @@ export default function ServiceForm({
     paginaWeb: string;
     redesSociales: string;
     horasRepetitivas: string;
-    tipoTareasRepetitivas: string;
+    tipoTareasRepetitivas: string[];
     otroTipoTareasRepetitivas: string;
     herramientasAutomatizacion: string[];
     otrasHerramientas: string;
@@ -82,7 +82,7 @@ export default function ServiceForm({
     redesSociales: '',
     // Preguntas específicas de automatización
     horasRepetitivas: '',
-    tipoTareasRepetitivas: '',
+    tipoTareasRepetitivas: [],
     otroTipoTareasRepetitivas: '',
     herramientasAutomatizacion: [],
     otrasHerramientas: '',
@@ -239,8 +239,8 @@ export default function ServiceForm({
         }
         if (serviceSlug === 'automatizacion-ia') {
           const horasValid = formData.horasRepetitivas.trim() !== '';
-          const tipoValid = formData.tipoTareasRepetitivas.trim() !== '';
-          const otroTipoValid = formData.tipoTareasRepetitivas !== 'Otro' || (formData.tipoTareasRepetitivas === 'Otro' && formData.otroTipoTareasRepetitivas.trim() !== '');
+          const tipoValid = formData.tipoTareasRepetitivas.length > 0;
+          const otroTipoValid = !formData.tipoTareasRepetitivas.includes('Otro') || (formData.tipoTareasRepetitivas.includes('Otro') && formData.otroTipoTareasRepetitivas.trim() !== '');
           return horasValid && tipoValid && otroTipoValid;
         }
         if (serviceSlug === 'sistema-scale') {
@@ -333,7 +333,7 @@ export default function ServiceForm({
       redesSociales: '',
       // Preguntas específicas de automatización
       horasRepetitivas: '',
-      tipoTareasRepetitivas: '',
+      tipoTareasRepetitivas: [],
       otroTipoTareasRepetitivas: '',
       herramientasAutomatizacion: [],
       otrasHerramientas: '',
@@ -694,27 +694,37 @@ export default function ServiceForm({
         <label className="block text-white font-semibold mb-2">
           ¿Qué tipo de tareas repetitivas te consumen más tiempo? *
         </label>
-        <select
-          value={formData.tipoTareasRepetitivas}
-          onChange={(e) => {
-            const newValue = e.target.value;
-            updateFormData('tipoTareasRepetitivas', newValue);
-            if (newValue !== 'Otro') {
-              updateFormData('otroTipoTareasRepetitivas', '');
-            }
-          }}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
-          required
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="Facturación y recordatorios">Facturación y recordatorios</option>
-          <option value="Respuesta de correos">Respuesta de correos</option>
-          <option value="Selección de candidatos">Selección de candidatos</option>
-          <option value="Propuestas comerciales">Propuestas comerciales</option>
-          <option value="Otro">Otro</option>
-        </select>
+        <div className="space-y-3">
+          {[
+            'Facturación y recordatorios',
+            'Respuesta de correos',
+            'Selección de candidatos',
+            'Propuestas comerciales',
+            'Otro'
+          ].map((opcion) => (
+            <label key={opcion} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formData.tipoTareasRepetitivas.includes(opcion)}
+                onChange={(e) => {
+                  const currentOpciones = formData.tipoTareasRepetitivas;
+                  if (e.target.checked) {
+                    updateFormData('tipoTareasRepetitivas', [...currentOpciones, opcion]);
+                  } else {
+                    updateFormData('tipoTareasRepetitivas', currentOpciones.filter(o => o !== opcion));
+                    if (opcion === 'Otro') {
+                      updateFormData('otroTipoTareasRepetitivas', '');
+                    }
+                  }
+                }}
+                className="w-4 h-4 text-purple-600 bg-white/10 border-white/20 rounded focus:ring-purple-500 focus:ring-2"
+              />
+              <span className="text-white">{opcion}</span>
+            </label>
+          ))}
+        </div>
         
-        {formData.tipoTareasRepetitivas === 'Otro' && (
+        {formData.tipoTareasRepetitivas.includes('Otro') && (
           <div className="mt-4">
             <label className="block text-white font-semibold mb-2">
               Especifica qué tipo de tareas:

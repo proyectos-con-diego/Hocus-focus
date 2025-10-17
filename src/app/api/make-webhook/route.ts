@@ -321,7 +321,11 @@ function formatDataForMake(data: any) {
         
         // Preguntas específicas de automatización (solo para automatizacion-ia)
         horasRepetitivas: data.horasRepetitivas || '',
-        tipoTareasRepetitivas: data.tipoTareasRepetitivas === 'Otro' ? (data.otroTipoTareasRepetitivas || 'Otro') : (data.tipoTareasRepetitivas || ''),
+        tipoTareasRepetitivas: Array.isArray(data.tipoTareasRepetitivas) ? 
+          data.tipoTareasRepetitivas.map((opcion: string) => 
+            opcion === 'Otro' ? (data.otroTipoTareasRepetitivas || 'Otro') : opcion
+          ) : 
+          (data.tipoTareasRepetitivas || []),
         herramientasAutomatizacion: Array.isArray(data.herramientasAutomatizacion) ? 
           data.herramientasAutomatizacion.map((herramienta: string) => {
             const cleanHerramienta = herramienta === 'Otros' ? (data.otrasHerramientas || 'Otros') : herramienta;
@@ -330,6 +334,14 @@ function formatDataForMake(data: any) {
           }) : 
           (data.herramientasAutomatizacion || []),
         nivelInversionTecnologica: data.nivelInversionTecnologica || '',
+        
+        // Versión string para compatibilidad
+        tipoTareasRepetitivasString: Array.isArray(data.tipoTareasRepetitivas) ? 
+          data.tipoTareasRepetitivas.map((opcion: string) => 
+            opcion === 'Otro' ? (data.otroTipoTareasRepetitivas || 'Otro') : opcion
+          ).join(', ') : 
+          (data.tipoTareasRepetitivas || ''),
+        
         // Preguntas específicas de SCALE
         sistemaOrganizacion: Array.isArray(data.sistemaOrganizacion) ? 
           data.sistemaOrganizacion.map((s: string) => s === 'Otro' ? (data.otroSistemaOrganizacion || 'Otro') : s) : 
