@@ -298,6 +298,15 @@ function formatDataForMake(data: any) {
         // Newsletter Subscription
         subscribeNewsletter: data.subscribeNewsletter || false,
         
+        // Preguntas específicas de marketing (solo para plan-marketing)
+        generacionClientes: data.generacionClientes || '',
+        problemaMarketing: data.problemaMarketing || '',
+        equipoMarketing: data.equipoMarketing || '',
+        inversionMarketing: data.inversionMarketing || '',
+        resultadoValioso: data.resultadoValioso || '',
+        paginaWeb: data.paginaWeb || '',
+        redesSociales: data.redesSociales || '',
+        
         // Metadata del Servicio
         serviceName: data.serviceName || '',
         serviceSlug: data.serviceSlug || '',

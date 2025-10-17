@@ -33,7 +33,15 @@ export default function ServiceForm({
     tamanoEquipo: '',
     urgencia: '',
     contextoAdicional: '',
-    subscribeNewsletter: true
+    subscribeNewsletter: true,
+    // Preguntas específicas de marketing
+    generacionClientes: '',
+    problemaMarketing: '',
+    equipoMarketing: '',
+    inversionMarketing: '',
+    resultadoValioso: '',
+    paginaWeb: '',
+    redesSociales: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [userCountry, setUserCountry] = useState<string>('');
@@ -140,7 +148,7 @@ export default function ServiceForm({
     detectUserCountry();
   }, []);
 
-  const totalSteps = 3;
+  const totalSteps = serviceSlug === 'plan-marketing' ? 5 : 3;
 
   const updateFormData = (field: string, value: string | boolean) => {
     setFormData(prev => ({
@@ -171,6 +179,16 @@ export default function ServiceForm({
       case 2:
         return formData.ocupacion.trim() !== '' && formData.industria.trim() !== '' && formData.nombreNegocio.trim() !== '';
       case 3:
+        if (serviceSlug === 'plan-marketing') {
+          return formData.generacionClientes.trim() !== '' && formData.problemaMarketing.trim() !== '';
+        }
+        return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
+      case 4:
+        if (serviceSlug === 'plan-marketing') {
+          return formData.equipoMarketing.trim() !== '' && formData.inversionMarketing.trim() !== '' && formData.resultadoValioso.trim() !== '';
+        }
+        return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
+      case 5:
         return formData.tamanoEquipo.trim() !== '' && formData.urgencia.trim() !== '';
       default:
         return false;
@@ -219,7 +237,15 @@ export default function ServiceForm({
       tamanoEquipo: '',
       urgencia: '',
       contextoAdicional: '',
-      subscribeNewsletter: true
+      subscribeNewsletter: true,
+      // Preguntas específicas de marketing
+      generacionClientes: '',
+      problemaMarketing: '',
+      equipoMarketing: '',
+      inversionMarketing: '',
+      resultadoValioso: '',
+      paginaWeb: '',
+      redesSociales: ''
     });
   };
 
@@ -363,6 +389,147 @@ export default function ServiceForm({
         <label htmlFor="subscribeNewsletter" className="text-sm text-gray-300 leading-relaxed">
           También quiero suscribirme para recibir artículos y recursos exclusivos en mi email.
         </label>
+      </div>
+    </div>
+  );
+
+  const renderMarketingStep3 = () => (
+    <div className="space-y-6">
+      <div className="text-center mb-6">
+        <h3 className="text-2xl font-bold text-white mb-2">Diagnóstico de Marketing</h3>
+        <p className="text-gray-400">Ayúdanos a entender tu situación actual</p>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Cómo están generando clientes actualmente? *
+        </label>
+        <select
+          value={formData.generacionClientes}
+          onChange={(e) => updateFormData('generacionClientes', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Ads pagados">Ads pagados</option>
+          <option value="Orgánicamente en redes sociales">Orgánicamente en redes sociales</option>
+          <option value="Por recomendaciones">Por recomendaciones</option>
+          <option value="Página web">Página web</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Cuál de estos problemas sientes que describe mejor tu situación? *
+        </label>
+        <select
+          value={formData.problemaMarketing}
+          onChange={(e) => updateFormData('problemaMarketing', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="No tengo una estrategia clara">No tengo una estrategia clara</option>
+          <option value="Mi presupuesto en marketing no está dando resultados">Mi presupuesto en marketing no está dando resultados</option>
+          <option value="Mi audiencia no está bien definida">Mi audiencia no está bien definida</option>
+          <option value="No sé qué métricas seguir">No sé qué métricas seguir</option>
+          <option value="Me cuesta implementar rápido">Me cuesta implementar rápido</option>
+          <option value="No hago seguimiento constante">No hago seguimiento constante</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+    </div>
+  );
+
+  const renderMarketingStep4 = () => (
+    <div className="space-y-6">
+      <div className="text-center mb-6">
+        <h3 className="text-2xl font-bold text-white mb-2">Más sobre tu Marketing</h3>
+        <p className="text-gray-400">Completa el diagnóstico</p>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Actualmente cuentas con un equipo de marketing? *
+        </label>
+        <select
+          value={formData.equipoMarketing}
+          onChange={(e) => updateFormData('equipoMarketing', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="No, lo manejo yo mismo">No, lo manejo yo mismo</option>
+          <option value="Sí, 1-2 personas">Sí, 1-2 personas</option>
+          <option value="Sí, 3-5 personas">Sí, 3-5 personas</option>
+          <option value="Sí, más de 5 personas">Sí, más de 5 personas</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          ¿Cuál es tu inversión mensual aproximada en marketing? *
+        </label>
+        <select
+          value={formData.inversionMarketing}
+          onChange={(e) => updateFormData('inversionMarketing', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Menos de $500">Menos de $500</option>
+          <option value="$500-$1,500">$500-$1,500</option>
+          <option value="$1,500-$3,000">$1,500-$3,000</option>
+          <option value="+$3,000">+$3,000</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          Si trabajamos juntos, ¿qué resultado sería más valioso para ti en los próximos 90 días? *
+        </label>
+        <select
+          value={formData.resultadoValioso}
+          onChange={(e) => updateFormData('resultadoValioso', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-purple-500 focus:outline-none transition-colors"
+          required
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Generar más leads">Generar más leads</option>
+          <option value="Aumentar ventas">Aumentar ventas</option>
+          <option value="Tener claridad en la estrategia">Tener claridad en la estrategia</option>
+          <option value="Optimizar procesos y ahorrar tiempo">Optimizar procesos y ahorrar tiempo</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          Página web del negocio:
+        </label>
+        <input
+          type="url"
+          value={formData.paginaWeb}
+          onChange={(e) => updateFormData('paginaWeb', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+          placeholder="https://tu-empresa.com"
+        />
+        <p className="text-xs text-gray-400 mt-2">Este campo es opcional</p>
+      </div>
+
+      <div>
+        <label className="block text-white font-semibold mb-2">
+          Enlaces a sus redes sociales:
+        </label>
+        <input
+          type="text"
+          value={formData.redesSociales}
+          onChange={(e) => updateFormData('redesSociales', e.target.value)}
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
+          placeholder="@usuario, https://instagram.com/usuario, etc."
+        />
+        <p className="text-xs text-gray-400 mt-2">Este campo es opcional</p>
       </div>
     </div>
   );
@@ -569,6 +736,16 @@ export default function ServiceForm({
               case 2:
                 return renderStep2();
               case 3:
+                if (serviceSlug === 'plan-marketing') {
+                  return renderMarketingStep3();
+                }
+                return renderStep3();
+              case 4:
+                if (serviceSlug === 'plan-marketing') {
+                  return renderMarketingStep4();
+                }
+                return renderStep3();
+              case 5:
                 return renderStep3();
               default:
                 return null;
