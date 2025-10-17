@@ -311,6 +311,7 @@ function formatDataForMake(data: any) {
         horasRepetitivas: data.horasRepetitivas || '',
         tipoTareasRepetitivas: data.tipoTareasRepetitivas || '',
         herramientasAutomatizacion: Array.isArray(data.herramientasAutomatizacion) ? data.herramientasAutomatizacion.join(', ') : (data.herramientasAutomatizacion || ''),
+        otrasHerramientas: data.otrasHerramientas || '',
         nivelInversionTecnologica: data.nivelInversionTecnologica || '',
         
         // Metadata del Servicio
