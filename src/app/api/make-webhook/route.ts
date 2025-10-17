@@ -311,9 +311,11 @@ function formatDataForMake(data: any) {
         horasRepetitivas: data.horasRepetitivas || '',
         tipoTareasRepetitivas: data.tipoTareasRepetitivas === 'Otro' ? (data.otroTipoTareasRepetitivas || 'Otro') : (data.tipoTareasRepetitivas || ''),
         herramientasAutomatizacion: Array.isArray(data.herramientasAutomatizacion) ? 
-          data.herramientasAutomatizacion.map((herramienta: string) => 
-            herramienta === 'Otros' ? (data.otrasHerramientas || 'Otros') : herramienta
-          ) : 
+          data.herramientasAutomatizacion.map((herramienta: string) => {
+            const cleanHerramienta = herramienta === 'Otros' ? (data.otrasHerramientas || 'Otros') : herramienta;
+            // Limpiar comas de las opciones para evitar problemas de parsing
+            return cleanHerramienta.replace(/,/g, ';');
+          }) : 
           (data.herramientasAutomatizacion || []),
         nivelInversionTecnologica: data.nivelInversionTecnologica || '',
         // Preguntas específicas de SCALE
@@ -328,9 +330,11 @@ function formatDataForMake(data: any) {
         
         // Versiones de string para compatibilidad (si se necesitan)
         herramientasAutomatizacionString: Array.isArray(data.herramientasAutomatizacion) ? 
-          data.herramientasAutomatizacion.map((herramienta: string) => 
-            herramienta === 'Otros' ? (data.otrasHerramientas || 'Otros') : herramienta
-          ).join(', ') : 
+          data.herramientasAutomatizacion.map((herramienta: string) => {
+            const cleanHerramienta = herramienta === 'Otros' ? (data.otrasHerramientas || 'Otros') : herramienta;
+            // Limpiar comas de las opciones para evitar problemas de parsing
+            return cleanHerramienta.replace(/,/g, ';');
+          }).join(', ') : 
           (data.herramientasAutomatizacion || ''),
         sistemaOrganizacionString: Array.isArray(data.sistemaOrganizacion) ? 
           data.sistemaOrganizacion.map((s: string) => s === 'Otro' ? (data.otroSistemaOrganizacion || 'Otro') : s).join(', ') : 
