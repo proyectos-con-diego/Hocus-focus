@@ -519,7 +519,6 @@ export default function ServiceForm({
           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
           placeholder="https://tu-empresa.com"
         />
-        <p className="text-xs text-gray-400 mt-2">Este campo es opcional</p>
       </div>
 
       <div>
@@ -533,7 +532,6 @@ export default function ServiceForm({
           className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none transition-colors"
           placeholder="@usuario, https://instagram.com/usuario, etc."
         />
-        <p className="text-xs text-gray-400 mt-2">Este campo es opcional</p>
       </div>
     </div>
   );
@@ -660,7 +658,7 @@ export default function ServiceForm({
 
       <div>
         <label className="block text-white font-semibold mb-2">
-          Cuéntanos todo lo que quieras compartir sobre tu negocio, tus retos o lo que esperas del diagnóstico
+          Cuéntanos todo sobre los retos de tu negocio y lo que esperas del diagnóstico:
         </label>
         <textarea
           value={formData.contextoAdicional}
@@ -669,7 +667,6 @@ export default function ServiceForm({
           placeholder="Comparte cualquier información adicional que consideres relevante..."
           rows={5}
         />
-        <p className="text-xs text-gray-400 mt-2">Este campo es opcional</p>
       </div>
     </div>
   );
