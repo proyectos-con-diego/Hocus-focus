@@ -110,7 +110,7 @@ export default function DiegoPersonalSite() {
             servicesSection.scrollIntoView({ behavior: 'smooth' });
           }
         }}
-                            secondaryCtaText="Ver Agentes IA"
+        secondaryCtaText="Ver Agentes IA"
         secondaryCtaOnClick={() => {
           try { trackEvent({ action: 'click_hero_cta', category: 'Home', label: 'ver_agentes_ia' }); } catch {}
           const assistantsSection = document.querySelector('[data-section="assistants"]');
@@ -118,8 +118,7 @@ export default function DiegoPersonalSite() {
             assistantsSection.scrollIntoView({ behavior: 'smooth' });
           }
         }}
-        imageSrc="/Retratos pets/Okro/okro retrato.png"
-        imageAlt="OKRo - Sistema automatizado trabajando"
+        centered={true}
       />
 
       {/* Case Study */}
