@@ -116,7 +116,7 @@ export default function HeroSection({
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.1 }}
-                  className="text-xl sm:text-2xl md:text-3xl font-normal mb-8 text-gray-400 leading-relaxed font-dancing-script"
+                  className="text-xl sm:text-2xl md:text-3xl font-normal mb-8 text-gray-400 leading-relaxed font-kalam"
                 >
                   {tagline}
                 </motion.h2>
