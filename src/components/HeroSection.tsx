@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 interface HeroSectionProps {
   title: string;
   subtitle?: string;
+  tagline?: string;
   description: string;
   ctaText: string;
   ctaOnClick: () => void;
@@ -29,6 +30,7 @@ interface HeroSectionProps {
 export default function HeroSection({
   title,
   subtitle,
+  tagline,
   description,
   ctaText,
   ctaOnClick,
@@ -103,6 +105,19 @@ export default function HeroSection({
                 </>
               )}
             </motion.h1>
+            
+            {/* Tagline destacado (opcional) */}
+            {tagline && (
+              <motion.p
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+                className="text-lg sm:text-xl md:text-2xl font-semibold text-cyan-400 mb-6 leading-snug"
+              >
+                {tagline}
+              </motion.p>
+            )}
+            
             <motion.p 
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}

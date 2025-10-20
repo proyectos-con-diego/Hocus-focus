@@ -171,6 +171,7 @@ export default function ServiciosPage() {
       <HeroSection 
         title="¿Pierdes tiempo en tareas"
         subtitle="repetitivas?"
+        tagline="Ahorra entre 8 y 20 horas semanales eliminando tareas manuales"
         description="Te ayudo a crear sistemas automatizados que trabajan 24/7 mientras tú te enfocas en lo que realmente importa para tu negocio."
         ctaText="🚀 Ver servicios"
         ctaOnClick={() => {
