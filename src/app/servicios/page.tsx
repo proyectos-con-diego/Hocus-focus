@@ -169,9 +169,9 @@ export default function ServiciosPage() {
 
       {/* Hero Section */}
       <HeroSection 
-        title="¿Pierdes tiempo en tareas"
-        subtitle="repetitivas?"
-        description="Ahorra entre 8 y 20 horas semanales eliminando tareas manuales"
+        title="Ahorra entre 8 y 20 horas semanales"
+        subtitle="eliminando tareas manuales"
+        description="Transforma tu caos en procesos claros y automatizados para que avances más rápido, sin perder energía en lo repetitivo."
         ctaText="🚀 Ver servicios"
         ctaOnClick={() => {
           try { trackEvent({ action: 'click_hero_cta', category: 'Servicios', label: 'ver_servicios' }); } catch {}
