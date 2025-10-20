@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Kalam } from "next/font/google";
+import { Geist, Geist_Mono, Amatic_SC } from "next/font/google";
 import "./globals.css";
 import { GoogleTagManagerHead, GoogleTagManagerBody } from "@/components/GoogleTagManager";
 import PageTracker from "@/components/PageTracker";
@@ -14,10 +14,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const kalam = Kalam({
-  variable: "--font-kalam",
+const amaticSC = Amatic_SC({
+  variable: "--font-amatic-sc",
   subsets: ["latin"],
-  weight: ["300", "400", "700"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -86,7 +86,7 @@ export default function RootLayout({
         <GoogleTagManagerHead />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${kalam.variable} antialiased bg-black text-gray-300 min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${amaticSC.variable} antialiased bg-black text-gray-300 min-h-screen`}
       >
         <GoogleTagManagerBody />
         <PageTracker />
