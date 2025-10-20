@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { GoogleTagManagerHead, GoogleTagManagerBody } from "@/components/GoogleTagManager";
 import PageTracker from "@/components/PageTracker";
@@ -11,6 +11,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const dancingScript = Dancing_Script({
+  variable: "--font-dancing-script",
   subsets: ["latin"],
 });
 
@@ -80,7 +85,7 @@ export default function RootLayout({
         <GoogleTagManagerHead />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-gray-300 min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} antialiased bg-black text-gray-300 min-h-screen`}
       >
         <GoogleTagManagerBody />
         <PageTracker />

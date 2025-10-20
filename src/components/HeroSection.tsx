@@ -7,6 +7,7 @@ interface HeroSectionProps {
   title: string;
   subtitle?: string;
   description: string;
+  tagline?: string; // Nueva prop para el lema manuscrito
   ctaText: string;
   ctaOnClick: () => void;
   ctaIcon?: string;
@@ -31,6 +32,7 @@ export default function HeroSection({
   title,
   subtitle,
   description,
+  tagline,
   ctaText,
   ctaOnClick,
   ctaIcon = "🚀",
@@ -108,7 +110,19 @@ export default function HeroSection({
                 </div>
               </motion.h1>
               
-              <motion.h2 
+              {/* Lema manuscrito */}
+              {tagline && (
+                <motion.h2 
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1 }}
+                  className="text-xl sm:text-2xl md:text-3xl font-normal mb-8 text-gray-400 leading-relaxed font-dancing-script"
+                >
+                  {tagline}
+                </motion.h2>
+              )}
+              
+              <motion.h1 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -123,7 +137,7 @@ export default function HeroSection({
                     </span>
                   </>
                 )}
-              </motion.h2>
+              </motion.h1>
               
               <motion.p 
                 initial={{ opacity: 0, y: -20 }}
