@@ -101,7 +101,7 @@ export default function DiegoPersonalSite() {
       <HeroSection 
         title="Ahorra entre 8 y 20 horas semanales"
         subtitle="eliminando tareas manuales"
-        description="Transforma tu caos en procesos claros y automatizados para que avances más rápido, sin perder energía en lo repetitivo."
+        description="La magia de las automatizaciones"
         ctaText="🚀 Ver servicios"
         ctaOnClick={() => {
           try { trackEvent({ action: 'click_hero_cta', category: 'Home', label: 'ver_servicios' }); } catch {}
