@@ -2351,55 +2351,28 @@ export default function ProductoPage() {
                 <div className="relative bg-gradient-to-br rounded-2xl p-4 sm:p-8 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-500" style={{ background: mainGradient, minWidth: 'clamp(280px, 50vw, 480px)', maxWidth: 'clamp(320px, 60vw, 520px)' }}>
                   <div className="text-center">
                     <div className="mb-4 flex justify-center">
-                      <div 
-                        className="relative"
+                      <img 
+                        src={`/Cabezas-pets/${getPetImageName(product.name)}.png`}
+                        alt={`${product.name} mascota`}
+                        className="object-contain"
                         style={{
                           width: 'clamp(200px, 40vw, 480px)',
                           height: 'clamp(200px, 40vw, 480px)',
-                          minHeight: 'clamp(200px, 40vw, 480px)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center'
+                          maxWidth: 'none',
+                          maxHeight: 'none',
+                          aspectRatio: '1 / 1'
                         }}
-                      >
-                        {/* Placeholder mientras carga */}
-                        <div 
-                          className="absolute inset-0 flex items-center justify-center text-[8rem] opacity-30 animate-pulse"
-                          style={{ fontSize: 'clamp(4rem, 8vw, 8rem)' }}
-                        >
-                          {product.emoji}
-                        </div>
-                        
-                        <img 
-                          src={`/Cabezas-pets/${getPetImageName(product.name)}.png`}
-                          alt={`${product.name} mascota`}
-                          className="object-contain relative z-10"
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            maxWidth: 'none',
-                            maxHeight: 'none'
-                          }}
-                          onLoad={(e) => {
-                            // Ocultar placeholder cuando la imagen carga
-                            const placeholder = e.currentTarget.previousElementSibling as HTMLElement;
-                            if (placeholder) {
-                              placeholder.style.display = 'none';
-                            }
-                          }}
-                          onError={(e) => {
-                            // Fallback al emoji si la imagen no carga
-                            const target = e.target as HTMLImageElement;
-                            const placeholder = target.previousElementSibling as HTMLElement;
-                            if (placeholder) {
-                              placeholder.style.display = 'flex';
-                              placeholder.style.opacity = '1';
-                              placeholder.classList.remove('animate-pulse');
-                            }
-                            target.style.display = 'none';
-                          }}
-                        />
-                      </div>
+                        loading="eager"
+                        onError={(e) => {
+                          // Fallback al emoji si la imagen no carga
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const fallback = document.createElement('div');
+                          fallback.className = 'text-[30rem] mb-4';
+                          fallback.textContent = product.emoji;
+                          target.parentNode?.insertBefore(fallback, target);
+                        }}
+                      />
                     </div>
                     <div className="text-white font-bold text-2xl mb-2">{product.name}</div>
                     {/* Precio oculto - Comentado para no mostrar */}
