@@ -243,6 +243,7 @@ export default function ArticulosSobreMiV2() {
                 onChange={handleInputChange}
                 className="w-full md:w-1/3 px-6 py-5 rounded-xl bg-white/20 text-white placeholder-white/70 border-none outline-none text-base focus:bg-white/30 transition-all duration-300" 
                 placeholder="Tu nombre" 
+                autoComplete="name"
                 aria-label="Nombre para suscripción"
                 required
               />
@@ -253,6 +254,7 @@ export default function ArticulosSobreMiV2() {
                 onChange={handleInputChange}
                 className="w-full md:w-2/3 px-6 py-5 rounded-xl bg-white/20 text-white placeholder-white/70 border-none outline-none text-base focus:bg-white/30 transition-all duration-300" 
                 placeholder="Tu mejor email" 
+                autoComplete="email"
                 aria-label="Email para suscripción"
                 required
               />
