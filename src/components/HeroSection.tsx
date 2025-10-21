@@ -114,7 +114,7 @@ export default function HeroSection({
                   </div>
                   {/* Lema superpuesto al logo */}
                   {tagline && (
-                    <div className="text-center mt-4 sm:mt-5 md:mt-6 lg:mt-8 xl:mt-10 relative z-10">
+                    <div className="text-center -mt-20 sm:-mt-24 md:-mt-32 lg:-mt-36 xl:-mt-40 relative z-10">
                       <span className="text-lg sm:text-xl md:text-2xl font-light text-gray-400 leading-relaxed font-inter drop-shadow-lg">
                         {tagline}
                       </span>
