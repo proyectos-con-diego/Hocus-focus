@@ -139,7 +139,7 @@ export default function ProductosNuevoPage() {
           {/* Section Header */}
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4" style={{ fontSize: '2.8rem', fontWeight: 800 }}>
-              Agentes IA para hábitos, proyectos, finanzas y más
+              Agentes IA disponibles
             </h2>
             <p className="text-xl opacity-80" style={{ fontSize: '1.2rem', opacity: 0.8 }}>
               Cada una resuelve un problema específico de tu vida digital
