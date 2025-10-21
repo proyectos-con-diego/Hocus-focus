@@ -193,42 +193,9 @@ export default function HeaderGlass({
                 );
               })}
               
-              {/* Botones CTA en mobile */}
-              <div className="pt-4 border-t border-cyan-400/20 flex flex-col space-y-3">
-                {/* Botón Secundario */}
-                {secondaryButton && (
-                  <button 
-                    className="bg-transparent border border-cyan-400/50 text-cyan-400 font-semibold text-base px-6 py-3 rounded-full transition-all duration-300 hover:bg-cyan-400/10 hover:border-cyan-400"
-                    onClick={() => {
-                      secondaryButton.onClick();
-                      setIsMobileMenuOpen(false);
-                    }}
-                  >
-                    {secondaryButton.icon && <span className="mr-2">{secondaryButton.icon}</span>}
-                    {secondaryButton.text}
-                  </button>
-                )}
-
-                {/* Botón CTA Principal */}
-                {ctaButton ? (
-                  <button 
-                    className="bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-semibold text-base px-6 py-3 rounded-full transition-all duration-300 hover:scale-105"
-                    onClick={() => {
-                      ctaButton.onClick();
-                      setIsMobileMenuOpen(false);
-                    }}
-                  >
-                    {ctaButton.icon && <span className="mr-2">{ctaButton.icon}</span>}
-                    {ctaButton.text}
-                  </button>
-                ) : (
-                  <button 
-                    className="bg-gradient-to-r from-cyan-400 to-purple-600 text-white font-semibold text-base px-6 py-3 rounded-full transition-all duration-300 hover:scale-105"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    🚀 Contactar
-                  </button>
-                )}
+              {/* Espaciado adicional */}
+              <div className="pt-4 border-t border-cyan-400/20">
+                {/* Espacio reservado para mantener el espaciado original */}
               </div>
             </div>
           </div>
