@@ -235,60 +235,21 @@ export default function HeroSection({
             {/* Imagen del Hero (opcional) */}
             {imageSrc && (
               <div className="relative flex justify-center items-center">
-                <motion.div className="flex items-end justify-center" style={{ gap: '-40px' }}>
-                  {/* Personaje 1 - Vinxi */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="relative"
-                  >
-                    <div className="absolute inset-0 rounded-full" style={{ opacity: 0.25, background: 'radial-gradient(closest-side, rgba(34,211,238,0.2), transparent 70%)' }} />
-                    <img 
-                      src="/personajes/Imagenes Agentes/Vinxi/Cuerpo completo/Vinxi agente 1.png" 
-                      alt="Vinxi - Agente de Proyectos" 
-                      loading="eager" 
-                      decoding="async" 
-                      className="relative z-10 w-80 h-auto sm:w-96 md:w-112 lg:w-128 xl:w-144 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
-                      style={{ filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.4))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
-                    />
-                  </motion.div>
-
-                  {/* Personaje 2 - Midas */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    className="relative"
-                  >
-                    <div className="absolute inset-0 rounded-full" style={{ opacity: 0.25, background: 'radial-gradient(closest-side, rgba(147,51,234,0.2), transparent 70%)' }} />
-                    <img 
-                      src="/personajes/Imagenes Agentes/Midas/Cuerpo completo/Midas agente 1.png" 
-                      alt="Midas - Agente de Finanzas" 
-                      loading="eager" 
-                      decoding="async" 
-                      className="relative z-10 w-88 h-auto sm:w-104 md:w-120 lg:w-136 xl:w-152 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
-                      style={{ filter: 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.4))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
-                    />
-                  </motion.div>
-
-                  {/* Personaje 3 - Jaime */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.6 }}
-                    className="relative"
-                  >
-                    <div className="absolute inset-0 rounded-full" style={{ opacity: 0.25, background: 'radial-gradient(closest-side, rgba(236,72,153,0.2), transparent 70%)' }} />
-                    <img 
-                      src="/personajes/Imagenes Agentes/Jaime/Cuerpo completo/Jaime agente 1.png" 
-                      alt="Jaime - Agente de Hábitos" 
-                      loading="eager" 
-                      decoding="async" 
-                      className="relative z-10 w-80 h-auto sm:w-96 md:w-112 lg:w-128 xl:w-144 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
-                      style={{ filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.4))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
-                    />
-                  </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="relative"
+                >
+                  <div className="absolute inset-0 rounded-full" style={{ opacity: 0.25, background: 'radial-gradient(closest-side, rgba(34,211,238,0.2), transparent 70%)' }} />
+                  <img 
+                    src="/personajes/Imagenes Agentes/Grupales/Grupal 1.png" 
+                    alt="Equipo de Agentes IA" 
+                    loading="eager" 
+                    decoding="async" 
+                    className="relative z-10 w-full h-auto max-w-2xl mx-auto lg:max-w-4xl xl:max-w-5xl object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
+                    style={{ filter: 'drop-shadow(0 0 25px rgba(34, 211, 238, 0.4)) drop-shadow(0 0 50px rgba(147, 51, 234, 0.3))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
+                  />
                 </motion.div>
               </div>
             )}
