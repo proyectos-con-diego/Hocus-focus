@@ -15,36 +15,36 @@ import { useMakeWebhook } from '../../hooks/useMakeWebhook';
 function getPetImageName(productName: string, view: 'lateral' | 'frontal' = 'lateral'): string {
   const imageMapping: { [key: string]: { lateral: string; frontal: string } } = {
     'OKRo': {
-      lateral: '/personajes/Imagenes%20Agentes/Okro/Cabeza/Okro-agente-lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Okro/Cabeza/okro-agente-frontal.png'
+      lateral: '/Personajes/Imagenes-Agentes/Okro/Cabeza/Okro-agente-lateral.png',
+      frontal: '/Personajes/Imagenes-Agentes/Okro/Cabeza/okro-agente-frontal.png'
     },
     'Grilla Viralis': {
-      lateral: '/personajes/Imagenes%20Agentes/Grilla/Cabeza/Grilla-agente-lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Grilla/Cabeza/Grilla-agente-frontal.png'
+      lateral: '/Personajes/Imagenes-Agentes/Grilla/Cabeza/Grilla-agente-lateral.png',
+      frontal: '/Personajes/Imagenes-Agentes/Grilla/Cabeza/Grilla-agente-frontal.png'
     },
     'Jaime Daily': {
-      lateral: '/personajes/Imagenes%20Agentes/Jaime/Cabeza/Jaime-agente-lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Jaime/Cabeza/Jaime-agente-frontal.png'
+      lateral: '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-agente-lateral.png',
+      frontal: '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-agente-frontal.png'
     },
     'Navio': {
-      lateral: '/personajes/Imagenes%20Agentes/Lee%20-%20Navio/Cabeza/Lee-agente-lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Lee%20-%20Navio/Cabeza/Lee-agente-frontal.png'
+      lateral: '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-agente-lateral.png',
+      frontal: '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-agente-frontal.png'
     },
     'Bafet': {
-      lateral: '/personajes/Imagenes%20Agentes/Bafet/Cabeza/Bafet-agente-lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Bafet/Cabeza/Bafet-agente-frontal.png'
+      lateral: '/Personajes/Imagenes-Agentes/Bafet/Cabeza/Bafet-agente-lateral.png',
+      frontal: '/Personajes/Imagenes-Agentes/Bafet/Cabeza/Bafet-agente-frontal.png'
     },
     'Midas': {
-      lateral: '/personajes/Imagenes%20Agentes/Midas/Cabeza/Midas-agente-lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Midas/Cabeza/Midas-agente-frontal.png'
+      lateral: '/Personajes/Imagenes-Agentes/Midas/Cabeza/Midas-agente-lateral.png',
+      frontal: '/Personajes/Imagenes-Agentes/Midas/Cabeza/Midas-agente-frontal.png'
     },
     'Vinxi': {
-      lateral: '/personajes/Imagenes%20Agentes/Vinxi/Cabeza/Vinxi-agente-lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Vinxi/Cabeza/Vinxi-agente-frontal.png'
+      lateral: '/Personajes/Imagenes-Agentes/Vinxi/Cabeza/Vinxi-agente-lateral.png',
+      frontal: '/Personajes/Imagenes-Agentes/Vinxi/Cabeza/Vinxi-agente-frontal.png'
     },
     'Mythos': {
-      lateral: '/personajes/Imagenes%20Agentes/Mythos/Cabeza/Mythos-agente-lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Mythos/Cabeza/Mythos-agente-frontal.png'
+      lateral: '/Personajes/Imagenes-Agentes/Mythos/Cabeza/Mythos-agente-lateral.png',
+      frontal: '/Personajes/Imagenes-Agentes/Mythos/Cabeza/Mythos-agente-frontal.png'
     }
   };
   
@@ -649,7 +649,7 @@ export default function SobreMiExperimentalPage() {
                 {/* Avatar con foto real */}
                 <div className="relative z-10 w-96 h-96 rounded-full overflow-hidden shadow-2xl shadow-yellow-400/30 border-4 border-white/20">
                   <img 
-                    src="/Integrantes/Diego Gonzalez/Diego Gonzalez.jpeg" 
+                    src="/Integrantes/Diego-Gonzalez/Diego-Gonzalez.jpeg" 
                     alt="Diego Gonzalez - Marketero especializado en automatizaciones con IA" 
                     className="w-full h-full object-cover scale-x-[-1]"
                     loading="eager"

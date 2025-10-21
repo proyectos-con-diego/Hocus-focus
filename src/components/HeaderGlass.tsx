@@ -67,7 +67,7 @@ export default function HeaderGlass({
             className="flex items-center transition-all duration-300 cursor-pointer hover:opacity-80"
           >
             <img 
-              src="/Logo Hocuz Focuz/Hocuz Focuz Logo corto.png" 
+              src="/Logo-Hocuz-Focuz/Hocuz-Focuz-Logo-corto.png" 
               alt="Hocuz Focuz Logo" 
               className="h-12 sm:h-14 w-auto"
             />
