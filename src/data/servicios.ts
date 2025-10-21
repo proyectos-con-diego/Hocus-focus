@@ -127,7 +127,7 @@ export const servicesData: Service[] = [
   {
     id: 'sistema-scale',
     badge: 'SCALE',
-    badgeColor: 'from-purple-500 to-blue-500',
+    badgeColor: 'from-orange-500 to-red-500',
     icon: '🏢',
     title: 'Sistema SCALE',
     targetAudience: 'Para líderes con equipos de 3-15 personas',
@@ -139,14 +139,14 @@ export const servicesData: Service[] = [
       'Procesos listos para delegar',
       'Decisiones basadas en datos reales'
     ],
-    buttonColor: 'from-purple-500 to-blue-500',
+    buttonColor: 'from-orange-500 to-red-500',
     buttonText: 'Ver Detalle del Servicio',
     url: '/servicios/sistema-scale'
   },
   {
     id: 'automatizacion-ia',
     badge: 'IA',
-    badgeColor: 'from-cyan-500 to-blue-500',
+    badgeColor: 'from-purple-500 to-blue-500',
     icon: '🤖',
     title: 'Automatización IA',
     targetAudience: 'Para consultores y servicios profesionales',
@@ -158,7 +158,7 @@ export const servicesData: Service[] = [
       'Automatizaciones que funcionan 24/7',
       'Supera a competencia tradicional'
     ],
-    buttonColor: 'from-cyan-500 to-blue-500',
+    buttonColor: 'from-purple-500 to-blue-500',
     buttonText: 'Ver Detalle del Servicio',
     url: '/servicios/automatizacion-ia'
   }
