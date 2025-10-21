@@ -232,6 +232,12 @@ export default function ProductosNuevoPage() {
         <BlogNewsletterSection source="productos" />
       </div>
 
+      {/* Espaciado adicional */}
+      <section className="py-12 px-6">
+        <div className="max-w-4xl mx-auto">
+          {/* Espacio reservado para mantener el espaciado original */}
+        </div>
+      </section>
       
       {/* FOOTER */}
       <footer className="py-8 px-6 bg-black border-t border-gray-800">
