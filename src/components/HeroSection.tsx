@@ -243,7 +243,7 @@ export default function HeroSection({
                 >
                   <div className="absolute inset-0 rounded-full" style={{ opacity: 0.25, background: 'radial-gradient(closest-side, rgba(34,211,238,0.2), transparent 70%)' }} />
                   <img 
-                    src="/personajes/Imagenes Agentes/Grupales/Grupal 1.png" 
+                    src="/grupal-1.png" 
                     alt="Equipo de Agentes IA" 
                     loading="eager" 
                     decoding="async" 
@@ -252,7 +252,7 @@ export default function HeroSection({
                     onError={(e) => {
                       // Fallback a imagen individual si la grupal no carga
                       const target = e.target as HTMLImageElement;
-                      target.src = "/personajes/Imagenes Agentes/Vinxi/Cuerpo completo/Vinxi agente 1.png";
+                      target.src = "/Cabezas pets/Vinxi.png";
                       target.alt = "Vinxi - Agente IA";
                     }}
                   />
