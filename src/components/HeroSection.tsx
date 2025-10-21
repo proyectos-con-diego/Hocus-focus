@@ -92,41 +92,41 @@ export default function HeroSection({
           // Diseño centrado para HOME
           <div className="flex flex-col items-center text-center">
             <div className="max-w-4xl">
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: -30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 bg-gradient-to-r from-white via-cyan-400 to-purple-600 bg-clip-text text-transparent leading-tight"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 leading-tight"
               >
-                <div className="block">
-                  <span className="bg-gradient-to-r from-white via-cyan-400 to-purple-600 bg-clip-text text-transparent">
-                    HOCUZ
-                  </span>
-                </div>
-                <div className="block">
-                  <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                    FOCUZ
-                  </span>
+                <div className="flex flex-col items-center justify-center">
+                  <div className="mb-0">
+                    <img 
+                      src={`/Logo Hocuz Focuz/Hocuz Focuz logo completo.png?v=${Date.now()}`} 
+                      alt="Hocuz Focuz Logo Completo" 
+                      className="h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] xl:h-[36rem] w-auto animate-pulse hover:animate-bounce transition-all duration-300 hover:scale-105 drop-shadow-2xl"
+                      style={{
+                        filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.3)) drop-shadow(0 0 40px rgba(147, 51, 234, 0.2))',
+                        animation: 'float 3s ease-in-out infinite'
+                      }}
+                    />
+                  </div>
+                  {/* Lema manuscrito centrado */}
+                  {tagline && (
+                    <div className="text-center -mt-12 md:-mt-16 lg:-mt-20 xl:-mt-24">
+                      <span className="text-lg sm:text-xl md:text-2xl font-light text-gray-400 leading-relaxed font-inter">
+                        {tagline}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </motion.h1>
               
-              {/* Lema manuscrito */}
-              {tagline && (
-                <motion.h2 
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1 }}
-                  className="text-xl sm:text-2xl md:text-3xl font-normal mb-8 text-gray-400 leading-relaxed font-amatic-sc"
-                >
-                  {tagline}
-                </motion.h2>
-              )}
               
               <motion.h1 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white/90 leading-tight"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-2 lg:mb-1 xl:mb-0 text-white/90 leading-tight"
               >
                 {title}
                 {subtitle && (

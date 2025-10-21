@@ -62,12 +62,15 @@ export default function HeaderGlass({
             </button>
           )}
           
-          <div className="text-2xl bg-gradient-to-r from-white via-cyan-400 to-purple-600 bg-clip-text text-transparent">🪄</div>
           <a 
             href="/" 
-            className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-white via-cyan-400 to-purple-600 bg-clip-text text-transparent hover:from-cyan-300 hover:via-purple-500 hover:to-blue-500 transition-all duration-300 cursor-pointer"
+            className="flex items-center transition-all duration-300 cursor-pointer hover:opacity-80"
           >
-            Hocuz Focuz
+            <img 
+              src="/Logo Hocuz Focuz/Hocuz Focuz Logo corto.png" 
+              alt="Hocuz Focuz Logo" 
+              className="h-12 sm:h-14 w-auto"
+            />
           </a>
         </div>
 
