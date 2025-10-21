@@ -129,8 +129,8 @@ export default function ProductosNuevoPage() {
             productsSection.scrollIntoView({ behavior: 'smooth' });
           }
         }}
-        imageSrc="/personajes/Imagenes Agentes/Vinxi/Cuerpo completo/Vinxi agente 1.png"
-        imageAlt="Vinxi - Agente IA trabajando"
+        imageSrc="/grupal-1.png"
+        imageAlt="Equipo de Agentes IA - Productos"
       />
 
       {/* Products Section */}
