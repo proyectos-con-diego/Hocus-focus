@@ -283,17 +283,10 @@ export default function ServiciosPage() {
         <BlogNewsletterSection source="servicios" />
       </section>
 
-      {/* Navegación de regreso */}
+      {/* Espaciado adicional */}
       <section className="py-12 px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center">
-            <a 
-              href="/"
-              className="inline-flex items-center gap-3 text-purple-400 hover:text-purple-300 transition-colors duration-300 font-medium"
-            >
-              <span className="text-xl">←</span> Volver al inicio
-            </a>
-          </div>
+          {/* Espacio reservado para mantener el espaciado original */}
         </div>
       </section>
 
