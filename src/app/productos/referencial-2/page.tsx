@@ -715,15 +715,10 @@ export default function JaimeDailyPage() {
         </div>
       </section>
 
-      {/* Back to Products */}
+      {/* Espaciado adicional */}
       <section className="py-8 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <Link 
-            href="/productos"
-            className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors duration-300"
-          >
-            ← Volver a productos
-          </Link>
+          {/* Espacio reservado para mantener el espaciado original */}
         </div>
       </section>
     </div>

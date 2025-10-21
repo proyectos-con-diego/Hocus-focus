@@ -2147,9 +2147,7 @@ export default function ProductoPage() {
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Producto no encontrado</h1>
           <p className="text-gray-400 mb-8">El producto &quot;{slug}&quot; no existe.</p>
-          <Link href="/productos" className="text-blue-400 hover:text-blue-300">
-            ← Volver a productos
-          </Link>
+          {/* Espaciado reservado */}
         </div>
       </div>
     );
@@ -2875,16 +2873,10 @@ export default function ProductoPage() {
       {/* Artículos Relacionados */}
       <ProductRelatedArticles productSlug={slug || ""} productColor={mainColor} />
 
-      {/* Back to Products */}
+      {/* Espaciado adicional */}
       <section className="py-8 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <Link 
-            href="/productos"
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300"
-            style={{ color: mainColor }}
-          >
-            ← Volver a productos
-          </Link>
+          {/* Espacio reservado para mantener el espaciado original */}
         </div>
       </section>
 

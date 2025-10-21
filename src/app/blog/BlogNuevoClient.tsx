@@ -387,22 +387,14 @@ export default function BlogNuevoClient() {
           <BlogNewsletterSection />
         </section>
 
-        {/* Back to top */}
+        {/* Espaciado adicional */}
         <section 
           className="text-center my-10"
           role="navigation"
           aria-label="Navegación"
           data-testid="back-to-top-section"
         >
-          <a 
-            href="/" 
-            className="text-purple-400 text-sm font-medium hover:text-pink-400 inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-black rounded"
-            aria-label="Volver a la página de inicio"
-            data-testid="back-to-home-link"
-            onKeyDown={(e) => handleKeyDown(e, () => window.location.href = '/')}
-          >
-            <span className="mr-1" aria-hidden="true">←</span>Volver al inicio
-          </a>
+          {/* Espacio reservado para mantener el espaciado original */}
         </section>
       </div>
 

@@ -135,12 +135,7 @@ export default function PackPage() {
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Pack no encontrado</h1>
           <p className="text-gray-400 mb-8">El pack que buscas no existe.</p>
-          <Link 
-            href="/productos"
-            className="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition-all duration-300"
-          >
-            ← Volver a productos
-          </Link>
+          {/* Espaciado reservado */}
         </div>
       </div>
     );
@@ -353,15 +348,10 @@ export default function PackPage() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Espaciado adicional */}
       <section className="py-8 px-6 border-t border-gray-800">
         <div className="max-w-6xl mx-auto text-center">
-          <Link 
-            href="/productos"
-            className="text-gray-400 hover:text-white transition-colors duration-300"
-          >
-            ← Volver a productos
-          </Link>
+          {/* Espacio reservado para mantener el espaciado original */}
         </div>
       </section>
     </div>

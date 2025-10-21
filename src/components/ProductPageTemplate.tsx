@@ -72,13 +72,7 @@ const ProductPageTemplate: React.FC<ProductPageTemplateProps> = ({
         <div className="absolute inset-0 z-0 bg-black/80" />
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="mb-6">
-            <Link 
-              href="/productos"
-              className={`inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-300 ${textColor} ${textColorHover}`}
-              style={{ color: mainColor }}
-            >
-              ← Volver a productos
-            </Link>
+            {/* Espaciado reservado */}
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -277,14 +271,10 @@ const ProductPageTemplate: React.FC<ProductPageTemplateProps> = ({
         </div>
       </section>
       {/* Botón volver a productos */}
+      {/* Espaciado adicional */}
       <section className="py-8 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <a 
-            href="/productos"
-            className={`inline-flex items-center gap-2 font-semibold transition-colors duration-300 ${textColor} ${textColorHover}`}
-          >
-            ← Volver a productos
-          </a>
+          {/* Espacio reservado para mantener el espaciado original */}
         </div>
       </section>
     </div>
