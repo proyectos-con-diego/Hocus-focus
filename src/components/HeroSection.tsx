@@ -103,18 +103,18 @@ export default function HeroSection({
                     <img 
                       src="/Logo-Hocuz-Focuz/Hocuz-Focuz-logo-completo.png" 
                       alt="Hocuz Focuz Logo Completo" 
-                      className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto animate-pulse hover:animate-bounce transition-all duration-300 hover:scale-105 drop-shadow-2xl"
+                      className="w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl h-auto animate-pulse hover:animate-bounce transition-all duration-300 hover:scale-105 drop-shadow-2xl"
                       style={{
                         filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.3)) drop-shadow(0 0 40px rgba(147, 51, 234, 0.2))',
                         animation: 'float 3s ease-in-out infinite',
-                        maxHeight: 'clamp(200px, 50vw, 400px)',
+                        maxHeight: 'clamp(300px, 60vw, 500px)',
                         objectFit: 'contain'
                       }}
                     />
                   </div>
                   {/* Lema superpuesto al logo */}
                   {tagline && (
-                    <div className="text-center -mt-20 sm:-mt-24 md:-mt-32 lg:-mt-36 xl:-mt-40 relative z-10">
+                    <div className="text-center mt-4 sm:mt-5 md:mt-6 lg:mt-8 xl:mt-10 relative z-10">
                       <span className="text-lg sm:text-xl md:text-2xl font-light text-gray-400 leading-relaxed font-inter drop-shadow-lg">
                         {tagline}
                       </span>
