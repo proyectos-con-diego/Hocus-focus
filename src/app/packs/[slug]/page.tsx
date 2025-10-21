@@ -7,14 +7,13 @@ import { getPackBySlug } from '../../../data/packs';
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
   const imageMapping: { [key: string]: string } = {
-    'OKRo': 'okro-panda',
-    'Grilla Viralis': 'Grilla',
-    'Jaime Daily': 'Jaime-Daily',
-    'Navio': 'Navio-Lobo',
-    'Bafet': 'Bafet',
-    'Midas': 'Midas',
-    'Vinxi': 'Vinxi',
-    'Mythos': 'Mythos'
+    'OKRo': '/Personajes/Imagenes-Agentes/Okro/Cabeza/okro-cabeza-frontal.png',
+    'Grilla Viralis': '/Personajes/Imagenes-Agentes/Grilla/Cabeza/Grilla-cabeza-frontal.png',
+    'Jaime Daily': '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-cabeza-frontal.png',
+    'Navio': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-cabeza-frontal.png',
+    'Bafet': '/Personajes/Imagenes-Agentes/Bafet/Cabeza/Bafet-cabeza-frontal.png',
+    'Midas': '/Personajes/Imagenes-Agentes/Midas/Cabeza/Midas-cabeza-frontal.png',
+    'Vinxi': '/Personajes/Imagenes-Agentes/Vinxi/Cabeza/Vinxi-frontal.png'
   };
   
   return imageMapping[productName] || productName;
@@ -172,7 +171,7 @@ export default function PackPage() {
                   <div className="text-center hover:scale-105 transition-all duration-300">
                     <div className="mb-4 flex justify-center">
                       <img 
-                                                 src={`/Cabezas-pets/${getPetImageName(productName)}.png`}
+                                                 src={getPetImageName(productName)}
                         alt={`${productName} mascota`}
                         className="w-32 h-32 object-contain"
                         onError={(e) => {

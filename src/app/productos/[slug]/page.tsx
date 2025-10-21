@@ -16,14 +16,13 @@ import { event as trackEvent } from '../../../lib/analytics';
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
   const imageMapping: { [key: string]: string } = {
-    'OKRo': 'okro-panda',
-    'Grilla Viralis': 'Grilla',
-    'Jaime Daily': 'Jaime-Daily',
-    'Navio': 'Navio-Lobo',
-    'Bafet': 'Bafet',
-    'Midas': 'Midas',
-    'Vinxi': 'Vinxi',
-    'Mythos': 'Mythos'
+    'OKRo': '/Personajes/Imagenes-Agentes/Okro/Cabeza/okro-cabeza-frontal.png',
+    'Grilla Viralis': '/Personajes/Imagenes-Agentes/Grilla/Cabeza/Grilla-cabeza-frontal.png',
+    'Jaime Daily': '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-cabeza-frontal.png',
+    'Navio': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-cabeza-frontal.png',
+    'Bafet': '/Personajes/Imagenes-Agentes/Bafet/Cabeza/Bafet-cabeza-frontal.png',
+    'Midas': '/Personajes/Imagenes-Agentes/Midas/Cabeza/Midas-cabeza-frontal.png',
+    'Vinxi': '/Personajes/Imagenes-Agentes/Vinxi/Cabeza/Vinxi-frontal.png'
   };
   
   return imageMapping[productName] || productName;
@@ -2351,28 +2350,28 @@ export default function ProductoPage() {
                 <div className="relative bg-gradient-to-br rounded-2xl p-4 sm:p-8 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-500" style={{ background: mainGradient, minWidth: 'clamp(280px, 50vw, 480px)', maxWidth: 'clamp(320px, 60vw, 520px)' }}>
                   <div className="text-center">
                     <div className="mb-4 flex justify-center">
-                      <img 
-                        src={`/Cabezas-pets/${getPetImageName(product.name)}.png`}
-                        alt={`${product.name} mascota`}
-                        className="object-contain"
-                        style={{
-                          width: 'clamp(200px, 40vw, 480px)',
-                          height: 'clamp(200px, 40vw, 480px)',
-                          maxWidth: 'none',
-                          maxHeight: 'none',
-                          aspectRatio: '1 / 1'
-                        }}
-                        loading="eager"
-                        onError={(e) => {
-                          // Fallback al emoji si la imagen no carga
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const fallback = document.createElement('div');
-                          fallback.className = 'text-[30rem] mb-4';
-                          fallback.textContent = product.emoji;
-                          target.parentNode?.insertBefore(fallback, target);
-                        }}
-                      />
+                        <img 
+                          src={getPetImageName(product.name)}
+                          alt={`${product.name} mascota`}
+                          className="object-contain"
+                          style={{
+                            width: 'clamp(200px, 40vw, 480px)',
+                            height: 'clamp(200px, 40vw, 480px)',
+                            maxWidth: 'none',
+                            maxHeight: 'none',
+                            aspectRatio: '1 / 1'
+                          }}
+                          loading="eager"
+                          onError={(e) => {
+                            // Fallback al emoji si la imagen no carga
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const fallback = document.createElement('div');
+                            fallback.className = 'text-[30rem] mb-4';
+                            fallback.textContent = product.emoji;
+                            target.parentNode?.insertBefore(fallback, target);
+                          }}
+                        />
                     </div>
                     <div className="text-white font-bold text-2xl mb-2">{product.name}</div>
                     {/* Precio oculto - Comentado para no mostrar */}

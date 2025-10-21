@@ -9,14 +9,13 @@ import { event as trackEvent } from '../../../lib/analytics';
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
   const imageMapping: { [key: string]: string } = {
-    'OKRo': 'okro-panda',
-    'Grilla Viralis': 'Grilla',
-    'Jaime Daily': 'Jaime-Daily',
-    'Navio': 'Navio-Lobo',
-    'Bafet': 'Bafet',
-    'Midas': 'Midas',
-    'Vinxi': 'Vinxi',
-    'Mythos': 'Mythos'
+    'OKRo': '/Personajes/Imagenes-Agentes/Okro/Cabeza/okro-cabeza-frontal.png',
+    'Grilla Viralis': '/Personajes/Imagenes-Agentes/Grilla/Cabeza/Grilla-cabeza-frontal.png',
+    'Jaime Daily': '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-cabeza-frontal.png',
+    'Navio': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-cabeza-frontal.png',
+    'Bafet': '/Personajes/Imagenes-Agentes/Bafet/Cabeza/Bafet-cabeza-frontal.png',
+    'Midas': '/Personajes/Imagenes-Agentes/Midas/Cabeza/Midas-cabeza-frontal.png',
+    'Vinxi': '/Personajes/Imagenes-Agentes/Vinxi/Cabeza/Vinxi-frontal.png'
   };
   
   return imageMapping[productName] || productName;
@@ -85,7 +84,7 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
               {/* Imagen del animalito */}
               <div className="flex-shrink-0 order-1 md:order-1">
                 <img 
-                  src={`/Cabezas-pets/${getPetImageName(productConfig.name)}.png`}
+                  src={getPetImageName(productConfig.name)}
                   alt={`${productConfig.name} mascota`}
                   className="w-12 h-12 md:w-16 md:h-16 object-contain"
                   onError={(e) => {
@@ -198,7 +197,7 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
                 <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-lg p-5 border border-purple-500/30">
                   <div className="flex items-center gap-3 mb-3">
                     <img 
-                      src={`/Cabezas-pets/${getPetImageName(productConfig.name)}.png`}
+                      src={getPetImageName(productConfig.name)}
                       alt={`${productConfig.name} mascota`}
                       className="w-16 h-16 object-contain"
                       onError={(e) => {
