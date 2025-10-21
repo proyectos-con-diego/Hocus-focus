@@ -101,7 +101,7 @@ export default function HeroSection({
                 <div className="flex flex-col items-center justify-center">
                   <div className="mb-0">
                     <img 
-                      src={`/Logo Hocuz Focuz/Hocuz Focuz logo completo.png?v=${Date.now()}`} 
+                      src="/Logo Hocuz Focuz/Hocuz Focuz logo completo.png" 
                       alt="Hocuz Focuz Logo Completo" 
                       className="h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] xl:h-[36rem] w-auto animate-pulse hover:animate-bounce transition-all duration-300 hover:scale-105 drop-shadow-2xl"
                       style={{
@@ -255,7 +255,7 @@ export default function HeroSection({
                     alt={imageAlt || "Hero Image"}
                     loading="eager"
                     decoding="async"
-                    className="relative z-10 w-full h-auto max-w-md mx-auto lg:max-w-lg xl:max-w-xl object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105"
+                    className="relative z-10 w-full h-auto max-w-xl mx-auto lg:max-w-2xl xl:max-w-3xl object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105 scale-x-[-1]"
                     style={{
                       filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.3))',
                       mixBlendMode: 'multiply',

@@ -129,8 +129,8 @@ export default function ProductosNuevoPage() {
             productsSection.scrollIntoView({ behavior: 'smooth' });
           }
         }}
-        imageSrc="/Retratos pets/Vinxi/Vinxi retrato.png"
-        imageAlt="Vinxi - Mascota IA trabajando"
+        imageSrc="/personajes/Imagenes Agentes/Vinxi/Cuerpo completo/Vinxi agente 1.png"
+        imageAlt="Vinxi - Agente IA trabajando"
       />
 
       {/* Products Section */}
