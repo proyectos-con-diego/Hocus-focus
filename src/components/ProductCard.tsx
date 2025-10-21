@@ -11,8 +11,7 @@ function getPetImageName(productName: string): string {
     'Navio': 'Navio-Lobo',
     'Bafet': 'Bafet',
     'Midas': 'Midas',
-    'Vinxi': 'Vinxi',
-    'Mythos': 'Mythos'
+    'Vinxi': 'Vinxi'
   };
   
   const mappedName = imageMapping[productName] || productName;
