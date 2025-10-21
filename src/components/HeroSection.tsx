@@ -249,7 +249,7 @@ export default function HeroSection({
                       alt="Vinxi - Agente de Proyectos" 
                       loading="eager" 
                       decoding="async" 
-                      className="relative z-10 w-64 h-auto lg:w-80 xl:w-96 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
+                      className="relative z-10 w-80 h-auto sm:w-96 md:w-112 lg:w-128 xl:w-144 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
                       style={{ filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.4))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
                     />
                   </motion.div>
@@ -267,7 +267,7 @@ export default function HeroSection({
                       alt="Midas - Agente de Finanzas" 
                       loading="eager" 
                       decoding="async" 
-                      className="relative z-10 w-72 h-auto lg:w-88 xl:w-104 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
+                      className="relative z-10 w-88 h-auto sm:w-104 md:w-120 lg:w-136 xl:w-152 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
                       style={{ filter: 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.4))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
                     />
                   </motion.div>
@@ -285,7 +285,7 @@ export default function HeroSection({
                       alt="Jaime - Agente de Hábitos" 
                       loading="eager" 
                       decoding="async" 
-                      className="relative z-10 w-64 h-auto lg:w-80 xl:w-96 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
+                      className="relative z-10 w-80 h-auto sm:w-96 md:w-112 lg:w-128 xl:w-144 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
                       style={{ filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.4))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
                     />
                   </motion.div>
