@@ -248,7 +248,13 @@ export default function HeroSection({
                     loading="eager" 
                     decoding="async" 
                     className="relative z-10 w-full h-auto max-w-2xl mx-auto lg:max-w-4xl xl:max-w-5xl object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
-                    style={{ filter: 'drop-shadow(0 0 25px rgba(34, 211, 238, 0.4)) drop-shadow(0 0 50px rgba(147, 51, 234, 0.3))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
+                    style={{ filter: 'drop-shadow(0 0 25px rgba(34, 211, 238, 0.4)) drop-shadow(0 0 50px rgba(147, 51, 234, 0.3))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }}
+                    onError={(e) => {
+                      // Fallback a imagen individual si la grupal no carga
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/personajes/Imagenes Agentes/Vinxi/Cuerpo completo/Vinxi agente 1.png";
+                      target.alt = "Vinxi - Agente IA";
+                    }}
                   />
                 </motion.div>
               </div>
