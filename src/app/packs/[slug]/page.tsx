@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { getPackBySlug } from '../../data/packs';
+import { getPackBySlug } from '../../../data/packs';
 
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
