@@ -1,23 +1,50 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { products } from '@/data/products';
 
-// Función helper para mapear nombres de productos a nombres de archivos de imágenes
-function getPetImageName(productName: string): string {
-  const imageMapping: { [key: string]: string } = {
-    'OKRo': 'okro panda',
-    'Grilla Viralis': 'Grilla',
-    'Jaime Daily': 'Jaime Daily',
-    'Navio': 'Navio | Lobo',
-    'Bafet': 'Bafet',
-    'Midas': 'Midas',
-    'Vinxi': 'Vinxi',
-    'Mythos': 'Mythos'
+// Función helper para mapear nombres de productos a rutas de imágenes de personajes
+function getPetImageName(productName: string, view: 'lateral' | 'frontal' = 'lateral'): string {
+  const imageMapping: { [key: string]: { lateral: string; frontal: string } } = {
+    'OKRo': {
+      lateral: '/personajes/Imagenes Agentes/Okro/Cabeza/Okro agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Okro/Cabeza/okro agente frontal.png'
+    },
+    'Grilla Viralis': {
+      lateral: '/personajes/Imagenes Agentes/Grilla/Cabeza/Grilla agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Grilla/Cabeza/Grilla agente frontal.png'
+    },
+    'Jaime Daily': {
+      lateral: '/personajes/Imagenes Agentes/Jaime/Cabeza/Jaime agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Jaime/Cabeza/Jaime agente frontal.png'
+    },
+    'Navio': {
+      lateral: '/personajes/Imagenes Agentes/Lee - Navio/Cabeza/Lee agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Lee - Navio/Cabeza/Lee agente frontal.png'
+    },
+    'Bafet': {
+      lateral: '/personajes/Imagenes Agentes/Bafet/Cabeza/Bafet agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Bafet/Cabeza/Bafet agente frontal.png'
+    },
+    'Midas': {
+      lateral: '/personajes/Imagenes Agentes/Midas/Cabeza/Midas agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Midas/Cabeza/Midas agente frontal.png'
+    },
+    'Vinxi': {
+      lateral: '/personajes/Imagenes Agentes/Vinxi/Cabeza/Vinxi agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Vinxi/Cabeza/Vinxi agente frontal.png'
+    },
+    'Mythos': {
+      lateral: '/personajes/Imagenes Agentes/Mythos/Cabeza/Mythos agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Mythos/Cabeza/Mythos agente frontal.png'
+    }
   };
   
-  return imageMapping[productName] || productName;
+  const agentImages = imageMapping[productName];
+  if (!agentImages) return productName;
+  
+  return view === 'frontal' ? agentImages.frontal : agentImages.lateral;
 }
 
 // Mapear productos a formato de mascotas para el carrusel
@@ -60,6 +87,7 @@ function getGradientFromProduct(product: any): string {
 
 export default function ProductCarouselHome() {
   const router = useRouter();
+  const [hoveredAgent, setHoveredAgent] = useState<string | null>(null);
 
   const handleTimelineClick = (index: number) => {
     const mascot = timelineMascots[index];
@@ -130,20 +158,22 @@ export default function ProductCarouselHome() {
                 <div 
                   className="w-30 h-30 flex items-center justify-center mb-4 transition-all duration-400 relative"
                   style={{
-                    width: '120px',
-                    height: '120px'
+                    width: '160px',
+                    height: '160px'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'scale(1.2)';
+                    setHoveredAgent(mascot.name);
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'scale(1)';
+                    setHoveredAgent(null);
                   }}
                 >
                   <img 
-                    src={`/Cabezas pets/${getPetImageName(mascot.name)}.png`}
+                    src={getPetImageName(mascot.name, hoveredAgent === mascot.name ? 'frontal' : 'lateral')}
                     alt={`${mascot.name} mascota`}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain transition-all duration-300"
                     onError={(e) => {
                       // Fallback al emoji si la imagen no carga
                       const target = e.target as HTMLImageElement;
@@ -204,20 +234,22 @@ export default function ProductCarouselHome() {
                 <div 
                   className="w-30 h-30 flex items-center justify-center mb-4 transition-all duration-400 relative"
                   style={{
-                    width: '120px',
-                    height: '120px'
+                    width: '160px',
+                    height: '160px'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'scale(1.2)';
+                    setHoveredAgent(mascot.name);
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'scale(1)';
+                    setHoveredAgent(null);
                   }}
                 >
                   <img 
-                    src={`/Cabezas pets/${getPetImageName(mascot.name)}.png`}
+                    src={getPetImageName(mascot.name, hoveredAgent === mascot.name ? 'frontal' : 'lateral')}
                     alt={`${mascot.name} mascota`}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain transition-all duration-300"
                     onError={(e) => {
                       // Fallback al emoji si la imagen no carga
                       const target = e.target as HTMLImageElement;
@@ -278,20 +310,22 @@ export default function ProductCarouselHome() {
                 <div 
                   className="w-30 h-30 flex items-center justify-center mb-4 transition-all duration-400 relative"
                   style={{
-                    width: '120px',
-                    height: '120px'
+                    width: '160px',
+                    height: '160px'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'scale(1.2)';
+                    setHoveredAgent(mascot.name);
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'scale(1)';
+                    setHoveredAgent(null);
                   }}
                 >
                   <img 
-                    src={`/Cabezas pets/${getPetImageName(mascot.name)}.png`}
+                    src={getPetImageName(mascot.name, hoveredAgent === mascot.name ? 'frontal' : 'lateral')}
                     alt={`${mascot.name} mascota`}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain transition-all duration-300"
                     onError={(e) => {
                       // Fallback al emoji si la imagen no carga
                       const target = e.target as HTMLImageElement;

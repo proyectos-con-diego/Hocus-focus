@@ -11,20 +11,88 @@ import SobreMiFAQSection from '../../components/SobreMiFAQSection';
 import { event as trackEvent } from '../../lib/analytics';
 import { useMakeWebhook } from '../../hooks/useMakeWebhook';
 
-// Función helper para mapear nombres de productos a nombres de archivos de imágenes
-function getPetImageName(productName: string): string {
-  const imageMapping: { [key: string]: string } = {
-    'OKRo': 'okro panda',
-    'Grilla Viralis': 'Grilla',
-    'Jaime Daily': 'Jaime Daily',
-    'Navio': 'Navio | Lobo',
-    'Bafet': 'Bafet',
-    'Midas': 'Midas',
-    'Vinxi': 'Vinxi',
-    'Mythos': 'Mythos'
+// Función helper para mapear nombres de productos a rutas de imágenes de personajes
+function getPetImageName(productName: string, view: 'lateral' | 'frontal' = 'lateral'): string {
+  const imageMapping: { [key: string]: { lateral: string; frontal: string } } = {
+    'OKRo': {
+      lateral: '/personajes/Imagenes Agentes/Okro/Cabeza/Okro agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Okro/Cabeza/okro agente frontal.png'
+    },
+    'Grilla Viralis': {
+      lateral: '/personajes/Imagenes Agentes/Grilla/Cabeza/Grilla agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Grilla/Cabeza/Grilla agente frontal.png'
+    },
+    'Jaime Daily': {
+      lateral: '/personajes/Imagenes Agentes/Jaime/Cabeza/Jaime agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Jaime/Cabeza/Jaime agente frontal.png'
+    },
+    'Navio': {
+      lateral: '/personajes/Imagenes Agentes/Lee - Navio/Cabeza/Lee agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Lee - Navio/Cabeza/Lee agente frontal.png'
+    },
+    'Bafet': {
+      lateral: '/personajes/Imagenes Agentes/Bafet/Cabeza/Bafet agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Bafet/Cabeza/Bafet agente frontal.png'
+    },
+    'Midas': {
+      lateral: '/personajes/Imagenes Agentes/Midas/Cabeza/Midas agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Midas/Cabeza/Midas agente frontal.png'
+    },
+    'Vinxi': {
+      lateral: '/personajes/Imagenes Agentes/Vinxi/Cabeza/Vinxi agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Vinxi/Cabeza/Vinxi agente frontal.png'
+    },
+    'Mythos': {
+      lateral: '/personajes/Imagenes Agentes/Mythos/Cabeza/Mythos agente lateral.png',
+      frontal: '/personajes/Imagenes Agentes/Mythos/Cabeza/Mythos agente frontal.png'
+    }
   };
   
-  return imageMapping[productName] || productName;
+  const agentImages = imageMapping[productName];
+  if (!agentImages) return productName;
+  
+  return view === 'frontal' ? agentImages.frontal : agentImages.lateral;
+}
+
+// Importar productos y crear timelineMascots
+import { products } from '../../data/products';
+
+// Mapear productos a formato de mascotas para el carrusel
+const timelineMascots = products.map(product => ({
+  name: product.name,
+  emoji: product.emoji,
+  category: getCategoryFromSlug(product.slug),
+  gradientBg: getGradientFromProduct(product),
+  isPopular: product.isPopular || false,
+  slug: product.slug
+}));
+
+// Función para obtener categoría basada en el slug
+function getCategoryFromSlug(slug: string): string {
+  const categoryMap: { [key: string]: string } = {
+    'jaime-daily': 'Hábitos',
+    'midas': 'Finanzas', 
+    'vinxi': 'Organización',
+    'grilla-viralis': 'Contenido',
+    'okro': 'Objetivos',
+    'bafet': 'Crypto',
+    'navio-360': 'Colaboración'
+  };
+  return categoryMap[slug] || 'Producto';
+}
+
+// Función para obtener gradiente basado en el producto
+function getGradientFromProduct(product: any): string {
+  const gradientMap: { [key: string]: string } = {
+    'jaime-daily': 'linear-gradient(135deg, #22c55e 0%, #10b981 100%)',
+    'midas': 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+    'vinxi': 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+    'grilla-viralis': 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    'okro': 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+    'bafet': 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+    'navio-360': 'linear-gradient(135deg, #607d8b 0%, #00bcd4 100%)'
+  };
+  return gradientMap[product.slug] || 'linear-gradient(135deg, #6b7280 0%, #4b5563 100%)';
 }
 
 // Función para obtener clases de color de categoría
@@ -99,6 +167,7 @@ function calculateReadingTime(body: any): number {
 
 export default function SobreMiExperimentalPage() {
   const [latestArticles, setLatestArticles] = useState<any[]>([]);
+  const [hoveredAgent, setHoveredAgent] = useState<string | null>(null);
   const [loadingArticles, setLoadingArticles] = useState(true);
   const [articlesError, setArticlesError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'superpoderes' | 'ideales'>('superpoderes');
@@ -413,6 +482,22 @@ export default function SobreMiExperimentalPage() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
       {/* Fondo estrellado sutil - igual que la página principal */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* Gradiente radial sutil - púrpura/rosa/azul como en la principal */}
@@ -1133,45 +1218,173 @@ export default function SobreMiExperimentalPage() {
               Asistentes de IA que han revolucionado la productividad de mis clientes
             </p>
           </motion.div>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
-            {productsData.map((product, index) => (
-              <motion.div
-                key={index}
-                className="group relative"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 h-full hover:border-cyan-400/30 transition-all duration-300 group-hover:scale-105">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${product.color} rounded-2xl flex items-center justify-center mb-6 overflow-hidden`}>
+        {/* Carrusel de Agentes - Ancho completo */}
+        <div className="relative w-full py-10 overflow-hidden">
+            <div className="flex gap-12 animate-scroll" style={{
+              width: 'calc(200% + 400px)'
+            }}>
+              {/* Primera serie de mascotas */}
+              {timelineMascots.map((mascot, index) => (
+                <div
+                  key={`first-${index}`}
+                  className="flex flex-col items-center cursor-pointer transition-all duration-400 relative"
+                  style={{
+                    minWidth: '160px',
+                    margin: '0 20px'
+                  }}
+                  onClick={() => {
+                    const mascot = timelineMascots[index];
+                    window.location.href = `/productos/${mascot.slug}`;
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-10px)';
+                    setHoveredAgent(mascot.name);
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    setHoveredAgent(null);
+                  }}
+                >
+                  {/* Mascot Avatar */}
+                  <div 
+                    className="w-30 h-30 flex items-center justify-center mb-4 transition-all duration-400 relative"
+                    style={{
+                      width: '160px',
+                      height: '160px'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.2)';
+                      setHoveredAgent(mascot.name);
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                      setHoveredAgent(null);
+                    }}
+                  >
                     <img 
-                      src={`/Cabezas pets/${getPetImageName(product.name)}.png`}
-                      alt={`${product.name} mascota`}
-                      className="w-full h-full object-contain"
+                      src={getPetImageName(mascot.name, hoveredAgent === mascot.name ? 'frontal' : 'lateral')}
+                      alt={`${mascot.name} mascota`}
+                      className="w-full h-full object-contain transition-all duration-300"
                       onError={(e) => {
                         // Fallback al emoji si la imagen no carga
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
                         const fallback = document.createElement('div');
-                        fallback.className = 'text-3xl';
-                        fallback.textContent = product.emoji;
+                        fallback.style.fontSize = '60px';
+                        fallback.textContent = mascot.emoji;
                         target.parentNode?.insertBefore(fallback, target);
                       }}
                     />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">{product.name}</h3>
-                  <p className="text-gray-400 leading-relaxed mb-4">{product.description}</p>
-                  <div className="text-cyan-400 font-semibold text-lg">{product.result}</div>
+
+                  {/* Popular Badge */}
+                  {mascot.isPopular && (
+                    <div className="absolute -top-2 -right-2 z-10" style={{
+                      background: 'linear-gradient(135deg, #22c55e 0%, #10b981 100%)',
+                      borderRadius: '12px',
+                      padding: '4px 8px',
+                      fontSize: '10px',
+                      fontWeight: 'bold',
+                      color: 'white',
+                      boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)'
+                    }}>
+                      POPULAR
+                    </div>
+                  )}
+
+                  {/* Mascot Info */}
+                  <div className="text-center">
+                    <h3 className="text-white font-bold text-lg mb-1">{mascot.name}</h3>
+                    <p className="text-gray-400 text-sm">{mascot.category}</p>
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-          
-          {/* Botón "Ver todos" sutil */}
+              ))}
+              
+              {/* Segunda serie de mascotas para efecto infinito */}
+              {timelineMascots.map((mascot, index) => (
+                <div
+                  key={`second-${index}`}
+                  className="flex flex-col items-center cursor-pointer transition-all duration-400 relative"
+                  style={{
+                    minWidth: '160px',
+                    margin: '0 20px'
+                  }}
+                  onClick={() => {
+                    const mascot = timelineMascots[index];
+                    window.location.href = `/productos/${mascot.slug}`;
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-10px)';
+                    setHoveredAgent(mascot.name);
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    setHoveredAgent(null);
+                  }}
+                >
+                  {/* Mascot Avatar */}
+                  <div 
+                    className="w-30 h-30 flex items-center justify-center mb-4 transition-all duration-400 relative"
+                    style={{
+                      width: '160px',
+                      height: '160px'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.2)';
+                      setHoveredAgent(mascot.name);
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                      setHoveredAgent(null);
+                    }}
+                  >
+                    <img 
+                      src={getPetImageName(mascot.name, hoveredAgent === mascot.name ? 'frontal' : 'lateral')}
+                      alt={`${mascot.name} mascota`}
+                      className="w-full h-full object-contain transition-all duration-300"
+                      onError={(e) => {
+                        // Fallback al emoji si la imagen no carga
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const fallback = document.createElement('div');
+                        fallback.style.fontSize = '60px';
+                        fallback.textContent = mascot.emoji;
+                        target.parentNode?.insertBefore(fallback, target);
+                      }}
+                    />
+                  </div>
+
+                  {/* Popular Badge */}
+                  {mascot.isPopular && (
+                    <div className="absolute -top-2 -right-2 z-10" style={{
+                      background: 'linear-gradient(135deg, #22c55e 0%, #10b981 100%)',
+                      borderRadius: '12px',
+                      padding: '4px 8px',
+                      fontSize: '10px',
+                      fontWeight: 'bold',
+                      color: 'white',
+                      boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)'
+                    }}>
+                      POPULAR
+                    </div>
+                  )}
+
+                  {/* Mascot Info */}
+                  <div className="text-center">
+                    <h3 className="text-white font-bold text-lg mb-1">{mascot.name}</h3>
+                    <p className="text-gray-400 text-sm">{mascot.category}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+        </div>
+        
+        {/* Botón "Ver todos" sutil */}
+        <div className="max-w-6xl mx-auto px-5">
           <motion.div 
-            className="text-center"
+            className="text-center mt-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
