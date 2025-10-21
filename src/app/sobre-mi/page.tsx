@@ -15,36 +15,36 @@ import { useMakeWebhook } from '../../hooks/useMakeWebhook';
 function getPetImageName(productName: string, view: 'lateral' | 'frontal' = 'lateral'): string {
   const imageMapping: { [key: string]: { lateral: string; frontal: string } } = {
     'OKRo': {
-      lateral: '/personajes/Imagenes%20Agentes/Okro/Cabeza/Okro%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Okro/Cabeza/okro%20agente%20frontal.png'
+      lateral: '/personajes/Imagenes%20Agentes/Okro/Cabeza/Okro-agente-lateral.png',
+      frontal: '/personajes/Imagenes%20Agentes/Okro/Cabeza/okro-agente-frontal.png'
     },
     'Grilla Viralis': {
-      lateral: '/personajes/Imagenes%20Agentes/Grilla/Cabeza/Grilla%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Grilla/Cabeza/Grilla%20agente%20frontal.png'
+      lateral: '/personajes/Imagenes%20Agentes/Grilla/Cabeza/Grilla-agente-lateral.png',
+      frontal: '/personajes/Imagenes%20Agentes/Grilla/Cabeza/Grilla-agente-frontal.png'
     },
     'Jaime Daily': {
-      lateral: '/personajes/Imagenes%20Agentes/Jaime/Cabeza/Jaime%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Jaime/Cabeza/Jaime%20agente%20frontal.png'
+      lateral: '/personajes/Imagenes%20Agentes/Jaime/Cabeza/Jaime-agente-lateral.png',
+      frontal: '/personajes/Imagenes%20Agentes/Jaime/Cabeza/Jaime-agente-frontal.png'
     },
     'Navio': {
-      lateral: '/personajes/Imagenes%20Agentes/Lee%20-%20Navio/Cabeza/Lee%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Lee%20-%20Navio/Cabeza/Lee%20agente%20frontal.png'
+      lateral: '/personajes/Imagenes%20Agentes/Lee%20-%20Navio/Cabeza/Lee-agente-lateral.png',
+      frontal: '/personajes/Imagenes%20Agentes/Lee%20-%20Navio/Cabeza/Lee-agente-frontal.png'
     },
     'Bafet': {
-      lateral: '/personajes/Imagenes%20Agentes/Bafet/Cabeza/Bafet%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Bafet/Cabeza/Bafet%20agente%20frontal.png'
+      lateral: '/personajes/Imagenes%20Agentes/Bafet/Cabeza/Bafet-agente-lateral.png',
+      frontal: '/personajes/Imagenes%20Agentes/Bafet/Cabeza/Bafet-agente-frontal.png'
     },
     'Midas': {
-      lateral: '/personajes/Imagenes%20Agentes/Midas/Cabeza/Midas%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Midas/Cabeza/Midas%20agente%20frontal.png'
+      lateral: '/personajes/Imagenes%20Agentes/Midas/Cabeza/Midas-agente-lateral.png',
+      frontal: '/personajes/Imagenes%20Agentes/Midas/Cabeza/Midas-agente-frontal.png'
     },
     'Vinxi': {
-      lateral: '/personajes/Imagenes%20Agentes/Vinxi/Cabeza/Vinxi%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Vinxi/Cabeza/Vinxi%20agente%20frontal.png'
+      lateral: '/personajes/Imagenes%20Agentes/Vinxi/Cabeza/Vinxi-agente-lateral.png',
+      frontal: '/personajes/Imagenes%20Agentes/Vinxi/Cabeza/Vinxi-agente-frontal.png'
     },
     'Mythos': {
-      lateral: '/personajes/Imagenes%20Agentes/Mythos/Cabeza/Mythos%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Mythos/Cabeza/Mythos%20agente%20frontal.png'
+      lateral: '/personajes/Imagenes%20Agentes/Mythos/Cabeza/Mythos-agente-lateral.png',
+      frontal: '/personajes/Imagenes%20Agentes/Mythos/Cabeza/Mythos-agente-frontal.png'
     }
   };
   

@@ -2,42 +2,42 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { products } from '@/data/products';
+import { products, Product } from '../data/products';
 
 // Función helper para mapear nombres de productos a rutas de imágenes de personajes
 function getPetImageName(productName: string, view: 'lateral' | 'frontal' = 'lateral'): string {
   const imageMapping: { [key: string]: { lateral: string; frontal: string } } = {
     'OKRo': {
-      lateral: '/personajes/Imagenes%20Agentes/Okro/Cabeza/Okro%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Okro/Cabeza/okro%20agente%20frontal.png'
+      lateral: '/Personajes/Imagenes Agentes/Okro/Cabeza/Okro-agente-lateral.png',
+      frontal: '/Personajes/Imagenes Agentes/Okro/Cabeza/okro-agente-frontal.png'
     },
     'Grilla Viralis': {
-      lateral: '/personajes/Imagenes%20Agentes/Grilla/Cabeza/Grilla%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Grilla/Cabeza/Grilla%20agente%20frontal.png'
+      lateral: '/Personajes/Imagenes Agentes/Grilla/Cabeza/Grilla-agente-lateral.png',
+      frontal: '/Personajes/Imagenes Agentes/Grilla/Cabeza/Grilla-agente-frontal.png'
     },
     'Jaime Daily': {
-      lateral: '/personajes/Imagenes%20Agentes/Jaime/Cabeza/Jaime%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Jaime/Cabeza/Jaime%20agente%20frontal.png'
+      lateral: '/Personajes/Imagenes Agentes/Jaime/Cabeza/Jaime-agente-lateral.png',
+      frontal: '/Personajes/Imagenes Agentes/Jaime/Cabeza/Jaime-agente-frontal.png'
     },
     'Navio': {
-      lateral: '/personajes/Imagenes%20Agentes/Lee%20-%20Navio/Cabeza/Lee%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Lee%20-%20Navio/Cabeza/Lee%20agente%20frontal.png'
+      lateral: '/Personajes/Imagenes Agentes/Lee - Navio/Cabeza/Lee-agente-lateral.png',
+      frontal: '/Personajes/Imagenes Agentes/Lee - Navio/Cabeza/Lee-agente-frontal.png'
     },
     'Bafet': {
-      lateral: '/personajes/Imagenes%20Agentes/Bafet/Cabeza/Bafet%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Bafet/Cabeza/Bafet%20agente%20frontal.png'
+      lateral: '/Personajes/Imagenes Agentes/Bafet/Cabeza/Bafet-agente-lateral.png',
+      frontal: '/Personajes/Imagenes Agentes/Bafet/Cabeza/Bafet-agente-frontal.png'
     },
     'Midas': {
-      lateral: '/personajes/Imagenes%20Agentes/Midas/Cabeza/Midas%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Midas/Cabeza/Midas%20agente%20frontal.png'
+      lateral: '/Personajes/Imagenes Agentes/Midas/Cabeza/Midas-agente-lateral.png',
+      frontal: '/Personajes/Imagenes Agentes/Midas/Cabeza/Midas-agente-frontal.png'
     },
     'Vinxi': {
-      lateral: '/personajes/Imagenes%20Agentes/Vinxi/Cabeza/Vinxi%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Vinxi/Cabeza/Vinxi%20agente%20frontal.png'
+      lateral: '/Personajes/Imagenes Agentes/Vinxi/Cabeza/Vinxi-agente-lateral.png',
+      frontal: '/Personajes/Imagenes Agentes/Vinxi/Cabeza/Vinxi-agente-frontal.png'
     },
     'Mythos': {
-      lateral: '/personajes/Imagenes%20Agentes/Mythos/Cabeza/Mythos%20agente%20lateral.png',
-      frontal: '/personajes/Imagenes%20Agentes/Mythos/Cabeza/Mythos%20agente%20frontal.png'
+      lateral: '/Personajes/Imagenes Agentes/Mythos/Cabeza/Mythos-agente-lateral.png',
+      frontal: '/Personajes/Imagenes Agentes/Mythos/Cabeza/Mythos-agente-frontal.png'
     }
   };
   
@@ -47,8 +47,18 @@ function getPetImageName(productName: string, view: 'lateral' | 'frontal' = 'lat
   return view === 'frontal' ? agentImages.frontal : agentImages.lateral;
 }
 
+// Tipo para las mascotas del carrusel
+interface Mascot {
+  name: string;
+  emoji: string;
+  category: string;
+  gradientBg: string;
+  isPopular: boolean;
+  slug: string;
+}
+
 // Mapear productos a formato de mascotas para el carrusel
-const timelineMascots = products.map(product => ({
+const timelineMascots: Mascot[] = products.map((product: Product) => ({
   name: product.name,
   emoji: product.emoji,
   category: getCategoryFromSlug(product.slug),
@@ -138,7 +148,7 @@ export default function ProductCarouselHome() {
             }}
           >
             {/* Primera serie de mascotas */}
-            {timelineMascots.map((mascot, index) => (
+            {timelineMascots.map((mascot: Mascot, index: number) => (
               <div
                 key={`first-${index}`}
                 className="flex flex-col items-center cursor-pointer transition-all duration-400 relative"
@@ -214,7 +224,7 @@ export default function ProductCarouselHome() {
             ))}
 
             {/* Serie duplicada para efecto infinito */}
-            {timelineMascots.map((mascot, index) => (
+            {timelineMascots.map((mascot: Mascot, index: number) => (
               <div
                 key={`second-${index}`}
                 className="flex flex-col items-center cursor-pointer transition-all duration-400 relative"
@@ -290,7 +300,7 @@ export default function ProductCarouselHome() {
             ))}
 
             {/* Tercera serie para garantizar infinito */}
-            {timelineMascots.map((mascot, index) => (
+            {timelineMascots.map((mascot: Mascot, index: number) => (
               <div
                 key={`third-${index}`}
                 className="flex flex-col items-center cursor-pointer transition-all duration-400 relative"
