@@ -185,8 +185,8 @@ export default function ServiciosPage() {
             });
           }
         }}
-        imageSrc="/Retratos pets/Midas/midas retrato.png"
-        imageAlt="Midas - Servicios de automatización"
+        imageSrc="/grupal-2.png"
+        imageAlt="Equipo de Agentes IA - Servicios"
       />
 
       {/* Case Study Section */}
