@@ -103,10 +103,12 @@ export default function HeroSection({
                     <img 
                       src="/Logo-Hocuz-Focuz/Hocuz-Focuz-logo-completo.png" 
                       alt="Hocuz Focuz Logo Completo" 
-                      className="h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] xl:h-[36rem] w-auto animate-pulse hover:animate-bounce transition-all duration-300 hover:scale-105 drop-shadow-2xl"
+                      className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto animate-pulse hover:animate-bounce transition-all duration-300 hover:scale-105 drop-shadow-2xl"
                       style={{
                         filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.3)) drop-shadow(0 0 40px rgba(147, 51, 234, 0.2))',
-                        animation: 'float 3s ease-in-out infinite'
+                        animation: 'float 3s ease-in-out infinite',
+                        maxHeight: 'clamp(200px, 50vw, 400px)',
+                        objectFit: 'contain'
                       }}
                     />
                   </div>
