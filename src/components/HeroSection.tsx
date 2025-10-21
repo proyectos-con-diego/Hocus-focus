@@ -243,8 +243,8 @@ export default function HeroSection({
                 >
                   <div className="absolute inset-0 rounded-full" style={{ opacity: 0.25, background: 'radial-gradient(closest-side, rgba(34,211,238,0.2), transparent 70%)' }} />
                   <img 
-                    src="/grupal-1.png" 
-                    alt="Equipo de Agentes IA" 
+                    src={imageSrc} 
+                    alt={imageAlt || "Hero Image"} 
                     loading="eager" 
                     decoding="async" 
                     className="relative z-10 w-full h-auto max-w-2xl mx-auto lg:max-w-4xl xl:max-w-5xl object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
