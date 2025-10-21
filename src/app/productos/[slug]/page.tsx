@@ -2352,7 +2352,7 @@ export default function ProductoPage() {
                   <div className="text-center">
                     <div className="mb-4 flex justify-center">
                       <img 
-                        src={`/Cabezas pets/${getPetImageName(product.name)}.png`}
+                        src={`/Cabezas-pets/${getPetImageName(product.name)}.png`}
                         alt={`${product.name} mascota`}
                         className="object-contain"
                         style={{

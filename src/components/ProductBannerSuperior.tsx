@@ -84,7 +84,7 @@ export default function ProductBannerSuperior({ product }: ProductBannerSuperior
       <div className="banner-content-superior">
         <div className="banner-icon-superior">
           <img 
-            src={`/Cabezas pets/${getPetImageName(product.nombre)}.png`}
+            src={`/Cabezas-pets/${getPetImageName(product.nombre)}.png`}
             alt={`${product.nombre} mascota`}
             className="w-16 h-16 object-contain"
             style={{ 

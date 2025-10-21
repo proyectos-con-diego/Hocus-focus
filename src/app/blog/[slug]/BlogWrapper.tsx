@@ -85,7 +85,7 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
               {/* Imagen del animalito */}
               <div className="flex-shrink-0 order-1 md:order-1">
                 <img 
-                  src={`/Cabezas pets/${getPetImageName(productConfig.name)}.png`}
+                  src={`/Cabezas-pets/${getPetImageName(productConfig.name)}.png`}
                   alt={`${productConfig.name} mascota`}
                   className="w-12 h-12 md:w-16 md:h-16 object-contain"
                   onError={(e) => {
@@ -198,7 +198,7 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
                 <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-lg p-5 border border-purple-500/30">
                   <div className="flex items-center gap-3 mb-3">
                     <img 
-                      src={`/Cabezas pets/${getPetImageName(productConfig.name)}.png`}
+                      src={`/Cabezas-pets/${getPetImageName(productConfig.name)}.png`}
                       alt={`${productConfig.name} mascota`}
                       className="w-16 h-16 object-contain"
                       onError={(e) => {

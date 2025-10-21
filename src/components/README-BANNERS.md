@@ -85,7 +85,7 @@ function getPetImageName(productName: string): string {
 ### **Uso en Componentes**:
 ```tsx
 <img 
-  src={`/Cabezas pets/${getPetImageName(product.name)}.png`}
+  src={`/Cabezas-pets/${getPetImageName(product.name)}.png`}
   alt={`${product.name} mascota`}
   className="w-8 h-8 object-contain"
   onError={(e) => {
@@ -111,7 +111,7 @@ const imageMapping: { [key: string]: string } = {
 ```
 
 ### **2. Verificar Imagen**
-- Asegurar que existe `/public/Cabezas pets/nuevo-producto.png`
+- Asegurar que existe `/public/Cabezas-pets/nuevo-producto.png`
 - Verificar que el nombre del archivo coincida exactamente
 
 ### **3. Probar Fallback**
@@ -137,7 +137,7 @@ const imageMapping: { [key: string]: string } = {
 Antes de hacer cambios en banners, verificar:
 
 - [ ] ¿La función `getPetImageName()` está implementada?
-- [ ] ¿La ruta `/Cabezas pets/` es correcta?
+- [ ] ¿La ruta `/Cabezas-pets/` es correcta?
 - [ ] ¿El fallback al emoji funciona?
 - [ ] ¿El componente se renderiza correctamente?
 - [ ] ¿Las imágenes se cargan sin errores?
@@ -145,7 +145,7 @@ Antes de hacer cambios en banners, verificar:
 ## 🔍 **Debugging Común**
 
 ### **Problema**: Imagen no se carga
-- **Solución**: Verificar ruta en `/Cabezas pets/`
+- **Solución**: Verificar ruta en `/Cabezas-pets/`
 - **Verificar**: Consola del navegador para errores 404
 
 ### **Problema**: Fallback no funciona

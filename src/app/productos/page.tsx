@@ -129,7 +129,7 @@ export default function ProductosNuevoPage() {
             productsSection.scrollIntoView({ behavior: 'smooth' });
           }
         }}
-        imageSrc="/Personajes/Imagenes Agentes/Grupales/Grupal 1.png"
+        imageSrc="/Personajes/Imagenes-Agentes/Grupales/Grupal-1.png"
         imageAlt="Equipo de Agentes IA - Productos"
       />
 

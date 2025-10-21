@@ -172,7 +172,7 @@ export default function PackPage() {
                   <div className="text-center hover:scale-105 transition-all duration-300">
                     <div className="mb-4 flex justify-center">
                       <img 
-                                                 src={`/Cabezas pets/${getPetImageName(productName)}.png`}
+                                                 src={`/Cabezas-pets/${getPetImageName(productName)}.png`}
                         alt={`${productName} mascota`}
                         className="w-32 h-32 object-contain"
                         onError={(e) => {

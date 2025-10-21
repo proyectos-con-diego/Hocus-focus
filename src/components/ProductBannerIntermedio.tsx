@@ -186,7 +186,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
       <div className="banner-content">
         <div className="banner-icon">
           <img 
-            src={`/Cabezas pets/${getPetImageName(product.nombre)}.png`}
+            src={`/Cabezas-pets/${getPetImageName(product.nombre)}.png`}
             alt={`${product.nombre} mascota`}
             className="w-16 h-16 object-contain"
             onError={(e) => {

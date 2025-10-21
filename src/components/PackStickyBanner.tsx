@@ -130,7 +130,7 @@ export default function PackStickyBanner() {
             {currentPack.products.map((productName, index) => (
               <div key={index} className="w-12 h-12 md:w-16 md:h-16">
                 <img 
-                  src={`/Cabezas pets/${getPetImageName(productName)}.png`}
+                  src={`/Cabezas-pets/${getPetImageName(productName)}.png`}
                   alt={`${productName} mascota`}
                   className="w-full h-full object-contain"
                   style={{ minWidth: '48px', minHeight: '48px' }}

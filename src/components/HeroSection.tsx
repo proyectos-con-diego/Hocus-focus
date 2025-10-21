@@ -252,7 +252,7 @@ export default function HeroSection({
                     onError={(e) => {
                       // Fallback a imagen individual si la grupal no carga
                       const target = e.target as HTMLImageElement;
-                      target.src = "/Cabezas pets/Vinxi.png";
+                      target.src = "/Cabezas-pets/Vinxi.png";
                       target.alt = "Vinxi - Agente IA";
                     }}
                   />

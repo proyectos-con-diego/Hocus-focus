@@ -108,7 +108,7 @@ export default function RotatingProductBanner() {
           {/* Imagen de la mascota y título */}
           <div className="flex justify-center mb-4">
             <img 
-                                  src={`/Cabezas pets/${getPetImageName(currentProduct.name)}.png`}
+                                  src={`/Cabezas-pets/${getPetImageName(currentProduct.name)}.png`}
               alt={`${currentProduct.name} mascota`}
               className="w-24 h-24 object-contain"
               onError={(e) => {

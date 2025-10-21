@@ -165,7 +165,7 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
           }}
         >
           <img 
-            src={`/Cabezas pets/${getPetImageName(product.name)}.png`}
+            src={`/Cabezas-pets/${getPetImageName(product.name)}.png`}
             alt={`${product.name} mascota`}
             className="w-full h-full object-contain"
             onError={(e) => {

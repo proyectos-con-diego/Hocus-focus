@@ -302,7 +302,7 @@ export default function SpiritsPage() {
                   {/* Imagen principal */}
                   <div className="relative z-10 group">
                     <img 
-                      src="/ghost image.png" 
+                      src="/ghost-image.png" 
                       alt="Ghost GPT - IA Fantasmal" 
                       className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto drop-shadow-2xl filter drop-shadow-cyan-400/30 transition-all duration-500 group-hover:drop-shadow-cyan-400/50 group-hover:brightness-110 scale-x-[-1]"
                     />
