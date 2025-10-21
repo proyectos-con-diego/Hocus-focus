@@ -15,7 +15,9 @@ function getPetImageName(productName: string): string {
     'Mythos': 'Mythos'
   };
   
-  return imageMapping[productName] || productName;
+  const mappedName = imageMapping[productName] || productName;
+  console.log(`Product: ${productName} -> Mapped: ${mappedName}`);
+  return mappedName;
 }
 
 interface ProductCardProps {
