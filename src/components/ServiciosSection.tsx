@@ -28,8 +28,13 @@ export default function ServiciosSection() {
               </div>
               
               {/* Icon */}
-              <div className={`w-16 h-16 bg-gradient-to-r ${service.buttonColor} rounded-2xl flex items-center justify-center text-3xl mb-6`}>
+              <div className={`w-16 h-16 bg-gradient-to-r ${service.buttonColor} rounded-2xl flex items-center justify-center text-3xl mb-4`}>
                 {service.icon}
+              </div>
+              
+              {/* Service Name */}
+              <div className="mb-2">
+                <span className="text-lg font-bold text-purple-400">{service.badge}</span>
               </div>
               
               {/* Content */}
