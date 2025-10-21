@@ -235,7 +235,7 @@ export default function HeroSection({
             {/* Imagen del Hero (opcional) */}
             {imageSrc && (
               <div className="relative flex justify-center items-center">
-                <motion.div className="flex items-end" style={{ gap: '-20px' }}>
+                <motion.div className="flex items-end justify-center" style={{ gap: '-40px' }}>
                   {/* Personaje 1 - Vinxi */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -249,8 +249,8 @@ export default function HeroSection({
                       alt="Vinxi - Agente de Proyectos" 
                       loading="eager" 
                       decoding="async" 
-                      className="relative z-10 w-48 h-auto lg:w-56 xl:w-64 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
-                      style={{ filter: 'drop-shadow(0 0 15px rgba(34, 211, 238, 0.3))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
+                      className="relative z-10 w-64 h-auto lg:w-80 xl:w-96 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
+                      style={{ filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.4))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
                     />
                   </motion.div>
 
@@ -267,8 +267,8 @@ export default function HeroSection({
                       alt="Midas - Agente de Finanzas" 
                       loading="eager" 
                       decoding="async" 
-                      className="relative z-10 w-52 h-auto lg:w-60 xl:w-68 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
-                      style={{ filter: 'drop-shadow(0 0 15px rgba(147, 51, 234, 0.3))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
+                      className="relative z-10 w-72 h-auto lg:w-88 xl:w-104 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
+                      style={{ filter: 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.4))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
                     />
                   </motion.div>
 
@@ -285,8 +285,8 @@ export default function HeroSection({
                       alt="Jaime - Agente de Hábitos" 
                       loading="eager" 
                       decoding="async" 
-                      className="relative z-10 w-48 h-auto lg:w-56 xl:w-64 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
-                      style={{ filter: 'drop-shadow(0 0 15px rgba(236, 72, 153, 0.3))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
+                      className="relative z-10 w-64 h-auto lg:w-80 xl:w-96 object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105" 
+                      style={{ filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.4))', mixBlendMode: 'multiply', transform: 'translateZ(0)' }} 
                     />
                   </motion.div>
                 </motion.div>
