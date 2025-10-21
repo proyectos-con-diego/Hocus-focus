@@ -108,7 +108,7 @@ export const servicesData: Service[] = [
   {
     id: 'plan-marketing',
     badge: 'CONVERT',
-    badgeColor: 'from-orange-500 to-red-500',
+    badgeColor: 'from-red-500 to-red-700',
     icon: '📊',
     title: 'Plan de Marketing',
     targetAudience: 'Para emprendedores que necesitan claridad total',
@@ -120,7 +120,7 @@ export const servicesData: Service[] = [
       'Metodología probada que funciona',
       'Coordinación completa opcional'
     ],
-    buttonColor: 'from-orange-500 to-red-500',
+    buttonColor: 'from-red-500 to-red-700',
     buttonText: 'Ver Detalle del Servicio',
     url: '/servicios/plan-marketing'
   },
