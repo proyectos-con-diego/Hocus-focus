@@ -206,7 +206,13 @@ export default function ProductosNuevoPage() {
             <span className="text-purple-300 font-semibold">Empieza hoy mismo.</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button onClick={() => { try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'ver_todos_los_agentes' }); } catch {} }} className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300">
+            <button onClick={() => { 
+              try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'ver_todos_los_agentes' }); } catch {} 
+              const productsSection = document.querySelector('[data-section="products"]');
+              if (productsSection) {
+                productsSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }} className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300">
               🚀 Ver todos los agentes
             </button>
             <button onClick={() => { try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'probar_spirits_gratis' }); } catch {} ; window.location.href = '/spirit-gpts'; }} className="px-10 py-4 border-2 border-white text-white rounded-full font-bold text-xl hover:bg-white hover:text-purple-900 transition-all duration-300">
@@ -226,19 +232,6 @@ export default function ProductosNuevoPage() {
         <BlogNewsletterSection source="productos" />
       </div>
 
-      {/* Navegación de regreso */}
-      <section className="py-12 px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center">
-            <a 
-              href="/"
-              className="inline-flex items-center gap-3 text-purple-400 hover:text-purple-300 transition-colors duration-300 font-medium"
-            >
-              <span className="text-xl">←</span> Volver al inicio
-            </a>
-          </div>
-        </div>
-      </section>
       
       {/* FOOTER */}
       <footer className="py-8 px-6 bg-black border-t border-gray-800">
