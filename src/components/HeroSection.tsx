@@ -255,7 +255,7 @@ export default function HeroSection({
                     alt={imageAlt || "Hero Image"}
                     loading="eager"
                     decoding="async"
-                    className="relative z-10 w-full h-auto max-w-xl mx-auto lg:max-w-2xl xl:max-w-3xl object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105 scale-x-[-1]"
+                    className="relative z-10 w-full h-auto max-w-xl mx-auto lg:max-w-2xl xl:max-w-3xl object-contain bg-transparent transition-transform duration-500 will-change-transform hover:scale-105"
                     style={{
                       filter: 'drop-shadow(0 0 20px rgba(34, 211, 238, 0.3))',
                       mixBlendMode: 'multiply',
