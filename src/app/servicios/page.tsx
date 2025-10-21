@@ -2,15 +2,15 @@
 import React, { useState, useCallback, useEffect } from "react";
 import HeaderGlass from '../../components/HeaderGlass';
 import HeroSection from '../../components/HeroSection';
-import CaseStudySection from '@/components/CaseStudySection';
-import ServiciosSection from '@/components/ServiciosSection';
-import ServiciosTestimonialsSection from '@/components/ServiciosTestimonialsSection';
-import ServiciosFAQSection from '@/components/ServiciosFAQSection';
-import AboutMeBanner from '@/components/AboutMeBanner';
-import WorkflowSection from '@/components/WorkflowSection';
-import StructuredData, { servicesPageStructuredData } from '@/components/StructuredData';
+import CaseStudySection from '../../components/CaseStudySection';
+import ServiciosSection from '../../components/ServiciosSection';
+import ServiciosTestimonialsSection from '../../components/ServiciosTestimonialsSection';
+import ServiciosFAQSection from '../../components/ServiciosFAQSection';
+import AboutMeBanner from '../../components/AboutMeBanner';
+import WorkflowSection from '../../components/WorkflowSection';
+import StructuredData, { servicesPageStructuredData } from '../../components/StructuredData';
 import BlogNewsletterSection from '../../components/BlogNewsletterSection';
-import { event as trackEvent } from '@/lib/analytics';
+import { event as trackEvent } from '../../lib/analytics';
 
 
 export default function ServiciosPage() {
@@ -185,7 +185,7 @@ export default function ServiciosPage() {
             });
           }
         }}
-        imageSrc="/grupal-2-servicios.png"
+        imageSrc="/Personajes/Imagenes Agentes/Grupales/Grupal 2.png"
         imageAlt="Equipo de Agentes IA - Servicios"
       />
 
@@ -197,8 +197,6 @@ export default function ServiciosPage() {
         data-section="case-study"
       >
         <CaseStudySection 
-          onLoad={() => handleComponentLoad('CaseStudySection')}
-          onError={(error) => handleComponentError('CaseStudySection', error)}
           onResultsClick={() => {
             const servicesSection = document.querySelector('#servicios');
             if (servicesSection) {
@@ -221,10 +219,7 @@ export default function ServiciosPage() {
         data-testid="services-section"
         data-section="services"
       >
-        <ServiciosSection 
-          onLoad={() => handleComponentLoad('ServiciosSection')}
-          onError={(error) => handleComponentError('ServiciosSection', error)}
-        />
+        <ServiciosSection />
       </section>
 
       {/* Workflow Section: Cómo trabajo contigo */}
@@ -246,10 +241,7 @@ export default function ServiciosPage() {
         data-testid="testimonials-section"
         data-section="testimonials"
       >
-        <ServiciosTestimonialsSection 
-          onLoad={() => handleComponentLoad('ServiciosTestimonialsSection')}
-          onError={(error) => handleComponentError('ServiciosTestimonialsSection', error)}
-        />
+        <ServiciosTestimonialsSection />
       </section>
 
       {/* CTA Banner */}
@@ -283,10 +275,7 @@ export default function ServiciosPage() {
         data-testid="faq-section"
         data-section="faq"
       >
-        <ServiciosFAQSection 
-          onLoad={() => handleComponentLoad('ServiciosFAQSection')}
-          onError={(error) => handleComponentError('ServiciosFAQSection', error)}
-        />
+        <ServiciosFAQSection />
       </section>
       
       {/* Newsletter Section al final */}

@@ -3,13 +3,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import HeaderGlass from '../../components/HeaderGlass';
 import HeroSection from '../../components/HeroSection';
-import ProductCard from '@/components/ProductCard';
-import ProductsTestimonialsSection from '@/components/ProductsTestimonialsSection';
-import ProductsFAQSection from '@/components/ProductsFAQSection';
-import { products } from '@/data/products';
-import StructuredData, { productsPageStructuredData } from '@/components/StructuredData';
+import ProductCard from '../../components/ProductCard';
+import ProductsTestimonialsSection from '../../components/ProductsTestimonialsSection';
+import ProductsFAQSection from '../../components/ProductsFAQSection';
+import { products } from '../../data/products';
+import StructuredData, { productsPageStructuredData } from '../../components/StructuredData';
 import BlogNewsletterSection from '../../components/BlogNewsletterSection';
-import { event as trackEvent } from '@/lib/analytics';
+import { event as trackEvent } from '../../lib/analytics';
 
 
 export default function ProductosNuevoPage() {
@@ -82,7 +82,7 @@ export default function ProductosNuevoPage() {
       <StructuredData data={{
         '@context': 'https://schema.org',
         '@type': 'ItemList',
-        itemListElement: products.map((p, idx) => ({
+        itemListElement: products.map((p: any, idx: number) => ({
           '@type': 'ListItem',
           position: idx + 1,
           url: `https://diegogonzalezvaccaro.com/productos/${p.slug}`,
@@ -129,7 +129,7 @@ export default function ProductosNuevoPage() {
             productsSection.scrollIntoView({ behavior: 'smooth' });
           }
         }}
-        imageSrc="/grupal-1.png"
+        imageSrc="/Personajes/Imagenes Agentes/Grupales/Grupal 1.png"
         imageAlt="Equipo de Agentes IA - Productos"
       />
 
@@ -153,7 +153,7 @@ export default function ProductosNuevoPage() {
             gap: '40px', 
             paddingTop: '20px' 
           }}>
-            {products.map((product, index) => (
+            {products.map((product: any, index: number) => (
               <ProductCard 
                 key={product.slug}
                 product={product}
