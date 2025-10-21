@@ -185,7 +185,7 @@ export default function ServiciosPage() {
             });
           }
         }}
-        imageSrc="/grupal-2.png"
+        imageSrc={`/grupal-2.png?v=${Date.now()}`}
         imageAlt="Equipo de Agentes IA - Servicios"
       />
 
