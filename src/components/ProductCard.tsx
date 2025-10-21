@@ -1,14 +1,14 @@
 'use client';
 import React from 'react';
-import { Product } from '@/data/products';
+import { Product } from '../data/products';
 
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
   const imageMapping: { [key: string]: string } = {
-    'OKRo': 'okro panda',
+    'OKRo': 'okro-panda',
     'Grilla Viralis': 'Grilla',
-    'Jaime Daily': 'Jaime Daily',
-    'Navio': 'Navio | Lobo',
+    'Jaime Daily': 'Jaime-Daily',
+    'Navio': 'Navio-Lobo',
     'Bafet': 'Bafet',
     'Midas': 'Midas',
     'Vinxi': 'Vinxi',

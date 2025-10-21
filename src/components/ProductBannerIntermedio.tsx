@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { event as trackEvent } from '@/lib/analytics';
+import { event as trackEvent } from '../lib/analytics';
 
 interface ProductBannerIntermedioProps {
   product: {
@@ -14,10 +14,10 @@ interface ProductBannerIntermedioProps {
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
   const imageMapping: { [key: string]: string } = {
-    'OKRo': 'okro panda',
+    'OKRo': 'okro-panda',
     'Grilla Viralis': 'Grilla',
-    'Jaime Daily': 'Jaime Daily',
-    'Navio': 'Navio | Lobo',
+    'Jaime Daily': 'Jaime-Daily',
+    'Navio': 'Navio-Lobo',
     'Bafet': 'Bafet',
     'Midas': 'Midas',
     'Vinxi': 'Vinxi',

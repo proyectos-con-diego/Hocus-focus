@@ -3,10 +3,10 @@ import React from 'react';
 
 export default function CompaniesBanner() {
   const companies = [
-    { name: 'Rayo', logo: '/Empresas/1. Rayo.png' },
-    { name: 'SPH', logo: '/Empresas/2. SPH.png' },
-    { name: 'BEAT', logo: '/Empresas/3. BEAT.png' },
-    { name: 'Rextie', logo: '/Empresas/4. Rextie.png' }
+    { name: 'Rayo', logo: '/Empresas/1-Rayo.png' },
+    { name: 'SPH', logo: '/Empresas/2-SPH.png' },
+    { name: 'BEAT', logo: '/Empresas/3-BEAT.png' },
+    { name: 'Rextie', logo: '/Empresas/4-Rextie.png' }
   ];
 
   return (

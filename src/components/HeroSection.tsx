@@ -101,7 +101,7 @@ export default function HeroSection({
                 <div className="flex flex-col items-center justify-center">
                   <div className="mb-0">
                     <img 
-                      src="/Logo Hocuz Focuz/Hocuz Focuz logo completo.png" 
+                      src="/Logo-Hocuz-Focuz/Hocuz-Focuz-logo-completo.png" 
                       alt="Hocuz Focuz Logo Completo" 
                       className="h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] xl:h-[36rem] w-auto animate-pulse hover:animate-bounce transition-all duration-300 hover:scale-105 drop-shadow-2xl"
                       style={{
