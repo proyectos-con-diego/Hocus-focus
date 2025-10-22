@@ -3,6 +3,7 @@ export interface Spirit {
   slug: string;
   name: string;
   icon: string;
+  imagePath?: string; // Nueva propiedad para la ruta de la imagen
   subtitle: string;
   description: string;
   buttonText: string;
@@ -23,7 +24,8 @@ export const spirits: Spirit[] = [
     id: 'vinxi',
     slug: 'vinxi-spirit',
     name: 'VINXI Spirit',
-    icon: '🦊',
+    icon: '👻',
+    imagePath: '/Personajes/Imagenes-Spirits/Vinxi-spirit/Cabeza/Vinxi-Spirit-cabeza.png',
     subtitle: 'Espectro con TDAH',
     description: 'Cuando las ideas te persiguen como enjambres y no sabes por dónde empezar, este fantasma te las atrapa, las ordena y te devuelve un plan claro para que avances sin perder el ritmo.',
     buttonText: 'Planificación',
@@ -69,7 +71,8 @@ export const spirits: Spirit[] = [
     id: 'grilla',
     slug: 'grilla-spirit',
     name: 'GRILLA Spirit',
-    icon: '🐜',
+    icon: '👻',
+    imagePath: '/Personajes/Imagenes-Spirits/Grilla-spirit/Cabeza/Grilla-spirit-cabeza.png',
     subtitle: 'El alma del público',
     description: 'Si tu feed parece un tablero Ouija descontrolado, este fantasma lo alinea con tu propósito. Convierte tu lluvia de ideas en una estrategia de contenido con rumbo y resultados.',
     buttonText: 'Estrategia',
@@ -101,7 +104,8 @@ export const spirits: Spirit[] = [
     id: 'okro',
     slug: 'okro-spirit',
     name: 'OKRO Spirit',
-    icon: '🐼',
+    icon: '👻',
+    imagePath: '/Personajes/Imagenes-Spirits/Okro-spirit/Cabeza/Okro-spirit-cabeza.png',
     subtitle: 'Fantasma del norte',
     description: 'Cuando tus metas viven flotando en el limbo, este espíritu les da cuerpo y dirección. Te ayuda a definir objetivos claros y alcanzables con OKRs.',
     buttonText: 'Metas',
@@ -133,7 +137,7 @@ export const spirits: Spirit[] = [
     id: 'tataroto',
     slug: 'tataroto-spirit',
     name: 'TATAROTO Spirit',
-    icon: '🔮',
+    icon: '👻',
     subtitle: 'Oráculo sabio del presente',
     description: 'Tataroto es un Spirit que usa el tarot como espejo simbólico. Te acompaña con cartas, preguntas y reflexiones que iluminan lo que hoy no ves con claridad.',
     buttonText: 'Reflexión',
@@ -161,7 +165,7 @@ export const spirits: Spirit[] = [
     id: 'cryptopher',
     slug: 'cryptopher-spirit',
     name: 'CRYPTOPHER Spirit',
-    icon: '₿',
+    icon: '👻',
     subtitle: 'Fantasma de las velas',
     description: 'Si las criptos se sienten como un laberinto oscuro, este espíritu ilumina el pre-mercado con análisis claros y señales clave. Te da una visión más ordenada antes de decidir.',
     buttonText: 'Trading',
@@ -193,7 +197,8 @@ export const spirits: Spirit[] = [
     id: 'nosferatu',
     slug: 'nosferatu-spirit',
     name: 'NOSFERATU Spirit',
-    icon: '🧛',
+    icon: '👻',
+    imagePath: '/Personajes/Imagenes-Spirits/Nosferatu-spirit/Cabeza/nosferatu-cabeza.png',
     subtitle: 'El vampiro de los pixeles',
     description: 'Cuando trabajas con NFTs o variaciones visuales, este espíritu extrae la esencia de cada imagen para que puedas replicarla y transformarla sin perder su identidad.',
     buttonText: 'NFTs',
@@ -225,7 +230,7 @@ export const spirits: Spirit[] = [
     id: 'promptify',
     slug: 'promptify-spirit',
     name: 'PROMPTIFY Spirit',
-    icon: '✨',
+    icon: '👻',
     subtitle: 'Alma redactora',
     description: 'Si tus prompts no despiertan la magia que esperas, este fantasma te ayuda a afinarlos, estructurarlos y hacerlos irresistibles para que tus bots den su mejor versión.',
     buttonText: 'Prompts',

@@ -302,9 +302,9 @@ export default function SpiritsPage() {
                   {/* Imagen principal */}
                   <div className="relative z-10 group">
                     <img 
-                      src="/ghost-image.png" 
-                      alt="Ghost GPT - IA Fantasmal" 
-                      className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto drop-shadow-2xl filter drop-shadow-cyan-400/30 transition-all duration-500 group-hover:drop-shadow-cyan-400/50 group-hover:brightness-110 scale-x-[-1]"
+                      src="/Personajes/Imagenes-Spirits/Grilla-spirit/Cuerpo-completo/Grilla-spirit-completo.png" 
+                      alt="Grilla Spirit - IA Fantasmal" 
+                      className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto drop-shadow-2xl filter drop-shadow-cyan-400/30 transition-all duration-500 group-hover:drop-shadow-cyan-400/50 group-hover:brightness-110"
                     />
                   </div>
 
@@ -345,8 +345,25 @@ export default function SpiritsPage() {
                 >
                   {/* Efecto de brillo en hover */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -skew-x-12 -translate-x-full group-hover:translate-x-full"></div>
-                  <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                    {spirit.icon}
+                  <div className="w-40 h-40 mb-6 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center mx-auto">
+                    {spirit.imagePath ? (
+                      <img 
+                        src={spirit.imagePath} 
+                        alt={`${spirit.name} imagen`}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          // Fallback al emoji si la imagen no carga
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const fallback = document.createElement('div');
+                          fallback.className = 'text-6xl bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent';
+                          fallback.textContent = spirit.icon;
+                          target.parentNode?.insertBefore(fallback, target);
+                        }}
+                      />
+                    ) : (
+                      <span className="text-6xl bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">{spirit.icon}</span>
+                    )}
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white">{spirit.name}</h3>
                   <p className="text-cyan-400 text-sm font-medium mb-4">{spirit.subtitle}</p>
