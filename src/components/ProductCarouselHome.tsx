@@ -19,7 +19,7 @@ function getPetImageName(productName: string, view: 'lateral' | 'frontal' = 'lat
       lateral: '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-agente-lateral.png',
       frontal: '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-agente-frontal.png'
     },
-    'Navio': {
+    'Lee Der': {
       lateral: '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-agente-lateral.png',
       frontal: '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-agente-frontal.png'
     },

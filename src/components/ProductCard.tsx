@@ -8,7 +8,7 @@ function getPetImageName(productName: string): string {
     'OKRo': '/Personajes/Imagenes-Agentes/Okro/Cabeza/okro-cabeza-frontal.png',
     'Grilla Viralis': '/Personajes/Imagenes-Agentes/Grilla/Cabeza/Grilla-cabeza-frontal.png',
     'Jaime Daily': '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-cabeza-frontal.png',
-    'Navio': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-cabeza-frontal.png',
+    'Lee Der': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-cabeza-frontal.png',
     'Bafet': '/Personajes/Imagenes-Agentes/Bafet/Cabeza/Bafet-cabeza-frontal.png',
     'Midas': '/Personajes/Imagenes-Agentes/Midas/Cabeza/Midas-cabeza-frontal.png',
     'Vinxi': '/Personajes/Imagenes-Agentes/Vinxi/Cabeza/Vinxi-frontal.png'
@@ -46,9 +46,9 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
       case 'okro':
         return '🎯 Avanza con OKRo';
       case 'bafet':
-        return '📊 Analiza con Bafet';
-      case 'navio':
-        return 'Lista de Espera';
+        return '🔔 Próximamente';
+      case 'lee der':
+        return '🔔 Próximamente';
       default:
         return `Conoce a ${getFirstName(productName)}`;
     }
@@ -255,7 +255,7 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
             handleClick();
           }}
         >
-          {product.isBeta ? 'Lista de Espera' : getButtonText(product.name)}
+          {product.name === 'Bafet' || product.name === 'Lee Der' ? '🔔 Próximamente' : (product.isBeta ? 'Lista de Espera' : getButtonText(product.name))}
         </button>
       </div>
     </div>

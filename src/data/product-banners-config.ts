@@ -127,7 +127,7 @@ export const productBannersConfig: { [key: string]: ProductBannerConfig } = {
     metrics: '🚀 Beta • Próximamente'
   },
   'navio-360': {
-    name: 'Navio',
+    name: 'Lee Der',
     slug: 'navio-360',
     emoji: '🐺',
     color: '#06b6d4',

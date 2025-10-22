@@ -89,7 +89,7 @@ export const products: Product[] = [
     isBeta: true
   },
   { 
-    name: "Navio", 
+    name: "Lee Der", 
     description: "Sistema colaborativo para equipos y proyectos",
     emoji: "🐺",
     gradientClass: "bg-gradient-to-br from-cyan-500 to-cyan-600",

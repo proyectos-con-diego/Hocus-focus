@@ -54,7 +54,7 @@ const timelineMascots = [
     slug: "bafet"
   },
   {
-    name: "Navio",
+    name: "Lee Der",
     emoji: "🐺",
     category: "Colaboración",
     gradientClass: styles['mascot-navio'],

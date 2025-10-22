@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { servicesData } from '@/data/servicios';
+import { servicesData } from '../data/servicios';
 
 export default function ServiciosSection() {
   return (
@@ -16,16 +16,18 @@ export default function ServiciosSection() {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
-          {servicesData.map((service, index) => (
+          {servicesData.map((service: any, index: number) => (
             <div 
               key={service.id}
               className="group relative"
             >
               <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 h-full hover:border-cyan-400/30 transition-all duration-300 group-hover:scale-105 flex flex-col">
-              {/* Badge en esquina superior derecha */}
-              <div className={`absolute -top-3 -right-3 bg-gradient-to-r ${service.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full`}>
-                {service.badge}
-              </div>
+                      {/* Badge solo para SCALE (centro) */}
+                      {service.id === 'sistema-scale' && (
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-bold px-4 py-1 rounded-full">
+                          Popular
+                        </div>
+                      )}
               
               {/* Icon */}
               <div className={`w-16 h-16 bg-gradient-to-r ${service.buttonColor} rounded-2xl flex items-center justify-center text-3xl mb-4`}>
@@ -34,7 +36,9 @@ export default function ServiciosSection() {
               
               {/* Service Name */}
               <div className="mb-2">
-                <span className="text-lg font-bold text-purple-400">{service.badge}</span>
+                <span className={`text-xl font-bold bg-gradient-to-r ${service.badgeColor} bg-clip-text text-transparent`}>
+                  {service.badge}
+                </span>
               </div>
               
               {/* Content */}
@@ -53,13 +57,16 @@ export default function ServiciosSection() {
               </div>
               
               {/* Features - Ahora ocupa el espacio disponible */}
-              <div className="space-y-2 mb-6 flex-1">
-                {service.features.map((feature, idx) => (
-                  <div key={idx} className="flex items-center text-sm text-gray-300">
-                    <span className="text-green-400 mr-2">✓</span>
-                    {feature}
-                  </div>
-                ))}
+              <div className="mb-6 flex-1">
+                <p className="text-xs text-gray-500 mb-3">Si buscas:</p>
+                <div className="space-y-2">
+                  {service.features.map((feature: any, idx: number) => (
+                    <div key={idx} className="flex items-center text-sm text-gray-300">
+                      <span className="text-green-400 mr-2">✓</span>
+                      {feature}
+                    </div>
+                  ))}
+                </div>
               </div>
               
               {/* CTA Button - Ahora está pegado al fondo */}

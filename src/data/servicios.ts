@@ -111,8 +111,7 @@ export const servicesData: Service[] = [
     badgeColor: 'from-red-500 to-red-700',
     icon: '📊',
     title: 'Plan de Marketing',
-    targetAudience: 'Para emprendedores que necesitan claridad total',
-    description: 'Genera más leads y clientes con una estrategia clara. → Avanza con confianza, sin improvisar.',
+    description: 'Genera más leads y clientes con una estrategia clara y replicable.',
     originalPrice: '$120',
     currentPrice: '$35',
     features: [
@@ -129,9 +128,8 @@ export const servicesData: Service[] = [
     badge: 'SCALE',
     badgeColor: 'from-orange-500 to-red-500',
     icon: '🏢',
-    title: 'Sistema SCALE',
-    targetAudience: 'Para líderes con equipos de 3-15 personas',
-    description: 'Escala tu negocio con un sistema digital organizado. → Delega sin dolores de cabeza.',
+    title: 'Agilidad digital',
+    description: 'Impulsa tu negocio con un sistema de gestión de equipos remotos.',
     originalPrice: '$120',
     currentPrice: '$35',
     features: [
@@ -145,12 +143,11 @@ export const servicesData: Service[] = [
   },
   {
     id: 'automatizacion-ia',
-    badge: 'IA',
+    badge: 'AUTOMATE',
     badgeColor: 'from-purple-500 to-blue-500',
     icon: '🤖',
-    title: 'Automatización IA',
-    targetAudience: 'Para consultores y servicios profesionales',
-    description: 'Automatiza 3 procesos clave y ahorra 8–15h semanales. → Gana tiempo para clientes y crecimiento.',
+    title: 'Automatizaciones iA',
+    description: 'Automatiza 3 procesos clave, ahorra 8–15h semanales y gana tiempo.',
     originalPrice: '$120',
     currentPrice: '$35',
     features: [

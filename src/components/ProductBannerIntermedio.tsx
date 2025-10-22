@@ -17,7 +17,7 @@ function getPetImageName(productName: string): string {
     'OKRo': '/Personajes/Imagenes-Agentes/Okro/Cabeza/okro-cabeza-frontal.png',
     'Grilla Viralis': '/Personajes/Imagenes-Agentes/Grilla/Cabeza/Grilla-cabeza-frontal.png',
     'Jaime Daily': '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-cabeza-frontal.png',
-    'Navio': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-cabeza-frontal.png',
+    'Lee Der': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-cabeza-frontal.png',
     'Bafet': '/Personajes/Imagenes-Agentes/Bafet/Cabeza/Bafet-cabeza-frontal.png',
     'Midas': '/Personajes/Imagenes-Agentes/Midas/Cabeza/Midas-cabeza-frontal.png',
     'Vinxi': '/Personajes/Imagenes-Agentes/Vinxi/Cabeza/Vinxi-frontal.png'
@@ -67,7 +67,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
       'Bafet': '¿Estás listo para invertir con confianza?',
       'Midas': '¿Quieres controlar tus finanzas personales?',
       'Jaime Daily': '¿Listo para cambiar tus hábitos?',
-      'Navio': '¿Tu equipo está desorganizado?',
+      'Lee Der': '¿Tu equipo está desorganizado?',
       'default': '¿Quieres optimizar tu productividad?'
     };
     
@@ -101,7 +101,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
       return questions['OKRo'];
     }
     if (normalizedName.includes('navio')) {
-      return questions['Navio'];
+      return questions['Lee Der'];
     }
     
     return questions[productName] || questions.default;
@@ -136,7 +136,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
       'Vinxi': 'Transforma ideas en acción con Vinxi.',
       'Grilla Viralis': 'Simplifica tu gestión de contenidos con Grilla Viralis.',
       'OKRo': 'Transforma objetivos difusos en resultados medibles con OKRo',
-      'Navio': 'Transforma el caos en coordinación efectiva con Navio'
+      'Lee Der': 'Transforma el caos en coordinación efectiva con Lee Der'
     };
     
     // Buscar coincidencias parciales para nombres que puedan variar
@@ -169,7 +169,7 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
       return descriptions['OKRo'];
     }
     if (normalizedName.includes('navio')) {
-      return descriptions['Navio'];
+      return descriptions['Lee Der'];
     }
     
     return descriptions[productName] || defaultDescription || 'Descubre cómo este producto puede ayudarte';

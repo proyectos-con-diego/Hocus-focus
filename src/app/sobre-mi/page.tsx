@@ -26,7 +26,7 @@ function getPetImageName(productName: string, view: 'lateral' | 'frontal' = 'lat
       lateral: '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-agente-lateral.png',
       frontal: '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-agente-frontal.png'
     },
-    'Navio': {
+    'Lee Der': {
       lateral: '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-agente-lateral.png',
       frontal: '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-agente-frontal.png'
     },
@@ -984,7 +984,7 @@ export default function SobreMiExperimentalPage() {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="text-white">Servicios</span>{' '}
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-yellow-400 to-cyan-400 bg-clip-text text-transparent">
                 Destacados
               </span>
             </h2>
@@ -996,36 +996,39 @@ export default function SobreMiExperimentalPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
+                id: "plan-marketing",
                 icon: "📊",
                 title: "Plan de Marketing",
-                description: "Genera más leads y clientes con una estrategia clara. → Avanza con confianza, sin improvisar.",
+                description: "Genera más leads y clientes con una estrategia clara y replicable.",
                 originalPrice: "$120",
                 currentPrice: "$35",
                 badge: "CONVERT",
-                badgeColor: "from-orange-500 to-red-500",
-                buttonColor: "from-orange-500 to-red-500",
+                badgeColor: "from-red-500 to-red-700",
+                buttonColor: "from-red-500 to-red-700",
                 slug: "/servicios/plan-marketing"
               },
               {
+                id: "sistema-scale",
                 icon: "🏢",
-                title: "Sistema SCALE",
-                description: "Escala tu negocio con un sistema digital organizado. → Delegar sin dolores de cabeza.",
+                title: "Agilidad digital",
+                description: "Impulsa tu negocio con un sistema de gestión de equipos remotos.",
                 originalPrice: "$120",
                 currentPrice: "$35",
                 badge: "SCALE",
-                badgeColor: "from-purple-500 to-blue-500",
-                buttonColor: "from-purple-500 to-blue-500",
+                badgeColor: "from-orange-500 to-red-500",
+                buttonColor: "from-orange-500 to-red-500",
                 slug: "/servicios/sistema-scale"
               },
               {
+                id: "automatizacion-ia",
                 icon: "🤖",
-                title: "Automatización IA",
-                description: "Automatiza 3 procesos clave y ahorra 8–15h semanales. → Gana tiempo para clientes y crecimiento.",
+                title: "Automatizaciones iA",
+                description: "Automatiza 3 procesos clave, ahorra 8–15h semanales y gana tiempo.",
                 originalPrice: "$120",
                 currentPrice: "$35",
-                badge: "IA",
-                badgeColor: "from-cyan-500 to-blue-500",
-                buttonColor: "from-cyan-500 to-blue-500",
+                badge: "AUTOMATE",
+                badgeColor: "from-purple-500 to-blue-500",
+                buttonColor: "from-purple-500 to-blue-500",
                 slug: "/servicios/automatizacion-ia"
               }
             ].map((service, index) => (
@@ -1038,83 +1041,82 @@ export default function SobreMiExperimentalPage() {
                 viewport={{ once: true }}
               >
                 <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 h-full hover:border-cyan-400/30 transition-all duration-300 group-hover:scale-105 flex flex-col">
-                  {/* Badge */}
-                  {service.badge && (
-                    <div className={`absolute -top-3 -right-3 bg-gradient-to-r ${service.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full`}>
-                      {service.badge}
+                  {/* Badge solo para SCALE (centro) */}
+                  {service.id === 'sistema-scale' && (
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-green-600 text-white text-xs font-bold px-4 py-1 rounded-full">
+                      Popular
                     </div>
                   )}
                   
                   {/* Icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-r ${service.buttonColor} rounded-2xl flex items-center justify-center text-3xl mb-6`}>
+                  <div className={`w-16 h-16 bg-gradient-to-r ${service.buttonColor} rounded-2xl flex items-center justify-center text-3xl mb-4`}>
                     {service.icon}
+                  </div>
+                  
+                  {/* Service Name */}
+                  <div className="mb-2">
+                    <span className={`text-xl font-bold bg-gradient-to-r ${service.badgeColor} bg-clip-text text-transparent`}>
+                      {service.badge}
+                    </span>
                   </div>
                   
                   {/* Content */}
                   <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
-                  <p className="text-gray-400 leading-relaxed mb-4">{service.description}</p>
-                  
-                  {/* Pricing */}
-                  <div className="mb-6">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl font-bold text-cyan-400">{service.currentPrice}</span>
-                      {service.originalPrice !== service.currentPrice && (
-                        <span className="text-gray-500 line-through text-lg">{service.originalPrice}</span>
-                      )}
-                    </div>
-                    <div className="text-xs text-purple-300 font-semibold mt-2">Sesión de diagnóstico (70% OFF)</div>
-                  </div>
+                  <p className="text-gray-400 leading-relaxed mb-6">{service.description}</p>
                   
                   {/* Features - Ahora ocupa el espacio disponible */}
-                  <div className="space-y-2 mb-6 flex-1">
-                    {service.badge === "CONVERT" && (
-                      <>
-                        <div className="flex items-center text-sm text-gray-300">
-                          <span className="text-green-400 mr-2">✓</span>
-                          Plan detallado en 2-3 semanas
-                        </div>
-                        <div className="flex items-center text-sm text-gray-300">
-                          <span className="text-green-400 mr-2">✓</span>
-                          Metodología probada que funciona
-                        </div>
-                        <div className="flex items-center text-sm text-gray-300">
-                          <span className="text-green-400 mr-2">✓</span>
-                          Coordinación completa opcional
-                        </div>
-                      </>
-                    )}
-                    {service.badge === "SCALE" && (
-                      <>
-                        <div className="flex items-center text-sm text-gray-300">
-                          <span className="text-green-400 mr-2">✓</span>
-                          Visibilidad 24/7 de equipo y proyectos
-                        </div>
-                        <div className="flex items-center text-sm text-gray-300">
-                          <span className="text-green-400 mr-2">✓</span>
-                          Procesos listos para delegar
-                        </div>
-                        <div className="flex items-center text-sm text-gray-300">
-                          <span className="text-green-400 mr-2">✓</span>
-                          Decisiones basadas en datos reales
-                        </div>
-                      </>
-                    )}
-                    {service.badge === "IA" && (
-                      <>
-                        <div className="flex items-center text-sm text-gray-300">
-                          <span className="text-green-400 mr-2">✓</span>
-                          8-15 horas semanales liberadas
-                        </div>
-                        <div className="flex items-center text-sm text-gray-300">
-                          <span className="text-green-400 mr-2">✓</span>
-                          Automatizaciones que funcionan 24/7
-                        </div>
-                        <div className="flex items-center text-sm text-gray-300">
-                          <span className="text-green-400 mr-2">✓</span>
-                          Supera a competencia tradicional
-                        </div>
-                      </>
-                    )}
+                  <div className="mb-6 flex-1">
+                    <p className="text-xs text-gray-500 mb-3">Si buscas:</p>
+                    <div className="space-y-2">
+                      {service.badge === "CONVERT" && (
+                        <>
+                          <div className="flex items-center text-sm text-gray-300">
+                            <span className="text-green-400 mr-2">✓</span>
+                            Plan detallado en 2-3 semanas
+                          </div>
+                          <div className="flex items-center text-sm text-gray-300">
+                            <span className="text-green-400 mr-2">✓</span>
+                            Metodología probada que funciona
+                          </div>
+                          <div className="flex items-center text-sm text-gray-300">
+                            <span className="text-green-400 mr-2">✓</span>
+                            Coordinación completa opcional
+                          </div>
+                        </>
+                      )}
+                      {service.badge === "SCALE" && (
+                        <>
+                          <div className="flex items-center text-sm text-gray-300">
+                            <span className="text-green-400 mr-2">✓</span>
+                            Visibilidad 24/7 de equipo y proyectos
+                          </div>
+                          <div className="flex items-center text-sm text-gray-300">
+                            <span className="text-green-400 mr-2">✓</span>
+                            Procesos listos para delegar
+                          </div>
+                          <div className="flex items-center text-sm text-gray-300">
+                            <span className="text-green-400 mr-2">✓</span>
+                            Decisiones basadas en datos reales
+                          </div>
+                        </>
+                      )}
+                      {service.badge === "AUTOMATE" && (
+                        <>
+                          <div className="flex items-center text-sm text-gray-300">
+                            <span className="text-green-400 mr-2">✓</span>
+                            8-15 horas semanales liberadas
+                          </div>
+                          <div className="flex items-center text-sm text-gray-300">
+                            <span className="text-green-400 mr-2">✓</span>
+                            Automatizaciones que funcionan 24/7
+                          </div>
+                          <div className="flex items-center text-sm text-gray-300">
+                            <span className="text-green-400 mr-2">✓</span>
+                            Supera a competencia tradicional
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                   
                   {/* CTA Button - Ahora está pegado al fondo */}
@@ -1229,15 +1231,12 @@ export default function SobreMiExperimentalPage() {
               {timelineMascots.map((mascot, index) => (
                 <div
                   key={`first-${index}`}
-                  className="flex flex-col items-center cursor-pointer transition-all duration-400 relative"
+                  className="flex flex-col items-center transition-all duration-400 relative"
                   style={{
                     minWidth: '160px',
                     margin: '0 20px'
                   }}
-                  onClick={() => {
-                    const mascot = timelineMascots[index];
-                    window.location.href = `/productos/${mascot.slug}`;
-                  }}
+                  // onClick removido para hacer los productos no clickeables
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-10px)';
                     setHoveredAgent(mascot.name);
@@ -1306,15 +1305,12 @@ export default function SobreMiExperimentalPage() {
               {timelineMascots.map((mascot, index) => (
                 <div
                   key={`second-${index}`}
-                  className="flex flex-col items-center cursor-pointer transition-all duration-400 relative"
+                  className="flex flex-col items-center transition-all duration-400 relative"
                   style={{
                     minWidth: '160px',
                     margin: '0 20px'
                   }}
-                  onClick={() => {
-                    const mascot = timelineMascots[index];
-                    window.location.href = `/productos/${mascot.slug}`;
-                  }}
+                  // onClick removido para hacer los productos no clickeables
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-10px)';
                     setHoveredAgent(mascot.name);

@@ -19,7 +19,7 @@ function getPetImageName(productName: string): string {
     'OKRo': '/Personajes/Imagenes-Agentes/Okro/Cabeza/okro-cabeza-frontal.png',
     'Grilla Viralis': '/Personajes/Imagenes-Agentes/Grilla/Cabeza/Grilla-cabeza-frontal.png',
     'Jaime Daily': '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-cabeza-frontal.png',
-    'Navio': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-cabeza-frontal.png',
+    'Lee Der': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-cabeza-frontal.png',
     'Bafet': '/Personajes/Imagenes-Agentes/Bafet/Cabeza/Bafet-cabeza-frontal.png',
     'Midas': '/Personajes/Imagenes-Agentes/Midas/Cabeza/Midas-cabeza-frontal.png',
     'Vinxi': '/Personajes/Imagenes-Agentes/Vinxi/Cabeza/Vinxi-frontal.png'
@@ -1861,7 +1861,7 @@ const products = [
     ctaClass: "primary",
   },
   {
-    name: "Navio",
+    name: "Lee Der",
     slug: "navio-360",
     subtitle: "Tu tablero de mando para equipos.",
     avatar: "🐺",
@@ -1887,40 +1887,40 @@ const products = [
     },
     faqs: [
       { 
-        question: "¿Qué es exactamente Navio y cómo ayuda a mi equipo?", 
-        answer: "Navio es un sistema de gestión diseñado para equipos que quieren dejar de apagar incendios y empezar a navegar con claridad. Cada miembro tiene su propio espacio de trabajo, mientras los líderes pueden ver el panorama completo sin perder de vista los detalles. Resultado: menos caos, más visibilidad y un flujo de trabajo donde todos saben exactamente qué hacer." 
+        question: "¿Qué es exactamente Lee Der y cómo ayuda a mi equipo?", 
+        answer: "Lee Der es un sistema de gestión diseñado para equipos que quieren dejar de apagar incendios y empezar a navegar con claridad. Cada miembro tiene su propio espacio de trabajo, mientras los líderes pueden ver el panorama completo sin perder de vista los detalles. Resultado: menos caos, más visibilidad y un flujo de trabajo donde todos saben exactamente qué hacer." 
       },
       { 
-        question: "¿En qué se diferencia Navio de otros gestores de proyectos?", 
-        answer: "A diferencia de los gestores tradicionales, Navio no solo organiza tareas: estructura equipos. Vista individual para cada miembro, panel de control para líderes con métricas reales, y herramientas simples para colaborar sin fricción. En otras palabras, Navio no te abruma con funciones que no usarás: te da justo lo que tu equipo necesita para moverse más rápido." 
+        question: "¿En qué se diferencia Lee Der de otros gestores de proyectos?", 
+        answer: "A diferencia de los gestores tradicionales, Lee Der no solo organiza tareas: estructura equipos. Vista individual para cada miembro, panel de control para líderes con métricas reales, y herramientas simples para colaborar sin fricción. En otras palabras, Lee Der no te abruma con funciones que no usarás: te da justo lo que tu equipo necesita para moverse más rápido." 
       },
       { 
-        question: "¿Navio permite ver métricas de productividad de cada miembro del equipo?", 
-        answer: "Sí. Navio muestra métricas claras sobre tareas completadas, pendientes y bloqueadas. Esto ayuda a los líderes a identificar cuellos de botella y a los miembros del equipo a priorizar sin necesidad de reuniones interminables." 
+        question: "¿Lee Der permite ver métricas de productividad de cada miembro del equipo?", 
+        answer: "Sí. Lee Der muestra métricas claras sobre tareas completadas, pendientes y bloqueadas. Esto ayuda a los líderes a identificar cuellos de botella y a los miembros del equipo a priorizar sin necesidad de reuniones interminables." 
       },
       { 
         question: "¿Se pueden personalizar los tableros y las vistas de los proyectos?", 
         answer: "Totalmente. Puedes crear vistas personalizadas para enfocarte solo en lo que importa: calendario, tablero kanban, lista detallada o dashboards específicos para cada rol del equipo." 
       },
       { 
-        question: "¿Navio guarda un historial de cambios en los proyectos?", 
+        question: "¿Lee Der guarda un historial de cambios en los proyectos?", 
         answer: "Sí. Cada cambio queda registrado para que nunca pierdas el rastro de lo que pasó, quién lo hizo y cuándo. Perfecto para equipos que necesitan claridad y responsabilidad compartida." 
       },
       { 
         question: "¿Puedo asignar tareas a varios miembros al mismo tiempo?", 
-        answer: "En Navio, cada tarea tiene un único responsable. Esto evita que las cosas se pierdan entre varios y asegura que alguien lleve la tarea hasta el final. ¿Necesitas que dos o más personas trabajen en algo? Puedes: 1) Fragmentar la tarea en subtareas, cada una con su responsable. 2) Convertirla en proyecto, si requiere coordinación entre varias cabezas. 3) Usar automatizaciones para crear varias tareas a la vez y asignarlas a diferentes miembros en un solo clic, ideal para proyectos recurrentes con roles predefinidos. Así, en lugar de diluir la responsabilidad, Navio la hace clara y fácil de gestionar." 
+        answer: "En Lee Der, cada tarea tiene un único responsable. Esto evita que las cosas se pierdan entre varios y asegura que alguien lleve la tarea hasta el final. ¿Necesitas que dos o más personas trabajen en algo? Puedes: 1) Fragmentar la tarea en subtareas, cada una con su responsable. 2) Convertirla en proyecto, si requiere coordinación entre varias cabezas. 3) Usar automatizaciones para crear varias tareas a la vez y asignarlas a diferentes miembros en un solo clic, ideal para proyectos recurrentes con roles predefinidos. Así, en lugar de diluir la responsabilidad, Lee Der la hace clara y fácil de gestionar." 
       },
     ],
     testimonials: [
       {
         name: 'Laura P.',
-        text: 'Antes de Navio, las tareas se quedaban flotando entre varias personas y nadie sabía quién debía terminarlas. Ahora todo tiene un dueño claro, y nuestros proyectos avanzan sin reuniones eternas. Es como pasar del caos a un tablero de control real.',
+        text: 'Antes de Lee Der, las tareas se quedaban flotando entre varias personas y nadie sabía quién debía terminarlas. Ahora todo tiene un dueño claro, y nuestros proyectos avanzan sin reuniones eternas. Es como pasar del caos a un tablero de control real.',
         role: 'Project Manager en una startup SaaS',
         result: 'Proyectos sin reuniones eternas'
       },
       {
         name: 'Carlos R.',
-        text: 'Lo que más nos sorprendió de Navio fue lo simple que es. Nada de funciones que nadie usa. Solo lo esencial: tareas claras, métricas útiles y automatizaciones que nos ahorran horas. Finalmente tenemos un sistema que el equipo realmente quiere usar.',
+        text: 'Lo que más nos sorprendió de Lee Der fue lo simple que es. Nada de funciones que nadie usa. Solo lo esencial: tareas claras, métricas útiles y automatizaciones que nos ahorran horas. Finalmente tenemos un sistema que el equipo realmente quiere usar.',
         role: 'Líder de Marketing en una agencia digital',
         result: 'Sistema que el equipo quiere usar'
       }
@@ -1929,7 +1929,7 @@ const products = [
       {
         icon: "👀",
         title: "¿Pierdes visibilidad de lo que hace tu equipo?",
-        description: "Deja de depender de reportes atrasados. Navio te muestra en tiempo real qué está pasando, sin necesidad de perseguir a nadie.",
+        description: "Deja de depender de reportes atrasados. Lee Der te muestra en tiempo real qué está pasando, sin necesidad de perseguir a nadie.",
         bullets: [
           "Paneles claros para managers",
           "Seguimiento individual y por equipo",
@@ -1939,7 +1939,7 @@ const products = [
       {
         icon: "🌀",
         title: "¿Sientes que tu equipo trabaja en silos?",
-        description: "Adiós a las tareas perdidas entre mensajes y hojas dispersas. Navio conecta a todos en un solo espacio.",
+        description: "Adiós a las tareas perdidas entre mensajes y hojas dispersas. Lee Der conecta a todos en un solo espacio.",
         bullets: [
           "Espacios individuales para cada miembro",
           "Proyectos compartidos y siempre sincronizados",
@@ -1949,7 +1949,7 @@ const products = [
       {
         icon: "⏳",
         title: "¿Tardas demasiado en detectar bloqueos?",
-        description: "Detecta cuellos de botella antes de que se vuelvan problemas. Con Navio, las alertas llegan a tiempo para actuar.",
+        description: "Detecta cuellos de botella antes de que se vuelvan problemas. Con Lee Der, las alertas llegan a tiempo para actuar.",
         bullets: [
           "Alertas automáticas por tareas retrasadas",
           "Visualización de cargas de trabajo",
@@ -1959,7 +1959,7 @@ const products = [
       {
         icon: "🎯",
         title: "¿Los objetivos del equipo se diluyen?",
-        description: "Convierte grandes metas en acciones claras y medibles. Navio te ayuda a mantener a todos alineados.",
+        description: "Convierte grandes metas en acciones claras y medibles. Lee Der te ayuda a mantener a todos alineados.",
         bullets: [
           "Objetivos conectados a tareas reales",
           "Métricas de progreso por miembro y por proyecto",
@@ -1969,7 +1969,7 @@ const products = [
       {
         icon: "🔄",
         title: "¿La coordinación consume más tiempo que el trabajo real?",
-        description: "Navio automatiza lo repetitivo para que tu equipo solo se concentre en avanzar.",
+        description: "Lee Der automatiza lo repetitivo para que tu equipo solo se concentre en avanzar.",
         bullets: [
           "Plantillas para tareas recurrentes",
           "Actualizaciones de estado con un clic",
@@ -1979,7 +1979,7 @@ const products = [
       {
         icon: "📊",
         title: "¿Te cuesta demostrar resultados al jefe o al cliente?",
-        description: "Navio traduce el trabajo del equipo en datos claros que cualquiera entiende.",
+        description: "Lee Der traduce el trabajo del equipo en datos claros que cualquiera entiende.",
         bullets: [
           "Reportes automáticos y visuales",
           "Métricas comparativas por período",
@@ -2035,7 +2035,7 @@ const products = [
         ]
       }
     ],
-    howItWorksDescription: "Así es como Navio mantiene a tu equipo organizado y en curso.",
+    howItWorksDescription: "Así es como Lee Der mantiene a tu equipo organizado y en curso.",
     metodologia: [
       {
         title: "Es así de simple",
@@ -2652,7 +2652,7 @@ export default function ProductoPage() {
                 <div className="text-6xl mb-4">{product.emoji}</div>
                 <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
               </div>
-              <h2 className="text-5xl md:text-6xl font-bold mb-6">
+              <h2 ref={formRef} className="text-5xl md:text-6xl font-bold mb-6">
                 <span className="text-white">Únete a la Lista</span>{' '}
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
                   VIP
