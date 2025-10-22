@@ -252,7 +252,26 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
               transition={{ duration: 0.8 }}
               className="mb-8"
             >
-              <div className="text-8xl mb-6">{spirit.icon}</div>
+              <div className="w-32 h-32 mb-6 mx-auto flex items-center justify-center">
+                {spirit.imagePath ? (
+                  <img 
+                    src={spirit.imagePath} 
+                    alt={`${spirit.name} imagen`}
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      // Fallback al emoji si la imagen no carga
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const fallback = document.createElement('div');
+                      fallback.className = 'text-8xl bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent';
+                      fallback.textContent = spirit.icon;
+                      target.parentNode?.insertBefore(fallback, target);
+                    }}
+                  />
+                ) : (
+                  <span className="text-8xl bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">{spirit.icon}</span>
+                )}
+              </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6">
                 <span className="text-white">{spirit.name.split(' ')[0]}</span>{' '}
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
