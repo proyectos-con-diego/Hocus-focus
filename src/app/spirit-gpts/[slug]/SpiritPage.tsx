@@ -252,7 +252,7 @@ export default function SpiritPage({ spirit }: SpiritPageProps) {
               transition={{ duration: 0.8 }}
               className="mb-8"
             >
-              <div className="w-32 h-32 mb-6 mx-auto flex items-center justify-center">
+              <div className="w-64 h-64 mb-6 mx-auto flex items-center justify-center">
                 {spirit.imagePath ? (
                   <img 
                     src={spirit.imagePath} 
