@@ -152,10 +152,12 @@ export default function SpiritForm({
         </label>
         <input
           type="text"
+          name="name"
           value={formData.name}
           onChange={(e) => updateFormData('name', e.target.value)}
           className="w-full px-4 py-4 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
           placeholder="Tu nombre completo"
+          autoComplete="name"
           required
         />
       </div>
@@ -167,10 +169,12 @@ export default function SpiritForm({
         </label>
         <input
           type="email"
+          name="email"
           value={formData.email}
           onChange={(e) => updateFormData('email', e.target.value)}
           className="w-full px-4 py-4 rounded-xl bg-gray-800/50 text-white placeholder-gray-400 focus:bg-gray-800 focus:ring-2 focus:ring-cyan-400/50 transition-all duration-200 border border-gray-700/50"
           placeholder="tu@email.com"
+          autoComplete="email"
           required
         />
       </div>

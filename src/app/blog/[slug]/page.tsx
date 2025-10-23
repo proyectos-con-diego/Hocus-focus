@@ -671,9 +671,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 </div>
               </div>
               <div className="flex items-center gap-4" data-testid="post-meta">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center text-lg font-bold text-white" data-testid="author-avatar">
-                  {post.author?.name ? post.author.name[0] : 'A'}
-                </div>
+                <Link href="/sobre-mi" className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 shadow-lg hover:border-white/40 transition-all duration-300 hover:scale-105" data-testid="author-avatar">
+                  <img 
+                    src="/Integrantes/Diego-Gonzalez/Diego-Gonzalez.jpeg" 
+                    alt={post.author?.name || 'Diego Gonzalez'}
+                    className="w-full h-full object-cover"
+                  />
+                </Link>
                 <div className="bg-black/50 px-4 py-2 rounded-lg backdrop-blur-sm shadow-lg">
                   <div className="font-semibold text-white text-base leading-tight">
                     <Link 

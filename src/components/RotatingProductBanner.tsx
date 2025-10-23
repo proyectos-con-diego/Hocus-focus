@@ -6,15 +6,15 @@ import { event as trackEvent } from '../lib/analytics';
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
 function getPetImageName(productName: string): string {
   const imageMapping: { [key: string]: string } = {
-    'OKRo': '/Personajes/Imagenes-Agentes/Okro/Cabeza/okro-cabeza-frontal.png',
-    'Grilla Viralis': '/Personajes/Imagenes-Agentes/Grilla/Cabeza/Grilla-cabeza-frontal.png',
-    'Jaime Daily': '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-cabeza-frontal.png',
-    'Lee Der': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-cabeza-frontal.png',
-    'Bafet': '/Personajes/Imagenes-Agentes/Bafet/Cabeza/Bafet-cabeza-frontal.png',
-    'Midas': '/Personajes/Imagenes-Agentes/Midas/Cabeza/Midas-cabeza-frontal.png',
-    'Vinxi': '/Personajes/Imagenes-Agentes/Vinxi/Cabeza/Vinxi-frontal.png'
+    'OKRo': '/Personajes/Imagenes-Agentes/Okro/Cabeza/okro-agente-frontal.png',
+    'Grilla Viralis': '/Personajes/Imagenes-Agentes/Grilla/Cabeza/Grilla-agente-frontal.png',
+    'Jaime Daily': '/Personajes/Imagenes-Agentes/Jaime/Cabeza/Jaime-agente-frontal.png',
+    'Lee Der': '/Personajes/Imagenes-Agentes/Lee-Navio/Cabeza/Lee-agente-frontal.png',
+    'Bafet': '/Personajes/Imagenes-Agentes/Bafet/Cabeza/Bafet-agente-frontal.png',
+    'Midas': '/Personajes/Imagenes-Agentes/Midas/Cabeza/Midas-agente-frontal.png',
+    'Vinxi': '/Personajes/Imagenes-Agentes/Vinxi/Cabeza/Vinxi-agente-frontal.png'
   };
-  
+
   return imageMapping[productName] || productName;
 }
 
@@ -90,7 +90,14 @@ export default function RotatingProductBanner() {
   const currentProduct = products[currentProductIndex];
 
   return (
-    <div className="my-6">
+    <>
+      <style jsx>{`
+        @keyframes heartbeat {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.08); }
+        }
+      `}</style>
+      <div className="my-6">
       <div 
         className="bg-gradient-to-r from-gray-900/60 to-gray-800/60 border border-gray-700/40 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 relative overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
@@ -105,20 +112,29 @@ export default function RotatingProductBanner() {
         {/* Contenido directo en el banner exterior (sin recuadro interior) */}
         <div className="text-center px-2 py-2 md:px-4 md:py-4">
           {/* Imagen de la mascota y título */}
-          <div className="flex justify-center mb-4">
-            <img 
-                                  src={getPetImageName(currentProduct.name)}
-              alt={`${currentProduct.name} mascota`}
-              className="w-24 h-24 object-contain"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-                const fallback = document.createElement('div');
-                fallback.className = 'text-4xl';
-                fallback.textContent = currentProduct.icon;
-                target.parentNode?.insertBefore(fallback, target);
-              }}
-            />
+          <div className="flex justify-center mb-2">
+            <div className="relative">
+              {/* Imagen del agente */}
+              <div className="relative z-10">
+                <img 
+                  src={getPetImageName(currentProduct.name)}
+                  alt={`${currentProduct.name} mascota`}
+                  className="w-32 h-32 object-contain"
+                  style={{
+                    filter: 'drop-shadow(0 8px 16px rgba(139, 92, 246, 0.35))',
+                    animation: 'heartbeat 2.5s ease-in-out infinite'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.className = 'text-4xl';
+                    fallback.textContent = currentProduct.icon;
+                    target.parentNode?.insertBefore(fallback, target);
+                  }}
+                />
+              </div>
+            </div>
           </div>
           <h4 className={`text-xl font-bold ${currentProduct.color} mb-3`}>
             {currentProduct.name}
@@ -159,5 +175,6 @@ export default function RotatingProductBanner() {
         </div>
       </div>
     </div>
+    </>
   );
 } 

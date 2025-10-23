@@ -15,31 +15,31 @@ interface Service {
 
 const services: Service[] = [
   {
-    id: 'automation',
-    name: 'Automatización IA',
+    id: 'automatizacion-ia',
+    name: 'AUTOMATE',
     slug: 'automatizacion-ia',
-    description: 'Recupera 20+ horas semanales con automatización inteligente',
+    description: 'Implementa sistemas inteligentes en tu negocio y multiplica tu productividad',
     icon: '🤖',
-    color: 'text-blue-400',
-    bgColor: 'bg-blue-500/10'
-  },
-  {
-    id: 'scale',
-    name: 'Sistema Scale',
-    slug: 'sistema-scale',
-    description: 'Escala tu negocio sin perder el control',
-    icon: '📈',
-    color: 'text-green-400',
-    bgColor: 'bg-green-500/10'
-  },
-  {
-    id: 'marketing',
-    name: 'Plan de Marketing',
-    slug: 'plan-marketing',
-    description: 'Estrategia de marketing que genera resultados reales',
-    icon: '🎯',
     color: 'text-purple-400',
     bgColor: 'bg-purple-500/10'
+  },
+  {
+    id: 'sistema-scale',
+    name: 'SCALE',
+    slug: 'sistema-scale',
+    description: 'Transforma tu negocio en una operación eficiente y escalable en 30 días.',
+    icon: '🏢',
+    color: 'text-orange-400',
+    bgColor: 'bg-orange-500/10'
+  },
+  {
+    id: 'plan-marketing',
+    name: 'CONVERT',
+    slug: 'plan-marketing',
+    description: 'Transforma tu marketing y multiplica tus clientes con una estrategia clara y efectiva.',
+    icon: '📊',
+    color: 'text-red-400',
+    bgColor: 'bg-red-500/10'
   }
 ];
 
@@ -62,7 +62,7 @@ export default function RotatingServiceBanner() {
 
   return (
     <div 
-      className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl p-6 border border-gray-600/50 shadow-xl hover:shadow-2xl transition-all duration-500 h-[320px] flex flex-col relative overflow-hidden group"
+      className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl p-6 border border-gray-600/50 shadow-xl hover:shadow-2xl transition-all duration-500 h-[400px] flex flex-col relative overflow-hidden group max-w-sm md:max-w-md mx-auto"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -81,17 +81,31 @@ export default function RotatingServiceBanner() {
         {/* Contenido principal centrado */}
         <div className="flex-1 flex flex-col justify-center">
           {/* Icono y título con animación */}
-          <div className="text-center mb-6">
+          <div className="text-center mb-4">
             <div className="text-5xl mb-3 transform group-hover:scale-110 transition-transform duration-300">
               {currentService.icon}
             </div>
-            <h3 className={`text-xl font-bold ${currentService.color} mb-3 group-hover:scale-105 transition-transform duration-300`}>
-              {currentService.name}
+            <h3 className="text-xl font-bold mb-2 group-hover:scale-105 transition-transform duration-300">
+              {currentService.id === 'automatizacion-ia' ? (
+                <span className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">AUTOMATE</span>
+              ) : currentService.id === 'sistema-scale' ? (
+                <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">SCALE</span>
+              ) : currentService.id === 'plan-marketing' ? (
+                <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">CONVERT</span>
+              ) : (
+                <span className={currentService.color}>{currentService.name}</span>
+              )}
             </h3>
+            <p className="text-gray-400 text-sm font-medium">
+              {currentService.id === 'automatizacion-ia' ? 'Automatizaciones iA' :
+               currentService.id === 'sistema-scale' ? 'Agilidad digital' :
+               currentService.id === 'plan-marketing' ? 'Plan de Marketing' :
+               'Solución profesional'}
+            </p>
           </div>
 
           {/* Descripción mejorada */}
-          <p className="text-gray-200 text-sm text-center mb-6 leading-relaxed px-2">
+          <p className="text-gray-200 text-sm text-center mb-4 leading-relaxed px-2">
             {currentService.description}
           </p>
 
@@ -110,19 +124,19 @@ export default function RotatingServiceBanner() {
           <button
             onClick={() => { try { trackEvent({ action: 'click_rotating_service_indicator', category: 'Blog', label: '0' }); } catch {} ; setCurrentServiceIndex(0); }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentServiceIndex === 0 ? 'bg-blue-400 opacity-100 shadow-lg shadow-blue-400/50' : 'bg-gray-600 opacity-50 hover:bg-gray-500'
+              currentServiceIndex === 0 ? 'bg-purple-400 opacity-100 shadow-lg shadow-purple-400/50' : 'bg-gray-600 opacity-50 hover:bg-gray-500'
             }`}
           />
           <button
             onClick={() => { try { trackEvent({ action: 'click_rotating_service_indicator', category: 'Blog', label: '1' }); } catch {} ; setCurrentServiceIndex(1); }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentServiceIndex === 1 ? 'bg-green-400 opacity-100 shadow-lg shadow-green-400/50' : 'bg-gray-600 opacity-50 hover:bg-gray-500'
+              currentServiceIndex === 1 ? 'bg-orange-400 opacity-100 shadow-lg shadow-orange-400/50' : 'bg-gray-600 opacity-50 hover:bg-gray-500'
             }`}
           />
           <button
             onClick={() => { try { trackEvent({ action: 'click_rotating_service_indicator', category: 'Blog', label: '2' }); } catch {} ; setCurrentServiceIndex(2); }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentServiceIndex === 2 ? 'bg-purple-400 opacity-100 shadow-lg shadow-purple-400/50' : 'bg-gray-600 opacity-50 hover:bg-gray-500'
+              currentServiceIndex === 2 ? 'bg-red-400 opacity-100 shadow-lg shadow-red-400/50' : 'bg-gray-600 opacity-50 hover:bg-gray-500'
             }`}
           />
         </div>

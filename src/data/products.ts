@@ -16,7 +16,7 @@ export interface Product {
 export const products: Product[] = [
   { 
     name: "Jaime Daily", 
-    description: "Sistema de gestión de hábitos y rutinas diarias",
+    description: "Sistema de seguimiento de hábitos y rutinas diarias",
     emoji: "🐔",
     gradientClass: "bg-gradient-to-br from-green-500 to-emerald-600",
     slug: "jaime-daily",
@@ -41,7 +41,7 @@ export const products: Product[] = [
   },
   { 
     name: "Grilla Viralis", 
-    description: "Base de datos para gestión de múltiples clientes",
+    description: "Sistema de gestión de contenidos para múltiples clientes",
     emoji: "🦗",
     gradientClass: "bg-gradient-to-br from-green-500 to-green-600",
     slug: "grilla-viralis",
@@ -53,7 +53,7 @@ export const products: Product[] = [
   },
   { 
     name: "Midas", 
-    description: "Dashboard financiero y seguimiento de gastos",
+    description: "Sistema de seguimiento financiero de ingresos y gastos",
     emoji: "🐷",
     gradientClass: "bg-gradient-to-br from-orange-500 to-orange-600",
     slug: "midas",
@@ -77,7 +77,7 @@ export const products: Product[] = [
   },
   { 
     name: "Bafet", 
-    description: "Dashboard de monitoreo y análisis crypto",
+    description: "Sistema de de seguimiento de inversiones en crypto",
     emoji: "🐸",
     gradientClass: "bg-gradient-to-br from-purple-500 to-pink-500",
     slug: "bafet",
@@ -90,7 +90,7 @@ export const products: Product[] = [
   },
   { 
     name: "Lee Der", 
-    description: "Sistema colaborativo para equipos y proyectos",
+    description: "Sistema colaborativo para proyectos en equipo",
     emoji: "🐺",
     gradientClass: "bg-gradient-to-br from-cyan-500 to-cyan-600",
     slug: "navio-360",

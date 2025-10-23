@@ -101,8 +101,25 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
               
               {/* Contenido del banner */}
               <div className="flex-1 min-w-0 order-2 md:order-2 text-center md:text-left">
-                <h3 className="text-white font-semibold text-base md:text-lg mb-2 leading-tight">
-                  {productConfig.title}
+                <h3 className="font-semibold text-base md:text-lg mb-2 leading-tight">
+                  {productSlug === 'automatizacion-ia' ? (
+                    <>
+                      <span className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">AUTOMATE</span>
+                      <span className="text-white"> - Automatizaciones iA</span>
+                    </>
+                  ) : productSlug === 'plan-marketing' ? (
+                    <>
+                      <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">CONVERT</span>
+                      <span className="text-white"> - Plan de Marketing</span>
+                    </>
+                  ) : productSlug === 'sistema-scale' ? (
+                    <>
+                      <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">SCALE</span>
+                      <span className="text-white"> - Agilidad digital</span>
+                    </>
+                  ) : (
+                    <span className="text-white">{productConfig.title}</span>
+                  )}
                 </h3>
                 <p className="text-gray-300 text-xs md:text-sm mb-2 leading-relaxed">
                   {productConfig.description}
@@ -171,18 +188,22 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
                 <div className="bg-gradient-to-r from-gray-800/60 to-gray-700/60 rounded-xl p-6 border border-gray-600/40 backdrop-blur-sm">
                   <div className="text-gray-400 text-xs mb-3 font-medium tracking-wide uppercase">EL AUTOR</div>
                   <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center text-xl font-bold text-white shadow-lg flex-shrink-0">
-                      {post.author?.name ? post.author.name[0] : 'D'}
-                    </div>
+                    <Link href="/sobre-mi" className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20 shadow-lg flex-shrink-0 hover:border-white/40 transition-all duration-300 hover:scale-105">
+                      <img 
+                        src="/Integrantes/Diego-Gonzalez/Diego-Gonzalez.jpeg" 
+                        alt={post.author?.name || 'Diego Gonzalez'}
+                        className="w-full h-full object-cover"
+                      />
+                    </Link>
                     <div className="flex-1">
                       <h4 className="text-white font-bold text-lg mb-1">{post.author?.name || 'Diego Gonzalez'}</h4>
-                      <p className="text-gray-300 text-sm mb-1">Especialista en productividad y desarrollo profesional</p>
+                      <p className="text-gray-300 text-sm mb-1">Especialista en marketing y automatizaciones IA</p>
                       <p className="text-gray-400 text-xs mb-3">Ayudando a profesionales a maximizar su potencial con IA y automatización</p>
                       <Link 
                         href="/sobre-mi"
                         className="inline-block text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors duration-300 underline decoration-purple-400/30 hover:decoration-purple-300/60"
                       >
-                        Conoce más sobre mí →
+                        Conoce más →
                       </Link>
                     </div>
                   </div>
@@ -211,8 +232,23 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
                       }}
                     />
                     <div>
-                      <h4 className="text-white font-semibold">{productConfig.name}</h4>
-                      <p className="text-gray-300 text-sm">Solución profesional</p>
+                      <h4 className="font-semibold">
+                        {productSlug === 'automatizacion-ia' ? (
+                          <span className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">AUTOMATE</span>
+                        ) : productSlug === 'plan-marketing' ? (
+                          <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">CONVERT</span>
+                        ) : productSlug === 'sistema-scale' ? (
+                          <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">SCALE</span>
+                        ) : (
+                          <span className="text-white">{productConfig.name}</span>
+                        )}
+                      </h4>
+                      <p className="text-gray-300 text-sm">
+                        {productSlug === 'automatizacion-ia' ? 'Automatizaciones iA' :
+                         productSlug === 'plan-marketing' ? 'Plan de Marketing' :
+                         productSlug === 'sistema-scale' ? 'Agilidad digital' :
+                         'Solución profesional'}
+                      </p>
                     </div>
                   </div>
                   <p className="text-gray-300 text-sm mb-4">{productConfig.description}</p>
