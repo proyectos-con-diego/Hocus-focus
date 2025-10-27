@@ -69,6 +69,7 @@ interface FormData {
   vinxi_storage: string;
   vinxi_storage_other: string;
   vinxi_projects: string[];
+  vinxi_projects_other: string;
   vinxi_skill_level: string;
   grilla_tools: string[];
   grilla_tools_other: string;
@@ -148,6 +149,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     vinxi_storage: '',
     vinxi_storage_other: '',
     vinxi_projects: [],
+    vinxi_projects_other: '',
     vinxi_skill_level: '',
     grilla_tools: [],
     grilla_tools_other: '',
@@ -774,6 +776,24 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             </label>
           ))}
         </div>
+        {getArrayValue('vinxi_projects').includes('Otro') && (
+          <input
+            type="text"
+            value={getStringValue('vinxi_projects_other')}
+            onChange={(e) => {
+              const currentProjects = getArrayValue('vinxi_projects');
+              const updatedProjects = currentProjects.filter(p => p !== 'Otro').concat(e.target.value ? [e.target.value] : []);
+              setFormData(prev => ({ 
+                ...prev, 
+                vinxi_projects: updatedProjects,
+                vinxi_projects_other: e.target.value 
+              }));
+            }}
+            placeholder="Especifica qué otros tipos de proyectos..."
+            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
+            required
+          />
+        )}
       </div>
 
       <div>
@@ -829,7 +849,15 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('grilla_platforms_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, grilla_platforms_other: e.target.value }))}
+            onChange={(e) => {
+              const currentPlatforms = getArrayValue('grilla_platforms');
+              const updatedPlatforms = currentPlatforms.filter(p => p !== 'Otra').concat(e.target.value ? [e.target.value] : []);
+              setFormData(prev => ({ 
+                ...prev, 
+                grilla_platforms: updatedPlatforms,
+                grilla_platforms_other: e.target.value 
+              }));
+            }}
             placeholder="Especifica qué otra plataforma utilizas..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -891,7 +919,15 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('grilla_tools_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, grilla_tools_other: e.target.value }))}
+            onChange={(e) => {
+              const currentTools = getArrayValue('grilla_tools');
+              const updatedTools = currentTools.filter(t => t !== 'Otro').concat(e.target.value ? [e.target.value] : []);
+              setFormData(prev => ({ 
+                ...prev, 
+                grilla_tools: updatedTools,
+                grilla_tools_other: e.target.value 
+              }));
+            }}
             placeholder="Especifica qué otras herramientas utilizas..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -1011,7 +1047,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('jaime_difficulty_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, jaime_difficulty_other: e.target.value }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, jaime_difficulty: e.target.value }))}
             placeholder="Especifica qué otras dificultades tienes..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -1064,7 +1100,15 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('jaime_habits_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, jaime_habits_other: e.target.value }))}
+            onChange={(e) => {
+              const currentHabits = getArrayValue('jaime_habits');
+              const updatedHabits = currentHabits.filter(h => h !== 'Otro').concat(e.target.value ? [e.target.value] : []);
+              setFormData(prev => ({ 
+                ...prev, 
+                jaime_habits: updatedHabits,
+                jaime_habits_other: e.target.value 
+              }));
+            }}
             placeholder="Especifica qué otros hábitos te gustaría desarrollar..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -1130,7 +1174,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('okro_challenge_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, okro_challenge_other: e.target.value }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, okro_challenge: e.target.value }))}
             placeholder="Describe tu desafío específico..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -1168,7 +1212,15 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('okro_tools_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, okro_tools_other: e.target.value }))}
+            onChange={(e) => {
+              const currentTools = getArrayValue('okro_tools');
+              const updatedTools = currentTools.filter(t => t !== 'Otro').concat(e.target.value ? [e.target.value] : []);
+              setFormData(prev => ({ 
+                ...prev, 
+                okro_tools: updatedTools,
+                okro_tools_other: e.target.value 
+              }));
+            }}
             placeholder="Especifica qué otras herramientas utilizas..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
