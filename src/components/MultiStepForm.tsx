@@ -708,7 +708,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('vinxi_storage_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, vinxi_storage_other: e.target.value }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, vinxi_storage: e.target.value }))}
             placeholder="Especifica dónde guardas tus ideas..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -738,7 +738,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('vinxi_difficulty_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, vinxi_difficulty_other: e.target.value }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, vinxi_difficulty: e.target.value }))}
             placeholder="Describe tu mayor dificultad..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required

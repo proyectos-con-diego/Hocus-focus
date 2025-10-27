@@ -190,6 +190,9 @@ function formatDataForMake(data: any) {
         productLabel: `${data.productName || ''}_mini`.toLowerCase(),
         
         // Preguntas Específicas VINXI (enviar directamente al nivel raíz)
+        vinxi_storage: data.vinxi_storage === 'Otro' && data.vinxi_storage_other 
+          ? data.vinxi_storage_other 
+          : (data.vinxi_storage || ''),
         vinxi_difficulty: data.vinxi_difficulty === 'Otro' && data.vinxi_difficulty_other 
           ? data.vinxi_difficulty_other 
           : (data.vinxi_difficulty || ''),
