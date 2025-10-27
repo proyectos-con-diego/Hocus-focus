@@ -18,7 +18,6 @@ interface FormData {
   // Información Específica del Producto
   productInterest: string;
   newsletter: boolean;
-  specificQuestions: { [key: string]: string | string[] };
   
   // Campos "Otro"
   otherCountry: string;
@@ -32,6 +31,48 @@ interface FormData {
   source: string;
   productType: 'vip' | 'spirit' | 'mini';
   productName: string;
+  
+  // Preguntas específicas de productos (ahora en nivel raíz para consistencia con Spirit)
+  // Grilla Viralis
+  grilla_platforms: string[];
+  grilla_platforms_other: string;
+  grilla_frequency: string;
+  grilla_content_goals: string;
+  grilla_goals: string;
+  
+  // Jaime Daily
+  jaime_objective: string;
+  jaime_difficulty: string;
+  jaime_difficulty_other: string;
+  jaime_habits: string[];
+  jaime_habits_other: string;
+  jaime_systems: string;
+  jaime_systems_other: string;
+  
+  // OKRo
+  okro_challenge: string;
+  okro_challenge_other: string;
+  okro_tools: string[];
+  okro_tools_other: string;
+  okro_experience: string;
+  okro_purpose: string;
+  okro_purpose_other: string;
+  
+  // Vinxi
+  vinxi_difficulty: string;
+  vinxi_difficulty_other: string;
+  vinxi_habits: string[];
+  vinxi_habits_other: string;
+  vinxi_systems: string;
+  // Campos adicionales para VIP/Spirit
+  spiritType: string;
+  vinxi_storage: string;
+  vinxi_storage_other: string;
+  vinxi_projects: string[];
+  vinxi_skill_level: string;
+  grilla_tools: string[];
+  grilla_tools_other: string;
+  grilla_investment: string;
 }
 
 interface MultiStepFormProps {
@@ -64,7 +105,6 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     teamSize: '',
     productInterest: '',
     newsletter: false,
-    specificQuestions: {},
     source,
     productType,
     productName,
@@ -73,7 +113,45 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     otherIndustry: '',
     otherProductInterest: '',
     // Suscripción al newsletter
-    subscribeNewsletter: true
+    subscribeNewsletter: true,
+    // Preguntas específicas de productos (ahora en nivel raíz para consistencia con Spirit)
+    // Grilla Viralis
+    grilla_platforms: [],
+    grilla_platforms_other: '',
+    grilla_frequency: '',
+    grilla_content_goals: '',
+    grilla_goals: '',
+    // Jaime Daily
+    jaime_objective: '',
+    jaime_difficulty: '',
+    jaime_difficulty_other: '',
+    jaime_habits: [],
+    jaime_habits_other: '',
+    jaime_systems: '',
+    jaime_systems_other: '',
+    // OKRo
+    okro_challenge: '',
+    okro_challenge_other: '',
+    okro_tools: [],
+    okro_tools_other: '',
+    okro_experience: '',
+    okro_purpose: '',
+    okro_purpose_other: '',
+    // Vinxi
+    vinxi_difficulty: '',
+    vinxi_difficulty_other: '',
+    vinxi_habits: [],
+    vinxi_habits_other: '',
+    vinxi_systems: '',
+    // Campos adicionales para VIP/Spirit
+    spiritType: '',
+    vinxi_storage: '',
+    vinxi_storage_other: '',
+    vinxi_projects: [],
+    vinxi_skill_level: '',
+    grilla_tools: [],
+    grilla_tools_other: '',
+    grilla_investment: ''
   });
 
   const { submitToMake, isSubmitting, submitMessage, submitStatus } = useMakeWebhook({
@@ -291,15 +369,14 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     }
   };
 
-  // Helper para obtener valores de arrays en specificQuestions
-  const getArrayValue = (key: string): string[] => {
-    const value = formData.specificQuestions[key];
-    return Array.isArray(value) ? value : [];
+  // Helper para obtener valores de strings directamente del formData
+  const getStringValue = (key: keyof FormData): string => {
+    return (formData[key] as string) || '';
   };
 
-  const getStringValue = (key: string): string => {
-    const value = formData.specificQuestions[key];
-    return typeof value === 'string' ? value : '';
+  // Helper para obtener valores de arrays directamente del formData
+  const getArrayValue = (key: keyof FormData): string[] => {
+    return (formData[key] as string[]) || [];
   };
 
   // Función para validar las preguntas específicas del producto
@@ -549,8 +626,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             ¿Qué tipo de Spirit te interesa más?
           </label>
           <select
-            value={formData.specificQuestions.spiritType || ''}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, spiritType: e.target.value } }))}
+            value={formData.spiritType || ''}
+            onChange={(e) => setFormData(prev => ({ ...prev, spiritType: e.target.value }))}
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           >
             <option value="" style={{ color: '#9CA3AF' }}>Selecciona una opción</option>
@@ -560,7 +637,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             <option value="Automatización">Automatización</option>
             <option value="Otro">Otro</option>
           </select>
-          {formData.specificQuestions.spiritType === 'Otro' && (
+          {formData.spiritType === 'Otro' && (
             <input
               type="text"
               value={formData.otherProductInterest}
@@ -617,7 +694,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                   name="vinxi_storage"
                   value={option}
                   checked={isSelected}
-                  onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, vinxi_storage: e.target.value } }))}
+                  onChange={(e) => setFormData(prev => ({ ...prev, vinxi_storage: e.target.value }))}
                   className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
                 />
                 <span className="text-white text-sm">{option}</span>
@@ -629,7 +706,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('vinxi_storage_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, vinxi_storage_other: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, vinxi_storage_other: e.target.value }))}
             placeholder="Especifica dónde guardas tus ideas..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -643,7 +720,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         </label>
         <select
           value={getStringValue('vinxi_difficulty')}
-          onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, vinxi_difficulty: e.target.value } }))}
+          onChange={(e) => setFormData(prev => ({ ...prev, vinxi_difficulty: e.target.value }))}
           className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           required
         >
@@ -659,7 +736,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('vinxi_difficulty_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, vinxi_difficulty_other: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, vinxi_difficulty_other: e.target.value }))}
             placeholder="Describe tu mayor dificultad..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -688,7 +765,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     : current.filter(item => item !== option);
                   setFormData(prev => ({
                     ...prev,
-                    specificQuestions: { ...prev.specificQuestions, vinxi_projects: updated }
+                    vinxi_projects: updated
                   }));
                 }}
                 className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
@@ -705,7 +782,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         </label>
         <select
           value={getStringValue('vinxi_skill_level')}
-          onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, vinxi_skill_level: e.target.value } }))}
+          onChange={(e) => setFormData(prev => ({ ...prev, vinxi_skill_level: e.target.value }))}
           className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           required
         >
@@ -739,7 +816,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     : current.filter(item => item !== option);
                   setFormData(prev => ({
                     ...prev,
-                    specificQuestions: { ...prev.specificQuestions, grilla_platforms: updated }
+                    grilla_platforms: updated
                   }));
                 }}
                 className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
@@ -752,7 +829,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('grilla_platforms_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, grilla_platforms_other: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, grilla_platforms_other: e.target.value }))}
             placeholder="Especifica qué otra plataforma utilizas..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -766,7 +843,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         </label>
         <select
           value={getStringValue('grilla_frequency')}
-          onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, grilla_frequency: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, grilla_frequency: e.target.value }))}
           className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           required
         >
@@ -801,7 +878,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     : current.filter(item => item !== option);
                   setFormData(prev => ({
                     ...prev,
-                    specificQuestions: { ...prev.specificQuestions, grilla_tools: updated }
+                    grilla_tools: updated
                   }));
                 }}
                 className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
@@ -814,7 +891,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('grilla_tools_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, grilla_tools_other: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, grilla_tools_other: e.target.value }))}
             placeholder="Especifica qué otras herramientas utilizas..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -828,7 +905,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         </label>
         <select
           value={getStringValue('grilla_investment')}
-          onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, grilla_investment: e.target.value } }))}
+          onChange={(e) => setFormData(prev => ({ ...prev, grilla_investment: e.target.value }))}
           className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           required
         >
@@ -877,7 +954,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                   name="grilla_goals"
                   value={option}
                   checked={isSelected}
-                  onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, grilla_goals: e.target.value } }))}
+                  onChange={(e) => setFormData(prev => ({ ...prev, grilla_content_goals: e.target.value }))}
                   className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
                 />
                 <span className="text-white text-sm">{option}</span>
@@ -898,7 +975,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         </label>
         <select
           value={getStringValue('jaime_objective')}
-          onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, jaime_objective: e.target.value } }))}
+          onChange={(e) => setFormData(prev => ({ ...prev, jaime_objective: e.target.value }))}
           className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           required
         >
@@ -923,7 +1000,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                 name="jaime_difficulty"
                 value={option}
                 checked={getStringValue('jaime_difficulty') === option}
-                onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, jaime_difficulty: e.target.value } }))}
+                onChange={(e) => setFormData(prev => ({ ...prev, jaime_difficulty: e.target.value }))}
                 className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
               />
               <span className="text-white text-sm">{option}</span>
@@ -934,7 +1011,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('jaime_difficulty_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, jaime_difficulty_other: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, jaime_difficulty_other: e.target.value }))}
             placeholder="Especifica qué otras dificultades tienes..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -974,7 +1051,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                   
                   setFormData(prev => ({
                     ...prev,
-                    specificQuestions: { ...prev.specificQuestions, jaime_habits: updated }
+                    jaime_habits: updated
                   }));
                 }}
                 className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
@@ -987,7 +1064,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('jaime_habits_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, jaime_habits_other: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, jaime_habits_other: e.target.value }))}
             placeholder="Especifica qué otros hábitos te gustaría desarrollar..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -1001,7 +1078,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         </label>
         <select
           value={getStringValue('jaime_systems')}
-          onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, jaime_systems: e.target.value } }))}
+          onChange={(e) => setFormData(prev => ({ ...prev, jaime_systems: e.target.value }))}
           className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           required
         >
@@ -1017,7 +1094,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('jaime_systems_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, jaime_systems_other: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, jaime_systems_other: e.target.value }))}
             placeholder="Especifica qué otro sistema has utilizado..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -1036,7 +1113,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         </label>
         <select
           value={getStringValue('okro_challenge')}
-          onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, okro_challenge: e.target.value } }))}
+          onChange={(e) => setFormData(prev => ({ ...prev, okro_challenge: e.target.value }))}
           className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           required
         >
@@ -1053,7 +1130,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('okro_challenge_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, okro_challenge_other: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, okro_challenge_other: e.target.value }))}
             placeholder="Describe tu desafío específico..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -1078,7 +1155,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                     : current.filter(item => item !== option);
                   setFormData(prev => ({
                     ...prev,
-                    specificQuestions: { ...prev.specificQuestions, okro_tools: updated }
+                    okro_tools: updated
                   }));
                 }}
                 className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
@@ -1091,7 +1168,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('okro_tools_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, okro_tools_other: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, okro_tools_other: e.target.value }))}
             placeholder="Especifica qué otras herramientas utilizas..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
@@ -1115,7 +1192,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                 name="okro_experience"
                 value={option}
                 checked={getStringValue('okro_experience') === option}
-                onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, okro_experience: e.target.value } }))}
+                onChange={(e) => setFormData(prev => ({ ...prev, okro_experience: e.target.value }))}
                 className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
               />
               <span className="text-white text-sm">{option}</span>
@@ -1130,7 +1207,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         </label>
         <select
           value={getStringValue('okro_purpose')}
-          onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, okro_purpose: e.target.value } }))}
+          onChange={(e) => setFormData(prev => ({ ...prev, okro_purpose: e.target.value }))}
           className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
           required
         >
@@ -1144,7 +1221,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <input
             type="text"
             value={getStringValue('okro_purpose_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, okro_purpose_other: e.target.value } }))}
+            onChange={(e) => setFormData(prev => ({ ...prev, okro_purpose_other: e.target.value }))}
             placeholder="Especifica otro propósito..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
