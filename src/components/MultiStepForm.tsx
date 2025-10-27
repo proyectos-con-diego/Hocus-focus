@@ -322,8 +322,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         
         return !!(hasPlatforms && hasPlatformsOtherText && getStringValue('grilla_frequency'));
       } else if (productSlugLower === 'jaime-daily' || productSlugLower === 'jaime daily') {
-        const hasDifficulty = getArrayValue('jaime_difficulty').length > 0;
-        const needsDifficultyOther = getArrayValue('jaime_difficulty').includes('Otro');
+        const hasDifficulty = !!getStringValue('jaime_difficulty');
+        const needsDifficultyOther = getStringValue('jaime_difficulty') === 'Otro';
         const hasDifficultyOtherText = !needsDifficultyOther || !!getStringValue('jaime_difficulty_other').trim();
         return !!(getStringValue('jaime_objective') && hasDifficulty && hasDifficultyOtherText);
       } else if (productSlugLower === 'okro') {
@@ -919,25 +919,18 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           {['Mantener la constancia', 'Olvidar hacer el seguimiento', 'Falta de motivación inicial', 'No tener claridad en cómo medir progreso', 'Querer hacer muchos cambios a la vez', 'Otro'].map((option) => (
             <label key={option} className="flex items-center space-x-3 cursor-pointer">
               <input
-                type="checkbox"
-                checked={getArrayValue('jaime_difficulty').includes(option)}
-                onChange={(e) => {
-                  const current = getArrayValue('jaime_difficulty');
-                  const updated = e.target.checked
-                    ? [...current, option]
-                    : current.filter(item => item !== option);
-                  setFormData(prev => ({
-                    ...prev,
-                    specificQuestions: { ...prev.specificQuestions, jaime_difficulty: updated }
-                  }));
-                }}
-                className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+                type="radio"
+                name="jaime_difficulty"
+                value={option}
+                checked={getStringValue('jaime_difficulty') === option}
+                onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, jaime_difficulty: e.target.value } }))}
+                className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
               />
               <span className="text-white text-sm">{option}</span>
             </label>
           ))}
         </div>
-        {getArrayValue('jaime_difficulty').includes('Otro') && (
+        {getStringValue('jaime_difficulty') === 'Otro' && (
           <input
             type="text"
             value={getStringValue('jaime_difficulty_other')}
@@ -958,6 +951,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         <label className="block text-white text-sm font-medium mb-2">
           ¿Qué tipo de hábitos te gustaría desarrollar? *
         </label>
+        <p className="text-gray-400 text-xs mb-3">Selecciona máximo 3 opciones</p>
         <div className="space-y-2">
           {['Ejercicio físico', 'Lectura o aprendizaje', 'Meditación o mindfulness', 'Alimentación saludable', 'Descanso adecuado', 'Organización personal', 'Otro'].map((option) => (
             <label key={option} className="flex items-center space-x-3 cursor-pointer">
@@ -966,9 +960,18 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                 checked={getArrayValue('jaime_habits').includes(option)}
                 onChange={(e) => {
                   const current = getArrayValue('jaime_habits');
-                  const updated = e.target.checked
-                    ? [...current, option]
-                    : current.filter(item => item !== option);
+                  let updated;
+                  
+                  if (e.target.checked) {
+                    // Si ya hay 3 selecciones y no es "Otro", no permitir más selecciones
+                    if (current.length >= 3 && option !== 'Otro') {
+                      return;
+                    }
+                    updated = [...current, option];
+                  } else {
+                    updated = current.filter(item => item !== option);
+                  }
+                  
                   setFormData(prev => ({
                     ...prev,
                     specificQuestions: { ...prev.specificQuestions, jaime_habits: updated }
