@@ -641,32 +641,20 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         <label className="block text-white text-sm font-medium mb-2">
           ¿Cuál es tu mayor dificultad al organizar tus ideas o proyectos? *
         </label>
-        <div className="space-y-2">
-          {['No sé por dónde empezar', 'Me cuesta priorizar / todo parece urgente', 'No termino lo que empiezo', 'Multiples ideas dispersas', 'Falta de visión general de los proyectos', 'Otro'].map((option) => {
-            const isSelected = getStringValue('vinxi_difficulty') === option;
-            const hasSelection = !!getStringValue('vinxi_difficulty');
-            const isOpaque = hasSelection && !isSelected;
-            
-            return (
-              <label 
-                key={option} 
-                className={`flex items-center space-x-3 cursor-pointer transition-all duration-300 ${
-                  isOpaque ? 'opacity-30' : 'opacity-100'
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="vinxi_difficulty"
-                  value={option}
-                  checked={isSelected}
-                  onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, vinxi_difficulty: e.target.value } }))}
-                  className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
-                />
-                <span className="text-white text-sm">{option}</span>
-              </label>
-            );
-          })}
-        </div>
+        <select
+          value={getStringValue('vinxi_difficulty')}
+          onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, vinxi_difficulty: e.target.value } }))}
+          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
+          required
+        >
+          <option value="" style={{ color: '#9CA3AF' }}>Selecciona tu mayor dificultad</option>
+          <option value="No sé por dónde empezar">No sé por dónde empezar</option>
+          <option value="Me cuesta priorizar / todo parece urgente">Me cuesta priorizar / todo parece urgente</option>
+          <option value="No termino lo que empiezo">No termino lo que empiezo</option>
+          <option value="Multiples ideas dispersas">Multiples ideas dispersas</option>
+          <option value="Falta de visión general de los proyectos">Falta de visión general de los proyectos</option>
+          <option value="Otro">Otro</option>
+        </select>
         {getStringValue('vinxi_difficulty') === 'Otro' && (
           <input
             type="text"
@@ -1008,32 +996,20 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         <label className="block text-white text-sm font-medium mb-2">
           ¿Qué otro sistema has utilizado con anterioridad? *
         </label>
-        <div className="space-y-2">
-          {['Nunca he usado un sistema de seguimiento', 'Google Sheets o Excel', 'Aplicaciones móviles de hábitos', 'Libretas o diarios físicos', 'Notion u otros sistemas de productividad', 'Otro'].map((option) => {
-            const isSelected = getStringValue('jaime_systems') === option;
-            const hasSelection = !!getStringValue('jaime_systems');
-            const isOpaque = hasSelection && !isSelected;
-            
-            return (
-              <label 
-                key={option} 
-                className={`flex items-center space-x-3 cursor-pointer transition-all duration-300 ${
-                  isOpaque ? 'opacity-30' : 'opacity-100'
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="jaime_systems"
-                  value={option}
-                  checked={isSelected}
-                  onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, jaime_systems: e.target.value } }))}
-                  className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
-                />
-                <span className="text-white text-sm">{option}</span>
-              </label>
-            );
-          })}
-        </div>
+        <select
+          value={getStringValue('jaime_systems')}
+          onChange={(e) => setFormData(prev => ({ ...prev, specificQuestions: { ...prev.specificQuestions, jaime_systems: e.target.value } }))}
+          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
+          required
+        >
+          <option value="" style={{ color: '#9CA3AF' }}>Selecciona el sistema que has usado</option>
+          <option value="Nunca he usado un sistema de seguimiento">Nunca he usado un sistema de seguimiento</option>
+          <option value="Google Sheets o Excel">Google Sheets o Excel</option>
+          <option value="Aplicaciones móviles de hábitos">Aplicaciones móviles de hábitos</option>
+          <option value="Libretas o diarios físicos">Libretas o diarios físicos</option>
+          <option value="Notion u otros sistemas de productividad">Notion u otros sistemas de productividad</option>
+          <option value="Otro">Otro</option>
+        </select>
         {getStringValue('jaime_systems') === 'Otro' && (
           <input
             type="text"
