@@ -196,6 +196,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         return 5; // 3 pasos originales + 2 páginas de preguntas específicas
       } else if (productSlugLower === 'jaime-daily' || productSlugLower === 'jaime daily') {
         return 5; // 3 pasos originales + 2 páginas de preguntas específicas + 1 página final
+      } else if (productSlugLower === 'vinxi') {
+        return 5; // 3 pasos originales + 2 páginas de preguntas específicas + 1 página final
       }
       return 4; // Default for other mini products: 3 pasos originales + 1 página final
     }
@@ -1357,6 +1359,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
                 {(productSlug.toLowerCase() === 'okro' && currentStep === 5) && renderStep3()}
                 {(productSlug.toLowerCase() === 'grilla-viralis' || productSlug.toLowerCase() === 'grilla viralis') && currentStep === 6 && renderStep3()}
                 {(productSlug.toLowerCase() === 'jaime-daily' || productSlug.toLowerCase() === 'jaime daily') && currentStep === 5 && renderStep3()}
+                {(productSlug.toLowerCase() === 'vinxi') && currentStep === 5 && renderStep3()}
               </>
             ) : (
               <>
