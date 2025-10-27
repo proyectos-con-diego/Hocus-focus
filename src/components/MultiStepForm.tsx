@@ -782,7 +782,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             value={getStringValue('vinxi_projects_other')}
             onChange={(e) => {
               const currentProjects = getArrayValue('vinxi_projects');
-              const updatedProjects = currentProjects.filter(p => p !== 'Otro').concat(e.target.value ? [e.target.value] : []);
+              // Mantener "Otro" en el array mientras se escribe
+              const otherProjects = currentProjects.filter(p => p !== 'Otro' && p !== getStringValue('vinxi_projects_other'));
+              const updatedProjects = [...otherProjects, 'Otro'];
+              if (e.target.value.trim()) {
+                updatedProjects.push(e.target.value);
+              }
               setFormData(prev => ({ 
                 ...prev, 
                 vinxi_projects: updatedProjects,
@@ -851,7 +856,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             value={getStringValue('grilla_platforms_other')}
             onChange={(e) => {
               const currentPlatforms = getArrayValue('grilla_platforms');
-              const updatedPlatforms = currentPlatforms.filter(p => p !== 'Otra').concat(e.target.value ? [e.target.value] : []);
+              // Mantener "Otra" en el array mientras se escribe
+              const otherPlatforms = currentPlatforms.filter(p => p !== 'Otra' && p !== getStringValue('grilla_platforms_other'));
+              const updatedPlatforms = [...otherPlatforms, 'Otra'];
+              if (e.target.value.trim()) {
+                updatedPlatforms.push(e.target.value);
+              }
               setFormData(prev => ({ 
                 ...prev, 
                 grilla_platforms: updatedPlatforms,
@@ -921,7 +931,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             value={getStringValue('grilla_tools_other')}
             onChange={(e) => {
               const currentTools = getArrayValue('grilla_tools');
-              const updatedTools = currentTools.filter(t => t !== 'Otro').concat(e.target.value ? [e.target.value] : []);
+              // Mantener "Otro" en el array mientras se escribe
+              const otherTools = currentTools.filter(t => t !== 'Otro' && t !== getStringValue('grilla_tools_other'));
+              const updatedTools = [...otherTools, 'Otro'];
+              if (e.target.value.trim()) {
+                updatedTools.push(e.target.value);
+              }
               setFormData(prev => ({ 
                 ...prev, 
                 grilla_tools: updatedTools,
@@ -1102,7 +1117,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             value={getStringValue('jaime_habits_other')}
             onChange={(e) => {
               const currentHabits = getArrayValue('jaime_habits');
-              const updatedHabits = currentHabits.filter(h => h !== 'Otro').concat(e.target.value ? [e.target.value] : []);
+              // Mantener "Otro" en el array mientras se escribe
+              const otherHabits = currentHabits.filter(h => h !== 'Otro' && h !== getStringValue('jaime_habits_other'));
+              const updatedHabits = [...otherHabits, 'Otro'];
+              if (e.target.value.trim()) {
+                updatedHabits.push(e.target.value);
+              }
               setFormData(prev => ({ 
                 ...prev, 
                 jaime_habits: updatedHabits,
@@ -1214,7 +1234,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
             value={getStringValue('okro_tools_other')}
             onChange={(e) => {
               const currentTools = getArrayValue('okro_tools');
-              const updatedTools = currentTools.filter(t => t !== 'Otro').concat(e.target.value ? [e.target.value] : []);
+              // Mantener "Otro" en el array mientras se escribe
+              const otherTools = currentTools.filter(t => t !== 'Otro' && t !== getStringValue('okro_tools_other'));
+              const updatedTools = [...otherTools, 'Otro'];
+              if (e.target.value.trim()) {
+                updatedTools.push(e.target.value);
+              }
               setFormData(prev => ({ 
                 ...prev, 
                 okro_tools: updatedTools,
