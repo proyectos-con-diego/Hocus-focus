@@ -263,10 +263,10 @@ function formatDataForMake(data: any) {
         })(),
         grilla_investment: data.grilla_investment || '',
         
-        // Campos "Otro" específicos
-        otherCountry: data.otherCountry || '',
-        otherIndustry: data.otherIndustry || '',
-        otherProductInterest: data.otherProductInterest || '',
+        // Campos "_other" específicos (NO enviar al webhook - solo para procesamiento interno)
+        // vinxi_difficulty_other, vinxi_projects_other, jaime_difficulty_other, jaime_habits_other, 
+        // jaime_systems_other, okro_challenge_other, okro_tools_other, okro_purpose_other,
+        // grilla_platforms_other, grilla_tools_other, etc.
         
         // Campos legacy (mantener para compatibilidad)
         product: data.product || data.productName || '',
@@ -304,10 +304,10 @@ function formatDataForMake(data: any) {
         // Preguntas Específicas
         specificQuestions: data.specificQuestions || {},
         
-        // Campos "Otro" específicos
-        otherCountry: data.otherCountry || '',
-        otherIndustry: data.otherIndustry || '',
-        otherProductInterest: data.otherProductInterest || '',
+        // Campos "Otro" específicos (NO enviar al webhook - solo para procesamiento interno)
+        // otherCountry: data.otherCountry || '',
+        // otherIndustry: data.otherIndustry || '',
+        // otherProductInterest: data.otherProductInterest || '',
         
         // Campos legacy (mantener para compatibilidad)
         product: data.product || data.productName || '',
