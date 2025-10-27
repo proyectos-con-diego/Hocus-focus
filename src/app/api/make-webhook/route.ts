@@ -189,8 +189,79 @@ function formatDataForMake(data: any) {
         productName: data.productName || '',
         productLabel: `${data.productName || ''}_mini`.toLowerCase(),
         
-        // Preguntas Específicas (convertir arrays a strings)
-        specificQuestions: data.specificQuestions || {},
+        // Preguntas Específicas VINXI (enviar directamente al nivel raíz)
+        vinxi_difficulty: data.vinxi_difficulty === 'Otro' && data.vinxi_difficulty_other 
+          ? data.vinxi_difficulty_other 
+          : (data.vinxi_difficulty || ''),
+        vinxi_projects: (() => {
+          const projects = Array.isArray(data.vinxi_projects) ? data.vinxi_projects : [];
+          const hasOther = projects.includes('Otro') && data.vinxi_projects_other;
+          if (hasOther) {
+            const filteredProjects = projects.filter((project: string) => project !== 'Otro');
+            return [...filteredProjects, data.vinxi_projects_other];
+          }
+          return projects;
+        })(),
+        vinxi_skill_level: data.vinxi_skill_level || '',
+        
+        // Preguntas Específicas JAIME
+        jaime_objective: data.jaime_objective || '',
+        jaime_difficulty: data.jaime_difficulty === 'Otro' && data.jaime_difficulty_other 
+          ? data.jaime_difficulty_other 
+          : (data.jaime_difficulty || ''),
+        jaime_habits: (() => {
+          const habits = Array.isArray(data.jaime_habits) ? data.jaime_habits : [];
+          const hasOther = habits.includes('Otro') && data.jaime_habits_other;
+          if (hasOther) {
+            const filteredHabits = habits.filter((habit: string) => habit !== 'Otro');
+            return [...filteredHabits, data.jaime_habits_other];
+          }
+          return habits;
+        })(),
+        jaime_systems: data.jaime_systems === 'Otro' && data.jaime_systems_other 
+          ? data.jaime_systems_other 
+          : (data.jaime_systems || ''),
+        
+        // Preguntas Específicas OKRo
+        okro_challenge: data.okro_challenge === 'Otro' && data.okro_challenge_other 
+          ? data.okro_challenge_other 
+          : (data.okro_challenge || ''),
+        okro_tools: (() => {
+          const tools = Array.isArray(data.okro_tools) ? data.okro_tools : [];
+          const hasOther = tools.includes('Otro') && data.okro_tools_other;
+          if (hasOther) {
+            const filteredTools = tools.filter((tool: string) => tool !== 'Otro');
+            return [...filteredTools, data.okro_tools_other];
+          }
+          return tools;
+        })(),
+        okro_experience: data.okro_experience || '',
+        okro_purpose: data.okro_purpose === 'Otro' && data.okro_purpose_other 
+          ? data.okro_purpose_other 
+          : (data.okro_purpose || ''),
+        
+        // Preguntas Específicas GRILLA
+        grilla_platforms: (() => {
+          const platforms = Array.isArray(data.grilla_platforms) ? data.grilla_platforms : [];
+          const hasOther = platforms.includes('Otra') && data.grilla_platforms_other;
+          if (hasOther) {
+            const filteredPlatforms = platforms.filter((platform: string) => platform !== 'Otra');
+            return [...filteredPlatforms, data.grilla_platforms_other];
+          }
+          return platforms;
+        })(),
+        grilla_frequency: data.grilla_frequency || '',
+        grilla_content_goals: data.grilla_content_goals || '',
+        grilla_tools: (() => {
+          const tools = Array.isArray(data.grilla_tools) ? data.grilla_tools : [];
+          const hasOther = tools.includes('Otro') && data.grilla_tools_other;
+          if (hasOther) {
+            const filteredTools = tools.filter((tool: string) => tool !== 'Otro');
+            return [...filteredTools, data.grilla_tools_other];
+          }
+          return tools;
+        })(),
+        grilla_investment: data.grilla_investment || '',
         
         // Campos "Otro" específicos
         otherCountry: data.otherCountry || '',
