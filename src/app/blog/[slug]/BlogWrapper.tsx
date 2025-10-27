@@ -247,7 +247,7 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
                         {productSlug === 'automatizacion-ia' ? 'Automatizaciones iA' :
                          productSlug === 'plan-marketing' ? 'Plan de Marketing' :
                          productSlug === 'sistema-scale' ? 'Agilidad digital' :
-                         'Solución profesional'}
+                         productConfig.title.includes(' - ') ? productConfig.title.split(' - ')[1] : 'Solución profesional'}
                       </p>
                     </div>
                   </div>

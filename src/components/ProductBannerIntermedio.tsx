@@ -30,8 +30,8 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
   const getProductIcon = (productName: string) => {
     const icons: { [key: string]: string } = {
       'Plan de Marketing CONVERT': '📊',
-      'Sistema SCALE': '🚀',
-      'Automatizaciones ia': '⚡',
+      'Sistema SCALE': '🏢',
+      'Automatizaciones ia': '🤖',
       'Vinxi': '🦊',
       'Grilla Viralis': '🦗',
       'OKRo': '🐼',
