@@ -7,6 +7,11 @@ const removeCommasFromOptions = (options: string[]): string[] => {
   return options.map(option => option.replace(/,/g, ''));
 };
 
+// Helper function to sanitize "Other" field values (remove commas)
+const sanitizeOtherField = (value: string): string => {
+  return value.replace(/,/g, '');
+};
+
 export async function POST(request: NextRequest) {
   try {
     console.log('🔗 Recibiendo datos para Make.com webhook...');
@@ -205,7 +210,7 @@ function formatDataForMake(data: any) {
           return removeCommasFromOptions(storage);
         })(),
         vinxi_difficulty: data.vinxi_difficulty === 'Otro' && data.vinxi_difficulty_other 
-          ? data.vinxi_difficulty_other 
+          ? sanitizeOtherField(data.vinxi_difficulty_other)
           : (data.vinxi_difficulty || ''),
         vinxi_projects: (() => {
           const projects = Array.isArray(data.vinxi_projects) ? data.vinxi_projects : [];
@@ -244,7 +249,7 @@ function formatDataForMake(data: any) {
         
         // Preguntas Específicas OKRo
         okro_challenge: data.okro_challenge === 'Otro' && data.okro_challenge_other 
-          ? data.okro_challenge_other 
+          ? sanitizeOtherField(data.okro_challenge_other)
           : (data.okro_challenge || ''),
         okro_tools: (() => {
           const tools = Array.isArray(data.okro_tools) ? data.okro_tools : [];
@@ -257,7 +262,7 @@ function formatDataForMake(data: any) {
         })(),
         okro_experience: data.okro_experience || '',
         okro_purpose: data.okro_purpose === 'Otro' && data.okro_purpose_other 
-          ? data.okro_purpose_other 
+          ? sanitizeOtherField(data.okro_purpose_other)
           : (data.okro_purpose || ''),
         
         // Preguntas Específicas GRILLA
