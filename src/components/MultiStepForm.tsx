@@ -1044,19 +1044,30 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           ¿Qué te resulta más difícil al intentar desarrollar o romper un hábito? *
         </label>
         <div className="space-y-2">
-          {['Mantener la constancia', 'Olvidar hacer el seguimiento', 'Falta de motivación inicial', 'No tener claridad en cómo medir progreso', 'Querer hacer muchos cambios a la vez', 'Otro'].map((option) => (
-            <label key={option} className="flex items-center space-x-3 cursor-pointer">
-              <input
-                type="radio"
-                name="jaime_difficulty"
-                value={option}
-                checked={getStringValue('jaime_difficulty') === option}
-                onChange={(e) => setFormData(prev => ({ ...prev, jaime_difficulty: e.target.value }))}
-                className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
-              />
-              <span className="text-white text-sm">{option}</span>
-            </label>
-          ))}
+          {['Mantener la constancia', 'Olvidar hacer el seguimiento', 'Falta de motivación inicial', 'No tener claridad en cómo medir progreso', 'Querer hacer muchos cambios a la vez', 'Otro'].map((option) => {
+            const isSelected = getStringValue('jaime_difficulty') === option;
+            const hasSelection = !!getStringValue('jaime_difficulty');
+            const isOpaque = hasSelection && !isSelected;
+            
+            return (
+              <label 
+                key={option} 
+                className={`flex items-center space-x-3 cursor-pointer transition-all duration-300 ${
+                  isOpaque ? 'opacity-30' : 'opacity-100'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="jaime_difficulty"
+                  value={option}
+                  checked={isSelected}
+                  onChange={(e) => setFormData(prev => ({ ...prev, jaime_difficulty: e.target.value }))}
+                  className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
+                />
+                <span className="text-white text-sm">{option}</span>
+              </label>
+            );
+          })}
         </div>
         {getStringValue('jaime_difficulty') === 'Otro' && (
           <input
@@ -1262,19 +1273,30 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           ¿Cuánto tiempo llevas trabajando con OKRs? *
         </label>
         <div className="space-y-2">
-          {['Nunca he usado OKRs', 'Menos de 6 meses', '6 meses - 1 año', '1-2 años', 'Más de 2 años'].map((option) => (
-            <label key={option} className="flex items-center space-x-3 cursor-pointer">
-              <input
-                type="radio"
-                name="okro_experience"
-                value={option}
-                checked={getStringValue('okro_experience') === option}
-                onChange={(e) => setFormData(prev => ({ ...prev, okro_experience: e.target.value }))}
-                className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
-              />
-              <span className="text-white text-sm">{option}</span>
-            </label>
-          ))}
+          {['Nunca he usado OKRs', 'Menos de 6 meses', '6 meses - 1 año', '1-2 años', 'Más de 2 años'].map((option) => {
+            const isSelected = getStringValue('okro_experience') === option;
+            const hasSelection = !!getStringValue('okro_experience');
+            const isOpaque = hasSelection && !isSelected;
+            
+            return (
+              <label 
+                key={option} 
+                className={`flex items-center space-x-3 cursor-pointer transition-all duration-300 ${
+                  isOpaque ? 'opacity-30' : 'opacity-100'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="okro_experience"
+                  value={option}
+                  checked={isSelected}
+                  onChange={(e) => setFormData(prev => ({ ...prev, okro_experience: e.target.value }))}
+                  className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
+                />
+                <span className="text-white text-sm">{option}</span>
+              </label>
+            );
+          })}
         </div>
       </div>
 
