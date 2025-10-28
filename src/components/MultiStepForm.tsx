@@ -441,7 +441,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
       }
     } else if (pageNumber === 5) {
       if (productSlugLower === 'grilla-viralis' || productSlugLower === 'grilla viralis') {
-        return !!getStringValue('grilla_goals');
+        return !!getStringValue('grilla_content_goals');
       }
     }
 
@@ -877,7 +877,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
       <div>
         <label className="block text-white text-sm font-medium mb-2">
-          ¿Con qué frecuencia ideal te gustaría publicar? *
+          ¿Con qué frecuencia publicas actualmente? *
         </label>
         <select
           value={getStringValue('grilla_frequency')}
@@ -989,8 +989,8 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         </label>
         <div className="space-y-2">
           {['Atraer clientes', 'Posicionar mi marca personal', 'Compartir conocimiento', 'Crear comunidad'].map((option) => {
-            const isSelected = getStringValue('grilla_goals') === option;
-            const hasSelection = !!getStringValue('grilla_goals');
+            const isSelected = getStringValue('grilla_content_goals') === option;
+            const hasSelection = !!getStringValue('grilla_content_goals');
             const isOpaque = hasSelection && !isSelected;
             
             return (
@@ -1002,7 +1002,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
               >
                 <input
                   type="radio"
-                  name="grilla_goals"
+                  name="grilla_content_goals"
                   value={option}
                   checked={isSelected}
                   onChange={(e) => setFormData(prev => ({ ...prev, grilla_content_goals: e.target.value }))}
