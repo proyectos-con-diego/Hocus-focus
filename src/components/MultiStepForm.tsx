@@ -46,7 +46,7 @@ interface FormData {
   jaime_difficulty_other: string;
   jaime_habits: string[];
   jaime_habits_other: string;
-  jaime_systems: string;
+  jaime_systems: string[];
   jaime_systems_other: string;
   
   // OKRo
@@ -128,7 +128,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     jaime_difficulty_other: '',
     jaime_habits: [],
     jaime_habits_other: '',
-    jaime_systems: '',
+    jaime_systems: [],
     jaime_systems_other: '',
     // OKRo
     okro_challenge: '',
@@ -401,10 +401,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         
         return !!(hasPlatforms && hasPlatformsOtherText && getStringValue('grilla_frequency'));
       } else if (productSlugLower === 'jaime-daily' || productSlugLower === 'jaime daily') {
-        const hasDifficulty = !!getStringValue('jaime_difficulty');
-        const needsDifficultyOther = getStringValue('jaime_difficulty') === 'Otro';
-        const hasDifficultyOtherText = !needsDifficultyOther || !!getStringValue('jaime_difficulty_other').trim();
-        return !!(getStringValue('jaime_objective') && hasDifficulty && hasDifficultyOtherText);
+        const hasObjective = !!getStringValue('jaime_objective');
+        const hasHabits = getArrayValue('jaime_habits').length > 0;
+        const needsHabitsOther = getArrayValue('jaime_habits').includes('Otro');
+        const hasHabitsOtherText = !needsHabitsOther || !!getStringValue('jaime_habits_other').trim();
+        
+        return !!(hasObjective && hasHabits && hasHabitsOtherText);
       } else if (productSlugLower === 'okro') {
         const challengeValid = !!getStringValue('okro_challenge') && 
           (getStringValue('okro_challenge') !== 'Otro' || !!getStringValue('okro_challenge_other').trim());
@@ -425,15 +427,11 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         
         return !!(hasInvestment && hasTools && hasToolsOtherText);
       } else if (productSlugLower === 'jaime-daily' || productSlugLower === 'jaime daily') {
-        const hasSystems = !!getStringValue('jaime_systems');
-        const needsSystemsOther = getStringValue('jaime_systems') === 'Otro';
+        const hasSystems = getArrayValue('jaime_systems').length > 0;
+        const needsSystemsOther = getArrayValue('jaime_systems').includes('Otro');
         const hasSystemsOtherText = !needsSystemsOther || !!getStringValue('jaime_systems_other').trim();
         
-        const hasHabits = getArrayValue('jaime_habits').length > 0;
-        const needsHabitsOther = getArrayValue('jaime_habits').includes('Otro');
-        const hasHabitsOtherText = !needsHabitsOther || !!getStringValue('jaime_habits_other').trim();
-        
-        return !!(hasHabits && hasHabitsOtherText && hasSystems && hasSystemsOtherText);
+        return !!(hasSystems && hasSystemsOtherText);
       } else if (productSlugLower === 'okro') {
         const purposeValid = !!getStringValue('okro_purpose') && 
           (getStringValue('okro_purpose') !== 'Otro' || !!getStringValue('okro_purpose_other').trim());
@@ -1041,53 +1039,6 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
       <div>
         <label className="block text-white text-sm font-medium mb-2">
-          ¿Qué te resulta más difícil al intentar desarrollar o romper un hábito? *
-        </label>
-        <div className="space-y-2">
-          {['Mantener la constancia', 'Olvidar hacer el seguimiento', 'Falta de motivación inicial', 'No tener claridad en cómo medir progreso', 'Querer hacer muchos cambios a la vez', 'Otro'].map((option) => {
-            const isSelected = getStringValue('jaime_difficulty') === option;
-            const hasSelection = !!getStringValue('jaime_difficulty');
-            const isOpaque = hasSelection && !isSelected;
-            
-            return (
-              <label 
-                key={option} 
-                className={`flex items-center space-x-3 cursor-pointer transition-all duration-300 ${
-                  isOpaque ? 'opacity-30' : 'opacity-100'
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="jaime_difficulty"
-                  value={option}
-                  checked={isSelected}
-                  onChange={(e) => setFormData(prev => ({ ...prev, jaime_difficulty: e.target.value }))}
-                  className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
-                />
-                <span className="text-white text-sm">{option}</span>
-              </label>
-            );
-          })}
-        </div>
-        {getStringValue('jaime_difficulty') === 'Otro' && (
-          <input
-            type="text"
-            value={getStringValue('jaime_difficulty_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, jaime_difficulty: e.target.value }))}
-            placeholder="Especifica qué otras dificultades tienes..."
-            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
-            required
-          />
-        )}
-      </div>
-
-    </div>
-  );
-
-  const renderJaimeStep4 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-white text-sm font-medium mb-2">
           ¿Qué tipo de hábitos te gustaría desarrollar? *
         </label>
         <p className="text-gray-400 text-xs mb-3">Selecciona máximo 3 opciones</p>
@@ -1147,29 +1098,55 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
         )}
       </div>
 
+    </div>
+  );
+
+  const renderJaimeStep4 = () => (
+    <div className="space-y-6">
       <div>
         <label className="block text-white text-sm font-medium mb-2">
           ¿Qué otro sistema has utilizado con anterioridad? *
         </label>
-        <select
-          value={getStringValue('jaime_systems')}
-          onChange={(e) => setFormData(prev => ({ ...prev, jaime_systems: e.target.value }))}
-          className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all"
-          required
-        >
-          <option value="" style={{ color: '#9CA3AF' }}>Selecciona el sistema que has usado</option>
-          <option value="Nunca he usado un sistema de seguimiento">Nunca he usado un sistema de seguimiento</option>
-          <option value="Google Sheets o Excel">Google Sheets o Excel</option>
-          <option value="Aplicaciones móviles de hábitos">Aplicaciones móviles de hábitos</option>
-          <option value="Libretas o diarios físicos">Libretas o diarios físicos</option>
-          <option value="Notion u otros sistemas de productividad">Notion u otros sistemas de productividad</option>
-          <option value="Otro">Otro</option>
-        </select>
-        {getStringValue('jaime_systems') === 'Otro' && (
+        <div className="space-y-2">
+          {['Nunca he usado un sistema de seguimiento', 'Google Sheets o Excel', 'Aplicaciones móviles de hábitos', 'Libretas o diarios físicos', 'Notion u otros sistemas de productividad', 'Otro'].map((option) => (
+            <label key={option} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={getArrayValue('jaime_systems').includes(option)}
+                onChange={(e) => {
+                  const current = getArrayValue('jaime_systems');
+                  const updated = e.target.checked
+                    ? [...current, option]
+                    : current.filter(item => item !== option);
+                  setFormData(prev => ({
+                    ...prev,
+                    jaime_systems: updated
+                  }));
+                }}
+                className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+              />
+              <span className="text-white text-sm">{option}</span>
+            </label>
+          ))}
+        </div>
+        {getArrayValue('jaime_systems').includes('Otro') && (
           <input
             type="text"
             value={getStringValue('jaime_systems_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, jaime_systems_other: e.target.value }))}
+            onChange={(e) => {
+              const currentSystems = getArrayValue('jaime_systems');
+              // Mantener "Otro" en el array mientras se escribe
+              const otherSystems = currentSystems.filter(s => s !== 'Otro' && s !== getStringValue('jaime_systems_other'));
+              const updatedSystems = [...otherSystems, 'Otro'];
+              if (e.target.value.trim()) {
+                updatedSystems.push(e.target.value);
+              }
+              setFormData(prev => ({ 
+                ...prev, 
+                jaime_systems: updatedSystems,
+                jaime_systems_other: e.target.value 
+              }));
+            }}
             placeholder="Especifica qué otro sistema has utilizado..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required

@@ -221,9 +221,15 @@ function formatDataForMake(data: any) {
           }
           return habits;
         })(),
-        jaime_systems: data.jaime_systems === 'Otro' && data.jaime_systems_other 
-          ? data.jaime_systems_other 
-          : (data.jaime_systems || ''),
+        jaime_systems: (() => {
+          const systems = Array.isArray(data.jaime_systems) ? data.jaime_systems : [];
+          const hasOther = systems.includes('Otro') && data.jaime_systems_other;
+          if (hasOther) {
+            const filteredSystems = systems.filter((system: string) => system !== 'Otro');
+            return [...filteredSystems, data.jaime_systems_other];
+          }
+          return systems;
+        })(),
         
         // Preguntas Específicas OKRo
         okro_challenge: data.okro_challenge === 'Otro' && data.okro_challenge_other 
