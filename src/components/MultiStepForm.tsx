@@ -678,7 +678,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           ¿Dónde guardas actualmente tus ideas o pendientes? *
         </label>
         <div className="space-y-2">
-          {['Papel y libretas / post-its', 'Chats conmigo mismo (whatsapp, telegram)', 'Notas de voz', 'En apps como Notion, Todoist, Asana, Trello, Airtable...', 'Word o Google Docs', 'Excel o Spreadsheets', 'No tengo sistema definido', 'Otro'].map((option) => (
+          {['Papel y libretas / post-its', 'Chats conmigo mismo (whatsapp telegram)', 'Notas de voz', 'En apps como Notion Todoist Asana Trello Airtable', 'Word o Google Docs', 'Excel o Spreadsheets', 'No tengo sistema definido', 'Otro'].map((option) => (
             <label key={option} className="flex items-center space-x-3 cursor-pointer">
               <input
                 type="checkbox"
