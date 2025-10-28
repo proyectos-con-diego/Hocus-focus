@@ -678,7 +678,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           ¿Dónde guardas actualmente tus ideas o pendientes? *
         </label>
         <div className="space-y-2">
-          {['Papel y libretas / post-its', 'Chats conmigo mismo (whatsapp telegram)', 'Notas de voz', 'En apps como Notion Todoist Asana Trello Airtable', 'Word o Google Docs', 'Excel o Spreadsheets', 'No tengo sistema definido', 'Otro'].map((option) => (
+          {['Papel y libretas / post-its', 'Chats conmigo mismo (whatsapp, telegram)', 'Notas de voz', 'En apps como Notion, Todoist, Asana, Trello, Airtable...', 'Word o Google Docs', 'Excel o Spreadsheets', 'No tengo sistema definido', 'Otro'].map((option) => (
             <label key={option} className="flex items-center space-x-3 cursor-pointer">
               <input
                 type="checkbox"
@@ -912,7 +912,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           ¿Qué herramientas utilizas actualmente para gestionar tus ideas y proyectos de contenido? *
         </label>
         <div className="space-y-2">
-          {['Herramientas de diseño (Canva Photoshop Figma etc)', 'Edición de video (CapCut Premiere DaVinci etc)', 'Gestión y productividad (Notion Airtable Trello Asana Monday etc)', 'Marketing (HubSpot Mailchimp Buffer etc)', 'Herramientas de Office (Word PowerPoint Excel Google Docs etc)', 'Otro'].map((option) => (
+          {['Herramientas de diseño (Canva, Photoshop, Figma, etc)', 'Edición de video (CapCut, Premiere, DaVinci, etc)', 'Gestión y productividad (Notion, Airtable, Trello, Asana, Monday, etc)', 'Marketing (HubSpot, Mailchimp, Buffer, etc)', 'Herramientas de Office (Word, PowerPoint, Excel, Google Docs, etc)', 'Otro'].map((option) => (
             <label key={option} className="flex items-center space-x-3 cursor-pointer">
               <input
                 type="checkbox"
@@ -1205,7 +1205,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           ¿Qué herramientas utilizas para gestionar objetivos? *
         </label>
         <div className="space-y-2">
-          {['Ninguna herramienta', 'Excel/Google Sheets', 'Herramientas de gestión (Notion Trello Asana etc)', 'Apps de OKR', 'Otro'].map((option) => (
+          {['Ninguna herramienta', 'Excel/Google Sheets', 'Herramientas de gestión (Notion, Trello, Asana, etc)', 'Apps de OKR', 'Otro'].map((option) => (
             <label key={option} className="flex items-center space-x-3 cursor-pointer">
               <input
                 type="checkbox"

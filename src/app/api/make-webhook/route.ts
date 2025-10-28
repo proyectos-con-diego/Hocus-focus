@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/jyh6038vmn3iqvsobgo0qcf3vumcdtbr';
 
+// Helper function to remove commas from multi-select options for Notion compatibility
+const removeCommasFromOptions = (options: string[]): string[] => {
+  return options.map(option => option.replace(/,/g, ''));
+};
+
 export async function POST(request: NextRequest) {
   try {
     console.log('🔗 Recibiendo datos para Make.com webhook...');
@@ -195,9 +200,9 @@ function formatDataForMake(data: any) {
           const hasOther = storage.includes('Otro') && data.vinxi_storage_other;
           if (hasOther) {
             const filteredStorage = storage.filter((item: string) => item !== 'Otro');
-            return [...filteredStorage, data.vinxi_storage_other];
+            return removeCommasFromOptions([...filteredStorage, data.vinxi_storage_other]);
           }
-          return storage;
+          return removeCommasFromOptions(storage);
         })(),
         vinxi_difficulty: data.vinxi_difficulty === 'Otro' && data.vinxi_difficulty_other 
           ? data.vinxi_difficulty_other 
@@ -207,9 +212,9 @@ function formatDataForMake(data: any) {
           const hasOther = projects.includes('Otro') && data.vinxi_projects_other;
           if (hasOther) {
             const filteredProjects = projects.filter((project: string) => project !== 'Otro');
-            return [...filteredProjects, data.vinxi_projects_other];
+            return removeCommasFromOptions([...filteredProjects, data.vinxi_projects_other]);
           }
-          return projects;
+          return removeCommasFromOptions(projects);
         })(),
         vinxi_skill_level: data.vinxi_skill_level || '',
         
@@ -223,18 +228,18 @@ function formatDataForMake(data: any) {
           const hasOther = habits.includes('Otro') && data.jaime_habits_other;
           if (hasOther) {
             const filteredHabits = habits.filter((habit: string) => habit !== 'Otro');
-            return [...filteredHabits, data.jaime_habits_other];
+            return removeCommasFromOptions([...filteredHabits, data.jaime_habits_other]);
           }
-          return habits;
+          return removeCommasFromOptions(habits);
         })(),
         jaime_systems: (() => {
           const systems = Array.isArray(data.jaime_systems) ? data.jaime_systems : [];
           const hasOther = systems.includes('Otro') && data.jaime_systems_other;
           if (hasOther) {
             const filteredSystems = systems.filter((system: string) => system !== 'Otro');
-            return [...filteredSystems, data.jaime_systems_other];
+            return removeCommasFromOptions([...filteredSystems, data.jaime_systems_other]);
           }
-          return systems;
+          return removeCommasFromOptions(systems);
         })(),
         
         // Preguntas Específicas OKRo
@@ -246,9 +251,9 @@ function formatDataForMake(data: any) {
           const hasOther = tools.includes('Otro') && data.okro_tools_other;
           if (hasOther) {
             const filteredTools = tools.filter((tool: string) => tool !== 'Otro');
-            return [...filteredTools, data.okro_tools_other];
+            return removeCommasFromOptions([...filteredTools, data.okro_tools_other]);
           }
-          return tools;
+          return removeCommasFromOptions(tools);
         })(),
         okro_experience: data.okro_experience || '',
         okro_purpose: data.okro_purpose === 'Otro' && data.okro_purpose_other 
@@ -261,9 +266,9 @@ function formatDataForMake(data: any) {
           const hasOther = platforms.includes('Otra') && data.grilla_platforms_other;
           if (hasOther) {
             const filteredPlatforms = platforms.filter((platform: string) => platform !== 'Otra');
-            return [...filteredPlatforms, data.grilla_platforms_other];
+            return removeCommasFromOptions([...filteredPlatforms, data.grilla_platforms_other]);
           }
-          return platforms;
+          return removeCommasFromOptions(platforms);
         })(),
         grilla_frequency: data.grilla_frequency || '',
         grilla_content_goals: data.grilla_content_goals || '',
@@ -272,9 +277,9 @@ function formatDataForMake(data: any) {
           const hasOther = tools.includes('Otro') && data.grilla_tools_other;
           if (hasOther) {
             const filteredTools = tools.filter((tool: string) => tool !== 'Otro');
-            return [...filteredTools, data.grilla_tools_other];
+            return removeCommasFromOptions([...filteredTools, data.grilla_tools_other]);
           }
-          return tools;
+          return removeCommasFromOptions(tools);
         })(),
         grilla_investment: data.grilla_investment || '',
         
