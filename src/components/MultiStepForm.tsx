@@ -96,7 +96,6 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [userCountry, setUserCountry] = useState<string>('');
-  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -382,38 +381,13 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     return (formData[key] as string[]) || [];
   };
 
-  // Helper para validar campos "Otro" (no permitir comas)
-  const validateOtherField = (value: string): { isValid: boolean; message: string } => {
-    if (value.includes(',')) {
-      return {
-        isValid: false,
-        message: 'No se permiten comas (,) en este campo. Usa espacios en su lugar.'
-      };
-    }
-    return { isValid: true, message: '' };
-  };
-
-  // Helper para manejar onChange de campos "Otro" con validación
+  // Helper para manejar onChange de campos "Otro" con filtrado automático de comas
   const handleOtherFieldChange = (fieldName: string, value: string) => {
-    const validation = validateOtherField(value);
+    // Filtrar comas automáticamente
+    const filteredValue = value.replace(/,/g, '');
     
-    if (validation.isValid) {
-      // Limpiar error si existe
-      setValidationErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[fieldName];
-        return newErrors;
-      });
-    } else {
-      // Mostrar error
-      setValidationErrors(prev => ({
-        ...prev,
-        [fieldName]: validation.message
-      }));
-    }
-    
-    // Actualizar el campo
-    setFormData(prev => ({ ...prev, [fieldName]: value }));
+    // Actualizar el campo con el valor filtrado
+    setFormData(prev => ({ ...prev, [fieldName]: filteredValue }));
   };
 
   // Función para validar las preguntas específicas del producto
@@ -421,10 +395,6 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     if (productType !== 'mini') return true;
 
     const productSlugLower = productSlug.toLowerCase();
-
-    // Verificar si hay errores de validación en campos "Otro"
-    const hasValidationErrors = Object.keys(validationErrors).length > 0;
-    if (hasValidationErrors) return false;
 
     if (pageNumber === 3) {
       if (productSlugLower === 'vinxi') {
@@ -782,21 +752,14 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <option value="Otro">Otro</option>
         </select>
         {getStringValue('vinxi_difficulty') === 'Otro' && (
-          <div>
-            <input
-              type="text"
-              value={getStringValue('vinxi_difficulty_other')}
-              onChange={(e) => handleOtherFieldChange('vinxi_difficulty_other', e.target.value)}
-              placeholder="Describe tu mayor dificultad..."
-              className={`w-full px-4 py-3 rounded-xl bg-white/10 border text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2 ${
-                validationErrors['vinxi_difficulty_other'] ? 'border-red-400' : 'border-white/20'
-              }`}
-              required
-            />
-            {validationErrors['vinxi_difficulty_other'] && (
-              <p className="text-red-400 text-xs mt-1">{validationErrors['vinxi_difficulty_other']}</p>
-            )}
-          </div>
+          <input
+            type="text"
+            value={getStringValue('vinxi_difficulty_other')}
+            onChange={(e) => handleOtherFieldChange('vinxi_difficulty_other', e.target.value)}
+            placeholder="Describe tu mayor dificultad..."
+            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
+            required
+          />
         )}
       </div>
     </div>
@@ -1235,21 +1198,14 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <option value="Otro">Otro</option>
         </select>
         {getStringValue('okro_challenge') === 'Otro' && (
-          <div>
-            <input
-              type="text"
-              value={getStringValue('okro_challenge_other')}
-              onChange={(e) => handleOtherFieldChange('okro_challenge_other', e.target.value)}
-              placeholder="Describe tu desafío específico..."
-              className={`w-full px-4 py-3 rounded-xl bg-white/10 border text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2 ${
-                validationErrors['okro_challenge_other'] ? 'border-red-400' : 'border-white/20'
-              }`}
-              required
-            />
-            {validationErrors['okro_challenge_other'] && (
-              <p className="text-red-400 text-xs mt-1">{validationErrors['okro_challenge_other']}</p>
-            )}
-          </div>
+          <input
+            type="text"
+            value={getStringValue('okro_challenge_other')}
+            onChange={(e) => handleOtherFieldChange('okro_challenge_other', e.target.value)}
+            placeholder="Describe tu desafío específico..."
+            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
+            required
+          />
         )}
       </div>
 
@@ -1357,21 +1313,14 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           <option value="Otro">Otro</option>
         </select>
         {getStringValue('okro_purpose') === 'Otro' && (
-          <div>
-            <input
-              type="text"
-              value={getStringValue('okro_purpose_other')}
-              onChange={(e) => handleOtherFieldChange('okro_purpose_other', e.target.value)}
-              placeholder="Especifica otro propósito..."
-              className={`w-full px-4 py-3 rounded-xl bg-white/10 border text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2 ${
-                validationErrors['okro_purpose_other'] ? 'border-red-400' : 'border-white/20'
-              }`}
-              required
-            />
-            {validationErrors['okro_purpose_other'] && (
-              <p className="text-red-400 text-xs mt-1">{validationErrors['okro_purpose_other']}</p>
-            )}
-          </div>
+          <input
+            type="text"
+            value={getStringValue('okro_purpose_other')}
+            onChange={(e) => handleOtherFieldChange('okro_purpose_other', e.target.value)}
+            placeholder="Especifica otro propósito..."
+            className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
+            required
+          />
         )}
       </div>
     </div>
