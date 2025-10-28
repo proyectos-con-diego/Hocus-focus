@@ -190,9 +190,15 @@ function formatDataForMake(data: any) {
         productLabel: `${data.productName || ''}_mini`.toLowerCase(),
         
         // Preguntas Específicas VINXI (enviar directamente al nivel raíz)
-        vinxi_storage: data.vinxi_storage === 'Otro' && data.vinxi_storage_other 
-          ? data.vinxi_storage_other 
-          : (data.vinxi_storage || ''),
+        vinxi_storage: (() => {
+          const storage = Array.isArray(data.vinxi_storage) ? data.vinxi_storage : [];
+          const hasOther = storage.includes('Otro') && data.vinxi_storage_other;
+          if (hasOther) {
+            const filteredStorage = storage.filter((item: string) => item !== 'Otro');
+            return [...filteredStorage, data.vinxi_storage_other];
+          }
+          return storage;
+        })(),
         vinxi_difficulty: data.vinxi_difficulty === 'Otro' && data.vinxi_difficulty_other 
           ? data.vinxi_difficulty_other 
           : (data.vinxi_difficulty || ''),

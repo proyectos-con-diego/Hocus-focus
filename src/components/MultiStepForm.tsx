@@ -66,7 +66,7 @@ interface FormData {
   vinxi_systems: string;
   // Campos adicionales para VIP/Spirit
   spiritType: string;
-  vinxi_storage: string;
+  vinxi_storage: string[];
   vinxi_storage_other: string;
   vinxi_projects: string[];
   vinxi_projects_other: string;
@@ -146,7 +146,7 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
     vinxi_systems: '',
     // Campos adicionales para VIP/Spirit
     spiritType: '',
-    vinxi_storage: '',
+    vinxi_storage: [],
     vinxi_storage_other: '',
     vinxi_projects: [],
     vinxi_projects_other: '',
@@ -389,11 +389,12 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
 
     if (pageNumber === 3) {
       if (productSlugLower === 'vinxi') {
-        const storageValid = !!getStringValue('vinxi_storage') && 
-          (getStringValue('vinxi_storage') !== 'Otro' || !!getStringValue('vinxi_storage_other').trim());
+        const storageValid = getArrayValue('vinxi_storage').length > 0;
+        const needsStorageOther = getArrayValue('vinxi_storage').includes('Otro');
+        const hasStorageOtherText = !needsStorageOther || !!getStringValue('vinxi_storage_other').trim();
         const difficultyValid = !!getStringValue('vinxi_difficulty') && 
           (getStringValue('vinxi_difficulty') !== 'Otro' || !!getStringValue('vinxi_difficulty_other').trim());
-        return storageValid && difficultyValid;
+        return storageValid && hasStorageOtherText && difficultyValid;
       } else if (productSlugLower === 'grilla-viralis' || productSlugLower === 'grilla viralis') {
         const hasPlatforms = getArrayValue('grilla_platforms').length > 0;
         const needsPlatformsOther = getArrayValue('grilla_platforms').includes('Otra');
@@ -677,37 +678,46 @@ const MultiStepForm: React.FC<MultiStepFormProps> = ({
           ¿Dónde guardas actualmente tus ideas o pendientes? *
         </label>
         <div className="space-y-2">
-          {['Papel y libretas / post-its', 'Chats conmigo mismo (whatsapp, telegram)', 'Notas de voz', 'En apps como Notion, Todoist, Asana, Trello, Airtable...', 'Word o Google Docs', 'Excel o Spreadsheets', 'No tengo sistema definido', 'Otro'].map((option) => {
-            const isSelected = getStringValue('vinxi_storage') === option;
-            const hasSelection = !!getStringValue('vinxi_storage');
-            const isOpaque = hasSelection && !isSelected;
-            
-            return (
-              <label 
-                key={option} 
-                className={`flex items-center space-x-3 cursor-pointer transition-all duration-300 ${
-                  isOpaque ? 'opacity-30' : 'opacity-100'
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="vinxi_storage"
-                  value={option}
-                  checked={isSelected}
-                  onChange={(e) => setFormData(prev => ({ ...prev, vinxi_storage: e.target.value }))}
-                  className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 focus:ring-cyan-400 focus:ring-2"
-                />
-                <span className="text-white text-sm">{option}</span>
-              </label>
-            );
-          })}
+          {['Papel y libretas / post-its', 'Chats conmigo mismo (whatsapp, telegram)', 'Notas de voz', 'En apps como Notion, Todoist, Asana, Trello, Airtable...', 'Word o Google Docs', 'Excel o Spreadsheets', 'No tengo sistema definido', 'Otro'].map((option) => (
+            <label key={option} className="flex items-center space-x-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={getArrayValue('vinxi_storage').includes(option)}
+                onChange={(e) => {
+                  const current = getArrayValue('vinxi_storage');
+                  const updated = e.target.checked
+                    ? [...current, option]
+                    : current.filter(item => item !== option);
+                  setFormData(prev => ({
+                    ...prev,
+                    vinxi_storage: updated
+                  }));
+                }}
+                className="w-4 h-4 text-cyan-400 bg-white/10 border-white/20 rounded focus:ring-cyan-400 focus:ring-2"
+              />
+              <span className="text-white text-sm">{option}</span>
+            </label>
+          ))}
         </div>
-        {getStringValue('vinxi_storage') === 'Otro' && (
+        {getArrayValue('vinxi_storage').includes('Otro') && (
           <input
             type="text"
             value={getStringValue('vinxi_storage_other')}
-            onChange={(e) => setFormData(prev => ({ ...prev, vinxi_storage: e.target.value }))}
-            placeholder="Especifica dónde guardas tus ideas..."
+            onChange={(e) => {
+              const currentStorage = getArrayValue('vinxi_storage');
+              // Mantener "Otro" en el array mientras se escribe
+              const otherStorage = currentStorage.filter(s => s !== 'Otro' && s !== getStringValue('vinxi_storage_other'));
+              const updatedStorage = [...otherStorage, 'Otro'];
+              if (e.target.value.trim()) {
+                updatedStorage.push(e.target.value);
+              }
+              setFormData(prev => ({ 
+                ...prev, 
+                vinxi_storage: updatedStorage,
+                vinxi_storage_other: e.target.value 
+              }));
+            }}
+            placeholder="Especifica dónde más guardas tus ideas..."
             className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:bg-white/20 focus:border-cyan-400 transition-all mt-2"
             required
           />
