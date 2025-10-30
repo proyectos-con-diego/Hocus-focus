@@ -1386,16 +1386,16 @@ export default function SobreMiExperimentalPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <button 
+            <Link
+              href="/productos"
               onClick={() => {
                 try { trackEvent({ action: 'click_cta', category: 'Sobre Mi', label: 'ver_todos_productos' }); } catch {}
-                window.location.href = '/productos';
               }}
               className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-gray-700/50 to-gray-800/50 backdrop-blur-sm border border-gray-600/50 text-gray-300 hover:text-white hover:border-cyan-400/50 hover:bg-gray-700/70 transition-all duration-300 rounded-lg group"
             >
               <span className="text-sm font-medium">Ver todos los productos</span>
               <span className="text-cyan-400 group-hover:translate-x-1 transition-transform duration-300">→</span>
-            </button>
+            </Link>
           </motion.div>
         </div>
       </section>

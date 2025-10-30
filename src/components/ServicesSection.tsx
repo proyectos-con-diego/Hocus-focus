@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 import { servicesData } from '../data/servicios'; // Changed from '@/data/servicios'
 
 export default function ServicesSection() {
@@ -70,12 +71,12 @@ export default function ServicesSection() {
               </div>
               
               {/* CTA Button - Ahora está pegado al fondo */}
-              <button 
-                className={`w-full px-6 py-3 bg-gradient-to-r ${service.buttonColor} text-white font-bold rounded-lg hover:scale-105 transition-all duration-300 transform mt-auto`}
-                onClick={() => window.location.href = service.url}
+              <Link 
+                href={service.url}
+                className={`w-full px-6 py-3 bg-gradient-to-r ${service.buttonColor} text-white font-bold rounded-lg hover:scale-105 transition-all duration-300 transform mt-auto text-center block`}
               >
                 {service.buttonText}
-              </button>
+              </Link>
               </div>
             </div>
           ))}

@@ -2495,6 +2495,31 @@ export default function ProductoPage() {
                     ))
                   )}
                 </div>
+                
+                {/* Botón "Cómo funciona" */}
+                <div className="text-center mt-12">
+                  <button 
+                    className="px-8 py-4 border-2 rounded-full font-semibold transition-all duration-300 group relative overflow-hidden"
+                    style={{ borderColor: mainColor, color: mainColor }}
+                    onClick={() => {
+                      setActiveTab('how-it-works');
+                      setTimeout(() => {
+                        const tabsSection = document.querySelector('[data-section="tabs"]');
+                        if (tabsSection) {
+                          tabsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }, 100);
+                    }}
+                  >
+                    <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+                      📖 Cómo funciona
+                    </span>
+                    <span
+                      className="absolute inset-0 w-0 group-hover:w-full transition-all duration-300 rounded-full"
+                      style={{ background: mainGradient }}
+                    ></span>
+                  </button>
+                </div>
               </div>
           )}
 

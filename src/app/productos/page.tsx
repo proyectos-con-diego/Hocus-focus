@@ -215,9 +215,9 @@ export default function ProductosNuevoPage() {
             }} className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300">
               🚀 Ver todos los agentes
             </button>
-            <button onClick={() => { try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'probar_spirits_gratis' }); } catch {} ; window.location.href = '/spirit-gpts'; }} className="px-10 py-4 border-2 border-white text-white rounded-full font-bold text-xl hover:bg-white hover:text-purple-900 transition-all duration-300">
+            <a href="/spirit-gpts" onClick={() => { try { trackEvent({ action: 'click_cta_banner', category: 'Productos', label: 'probar_spirits_gratis' }); } catch {} }} className="px-10 py-4 border-2 border-white text-white rounded-full font-bold text-xl hover:bg-white hover:text-purple-900 transition-all duration-300">
               🎁 Probar Spirits Gratis
-            </button>
+            </a>
           </div>
         </div>
       </section>

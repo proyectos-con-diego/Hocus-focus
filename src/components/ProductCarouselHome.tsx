@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { products, Product } from '../data/products';
 
 // Función helper para mapear nombres de productos a rutas de imágenes de personajes
@@ -96,13 +95,7 @@ function getGradientFromProduct(product: any): string {
 }
 
 export default function ProductCarouselHome() {
-  const router = useRouter();
   const [hoveredAgent, setHoveredAgent] = useState<string | null>(null);
-
-  const handleTimelineClick = (index: number) => {
-    const mascot = timelineMascots[index];
-    router.push(`/productos/${mascot.slug}`);
-  };
 
   return (
     <section 
@@ -149,14 +142,14 @@ export default function ProductCarouselHome() {
           >
             {/* Primera serie de mascotas */}
             {timelineMascots.map((mascot: Mascot, index: number) => (
-              <div
+              <Link
                 key={`first-${index}`}
+                href={`/productos/${mascot.slug}`}
                 className="flex flex-col items-center cursor-pointer transition-all duration-400 relative"
                 style={{
                   minWidth: '160px',
                   margin: '0 20px'
                 }}
-                onClick={() => handleTimelineClick(index)}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-10px)';
                 }}
@@ -220,19 +213,19 @@ export default function ProductCarouselHome() {
                 <div className="text-sm opacity-70" style={{ fontSize: '0.9rem', opacity: 0.7 }}>
                   {mascot.category}
                 </div>
-              </div>
+              </Link>
             ))}
 
             {/* Serie duplicada para efecto infinito */}
             {timelineMascots.map((mascot: Mascot, index: number) => (
-              <div
+              <Link
                 key={`second-${index}`}
+                href={`/productos/${mascot.slug}`}
                 className="flex flex-col items-center cursor-pointer transition-all duration-400 relative"
                 style={{
                   minWidth: '160px',
                   margin: '0 20px'
                 }}
-                onClick={() => handleTimelineClick(index)}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-10px)';
                 }}
@@ -296,19 +289,19 @@ export default function ProductCarouselHome() {
                 <div className="text-sm opacity-70" style={{ fontSize: '0.9rem', opacity: 0.7 }}>
                   {mascot.category}
                 </div>
-              </div>
+              </Link>
             ))}
 
             {/* Tercera serie para garantizar infinito */}
             {timelineMascots.map((mascot: Mascot, index: number) => (
-              <div
+              <Link
                 key={`third-${index}`}
+                href={`/productos/${mascot.slug}`}
                 className="flex flex-col items-center cursor-pointer transition-all duration-400 relative"
                 style={{
                   minWidth: '160px',
                   margin: '0 20px'
                 }}
-                onClick={() => handleTimelineClick(index)}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-10px)';
                 }}
@@ -372,7 +365,7 @@ export default function ProductCarouselHome() {
                 <div className="text-sm opacity-70" style={{ fontSize: '0.9rem', opacity: 0.7 }}>
                   {mascot.category}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

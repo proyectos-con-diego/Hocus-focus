@@ -1,21 +1,11 @@
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface AboutMeBannerProps {
   onServicesClick?: () => void;
 }
 
 export default function AboutMeBanner({ onServicesClick }: AboutMeBannerProps) {
-  const router = useRouter();
-
-  const handleClick = () => {
-    if (onServicesClick) {
-      onServicesClick();
-    } else {
-      router.push('/servicios');
-    }
-  };
-
   return (
     <section className="py-20 px-6 bg-gradient-to-r relative overflow-hidden" style={{
       background: 'linear-gradient(to right, #7c3aed, #4c1d95)'
@@ -28,18 +18,27 @@ export default function AboutMeBanner({ onServicesClick }: AboutMeBannerProps) {
           <span className="text-purple-300 font-semibold">Precios de lanzamiento + atención personalizada.</span>
         </p>
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <button 
-            onClick={handleClick}
-            className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300"
-          >
-            🚀 Ver servicios de automatización
-          </button>
-          <button 
-            onClick={() => router.push('/spirit-gpts')}
+          {onServicesClick ? (
+            <button 
+              onClick={onServicesClick}
+              className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300"
+            >
+              🚀 Ver servicios de automatización
+            </button>
+          ) : (
+            <Link
+              href="/servicios"
+              className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full font-bold text-xl shadow-2xl hover:scale-110 transform transition-all duration-300"
+            >
+              🚀 Ver servicios de automatización
+            </Link>
+          )}
+          <Link
+            href="/spirit-gpts"
             className="px-10 py-4 border-2 border-white text-white rounded-full font-bold text-xl hover:bg-white hover:text-purple-900 transition-all duration-300"
           >
             🎁 Probar Spirits gratis
-          </button>
+          </Link>
         </div>
       </div>
     </section>

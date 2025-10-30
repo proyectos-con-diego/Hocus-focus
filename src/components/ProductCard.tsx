@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 import { Product } from '../data/products';
 
 // Función helper para mapear nombres de productos a nombres de archivos de imágenes
@@ -219,10 +220,10 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
 
       {/* Action Button */}
       <div className="mt-auto pt-6">
-        <button 
-          className="btn-shop w-full py-3 px-6 text-base font-semibold transition-all duration-300 cursor-pointer touch-manipulation" 
+        <Link
+          href={`/productos/${product.slug}`}
+          className="btn-shop w-full py-3 px-6 text-base font-semibold transition-all duration-300 cursor-pointer touch-manipulation inline-block text-center"
           style={{
-            border: 'none',
             borderRadius: '12px',
             fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
             fontWeight: 600,
@@ -238,25 +239,20 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
             minHeight: '48px'
           }}
           onMouseEnter={(e) => {
-            const button = e.currentTarget;
+            const button = e.currentTarget as HTMLElement;
             button.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(236, 72, 153, 0.9))';
             button.style.borderColor = 'rgba(139, 92, 246, 0.4)';
             button.style.boxShadow = '0 6px 20px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
           }}
           onMouseLeave={(e) => {
-            const button = e.currentTarget;
+            const button = e.currentTarget as HTMLElement;
             button.style.background = 'linear-gradient(135deg, rgba(75, 85, 99, 0.8), rgba(55, 65, 81, 0.8))';
             button.style.borderColor = 'rgba(255, 255, 255, 0.1)';
             button.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)';
           }}
-          onClick={(e) => {
-            e.stopPropagation();
-            createRipple(e);
-            handleClick();
-          }}
         >
           {product.name === 'Bafet' || product.name === 'Lee Der' ? '🔔 Próximamente' : (product.isBeta ? 'Lista de Espera' : getButtonText(product.name))}
-        </button>
+        </Link>
       </div>
     </div>
   );
