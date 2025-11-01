@@ -134,6 +134,26 @@ function generateJaimeDailyPlans(product: any) {
       badgeGradient: mainGradient,
       buttonColor: mainColor,
       buttonGradient: mainGradient
+    },
+    {
+      name: "Jaime Daily Ai",
+      badge: "PRÓXIMAMENTE",
+      description: "Con Inteligencia Artificial",
+      price: "Próximamente",
+      features: [
+        { text: "Todo lo de la versión PRO", included: true },
+        { text: "Asistente IA personalizado", included: true },
+        { text: "Análisis inteligente de patrones", included: true },
+        { text: "Recomendaciones adaptativas", included: true },
+        { text: "Chat conversacional integrado", included: true },
+        { text: "Insights automáticos", included: true }
+      ],
+      cta: "🔮 Próximamente",
+      badgeColor: "#9333ea",
+      badgeGradient: "linear-gradient(45deg, #9333ea, #c026d3)",
+      buttonColor: "#9333ea",
+      buttonGradient: "linear-gradient(45deg, #9333ea, #c026d3)",
+      comingSoon: true
     }
   ];
 }
@@ -165,6 +185,17 @@ function generateJaimeDailyGuarantee(product: any) {
 
 // Función helper específica para planes de Midas
 function generateMidasPlans(product: any) {
+  // Extraer el color principal del producto del gradiente
+  let mainColor = '#ff9800'; // Color por defecto
+  if (product.avatarBg) {
+    // Extraer el primer color del gradiente usando regex
+    const match = product.avatarBg.match(/#[a-fA-F0-9]{6}/);
+    if (match) {
+      mainColor = match[0];
+    }
+  }
+  const mainGradient = product.avatarBg || 'linear-gradient(45deg, #ff9800, #ff6f00)';
+  
   return [
     {
       name: "Midas PRO",
@@ -184,7 +215,31 @@ function generateMidasPlans(product: any) {
         { text: "Calendario integrado para planificación", included: true },
         { text: "Configuración guiada paso a paso", included: true },
         { text: "Acceso móvil vía Notion", included: true }      ],
-      cta: "💰 Comprar Midas PRO"
+      cta: "💰 Comprar Midas PRO",
+      badgeColor: mainColor,
+      badgeGradient: mainGradient,
+      buttonColor: mainColor,
+      buttonGradient: mainGradient
+    },
+    {
+      name: "Midas Ai",
+      badge: "PRÓXIMAMENTE",
+      description: "Con Inteligencia Artificial",
+      price: "Próximamente",
+      features: [
+        { text: "Todo lo de la versión PRO", included: true },
+        { text: "Asistente IA personalizado", included: true },
+        { text: "Análisis predictivo de gastos", included: true },
+        { text: "Recomendaciones inteligentes de ahorro", included: true },
+        { text: "Detección automática de patrones", included: true },
+        { text: "Alertas inteligentes de presupuesto", included: true }
+      ],
+      cta: "🔮 Próximamente",
+      badgeColor: "#9333ea",
+      badgeGradient: "linear-gradient(45deg, #9333ea, #c026d3)",
+      buttonColor: "#9333ea",
+      buttonGradient: "linear-gradient(45deg, #9333ea, #c026d3)",
+      comingSoon: true
     }
   ];
 }
@@ -242,6 +297,26 @@ function generateOKRoPlans(product: any) {
       badgeGradient: mainGradient,
       buttonColor: mainColor,
       buttonGradient: mainGradient
+    },
+    {
+      name: `${product.name} Ai`,
+      badge: "PRÓXIMAMENTE",
+      description: "Con Inteligencia Artificial",
+      price: "Próximamente",
+      features: [
+        { text: "Todo lo de la versión PRO", included: true },
+        { text: "Asistente IA personalizado", included: true },
+        { text: "Análisis predictivo de OKRs", included: true },
+        { text: "Recomendaciones de objetivos inteligentes", included: true },
+        { text: "Seguimiento automático de progreso", included: true },
+        { text: "Generación de estrategias por IA", included: true }
+      ],
+      cta: "🔮 Próximamente",
+      badgeColor: "#9333ea",
+      badgeGradient: "linear-gradient(45deg, #9333ea, #c026d3)",
+      buttonColor: "#9333ea",
+      buttonGradient: "linear-gradient(45deg, #9333ea, #c026d3)",
+      comingSoon: true
     }
   ];
 }
@@ -306,6 +381,26 @@ function generateGrillaPlans(product: any) {
       badgeGradient: mainGradient,
       buttonColor: mainColor,
       buttonGradient: mainGradient
+    },
+    {
+      name: `${product.name} Ai`,
+      badge: "PRÓXIMAMENTE",
+      description: "Con Inteligencia Artificial",
+      price: "Próximamente",
+      features: [
+        { text: "Todo lo de la versión PRO", included: true },
+        { text: "Asistente IA personalizado", included: true },
+        { text: "Generación automática de contenido", included: true },
+        { text: "Análisis predictivo de engagement", included: true },
+        { text: "Optimización de calendario por IA", included: true },
+        { text: "Sugerencias inteligentes de distribución", included: true }
+      ],
+      cta: "🔮 Próximamente",
+      badgeColor: "#9333ea",
+      badgeGradient: "linear-gradient(45deg, #9333ea, #c026d3)",
+      buttonColor: "#9333ea",
+      buttonGradient: "linear-gradient(45deg, #9333ea, #c026d3)",
+      comingSoon: true
     }
   ];
 }
@@ -368,6 +463,26 @@ function generateVinxiPlans(product: any) {
       badgeGradient: mainGradient,
       buttonColor: mainColor,
       buttonGradient: mainGradient
+    },
+    {
+      name: `${product.name} Ai`,
+      badge: "PRÓXIMAMENTE",
+      description: "Con Inteligencia Artificial",
+      price: "Próximamente",
+      features: [
+        { text: "Todo lo de la versión PRO", included: true },
+        { text: "Asistente IA personalizado", included: true },
+        { text: "Optimización automática de proyectos", included: true },
+        { text: "Sugerencias inteligentes de prioridades", included: true },
+        { text: "Análisis predictivo de entregas", included: true },
+        { text: "Generación automática de tareas", included: true }
+      ],
+      cta: "🔮 Próximamente",
+      badgeColor: "#9333ea",
+      badgeGradient: "linear-gradient(45deg, #9333ea, #c026d3)",
+      buttonColor: "#9333ea",
+      buttonGradient: "linear-gradient(45deg, #9333ea, #c026d3)",
+      comingSoon: true
     }
   ];
 }
@@ -2741,11 +2856,11 @@ export default function ProductoPage() {
                     <div className={`absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-full text-sm font-bold text-white ${
                       plan.badge === 'GRATIS' 
                         ? 'bg-gradient-to-r from-gray-500 to-gray-600' 
-                        : plan.badge === 'RECOMENDADO' || plan.badge === 'RECOMENDADA' || plan.badge === 'MÁS POPULAR'
+                        : plan.badge === 'RECOMENDADO' || plan.badge === 'RECOMENDADA' || plan.badge === 'MÁS POPULAR' || plan.badge === 'PRÓXIMAMENTE'
                         ? ''
                         : 'bg-gradient-to-r from-pink-500 to-purple-600'
                     }`} style={
-                      plan.badge === 'RECOMENDADO' || plan.badge === 'RECOMENDADA' || plan.badge === 'MÁS POPULAR' 
+                      plan.badge === 'RECOMENDADO' || plan.badge === 'RECOMENDADA' || plan.badge === 'MÁS POPULAR' || plan.badge === 'PRÓXIMAMENTE'
                         ? { background: (plan as any).badgeGradient || mainGradient } 
                         : plan.badge === 'PROMO'
                         ? { background: (plan as any).badgeGradient || 'linear-gradient(to right, #ec4899, #8b5cf6)' }
@@ -2781,6 +2896,8 @@ export default function ProductoPage() {
                         ? 'border-2 hover:text-white' 
                         : plan.badge === 'PROMO'
                         ? 'text-white hover:scale-105 transition-transform duration-300'
+                        : (plan as any).comingSoon
+                        ? 'text-white cursor-not-allowed opacity-60'
                         : 'text-white hover:scale-105 transition-transform duration-300'
                     }`} style={plan.badge === 'GRATIS' ? { 
                       borderColor: (plan as any).buttonColor || mainColor, 
@@ -2788,19 +2905,29 @@ export default function ProductoPage() {
                       backgroundColor: 'transparent'
                     } : plan.badge === 'PROMO' ? { 
                       background: (plan as any).buttonGradient || 'linear-gradient(to right, #ec4899, #8b5cf6)' 
+                    } : (plan as any).comingSoon ? {
+                      background: (plan as any).buttonGradient || mainGradient
                     } : { 
                       background: (plan as any).buttonGradient || mainGradient 
                     }} onMouseEnter={(e) => {
                       if (plan.badge === 'GRATIS') {
                         e.currentTarget.style.backgroundColor = (plan as any).buttonColor || mainColor;
                         e.currentTarget.style.color = 'white';
+                      } else if ((plan as any).comingSoon) {
+                        e.currentTarget.style.opacity = '0.7';
                       }
                     }} onMouseLeave={(e) => {
                       if (plan.badge === 'GRATIS') {
                         e.currentTarget.style.backgroundColor = 'transparent';
                         e.currentTarget.style.color = (plan as any).buttonColor || mainColor;
+                      } else if ((plan as any).comingSoon) {
+                        e.currentTarget.style.opacity = '0.6';
                       }
-                    }} onClick={() => {
+                    }} onClick={(e) => {
+                      if ((plan as any).comingSoon) {
+                        e.preventDefault();
+                        return;
+                      }
                       if (plan.badge === 'GRATIS') {
                         // Para botones GRATIS, abrir modal MINI
                         openMiniModal();
