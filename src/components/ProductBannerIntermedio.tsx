@@ -187,13 +187,14 @@ export default function ProductBannerIntermedio({ product }: ProductBannerInterm
           <img 
             src={getPetImageName(product.nombre)}
             alt={`${product.nombre} mascota`}
-            className="w-16 h-16 object-contain"
+            className="md:w-16 md:h-16 object-contain"
+            style={{ width: '84px', height: '84px' }}
             onError={(e) => {
               // Fallback al emoji si la imagen no carga
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';
               const fallback = document.createElement('div');
-              fallback.className = 'text-4xl';
+              fallback.className = 'text-5xl md:text-4xl';
               fallback.textContent = getProductIcon(product.nombre);
               target.parentNode?.insertBefore(fallback, target);
             }}

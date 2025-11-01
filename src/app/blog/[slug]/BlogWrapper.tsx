@@ -98,13 +98,13 @@ export default function BlogWrapper({ post, firstHalf, secondHalf, children }: B
                 <img 
                   src={getPetImageName(productConfig.name)}
                   alt={`${productConfig.name} mascota`}
-                  className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                  className="w-16 h-16 md:w-16 md:h-16 object-contain"
                   onError={(e) => {
                     // Fallback al emoji si la imagen no carga
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
                     const fallback = document.createElement('span');
-                    fallback.className = 'text-3xl md:text-4xl';
+                    fallback.className = 'text-4xl md:text-4xl';
                     fallback.textContent = productConfig.emoji;
                     target.parentNode?.insertBefore(fallback, target);
                   }}

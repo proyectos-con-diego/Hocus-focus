@@ -453,6 +453,7 @@ export default function SobreMiExperimentalPage() {
   const projectsData = React.useMemo(() => [
     {
       icon: "🛍️",
+      logo: "/+-logos/GoodFellas-brand.png",
       title: "GoodFellas",
       description: "E-commerce de polos divertidos inspirados en memes. Diseños únicos y humor que conecta con la cultura digital actual.",
       badge: "E-COMMERCE",
@@ -461,8 +462,8 @@ export default function SobreMiExperimentalPage() {
       gradient: "from-pink-500 to-purple-500"
     },
     {
-      icon: "🔮",
-      title: "Mystical Insights",
+      icon: "🃏",
+      title: "Tarot Bajo la Manga",
       description: "Blog sobre tarot práctico donde comparto interpretaciones, lecturas y consejos para aplicar la sabiduría del tarot en la vida cotidiana.",
       badge: "TAROT",
       badgeText: "Blog activo - Actualizaciones semanales",
@@ -1441,8 +1442,25 @@ export default function SobreMiExperimentalPage() {
                   </div>
                   
                   {/* Icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-r ${project.gradient} rounded-2xl flex items-center justify-center text-3xl mb-6`}>
-                    {project.icon}
+                  <div className={`w-16 h-16 bg-gradient-to-r ${project.gradient} rounded-2xl flex items-center justify-center mb-6 overflow-hidden`}>
+                    {(project as any).logo ? (
+                      <img 
+                        src={(project as any).logo} 
+                        alt={project.title}
+                        className="w-full h-full object-contain p-2"
+                        onError={(e) => {
+                          // Fallback al emoji si la imagen no carga
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const fallback = document.createElement('div');
+                          fallback.className = 'text-3xl';
+                          fallback.textContent = project.icon;
+                          target.parentNode?.insertBefore(fallback, target);
+                        }}
+                      />
+                    ) : (
+                      <span className="text-3xl">{project.icon}</span>
+                    )}
                   </div>
                   
                   {/* Content */}
