@@ -55,3 +55,13 @@ body {
   0% { box-shadow: 0 0 32px 0 #a21caf55, 0 8px 32px 0 #0008; }
   100% { box-shadow: 0 0 64px 8px #a21caf99, 0 8px 32px 0 #0008; }
 }
+
+/* Ocultar scrollbar pero mantener funcionalidad */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE y Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari y Opera */
+}

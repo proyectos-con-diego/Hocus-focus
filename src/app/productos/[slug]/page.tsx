@@ -2505,15 +2505,15 @@ export default function ProductoPage() {
       </section>
 
       {/* Tabs Navigation */}
-      <section className="py-6 sm:py-8 px-4 sm:px-6 bg-gray-900/30 border-b border-gray-800" data-section="tabs">
+      <section className="py-4 sm:py-6 px-2 sm:px-6 bg-gray-900/30 border-b border-gray-800" data-section="tabs">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
+          <div className="flex gap-1 sm:gap-3 justify-center overflow-x-auto pb-2 -mx-2 sm:mx-0 px-2 sm:px-0 scrollbar-hide">
             <button 
               onClick={() => {
                 try { trackEvent({ action: 'click_tab', category: 'Producto', label: `${product?.name || 'unknown'}_features` }); } catch {}
                 setActiveTab('features');
               }}
-              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
+              className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-base whitespace-nowrap transition-all duration-300 touch-manipulation flex-shrink-0 ${
                 activeTab === 'features' 
                   ? ''
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -2527,7 +2527,7 @@ export default function ProductoPage() {
                 try { trackEvent({ action: 'click_tab', category: 'Producto', label: `${product?.name || 'unknown'}_how-it-works` }); } catch {}
                 setActiveTab('how-it-works');
               }}
-              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
+              className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-base whitespace-nowrap transition-all duration-300 touch-manipulation flex-shrink-0 ${
                 activeTab === 'how-it-works' 
                   ? ''
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -2541,7 +2541,7 @@ export default function ProductoPage() {
                 try { trackEvent({ action: 'click_tab', category: 'Producto', label: `${product?.name || 'unknown'}_testimonials` }); } catch {}
                 setActiveTab('testimonials');
               }}
-              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
+              className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-base whitespace-nowrap transition-all duration-300 touch-manipulation flex-shrink-0 ${
                 activeTab === 'testimonials' 
                   ? ''
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
@@ -2555,7 +2555,7 @@ export default function ProductoPage() {
                 try { trackEvent({ action: 'click_tab', category: 'Producto', label: `${product?.name || 'unknown'}_faq` }); } catch {}
                 setActiveTab('faq');
               }}
-              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 touch-manipulation ${
+              className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-base whitespace-nowrap transition-all duration-300 touch-manipulation flex-shrink-0 ${
                 activeTab === 'faq' 
                   ? ''
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
